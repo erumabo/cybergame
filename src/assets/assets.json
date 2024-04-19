@@ -1,0 +1,46 @@
+{
+  "frames": {
+    "grass": {
+      "frame": { 
+        "x": 0,"y": 0,"w": 32,"h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      },
+      "spriteSourceSize": {
+        "x":  0,
+        "y":  0,
+        "w": 32,
+        "h": 32
+      }
+    },
+    "dirt": {
+      "frame": { 
+        "x":  0,
+        "y": 32,
+        "w": 32,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 32,
+        "h": 32
+      },
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 32,
+        "h": 32
+      }
+    }
+  },
+  "meta": {
+    "image": "./assets.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 64,
+      "h": 64
+    },
+    "scale": 1
+  }
+}
