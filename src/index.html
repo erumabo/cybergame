@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic"> -->
-  <link rel="stylesheet" href="styles/picnic">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.6.1/css/iziModal.min.css" integrity="sha512-3c5WiuZUnVWCQGwVBf8XFg/4BKx48Xthd9nXi62YK0xnf39Oc2FV43lIEIdK50W+tfnw2lcVThJKmEAOoQG84Q==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-  <link rel="stylesheet" href="styles/iziModal.min.css" integrity="sha512-3c5WiuZUnVWCQGwVBf8XFg/4BKx48Xthd9nXi62YK0xnf39Oc2FV43lIEIdK50W+tfnw2lcVThJKmEAOoQG84Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="styles/global.css">
-</head>
-
-<body>
-  
-  <main
-    id="game"
-    class="mainContainer"
-    ></main>
-  
-  <script src="libs/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.6.1/js/iziModal.js"></script> -->
-  <script src="libs/lodash.js"></script>
-  <script src="libs/pixi.min.js" ></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@pixi/tilemap@latest/dist/pixi-tilemap.umd.js"></script> -->
-  <script src="libs/pixi-tilemap.umd.js"></script>
-  <script src="libs/hammer.min.js"></script>
-  <!-- <script src="https://unpkg.com/nipplejs@0.10.0"></script> -->
-  <script src="libs/nipplejs.js"></script>
-  <!--<script src="https://unpkg.com/lunr/lunr.js"></script>-->
-  <script type="module" src="main.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="game-container"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script></body>
+    <script>eruda.init();</script>
+    
+    
+    <script type="module" src="/src/main.js" defer></script>
+  </body>
 </html>
