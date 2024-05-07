@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-lan": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "alpinejs": "^3.13.9",
+    "nipplejs": "^0.10.2",
     "phaser": "^3.80.1"
   }
 }

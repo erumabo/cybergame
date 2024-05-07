@@ -3,16 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="game-container"></div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script></body>
-    <script>eruda.init();</script>
-    
-    
+    <div id="game">
+      <div id="game-container"></div>
+      <div id="game-log" x-data>
+      </div>
+      <!--<div id="game-controls"></div>-->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      eruda.init();
+    </script>
+
     <script type="module" src="/src/main.js" defer></script>
   </body>
 </html>
