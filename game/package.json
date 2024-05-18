@@ -13,7 +13,8 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "alpinejs": "^3.13.9",
+    "backbone": "^1.6.0",
+    "gsap": "^3.12.5",
     "nipplejs": "^0.10.2",
     "phaser": "^3.80.1"
   }
