@@ -10,12 +10,30 @@
   <body>
     <div id="game">
       <div id="game-container"></div>
+      <div id="game-controlls"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>
       eruda.init();
     </script>
+
+    <template id="map-view-template">
+      <style>
+        ul,
+        ol,
+        li {
+          list-style-type: none;
+        }
+      </style>
+      <div>
+        <img id="unitImage"/>
+        <span id="unitId"></span><br />
+        <span id="unitClass"></span><br />
+        <ul id="unitActions"></ul>
+        <br />
+      </div>
+    </template>
 
     <script type="module" src="/src/main.js" defer></script>
   </body>

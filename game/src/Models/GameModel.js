@@ -11,7 +11,8 @@ export default class GameModel extends Backbone.Model {
     super(gameConfig);
     gameConfig.units.forEach(u => {
       let unit = new UnitModel(u);
-      unit.skills.push(new Skills.Move());
+      unit.skills.push(new Skills.Move(unit));
+      unit.skills.push(new Skills.Attack(unit));
       this.units.add(unit);
     });
     this.levels.add(

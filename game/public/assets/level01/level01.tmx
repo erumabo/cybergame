@@ -1687,19 +1687,27 @@
       </properties>
     </tile>
   </tileset>
+  <tileset firstgid="1025" name="galletcity_tiles" columns="8" tilecount="168" tileheight="8" tilewidth="8">
+    <image source="galletcity_tiles.png" width="64" height="168" />
+  </tileset>
   <layer name="Ground" width="28" height="28">
     <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAN2WOU4DQRBFB4gMGbdAnAAR2WwGs3jAgM1mxBIRGkfcgyNwAEQKASKFU3ADRM4fqUv6Kmq6ihTJT9P2dNev+l09nuZEUawFaIMmaIElsAxWwKq671GCwwB9sA42QAdsgi2wDXZA9496krtXwy7YAz2wDw4oHyu+jiV6krtXwxE4DnprxSoDa60aIt6Whh9lYO0ZGIJztQ+etwPy4wScpnXeWqtmK5aVl9Uv3lqrZnyKycRUke8b3qtBijtU97yaG9CYTswU9bXpvcr1Lvuna9Z6dede5+3piH995eEi6S0ob3M1eL0p/klNc2C2hvlUa+7MePsk/rWSXhXvHuNPcIHxJX1vKD0rttebcu1TvAeMv8F10vtK37WeFdvzk3tA4slejDEeFb/v6/PAGp6folvFfARP1AM34Ir6q05Pn7+cn6Jb1fMK3pJ2h/TED9ar63nvPHC/6DmV3i358QxenD2KngdrjtQnfryDDyf/6Hmw5oxSfbnnl84/un/WnDswNmqIvAN4uhwv+g7g/U/lfJcrn8m6GtpqLecV9Z2f2zKuq6Gr1nJe0fcDfm7LODefx5xXdP/kyr/l5kfeLf4jP8Dd/FRADAAA
+   H4sIAAAAAAAAAN1Wy04DMQxM4VS48ReIL0CcWigs7y4U2PIqgiM3CgdA8O1MpVgaGSc2V6SONu3GHs/Y2e6gl9JeAA0wAIbANrADjIBddd9DC1wF0AH7wAFwCBwBx8AJcAqM/8gntXsazoBzYAJcAJdUj5Vf5xI+qd3TcA3cBL21crWBWEtDxNvW8KMNxN4DM+BB9cHzdkp+3AJ3Oc6LtTRbuay6rHnxYi3N+KSljOVUnxvu1TTnnal7nuY+OFYyVlNZm+5VbXbZP61Z85XOva7b4xH/OuXhFvFtKm9rGrzZFP9E0zqwVsBG1lo7M16fxL9h5lvkk9hHrJ/oe1/xWbm92ZRrR/kkVvjku+azcnt+8gxIPunFC9bz9Pu+Pg/M4fkpvA3VIzPwseCk+Srx6fNX81N4R1RPk2udA+/kB/OVZt47Dzwves8z8E1+iP5aj6LnwdrzlfWJH6K/Vn/0PFh7Fv177dWfX7r+aP+sPZ/Am6Eh8g7g8XK+6DuA9z9V812ufCZLGhoVy3VFfefntqxLGsYqluuKvh/wc1vWtf285rqi/ZMr/1bbH3m3+I/4AYQpCcJADAAA
   </data>
   </layer>
   <layer name="Decor" width="28" height="28">
     <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBRQCiYxMjAcB+LJQDyFkfb2LUKyY8kwsW8SNPxA+CSSHUeRxKkZtouIMIuafgXZNxVq3kU0c5mYGBhmMlLfvqVQ8x6imSsEtG8lDezbise8nVS2jxCgtv8Gm32jYBSMglEwkAAA68GVnEAMAAA=
+   H4sIAAAAAAAAAO2QOwqAQAxEk/t3frFd/GArWtiKFt7KCC6k2ghmLTQPpkgzjwmAYRhPSRAgvZJhfJ9jjvojPv7DnTm2SL91N7o0t56+nFJQStbr7wr1fQ2lpXSs1999BN8U6JuVfQN1jYE+7X0Lda0v7pOQ9msj7TcM418cHxjr40AMAAA=
   </data>
   </layer>
-  <layer name="Chars" width="28" height="28">
+  <layer name="Decor 2" visible="0" width="28" height="28">
     <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAAGNgGAWjYBRQAzQzMTD0MA20K4Y+6MQShq2j4ToKRgHVQeMIzlctQL834fB/N4Xh0kWk/t4RHP6jYOgDAMZ+DnpADAAA
+   H4sIAAAAAAAAAO3BgQAAAADDoPlTX+EAVQEAAHwGb7FwgkAMAAA=
+  </data>
+  </layer>
+  <layer name="Chars" visible="0" width="28" height="28">
+    <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgGAWjYBSMglEwCsgHrUwMDD1MA+2KgQNNdPZ/E53DGhS/LSM4fkfBKBgFmAAArx035EAMAAA=
   </data>
   </layer>
 </map>

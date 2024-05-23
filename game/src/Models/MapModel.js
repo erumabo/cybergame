@@ -1,4 +1,5 @@
-import { TileTypes, TileTypeConfig, Hints, TileCosts } from "/src/globals.js";
+import { Hints } from "/src/globals.js";
+import { TileModel, TilesCollection } from "./TileModel";
 import Backbone from "backbone";
 
 export class MapModel extends Backbone.Model {
@@ -6,23 +7,29 @@ export class MapModel extends Backbone.Model {
     return {
       width: 0,
       height: 0,
-      map: []
+      map: new TilesCollection()
     };
   }
   constructor(gameController, levelConfig) {
     super(levelConfig);
     this.gameController = gameController;
     this.updateList = [];
-    
-    this.on("change:activeUnit", this.activateUnit)
+
+    this.on("change:activeUnit", this.activateUnit);
   }
 
   getTile(x, y) {
-    return this.get("map")[y][x];
+    return this.get("map").get(x * this.get("mapHeight") + y);
   }
 
   setTile(tile) {
-    this.get("map")[tile.y][tile.x] = tile;
+    this.get("map").set(
+      {
+        id: tile.x * this.get("mapHeight") + tile.y,
+        ...tile
+      },
+      { remove: false }
+    );
     this.trigger("change:tile");
   }
 
@@ -33,30 +40,29 @@ export class MapModel extends Backbone.Model {
   }
 
   clearHint(hint = 0xff) {
-    this.get("map").forEach(row => row.forEach(col => (col.hint &= !hint)));
+    this.get("map").forEach(col =>
+      col.set({
+        hint: col.get("hint") & ~hint
+      })
+    );
     this.trigger("refresh");
   }
 
   update(dt) {
     this.updateList.forEach(i => i.update(dt));
   }
-  
+
   activateUnit() {
-    if(!this.has("activeUnit")) {
+    if (!this.has("activeUnit")) {
       //cleanup unit hints and timers
       //  and move to next turn
-      this.clearHint(Hints.Move);
+      this.clearHint();
+      this.unset("target")
       return;
     }
-    
+
     this.get("activeUnit").activate(this);
   }
-  
-  target({x,y}) {
-    console.debug(x,y)
-    this.get("activeUnit").target(this, this.getTile(x,y));
-  }
-  
 }
 
 export class MapsCollection extends Backbone.Collection {

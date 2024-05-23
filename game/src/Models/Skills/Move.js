@@ -1,19 +1,43 @@
-import { Hints, TileCosts } from "/src/globals.js";
+import { Hints, TileTypes, UnitTypes } from "/src/globals.js";
+import anime from "animejs/lib/anime.es.js";
+
+const TileCosts = Object.keys(TileTypes).map(_ =>
+  Object.keys(UnitTypes).map(_ => 0xffffff)
+);
+
+TileCosts[TileTypes.Ground][UnitTypes.Heavy] = 2;
+TileCosts[TileTypes.Ground][UnitTypes.Light] = 1;
+TileCosts[TileTypes.Ground][UnitTypes.Archer] = 1;
+TileCosts[TileTypes.Ground][UnitTypes.Knight] = 1;
 
 export class Move {
-  activate(map, target) {
+  constructor(unit) {
+    this.unit = unit;
+    this.cd = false;
+    this.distanceMap = [];
+    this.name = "Moverse"
+  }
+
+  activate(map) {
+    if(this.cd) return false;
+    
     // uggly, clones map and clears Move hint
-    const distanceMap = map
+    map.clearHint(Hints.Move);
+    this.distanceMap = map
       .get("map")
-      .map(m => m.map(c => ((c.hint &= !Hints.Move), 0xffffff)));
+      .models.map(c => ({ dist: 0xffffff, px: 0, py: 0 }));
 
     const queue = [];
-    let x = this.get("tileX"),
-      y = this.get("tileY");
+    let x = this.unit.get("tileX"),
+      y = this.unit.get("tileY");
 
     queue.push([x, y]);
-    distanceMap[y][x] = 0;
-    map.getTile(x, y).hint |= Hints.Move;
+    this.distanceMap[x * map.get("mapHeight") + y] = {
+      dist: 0,
+      px: x,
+      py: y
+    };
+    map.setTile({ x, y, hint: map.getTile(x, y).hint | Hints.Move });
 
     while (queue.length > 0) {
       [x, y] = queue.shift();
@@ -29,38 +53,91 @@ export class Move {
 
         let destTile = map.getTile(nx, ny);
         let newLength =
-          distanceMap[y][x] + TileCosts[destTile.type][this.get("type")];
-        if (newLength > this.get("power")) return false;
+          this.distanceMap[x * map.get("mapHeight") + y].dist +
+          TileCosts[destTile.get("type")][this.unit.get("type")];
+        if (newLength > this.unit.get("power")) return false;
 
-        if (destTile.sides.includes(dirr) || currTile.sides.includes(_dirr))
+        if (
+          destTile.get("sides").includes(dirr) ||
+          currTile.get("sides").includes(_dirr)
+        )
           return false;
 
-        if (distanceMap[ny][nx] > newLength) {
-          distanceMap[ny][nx] = newLength;
+        if (this.distanceMap[nx * map.get("mapHeight") + ny].dist > newLength) {
+          this.distanceMap[nx * map.get("mapHeight") + ny] = {
+            dist: newLength,
+            px: x,
+            py: y
+          };
           queue.push([nx, ny]);
-          destTile.hint |= Hints.Move;
+
+          if (destTile.get("units").length == 0) {
+            map.setTile({
+              id: destTile.id,
+              hint: destTile.get("hint") | Hints.Move
+            });
+          }
         }
       });
     }
-    map.trigger("refresh");
   }
 
-  validTarget(map, target) {
-    return map.getTile(target.x, target.y).hint & Hints.Move;
+  validTarget(target, map) {
+    return target.get("hint") & Hints.Move;
   }
 
-  use(map, target) {
-    if (!(target.hint & Hints.Move)) return false;
-    //let unit = map.gameController.units.get(map.get("activeUnit"));
-    this.set({
-      x: (target.x + 0.5) * map.get("tileSize"),
-      y: (target.y + 0.5) * map.get("tileSize"),
-      tileX: target.x,
-      tileY: target.y
+  use(target, map) {
+    const unit = this.unit;
+    const animeWapper = {
+      get x() {
+        return unit.get("x");
+      },
+      get y() {
+        return unit.get("y");
+      },
+      set x(x) {
+        return unit.set({ x });
+      },
+      set y(y) {
+        return unit.set({ y });
+      }
+    };
+
+    const path = [];
+    let x = target.get("x"),
+      y = target.get("y");
+    while (this.distanceMap[x * map.get("mapHeight") + y].dist > 0) {
+      path.push({ x, y });
+      ({ px: x, py: y } = this.distanceMap[x * map.get("mapHeight") + y]);
+    }
+
+    const tl = anime.timeline({
+      easing: "linear",
+      duration: Math.max(path.length * 20, 100)
+    });
+    path.reverse().forEach(({ x, y }) => {
+      tl.add({
+        targets: animeWapper,
+        x: (x + 0.5) * map.get("tileSize"),
+        y: (y + 0.5) * map.get("tileSize")
+      });
     });
 
-    map.unset("activeUnit");
+    tl.finished.then(() => {
+      if (this.unit.has("parent")) {
+        this.unit.get("parent").get("units").remove(this.unit);
+      }
+      target.get("units").add(this.unit);
+      this.unit.set({
+        parent: target,
+        tileX: target.get("x"),
+        tileY: target.get("y"),
+        energy: 0
+      });
+    });
 
+    this.cd = true;
+    map.unset("activeUnit");
     return true;
   }
 }

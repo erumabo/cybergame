@@ -11,13 +11,11 @@ const TileTypes = {
   Ground: 1
 };
 
-const TileTypeConfig = Object.keys(TileTypes).map(_ => ({
-  defBonus: 0,
-  atkBonus: 0
-}));
+const TileTypeConfig = Object.keys(TileTypes).map(_ => ({}));
 
 const Hints = {
-  Move: 0b0010
+  Move: 0b0010,
+  Attack: 0b0001
 };
 
 /***
@@ -46,15 +44,5 @@ UnitConfig[UnitTypes.Heavy] = {
  * Tile and Unit Relation
  */
 
-const TileCosts = Object.keys(TileTypes).map(_ =>
-  Object.keys(UnitTypes).map(_ => 0xffffff)
-);
 
-TileCosts[TileTypes.Wall][UnitTypes.Fly] = 1;
-
-TileCosts[TileTypes.Ground][UnitTypes.Heavy] = 2;
-TileCosts[TileTypes.Ground][UnitTypes.Light] = 1;
-TileCosts[TileTypes.Ground][UnitTypes.Archer] = 1;
-TileCosts[TileTypes.Ground][UnitTypes.Knight] = 1;
-
-export { TileTypes, UnitTypes, TileTypeConfig, UnitConfig, TileCosts, Hints };
+export { TileTypes, UnitTypes, TileTypeConfig, UnitConfig, Hints };

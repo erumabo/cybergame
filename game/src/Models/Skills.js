@@ -1,6 +1,7 @@
 import { Move } from "./Skills/Move.js";
-const Skills = {
-  Move
-};
+import { Attack } from "./Skills/Attack.js";
 
+const Skills = {
+  Move, Attack
+};
 export default Skills;
