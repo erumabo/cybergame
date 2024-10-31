@@ -31,7 +31,7 @@ function parseTileset(tileset) {
 function assembleTilemap(mapa) {
   const TileDefinitions = parseTileset(openYAML("./Tilesets/TileTypes/config.yml"));
 
-  let tilemap = openJSON(`./${mapa}/base.json`);
+  let tilemap = openYAML(`./${mapa}/base.yml`);
   for (let layer of tilemap.layers) {
     let data = openCSV(`./${mapa}/${layer.name}.csv`);
     layer.data = data

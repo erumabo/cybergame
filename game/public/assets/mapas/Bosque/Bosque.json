@@ -519,23 +519,6 @@
        "value": ""
       }
      ]
-    },
-    {
-     "id": 0,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string"
-      },
-      {
-       "name": "z-index",
-       "type": "string"
-      },
-      {
-       "name": "type",
-       "type": "string"
-      }
-     ]
     }
    ]
   }
