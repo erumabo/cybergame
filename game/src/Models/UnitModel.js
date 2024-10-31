@@ -32,6 +32,8 @@ export class UnitModel extends Backbone.Model {
     this.on("change:energy", () =>{
       this.skills.forEach(s => s.cd = false);
     })
+    
+    this.on("change:hp", this.onDamage);
   }
 
   /* Lifecycle */
@@ -43,10 +45,21 @@ export class UnitModel extends Backbone.Model {
       )
     });
   }
-
+  
   activate(map) {
+    this.onActivate(map)
+  }
+
+  onActivate(mapContext) {
     for (let skill of this.skills) {
-      skill.activate(map);
+      skill.activate(mapContext);
+    }
+  }
+  
+  onDamage() {
+    if(this.get("hp") <= 0) {
+      this.set({"status": "dead", hp:0});
+      this.trigger("dead");
     }
   }
 

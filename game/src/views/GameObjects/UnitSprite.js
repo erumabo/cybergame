@@ -1,4 +1,5 @@
 import * as Phaser from "phaser";
+import anime from "animejs/lib/anime.es.js";
 
 export class UnitSprite extends Phaser.GameObjects.Container {
   constructor(scene, model) {
@@ -32,6 +33,8 @@ export class UnitSprite extends Phaser.GameObjects.Container {
       );
     });
 
+    this.getData("model").on("dead", ()=>this.die());
+
     const tileSize = this.scene.mapController.get("tileSize");
     this.setInteractive(
       new Phaser.Geom.Rectangle(
@@ -43,24 +46,59 @@ export class UnitSprite extends Phaser.GameObjects.Container {
       Phaser.Geom.Rectangle.Contains
     );
 
-    this.on("pointerdown", () => {
-      const map = this.scene.mapController;
-      const model = this.getData("model");
-      if (map.has("activeUnit")) {
-        if (map.get("activeUnit") == model) {
-          map.unset("activeUnit");
-        } else {
-          map.set({
-            target: model.get("parent")
-          });
-        }
+    this.on("pointerdown", this.selectUnit);
+  }
+
+  selectUnit() {
+    const map = this.scene.mapController;
+    const model = this.getData("model");
+    if (map.has("activeUnit")) {
+      if (map.get("activeUnit") == model) {
+        map.unset("activeUnit");
       } else {
-        if (model.get("energy") == 100) {
-          map.set({
-            activeUnit: model
-          });
-        }
+        map.set({
+          target: model.get("parent")
+        });
       }
+    } else {
+      if (model.get("energy") == 100) {
+        map.set({
+          activeUnit: model
+        });
+      }
+    }
+  }
+
+  die() {
+    const model = this.getData("model");
+    const map = this.scene.mapController;
+    map.updateList.splice(
+      map.updateList.findIndex(u => u.get("id") == model.get("id")),
+      1
+    );
+
+    const tl = anime.timeline({
+      easing: "linear",
+      duration: 200
+    });
+    tl.add({
+      targets: this,
+      alpha: 0,
+      tint: "#A0A0A0"
+    });
+
+    tl.finished.then(() => {
+      if (model.has("parent")) {
+        model.get("parent").get("units").remove(model);
+      }
+      model.set({
+        parent: null,
+        tileX: -2,
+        tileY: -2,
+        x: -2 * map.get("tileSize"),
+        y: -2 * map.get("tileSize"),
+        energy: 0
+      });
     });
   }
 
