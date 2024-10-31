@@ -9,6 +9,7 @@ import { MapView } from "../UIComponents/MapView.js";
 export class MapScene extends Phaser.Scene {
   mapController;
   gameController;
+  mapa;
 
   constructor() {
     super("MapScene");
@@ -16,48 +17,36 @@ export class MapScene extends Phaser.Scene {
 
   init(data) {
     this.gameController = new GameModel(gameConfig);
-    this.mapController = this.gameController.levels.at(0);
+    //this.mapController = this.gameController.levels.at(0);
     this.mapView = document.createElement("mb-map-view");
-    this.mapView.model = this.mapController;
+    //this.mapView.model = this.mapController;
+
+    this.mapa = "Bosque";
   }
 
   preload() {
-    for (let tileset in this.mapController.get("tilesets")) {
-      this.load.image(
-        tileset,
-        this.mapController.get("baseURL") +
-          this.mapController.get("tilesets")[tileset]
-      );
-    }
-
-    this.load.tilemapTiledJSON(
-      "levelmap",
-      this.mapController.get("baseURL") + this.mapController.get("tilemap")
-    );
-
-    /*** this goes in game main preloader ***/
-    this.gameController.units.models.forEach(unit => {
-      this.load.image(unit.get("id"), `/assets/Chars/${unit.get("id")}.png`);
-    });
+    this.load.pack("juego", gameConfig.pack);
   }
 
   create() {
     this.tilemap = this.make.tilemap({
-      key: "levelmap"
+      key: this.mapa
     });
 
-    const tilesets = [];
-    for (let tileset in this.mapController.get("tilesets")) {
-      tilesets.push(this.tilemap.addTilesetImage(tileset, tileset));
-    }
+    const tilesets = this.tilemap.tilesets.map(({ name }) =>
+      this.tilemap.addTilesetImage(name)
+    );
 
+    /*
     // Create MapModel for controller
     this.mapController.set({
       mapWidth: this.tilemap.width,
       mapHeight: this.tilemap.height
     });
+*/
 
-    let groundLayer = this.tilemap.createLayer("Ground", tilesets);
+    let groundLayer = this.tilemap.createLayer("Suelo", tilesets);
+    /*
     this.tilemap.forEachTile(tile => {
       this.mapController.setTile({
         x: tile.x,
@@ -71,8 +60,8 @@ export class MapScene extends Phaser.Scene {
         ...TileTypeConfig[tile.properties.type]
       });
     });
-
-    this.tilemap.createLayer("Decor", tilesets);
+    
+    this.tilemap.createLayer("Decor", tilesets, 0.5, 0.5);
     this.tilemap.forEachTile(tile => {
       if (tile.index < 0) return;
       this.mapController.setTile({
@@ -84,7 +73,8 @@ export class MapScene extends Phaser.Scene {
         )
       });
     });
-
+    */
+    /*
     this.mapController.get("map").on("change:hint", tm => {
       let tint = 0xffffff;
       if (tm.get("hint") & Hints.Move) {
@@ -94,14 +84,15 @@ export class MapScene extends Phaser.Scene {
         let tile = this.tilemap.getTileAt(tm.get("x"), tm.get("y"), false, i);
         if (tile) tile.tint = tint;
       });
-    });
+    });*/
 
     this.tilemap.layers
       .find(l => l.name == "Chars")
-      .data.forEach((row, y) => {
+      ?.data.forEach((row, y) => {
         row.forEach((col, x) => {
           if (col.properties["id"]) {
             const uctr = this.gameController.units.get(col.properties.id);
+            console.log(uctr.get("id"));
             uctr.set({
               x: this.mapController.get("tileSize") * (x + 0.5),
               y: this.mapController.get("tileSize") * (y + 0.5),
@@ -118,6 +109,7 @@ export class MapScene extends Phaser.Scene {
         });
       });
 
+    /*
     groundLayer.setInteractive().on("pointerdown", function (p) {
       if (this.scene.mapController.has("activeUnit")) {
         let { x, y } = this.worldToTileXY(p.worldX, p.worldY);
@@ -126,6 +118,7 @@ export class MapScene extends Phaser.Scene {
         });
       }
     });
+    */
 
     this.input.on("pointermove", p => {
       if (!p.isDown) return;
@@ -133,17 +126,18 @@ export class MapScene extends Phaser.Scene {
       this.cameras.main.scrollY -= p.y - p.prevPosition.y;
     });
 
+    const tileSize = this.tilemap.tileWidth;
     this.cameras.main.setBounds(
-      -this.mapController.get("tileSize"),
-      -this.mapController.get("tileSize"),
-      (this.tilemap.height + 2) * this.mapController.get("tileSize"),
-      (this.tilemap.width + 2) * this.mapController.get("tileSize")
+      -tileSize,
+      -tileSize,
+      (this.tilemap.height + 2) * tileSize,
+      (this.tilemap.width + 2) * tileSize
     );
 
     document.getElementById("game-controlls").appendChild(this.mapView);
   }
 
   update(dt) {
-    this.mapController.update(dt);
+    //this.mapController.update(dt);
   }
 }

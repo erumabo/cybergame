@@ -11,6 +11,17 @@ A repo to develop a 2d top-down view rpg strategy game
 - [AnimeJS](https://animejs.com/documentation/): Animation and Tweening Timelines
 - [Inkle's Ink](http://www.inklestudios.com/ink) and [InkJS](https://github.com/y-lohse/inkjs): Dialogs and story state management
 
+https://github.com/necolas/normalize.css/
+
+### replace backbone
+https://github.com/pmndrs/valtio, https://github.com/pmndrs/valtio/blob/main/docs/guides/async.mdx
+https://github.com/ai/nanoevents
+
+### helper and ui
+https://github.com/dataarts/dat.gui/blob/master/API.md#Controller+listen
+
+
+
 ## Assets
 
 Currently using ["Pixel Art Top Down Basic" by _Cainos_](https://cainos.itch.io/pixel-art-top-down-basic) tileset.

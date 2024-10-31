@@ -1,0 +1,38 @@
+{
+  "general": {
+    "path": "assets/mapas",
+    "files": [
+      {
+        "key": "TileTypes",
+        "type": "image",
+        "url": "Tilesets/TileTypes/tileset.png"
+      }
+    ]
+  },
+  "bosque": {
+    "path": "assets/mapas/Bosque",
+    "files": [
+      {
+        "key": "Bosque",
+        "type": "tilemapTiledJSON",
+        "url": "Bosque.json"
+      }
+    ]
+  },
+  "Chars": {
+    "path": "assets/Chars/",
+    "defaultType": "image",
+    "files": [
+      { "key": "Topaz", "url": "Topaz.png" },
+      { "key": "Aqua", "url": "Aqua.png" },
+      { "key": "Opal", "url": "Opal.png" },
+      { "key": "Ruby", "url": "Ruby.png" },
+      { "key": "Emerald", "url": "Emerald.png" },
+      { "key": "Spinel", "url": "Spinel.png" },
+      { "key": "Azure", "url": "Azure.png" },
+      { "key": "Rubellite", "url": "Rubellite.png" },
+      { "key": "Cinnabar", "url": "Cinnabar.png" },
+      { "key": "Diamond", "url": "Diamond.png" }
+    ]
+  }
+}
