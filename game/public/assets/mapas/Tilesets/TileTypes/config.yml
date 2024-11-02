@@ -4,8 +4,8 @@ tilewidth: 32
 tileheight: 32
 spacing: 0
 margin: 0
-columns: 5
-tilecount: 25
-imagewidth: 160
-imageheight: 160
+columns: 8
+tilecount: 64
+imagewidth: 256
+imageheight: 256
 properties: []

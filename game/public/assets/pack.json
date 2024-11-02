@@ -6,6 +6,11 @@
         "key": "TileTypes",
         "type": "image",
         "url": "Tilesets/TileTypes/tileset.png"
+      },
+      {
+        "key": "Tileset",
+        "type": "image",
+        "url": "Tilesets/Tileset/tileset-e.png"
       }
     ]
   },

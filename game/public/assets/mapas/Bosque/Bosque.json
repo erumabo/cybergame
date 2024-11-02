@@ -13,12 +13,1328 @@
    "tileheight": 32,
    "spacing": 0,
    "margin": 0,
-   "columns": 5,
-   "tilecount": 25,
-   "imagewidth": 160,
-   "imageheight": 160,
+   "columns": 8,
+   "tilecount": 64,
+   "imagewidth": 256,
+   "imageheight": 256,
    "properties": [],
    "image": "../Tilesets/TileTypes/tileset.png",
+   "tiles": [
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "₩"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": "0"
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Agua Profunda"
+      }
+     ]
+    },
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "~"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": "3"
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Agua"
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "v"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": "2"
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Pasto"
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "_"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": "10"
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Camino"
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "="
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Tierra"
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "^"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Arboles"
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "-"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Acera"
+      }
+     ]
+    },
+    {
+     "id": 14,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": "*"
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Arena"
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 20,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Edificio 1"
+      }
+     ]
+    },
+    {
+     "id": 21,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Edificio 2"
+      }
+     ]
+    },
+    {
+     "id": 22,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 23,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 24,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 25,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 26,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 27,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 28,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 29,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 30,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 31,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 34,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 35,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 36,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 37,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 38,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 39,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 40,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 41,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 42,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 43,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 44,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 45,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 46,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 47,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 48,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 49,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 50,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 51,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 52,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 53,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 54,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 55,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 56,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 57,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 58,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 59,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 60,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 61,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 62,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 63,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 64,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Tileset",
+   "firstgid": 100,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 2,
+   "margin": 1,
+   "columns": 32,
+   "tilecount": 1024,
+   "imagewidth": 1024,
+   "imageheight": 1024,
+   "properties": [],
+   "image": "../Tilesets/Tileset/tileset-e.png",
    "tiles": [
     {
      "id": 0,
@@ -519,6 +1835,806 @@
        "value": ""
       }
      ]
+    },
+    {
+     "id": 25,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 26,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 27,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 28,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 29,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 30,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 31,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 34,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 35,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 36,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 37,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 38,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 39,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 40,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 41,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 42,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 43,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 44,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 45,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 46,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 47,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 48,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 49,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 50,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 51,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 52,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 53,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 54,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 55,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 56,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 57,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 58,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 59,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 60,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 61,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 62,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 63,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 64,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
     }
    ]
   }
@@ -527,15 +2643,26 @@
   {
    "name": "Suelo",
    "type": "tilelayer",
-   "height": 10,
    "width": 10,
-   "visible": true,
+   "height": 10,
+   "visible": false,
    "opacity": 1,
    "offsetx": 0,
    "offsety": 0,
    "x": 0,
    "y": 0,
    "id": 1,
+   "encoding": "csv",
+   "properties": [
+    {
+     "name": "type",
+     "value": "ground"
+    },
+    {
+     "name": "dualgrid",
+     "value": true
+    }
+   ],
    "data": [
     6,
     6,
@@ -592,7 +2719,7 @@
     6,
     6,
     9,
-    6,
+    1,
     6,
     6,
     6,
@@ -602,7 +2729,7 @@
     6,
     6,
     9,
-    6,
+    2,
     6,
     6,
     6,

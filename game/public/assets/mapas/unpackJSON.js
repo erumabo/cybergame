@@ -39,8 +39,6 @@ function packTiles(tiles) {
       )
     }))
     .map(tile => headers.map(header => tile[header] ?? "").join());
-  console.log(rows);
-    
   return [headers.join(), ...rows].join("\n");
 }
 

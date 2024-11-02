@@ -6,15 +6,22 @@ nextobjectid: 1
 orientation: orthogonal
 tilesets:
   - name: TileTypes
+  - name: Tileset
 layers:
   - name: Suelo
     type: tilelayer
-    height: 10
     width: 10
-    visible: true
+    height: 10
+    visible: false
     opacity: 1
     offsetx: 0
     offsety: 0
     x: 0
     y: 0
     id: 1
+    encoding: csv
+    properties:
+      - name: type
+        value: ground
+      - name: dualgrid
+        value: true
