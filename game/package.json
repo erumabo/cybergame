@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
     "animejs": "^3.2.2",
     "backbone": "^1.6.0",
     "nipplejs": "^0.10.2",
