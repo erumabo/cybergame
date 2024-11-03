@@ -5,8 +5,8 @@ tileheight: 32
 nextobjectid: 1
 orientation: orthogonal
 tilesets:
-  - name: TileTypes
   - name: Tileset
+  - name: TilesetDual
 layers:
   - name: Suelo
     type: tilelayer

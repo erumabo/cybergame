@@ -29,7 +29,7 @@ function parseTileset(tileset) {
 
 
 function assembleTilemap(mapa) {
-  const TileDefinitions = parseTileset(openYAML("./Tilesets/TileTypes/config.yml"));
+  //const TileDefinitions = parseTileset(openYAML("./Tilesets/TileTypes/config.yml"));
 
   let tilemap = openYAML(`./${mapa}/base.yml`);
   for (let layer of tilemap.layers) {

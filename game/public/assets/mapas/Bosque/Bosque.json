@@ -1331,8 +1331,8 @@
    "margin": 1,
    "columns": 32,
    "tilecount": 1024,
-   "imagewidth": 1024,
-   "imageheight": 1024,
+   "imagewidth": 1088,
+   "imageheight": 1088,
    "properties": [],
    "image": "../Tilesets/Tileset/tileset-e.png",
    "tiles": [

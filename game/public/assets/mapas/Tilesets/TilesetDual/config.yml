@@ -1,0 +1,11 @@
+name: TilesetDual
+firstgid: 100
+tilewidth: 32
+tileheight: 32
+spacing: 2
+margin: 1
+columns: 32
+tilecount: 1024
+imagewidth: 1088
+imageheight: 1088
+properties: []

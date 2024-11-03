@@ -3,14 +3,14 @@
     "path": "assets/mapas",
     "files": [
       {
-        "key": "TileTypes",
-        "type": "image",
-        "url": "Tilesets/TileTypes/tileset.png"
-      },
-      {
         "key": "Tileset",
         "type": "image",
-        "url": "Tilesets/Tileset/tileset-e.png"
+        "url": "Tilesets/Tileset/tileset.png"
+      },
+      {
+        "key": "TilesetDual",
+        "type": "image",
+        "url": "Tilesets/TilesetDual/tileset.png"
       }
     ]
   },

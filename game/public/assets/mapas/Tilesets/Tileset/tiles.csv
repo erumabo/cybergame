@@ -1,13 +1,13 @@
 id,alias,z-index,type
 0,₩,0,Agua Profunda
-1,~,,Agua
+1,~,3,Agua
 2,,,
 3,,,
 4,,,
-5,v,,Pasto
+5,v,2,Pasto
 6,,,
 7,,,
-8,_,,Camino
+8,_,10,Camino
 9,,,
 10,,,
 11,=,,Tierra
