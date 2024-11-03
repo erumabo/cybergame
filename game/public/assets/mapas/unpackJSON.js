@@ -45,20 +45,31 @@ function packTiles(tiles) {
 function main() {
   const [, , key] = process.argv;
   const tilemap = openJSON(`./${key}/${key}.json`);
-  const tileTypes = {
+  /*const tileTypes = {
     ...tilemap.tilesets.find(tileset => tileset.name == "TileTypes")
-  };
+  };*/
 
   tilemap.layers.forEach(layer => {
     fs.writeFileSync(
       `./${key}/${layer.name}.csv`,
       packLayerTiles(
-        layer.data.map(
-          tile =>
-            tileTypes.tiles
-              .find(type => type.id == tile - tileTypes.firstgid)
-              .properties.find(prop => prop.name == "alias").value
-        ),
+        layer.data.map(tile => {
+          for (let tileset of tilemap.tilesets) {
+            if (
+              tile >= tileset.firstgid &&
+              tile < tileset.firstgid + tileset.tilecount
+            ) {
+              let model = tileset.tiles[tile - tileset.firstgid];
+              if (model) {
+                return model.properties.find(prop => prop.name == "alias")
+                  .value;
+              } else {
+                return tile;
+              }
+            }
+          }
+          return tile;
+        }),
         +layer.width
       )
     );

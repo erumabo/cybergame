@@ -23,5 +23,7 @@ layers:
     properties:
       - name: type
         value: ground
+        type: string
       - name: dualgrid
         value: true
+        type: boolean

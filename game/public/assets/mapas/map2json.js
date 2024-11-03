@@ -2,17 +2,21 @@ import _ from "underscore";
 import YAML from "yaml";
 import fs from "node:fs";
 
-const parseCSV= csv => csv.split("\n").map(row => row.split(",").map(cell => cell.trim()));
+const parseCSV = csv =>
+  csv.split("\n").map(row => row.split(",").map(cell => cell.trim()));
 const openJSON = file => JSON.parse(fs.readFileSync(file, "utf-8"));
 const openCSV = file => parseCSV(fs.readFileSync(file, "utf-8"));
 const openYAML = file => YAML.parse(fs.readFileSync(file, "utf-8"));
 
 function parseTileset(tileset) {
-  const [[, ...tileHeaders], ...tiles] = openCSV(`./Tilesets/${tileset.name}/tiles.csv`);
+  const [[, ...tileHeaders], ...tiles] = openCSV(
+    `./Tilesets/${tileset.name}/tiles.csv`
+  );
   return {
     ...tileset,
     image: `../Tilesets/${tileset.name}/tileset.png`,
     firstgid: +tileset.firstgid,
+    tilecount: +tileset.tilecount,
     tiles: tiles.map(tile => {
       let [id, ...props] = tile;
       return {
@@ -27,26 +31,26 @@ function parseTileset(tileset) {
   };
 }
 
-
 function assembleTilemap(mapa) {
   //const TileDefinitions = parseTileset(openYAML("./Tilesets/TileTypes/config.yml"));
 
   let tilemap = openYAML(`./${mapa}/base.yml`);
+  tilemap.tilesets = tilemap.tilesets.map(tileset =>
+    parseTileset(openYAML(`./Tilesets/${tileset.name}/config.yml`))
+  );
+
   for (let layer of tilemap.layers) {
     let data = openCSV(`./${mapa}/${layer.name}.csv`);
-    layer.data = data
-      .flat()
-      .map(
-        cell =>
-          TileDefinitions.tiles.find(td =>
-            td.properties.some(tp => tp.name == "alias" && tp.value == cell)
-          ).id + TileDefinitions.firstgid
-      );
+    layer.data = data.flat().map(cell => {
+      for (let tileset of tilemap.tilesets) {
+        let tile = tileset.tiles.find(td =>
+          td.properties.some(tp => tp.name == "alias" && tp.value == cell)
+        );
+        if (tile) return tile.id + tileset.firstgid;
+      }
+      return +cell;
+    });
   }
-
-  tilemap.tilesets = tilemap.tilesets.map(tileset => ({
-    ...parseTileset(openYAML(`./Tilesets/${tileset.name}/config.yml`))
-  }));
 
   return tilemap;
 }
