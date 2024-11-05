@@ -3,7 +3,7 @@
  "height": 10,
  "tilewidth": 32,
  "tileheight": 32,
- "nextobjectid": 1,
+ "nextobjectid": 2,
  "orientation": "orthogonal",
  "tilesets": [
   {
@@ -1357,6 +1357,516 @@
      ]
     }
    ]
+  },
+  {
+   "name": "Aqua",
+   "firstgid": 1125,
+   "tilewidth": 35,
+   "tileheight": 35,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 35,
+   "imageheight": 35,
+   "properties": [],
+   "image": "../Tilesets/Aqua/tileset.png",
+   "tiles": [
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Azure",
+   "firstgid": 1135,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Azure/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Cinnabar",
+   "firstgid": 1145,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Cinnabar/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Diamond",
+   "firstgid": 1155,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Diamond/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Emerald",
+   "firstgid": 1165,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Emerald/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Opal",
+   "firstgid": 1175,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Opal/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Rubellite",
+   "firstgid": 1185,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Rubellite/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Ruby",
+   "firstgid": 1195,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Ruby/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Spinel",
+   "firstgid": 1205,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Spinel/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Topaz",
+   "firstgid": 1214,
+   "tilewidth": 32,
+   "tileheight": 32,
+   "spacing": 0,
+   "margin": 0,
+   "columns": 1,
+   "tilecount": 1,
+   "imagewidth": 32,
+   "imageheight": 32,
+   "properties": [],
+   "image": "../Tilesets/Topaz/tileset.png",
+   "tiles": [
+    {
+     "id": 1,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "z-index",
+       "type": "string",
+       "value": ""
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": ""
+      }
+     ]
+    },
+    {
+     "id": 0,
+     "properties": [
+      {
+       "name": "alias",
+       "type": "string"
+      },
+      {
+       "name": "z-index",
+       "type": "string"
+      },
+      {
+       "name": "type",
+       "type": "string"
+      }
+     ]
+    }
+   ]
   }
  ],
  "layers": [
@@ -1402,24 +1912,26 @@
     6,
     6,
     6,
+    9,
+    9,
+    9,
+    9,
     6,
     6,
     6,
     6,
     6,
+    9,
+    9,
+    9,
+    9,
+    9,
     6,
     6,
     6,
     6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
+    9,
+    9,
     9,
     6,
     6,
@@ -1427,65 +1939,88 @@
     6,
     6,
     6,
-    6,
-    6,
-    6,
+    9,
+    9,
     9,
     6,
     6,
     6,
+    1,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
     6,
+    1,
+    1,
+    1,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
     6,
-    6,
+    1,
+    1,
+    1,
     6,
     6,
     6,
     9,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
+    9,
     9,
     6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    9,
-    6,
-    6,
-    6,
-    6,
-    6,
+    1,
+    1,
+    1,
     6,
     6,
     6,
     6,
     9,
+    9,
+    6,
+    6,
+    1,
+    1,
     6,
     6,
     6,
     6,
+    9,
+    9,
     6,
     6,
     6,
     6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6
+    3
+   ]
+  },
+  {
+   "name": "Chars",
+   "type": "objectgroup",
+   "visible": true,
+   "opacity": 1,
+   "offsetx": 0,
+   "offsety": 0,
+   "x": 0,
+   "y": 0,
+   "id": 2,
+   "objects": [
+    {
+     "id": 1,
+     "gid": 1125,
+     "name": "Aquamarina",
+     "x": 32,
+     "y": 32,
+     "visible": true,
+     "rotation": 0,
+     "width": 32,
+     "height": 32
+    }
    ]
   }
  ]

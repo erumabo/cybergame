@@ -2,29 +2,65 @@ import * as Phaser from "phaser";
 import anime from "animejs/lib/anime.es.js";
 
 export class UnitSprite extends Phaser.GameObjects.Container {
-  constructor(scene, model) {
-    const x = model.get("x");
-    const y = model.get("y");
-    super(scene, x, y);
+  sprite?: Phaser.GameObjects.Sprite;
+  bars: Map<
+    string,
+    {
+      progress: Phaser.GameObjects.Rectangle;
+      border: Phaser.GameObjects.Rectangle;
+    }
+  >;
 
-    this.setData({
-      model
+  constructor(scene: Phaser.Scene) {
+    super(scene);
+    this.bars = new Map();
+    Object.defineProperty(this, "displayWidth", {
+      set: function (width: number) {
+        this.sprite && (this.sprite.displayWidth = width);
+      },
+      get: function () {
+        return this.sprite?.displayWidth ?? 0;
+      }
     });
-
-    this.setUI();
-    this.setEventListeners();
+    Object.defineProperty(this, "displayHeight", {
+      set: function (height: number) {
+        this.sprite && (this.sprite.displayHeight = height);
+      },
+      get: function () {
+        return this.sprite?.displayHeight ?? 0;
+      }
+    });
   }
 
-  setUI() {
-    this.sprite = this.scene.add.sprite(0, 0, this.getData("model").get("id"));
+  /*setPosition(...position: number[]) {
+    return super.setPosition(...position);
+  }*/
+
+  setTexture(key: string, frame: number, ...rest: any[]) {
+    if (this.sprite) {
+      this.sprite.setTexture(key, frame);
+    } else {
+      this.setUI(key, frame);
+    }
+    return this.sprite;
+  }
+
+  setFlip(x: boolean, y: boolean) {
+    if (this.sprite) {
+      return this.sprite.setFlip(x, y);
+    }
+  }
+
+  setUI(key: string, frame: number) {
+    this.sprite = this.scene.add.sprite(0, 0, key, frame);
     this.add(this.sprite);
 
-    const tileSize = this.scene.mapController.get("tileSize");
-    this.bars = new Map();
+    const tileSize = this.displayWidth;
     this.addBar("energy", 0, tileSize / 2, tileSize - 5, 5, 0xffff00);
     this.addBar("hp", 0, -tileSize / 2 - 5, tileSize - 5, 5, 0xff00f0);
   }
 
+  /*
   setEventListeners() {
     this.getData("model").on("change:x change:y", () => {
       this.setPosition(
@@ -48,7 +84,9 @@ export class UnitSprite extends Phaser.GameObjects.Container {
 
     this.on("pointerdown", this.selectUnit);
   }
+  */
 
+  /*
   selectUnit() {
     const map = this.scene.mapController;
     const model = this.getData("model");
@@ -67,8 +105,9 @@ export class UnitSprite extends Phaser.GameObjects.Container {
         });
       }
     }
-  }
+  }*/
 
+  /*
   die() {
     const model = this.getData("model");
     const map = this.scene.mapController;
@@ -100,9 +139,16 @@ export class UnitSprite extends Phaser.GameObjects.Container {
         energy: 0
       });
     });
-  }
+  }*/
 
-  addBar(stat, x, y, width, height, color) {
+  addBar(
+    stat: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    color: number
+  ) {
     const progress = this.scene.add.rectangle(x, y, width, height);
     const border = this.scene.add.rectangle(x, y, width, height);
 
@@ -114,13 +160,13 @@ export class UnitSprite extends Phaser.GameObjects.Container {
 
     this.bars.set(stat, { progress, border });
 
-    this.getData("model").on("change:" + stat, () => {
+    /*this.getData("model").on("change:" + stat, () => {
       const percent =
         this.getData("model").get(stat) /
         (this.getData("model").has("max" + stat)
           ? this.getData("model").get("max" + stat)
           : 100.0);
       this.bars.get(stat).progress.setDisplaySize(width * percent, height);
-    });
+    });*/
   }
 }

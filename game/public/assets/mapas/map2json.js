@@ -40,16 +40,18 @@ function assembleTilemap(mapa) {
   );
 
   for (let layer of tilemap.layers) {
-    let data = openCSV(`./${mapa}/${layer.name}.csv`);
-    layer.data = data.flat().map(cell => {
-      for (let tileset of tilemap.tilesets) {
-        let tile = tileset.tiles.find(td =>
-          td.properties.some(tp => tp.name == "alias" && tp.value == cell)
-        );
-        if (tile) return tile.id + tileset.firstgid;
-      }
-      return +cell;
-    });
+    if (layer.type == "tilelayer") {
+      let data = openCSV(`./${mapa}/${layer.name}.csv`);
+      layer.data = data.flat().map(cell => {
+        for (let tileset of tilemap.tilesets) {
+          let tile = tileset.tiles.find(td =>
+            td.properties.some(tp => tp.name == "alias" && tp.value == cell)
+          );
+          if (tile) return tile.id + tileset.firstgid;
+        }
+        return +cell;
+      });
+    }
   }
 
   return tilemap;

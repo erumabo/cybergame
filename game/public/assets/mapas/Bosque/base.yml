@@ -5,8 +5,18 @@ tileheight: 32
 nextobjectid: 1
 orientation: orthogonal
 tilesets:
-  - name: Tileset
-  - name: TilesetDual
+  - name: Tileset #1-99
+  - name: TilesetDual #100-1124
+  - name: Aqua      # 1125
+  - name: Azure     # 1135
+  - name: Cinnabar  # 1145
+  - name: Diamond   # 1155
+  - name: Emerald   # 1165
+  - name: Opal      # 1175
+  - name: Rubellite # 1185
+  - name: Ruby      # 1195
+  - name: Spinel    # 1205
+  - name: Topaz     # 1215
 layers:
   - name: Suelo
     type: tilelayer
@@ -27,3 +37,23 @@ layers:
       - name: dualgrid
         value: true
         type: boolean
+  - name: Chars
+    type: objectgroup
+    visible: true
+    opacity: 1
+    offsetx: 0
+    offsety: 0
+    x: 0
+    y: 0
+    id: 2
+    objects: 
+      - id: 1
+        gid: 1125
+        type: player
+        name: Aquamarina
+        x: 33
+        y: 33
+        width: 32
+        height: 32
+        rotation: 0
+    

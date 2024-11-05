@@ -1,5 +1,5 @@
 {
-  "general": {
+  "tilesets": {
     "path": "assets/mapas",
     "files": [
       {
@@ -25,19 +25,59 @@
     ]
   },
   "Chars": {
-    "path": "assets/Chars/",
-    "defaultType": "image",
+    "path": "assets/mapas/Tilesets",
+    "defaultType": "spritesheet",
     "files": [
-      { "key": "Topaz", "url": "Topaz.png" },
-      { "key": "Aqua", "url": "Aqua.png" },
-      { "key": "Opal", "url": "Opal.png" },
-      { "key": "Ruby", "url": "Ruby.png" },
-      { "key": "Emerald", "url": "Emerald.png" },
-      { "key": "Spinel", "url": "Spinel.png" },
-      { "key": "Azure", "url": "Azure.png" },
-      { "key": "Rubellite", "url": "Rubellite.png" },
-      { "key": "Cinnabar", "url": "Cinnabar.png" },
-      { "key": "Diamond", "url": "Diamond.png" }
+      {
+        "key": "Topaz",
+        "url": "Topaz/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Aqua",
+        "url": "Aqua/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Opal",
+        "url": "Opal/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Ruby",
+        "url": "Ruby/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Emerald",
+        "url": "Emerald/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Spinel",
+        "url": "Spinel/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Azure",
+        "url": "Azure/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Rubellite",
+        "url": "Rubellite/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Cinnabar",
+        "url": "Cinnabar/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      },
+      {
+        "key": "Diamond",
+        "url": "Diamond/tileset.png",
+        "frameConfig": { "frameWidth": 32, "frameHeight": 32 }
+      }
     ]
   }
 }

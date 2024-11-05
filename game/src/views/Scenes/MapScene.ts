@@ -3,24 +3,22 @@ import * as Phaser from "phaser";
 import { gameConfig } from "../../levelConfig.js";
 import { Hints, TileTypes, TileTypeConfig } from "../../globals.js";
 import GameModel from "../../Models/GameModel.js";
-import { UnitSprite } from "../GameObjects/UnitSprite.js";
+import { UnitSprite } from "../GameObjects/UnitSprite";
 import { MapView } from "../UIComponents/MapView.js";
 
 export class MapScene extends Phaser.Scene {
-  mapController;
-  gameController;
-  mapa;
+  mapController?: any;
+  gameController?: GameModel;
+  mapa: string;
+  tilemap?: Phaser.Tilemaps.Tilemap;
 
   constructor() {
     super("MapScene");
+    this.mapa = "";
   }
 
-  init(data) {
+  init(data: any) {
     this.gameController = new GameModel(gameConfig);
-    //this.mapController = this.gameController.levels.at(0);
-    //this.mapView = document.createElement("mb-map-view");
-    //this.mapView.model = this.mapController;
-
     this.mapa = "Bosque";
   }
 
@@ -29,13 +27,18 @@ export class MapScene extends Phaser.Scene {
   }
 
   create() {
+    //this.mapController = this.gameController.levels.at(0);
+    //this.mapView = document.createElement("mb-map-view");
+    //this.mapView.model = this.mapController;
+
     this.tilemap = this.make.tilemap({
       key: this.mapa
     });
 
-    const tilesets = this.tilemap.tilesets.map(({ name }) =>
-      this.tilemap.addTilesetImage(name)
-    );
+    const tilesets: Phaser.Tilemaps.Tileset[] =
+      this.tilemap?.tilesets
+        ?.map(tileset => this.tilemap?.addTilesetImage(tileset.name))
+        ?.filter(v => v != null) || [];
 
     /*
     // Create MapModel for controller
@@ -43,8 +46,19 @@ export class MapScene extends Phaser.Scene {
       mapWidth: this.tilemap.width,
       mapHeight: this.tilemap.height
     });
-*/
-    this.tilemap.layers.forEach(layer => this.processLayer(layer, tilesets));
+    */
+
+    this.tilemap.layers.forEach((layer: Phaser.Tilemaps.LayerData) => {
+      this.processLayer(layer, tilesets);
+    });
+
+    this.tilemap.createFromObjects(
+      "Chars",
+      {
+        classType: UnitSprite
+      },
+      true
+    );
 
     /*
     this.tilemap.layers
@@ -53,7 +67,6 @@ export class MapScene extends Phaser.Scene {
         row.forEach((col, x) => {
           if (col.properties["id"]) {
             const uctr = this.gameController.units.get(col.properties.id);
-            console.log(uctr.get("id"));
             uctr.set({
               x: this.mapController.get("tileSize") * (x + 0.5),
               y: this.mapController.get("tileSize") * (y + 0.5),
@@ -68,20 +81,19 @@ export class MapScene extends Phaser.Scene {
             this.mapController.updateList.push(uctr);
           }
         });
-      });
-      */
+      });*/
 
     this.tilemap.layers[
       this.tilemap.getLayerIndexByName("SueloDual")
     ].tilemapLayer
       .setInteractive()
-      .on("pointerdown", function (p) {
+      .on("pointerdown", function (this: Phaser.Tilemaps.TilemapLayer, p: any) {
         let prevTile = this.getData("prevTile");
         if (prevTile) this.getTileAt(prevTile.x, prevTile.y, true).index = -1;
 
         let { x, y } = this.worldToTileXY(p.worldX, p.worldY);
         let tile = this.getTileAt(x, y, true);
-        tile.index = 100;
+        tile.index = 3;
         this.setData("prevTile", { x, y });
       });
 
@@ -108,7 +120,7 @@ export class MapScene extends Phaser.Scene {
     });
     */
 
-    this.input.on("pointermove", p => {
+    this.input.on("pointermove", (p: any) => {
       if (!p.isDown) return;
       this.cameras.main.scrollX -= p.x - p.prevPosition.x;
       this.cameras.main.scrollY -= p.y - p.prevPosition.y;
@@ -121,35 +133,42 @@ export class MapScene extends Phaser.Scene {
       (this.tilemap.height + 2) * tileSize,
       (this.tilemap.width + 2) * tileSize
     );
+    //this.cameras.main.setZoom(2);
 
     //document.getElementById("game-controlls").appendChild(this.mapView);
   }
 
-  clamp(min, val, max) {
+  clamp(min: number, val: number, max: number) {
     return Math.min(max, Math.max(min, val));
   }
 
-  processLayer(layer, tilesets) {
+  processLayer(
+    layer: Phaser.Tilemaps.LayerData,
+    tilesets: Phaser.Tilemaps.Tileset[]
+  ) {
+    if (this.tilemap == null) return;
+
     if (layer.visible) {
       return this.tilemap.createLayer(layer.name, tilesets);
     }
 
-    if (layer.properties.some(prop => prop.name == "dualgrid")) {
-      const dual = [0, 1, 2, 3]
-        .map(i =>
-          this.tilemap.createBlankLayer(
-            layer.name + "Dual" + i,
-            tilesets,
-            layer.x - layer.tileWidth / 2,
-            layer.y - layer.tileHeight / 2,
-            layer.width + 1,
-            layer.height + 1,
-            layer.tileWidth,
-            layer.tileHeight
-          )
+    if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {
+      const dual: Phaser.Tilemaps.TilemapLayer[] = [0, 1, 2, 3]
+        .map(
+          i =>
+            this.tilemap?.createBlankLayer(
+              layer.name + "Dual" + i,
+              tilesets,
+              layer.x - layer.tileWidth / 2,
+              layer.y - layer.tileHeight / 2,
+              layer.width + 1,
+              layer.height + 1,
+              layer.tileWidth,
+              layer.tileHeight
+            )
         )
         .concat([
-          this.tilemap.createBlankLayer(
+          this.tilemap?.createBlankLayer(
             layer.name + "Dual",
             tilesets,
             layer.x,
@@ -159,12 +178,8 @@ export class MapScene extends Phaser.Scene {
             layer.tileWidth,
             layer.tileHeight
           )
-        ]);
-
-      const tileTypes = this.tilemap.getTileset("Tileset");
-      const tilesetWidth = tileTypes.columns;
-
-      const firstgid = this.tilemap.getTileset("TilesetDual").firstgid;
+        ])
+        .filter(tilemap => tilemap != null);
 
       dual[0].forEachTile(tile => {
         const coords = [
@@ -182,26 +197,34 @@ export class MapScene extends Phaser.Scene {
 
         let types = [...new Set(tiles.map(t => t.index))];
         types
-          .map(type => ({
-            id: type,
-            "z-index": +(
-              tileTypes
-                .getTileData(type)
-                ?.properties.find(p => p.name == "z-index")?.value ?? 0
-            )
-          }))
-          .sort((a, b) => a["z-index"] - b["z-index"])
-          .forEach((type, li) => {
-            const pattern = tiles.map(t => +(t.index == type.id));
-            const b1 = pattern[0] * 2 + pattern[2];
-            const b2 = pattern[1] * 2 + pattern[3];
-
-            const mosaico = {
-              x: Math.floor(type.id / tilesetWidth) * 4 + b1,
-              y: ((type.id % tilesetWidth) - 1) * 4 + b2
+          .map((type: number) => {
+            let tiletypes = this.tilemap?.tilesets?.find(tileset =>
+              tileset.containsTileIndex(type)
+            );
+            if (tiletypes == null) return;
+            return {
+              id: type,
+              //"z-index": +(
+              //--  tiletypes
+              //    .getTileData(type)
+              //    .properties.find(p => p.name == "z-index")?.value ?? 0
+              //),
+              firstgid:
+                this.tilemap?.getTileset(tiletypes.name + "Dual")?.firstgid ||
+                0,
+              x: Math.floor(type / tiletypes.columns),
+              y: (type % tiletypes.columns) - 1,
+              tilesetWidth: tiletypes.columns
             };
+          })
+          //.sort((a, b) => a["z-index"] - b["z-index"])
+          .forEach((type: any, li: number) => {
+            const pattern = tiles.map(t => +(t.index == type.id));
+            type.x = type.x * 4 + pattern[0] * 2 + pattern[2];
+            type.y = type.y * 4 + pattern[1] * 2 + pattern[3];
 
-            const index = firstgid + mosaico.x * tilesetWidth * 4 + mosaico.y;
+            const index =
+              type.firstgid + type.x * type.tilesetWidth * 4 + type.y;
             dual[li].putTileAt(index, tile.x, tile.y);
           });
       });
@@ -210,7 +233,7 @@ export class MapScene extends Phaser.Scene {
     }
   }
 
-  update(dt) {
+  update(dt: number) {
     //this.mapController.update(dt);
   }
 }

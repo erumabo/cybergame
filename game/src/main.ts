@@ -1,5 +1,5 @@
 import { Game } from "phaser";
-import { MapScene } from "./views/Scenes/MapScene.js";
+import { MapScene } from "./views/Scenes/MapScene";
 
 const config = {
   type: Phaser.AUTO,
