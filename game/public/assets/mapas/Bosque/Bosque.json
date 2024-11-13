@@ -1361,14 +1361,14 @@
   {
    "name": "Aqua",
    "firstgid": 1125,
-   "tilewidth": 35,
-   "tileheight": 35,
+   "tilewidth": 32,
+   "tileheight": 32,
    "spacing": 0,
    "margin": 0,
    "columns": 1,
    "tilecount": 1,
-   "imagewidth": 35,
-   "imageheight": 35,
+   "imagewidth": 32,
+   "imageheight": 32,
    "properties": [],
    "image": "../Tilesets/Aqua/tileset.png",
    "tiles": [
