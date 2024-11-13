@@ -1,5 +1,6 @@
 import { Game } from "phaser";
-import { MapScene } from "./views/Scenes/MapScene";
+import { BootScene } from "./Vistas/Scenes/BootScene";
+import { MapScene } from "./Vistas/Scenes/MapScene";
 
 const config = {
   type: Phaser.AUTO,
@@ -13,7 +14,7 @@ const config = {
     height: (2 * window.innerHeight) / 3
   },
   scene: [
-    //Boot,
+    BootScene,
     //Preloader,
     //MainMenu,
     MapScene

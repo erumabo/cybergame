@@ -1,5 +1,5 @@
 //import { UnitView } from "./UnitView.js";
-import Backbone from "backbone";
+//import Backbone from "backbone";
 import _ from "underscore";
 
 const template = document.getElementById("map-view-template");
@@ -44,7 +44,7 @@ export class MapView extends HTMLElement {
   }
 
   // TODO: Move to UnitView class
-  bindModelEvents() {
+  /*bindModelEvents() {
     this.listenTo(this.#model, "change:activeUnit", () => {
       if (!this.#UIReady) return;
       if (this.#model.has("activeUnit")) {
@@ -78,7 +78,7 @@ export class MapView extends HTMLElement {
         });
       }
     });
-  }
+  }*/
 }
 
 customElements.define("mb-map-view", MapView);

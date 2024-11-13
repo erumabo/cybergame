@@ -1,7 +1,7 @@
 import * as Phaser from "phaser";
 import anime from "animejs/lib/anime.es.js";
 
-export class UnitSprite extends Phaser.GameObjects.Container {
+export default class UnitSprite extends Phaser.GameObjects.Container {
   sprite?: Phaser.GameObjects.Sprite;
   bars: Map<
     string,
@@ -13,6 +13,7 @@ export class UnitSprite extends Phaser.GameObjects.Container {
 
   constructor(scene: Phaser.Scene) {
     super(scene);
+
     this.bars = new Map();
     Object.defineProperty(this, "displayWidth", {
       set: function (width: number) {
