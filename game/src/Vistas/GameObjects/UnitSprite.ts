@@ -1,18 +1,14 @@
 import * as Phaser from "phaser";
 import anime from "animejs/lib/anime.es.js";
+import Bar from "./Bar";
 
 export default class UnitSprite extends Phaser.GameObjects.Container {
   sprite?: Phaser.GameObjects.Sprite;
-  bars: Map<
-    string,
-    {
-      progress: Phaser.GameObjects.Rectangle;
-      border: Phaser.GameObjects.Rectangle;
-    }
-  >;
+  bars: Map<string, Bar>;
 
   constructor(scene: Phaser.Scene) {
     super(scene);
+    this.setDataEnabled();
 
     this.bars = new Map();
     Object.defineProperty(this, "displayWidth", {
@@ -33,15 +29,12 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     });
   }
 
-  /*setPosition(...position: number[]) {
-    return super.setPosition(...position);
-  }*/
-
   setTexture(key: string, frame: number, ...rest: any[]) {
     if (this.sprite) {
       this.sprite.setTexture(key, frame);
     } else {
-      this.setUI(key, frame);
+      this.add((this.sprite = this.scene.add.sprite(0, 0, key, frame)));
+      this.setSize(this.sprite.displayWidth, this.sprite.displayHeight);
     }
     return this.sprite;
   }
@@ -52,122 +45,21 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     }
   }
 
-  setUI(key: string, frame: number) {
-    this.sprite = this.scene.add.sprite(0, 0, key, frame);
-    this.add(this.sprite);
+  addBar(stat: string, color: number, value: number = 100) {
+    const width = this.displayWidth;
+    const height = this.displayHeight / 10;
+    const x = this.bars.size + 2;
+    const y = this.displayHeight / 2 + (height + 2) * this.bars.size - 2;
 
-    const tileSize = this.displayWidth;
-    this.addBar("energy", 0, tileSize / 2, tileSize - 5, 5, 0xffff00);
-    this.addBar("hp", 0, -tileSize / 2 - 5, tileSize - 5, 5, 0xff00f0);
+    const bar = new Bar(this.scene, x, y, width, height, color).setFillPercent(value);
+    this.add(bar);
+
+    this.bars.set(stat, bar);
   }
 
-  /*
-  setEventListeners() {
-    this.getData("model").on("change:x change:y", () => {
-      this.setPosition(
-        this.getData("model").get("x"),
-        this.getData("model").get("y")
-      );
-    });
+  updateBar(stat: string, value: number) {
+    if (!this.bars.has(stat)) throw new Error(`Bar for stat ${stat} not found`);
 
-    this.getData("model").on("dead", ()=>this.die());
-
-    const tileSize = this.scene.mapController.get("tileSize");
-    this.setInteractive(
-      new Phaser.Geom.Rectangle(
-        -tileSize / 2,
-        -tileSize / 2,
-        tileSize,
-        tileSize
-      ),
-      Phaser.Geom.Rectangle.Contains
-    );
-
-    this.on("pointerdown", this.selectUnit);
-  }
-  */
-
-  /*
-  selectUnit() {
-    const map = this.scene.mapController;
-    const model = this.getData("model");
-    if (map.has("activeUnit")) {
-      if (map.get("activeUnit") == model) {
-        map.unset("activeUnit");
-      } else {
-        map.set({
-          target: model.get("parent")
-        });
-      }
-    } else {
-      if (model.get("energy") == 100) {
-        map.set({
-          activeUnit: model
-        });
-      }
-    }
-  }*/
-
-  /*
-  die() {
-    const model = this.getData("model");
-    const map = this.scene.mapController;
-    map.updateList.splice(
-      map.updateList.findIndex(u => u.get("id") == model.get("id")),
-      1
-    );
-
-    const tl = anime.timeline({
-      easing: "linear",
-      duration: 200
-    });
-    tl.add({
-      targets: this,
-      alpha: 0,
-      tint: "#A0A0A0"
-    });
-
-    tl.finished.then(() => {
-      if (model.has("parent")) {
-        model.get("parent").get("units").remove(model);
-      }
-      model.set({
-        parent: null,
-        tileX: -2,
-        tileY: -2,
-        x: -2 * map.get("tileSize"),
-        y: -2 * map.get("tileSize"),
-        energy: 0
-      });
-    });
-  }*/
-
-  addBar(
-    stat: string,
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    color: number
-  ) {
-    const progress = this.scene.add.rectangle(x, y, width, height);
-    const border = this.scene.add.rectangle(x, y, width, height);
-
-    progress.setFillStyle(color, 1);
-    border.setStrokeStyle(1, 0x000000);
-
-    this.add(progress);
-    this.add(border);
-
-    this.bars.set(stat, { progress, border });
-
-    /*this.getData("model").on("change:" + stat, () => {
-      const percent =
-        this.getData("model").get(stat) /
-        (this.getData("model").has("max" + stat)
-          ? this.getData("model").get("max" + stat)
-          : 100.0);
-      this.bars.get(stat).progress.setDisplaySize(width * percent, height);
-    });*/
+    this.bars.get(stat)!.setFillPercent(value);
   }
 }

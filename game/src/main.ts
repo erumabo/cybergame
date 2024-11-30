@@ -13,6 +13,9 @@ const config = {
     width: window.innerWidth,
     height: (2 * window.innerHeight) / 3
   },
+  dom: {
+    createContainer: true
+  },
   scene: [
     BootScene,
     //Preloader,

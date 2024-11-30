@@ -1,5 +1,5 @@
 import * as Phaser from "phaser";
-import UnitSprite from "../GameObjectComponents/UnitSprite";
+import UnitSprite from "./UnitSprite";
 
 /*
   mapRotation(tile) {
@@ -28,6 +28,15 @@ function clamp(min: number, val: number, max: number) {
   return Math.min(max, Math.max(min, val));
 }
 
+// Hack to suppport Tiled v1.2 up
+Phaser.Tilemaps.Tileset.prototype.getTileProperties = function (
+  tileIndex: number
+) {
+  return this.containsTileIndex(tileIndex)
+    ? (this.getTileData(tileIndex) as any).properties
+    : null;
+};
+
 export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
   tilesetImages: Phaser.Tilemaps.Tileset[];
 
@@ -51,10 +60,11 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
 
   processLayer(
     layer: Phaser.Tilemaps.LayerData,
-    tilesets: Phaser.Tilemaps.Tileset[]
+    tilesets: Phaser.Tilemaps.Tileset[],
+    index: number
   ) {
     if (layer.visible) {
-      return this.createLayer(layer.name, tilesets);
+      return this.createLayer(layer.name, tilesets)!.setDepth(index);
     }
 
     if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {

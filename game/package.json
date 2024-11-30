@@ -20,9 +20,12 @@
     "@capacitor/android": "^6.1.2",
     "@capacitor/core": "^6.1.2",
     "animejs": "^3.2.2",
+    "commander": "^12.1.0",
+    "jimp": "^1.6.0",
     "nanoevents": "^9.1.0",
     "nipplejs": "^0.10.2",
     "phaser": "^3.80.1",
+    "underscore": "^1.13.7",
     "yaml": "^2.6.0"
   }
 }

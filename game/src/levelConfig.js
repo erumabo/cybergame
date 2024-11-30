@@ -14,7 +14,7 @@ const gameConfig = {
     { id: "Cinnabar", type: UnitTypes.Archer },
     { id: "Diamond", type: UnitTypes.Knight }
   ],
-  levels: [
+  mapas: [
     "Bosque"
   ]
 };

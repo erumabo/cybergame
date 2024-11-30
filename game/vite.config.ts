@@ -1,3 +1,6 @@
+import path from 'path'
+
+
 // vite.config.js
 export default {
   // config options
@@ -10,5 +13,10 @@ export default {
       },
       preserveEntrySignatures: "exports-only"
     }
+  },
+  resolve: {
+    alias: {
+      src: path.resolve('src/'),
+    },
   }
 };

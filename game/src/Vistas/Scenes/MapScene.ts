@@ -1,21 +1,18 @@
 //import _ from "underscore";
 import * as Phaser from "phaser";
-import { World } from "../../mecs";
-import { Hints, TileTypes, TileTypeConfig } from "../../globals.js";
-import TilemapSprite from "../GameObjectComponents/Tilemap";
-import UnitSprite from "../GameObjectComponents/UnitSprite";
-
-import Position from "../../Componentes/Position";
+import TilemapSprite from "../GameObjects/TilemapSprite";
+import UnitSprite from "../GameObjects/UnitSprite";
+import MapSceneController from "../../Controladores/Mapa/MapController";
 
 export class MapScene extends Phaser.Scene {
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
-  world: World;
+  controller: MapSceneController;
+  units!: UnitSprite[];
 
   constructor() {
     super("MapScene");
-    this.world = new World();
-    this.world.addComponent(Position);
+    this.controller = new MapSceneController(this);
   }
 
   init(data: any) {
@@ -27,62 +24,73 @@ export class MapScene extends Phaser.Scene {
   create() {
     // Crear objectos
     this.tilemap = new TilemapSprite(this, this.mapa);
-    this.tilemap.layers.forEach(layer =>
-      this.tilemap.processLayer(layer, this.tilemap.tilesetImages)
+    
+    this.tilemap.layers.forEach((layer, index) =>
+      this.tilemap.processLayer(layer, this.tilemap.tilesetImages, index)
     );
+    
+    const charsDepth = this.tilemap.layers.length + 1;
+    this.units = this.tilemap.createFromObjects(
+      "Chars",
+      { classType: UnitSprite, ignoreTileset: false },
+      true
+    ) as UnitSprite[];
+    this.units.forEach(unit => {
+      this.controller.addUnitEntity(unit as UnitSprite);
+      unit.setDepth(charsDepth);
+    });
 
-    this.tilemap
-      .createFromObjects("Chars", { classType: UnitSprite }, true)
-      .forEach(unit => {
-        const entity = this.world.addEntity();
-        this.world.addEntityComponent(entity, new Position());
-      });
+    const tileWidth = this.tilemap.tileWidth;
+    const tileHeight = this.tilemap.tileHeight;
+    this.cameras.main.setBounds(
+      -tileWidth,
+      -tileHeight,
+      (this.tilemap.height + 2) * tileWidth,
+      (this.tilemap.width + 2) * tileHeight
+    );
 
     this.setUIEventListeners();
   }
 
   setUIEventListeners() {
+
+    this.units.forEach(unit =>
+      unit
+        .setInteractive()
+        .on(
+          "pointerdown",
+          function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
+            (this.scene as MapScene).controller.onUnitSelected(pointer, unit);
+          }
+        )
+    );
+
     this.tilemap.layers[
       this.tilemap.getLayerIndexByName("SueloDual")
-    ].tilemapLayer
+    ]?.tilemapLayer
       .setInteractive()
-      .on("pointerdown", function (this: Phaser.Tilemaps.TilemapLayer, p: any) {
-        let prevTile = this.getData("prevTile");
-        if (prevTile) this.getTileAt(prevTile.x, prevTile.y, true).index = -1;
-
-        let { x, y } = this.worldToTileXY(p.worldX, p.worldY);
-        let tile = this.getTileAt(x, y, true);
-        tile.index = 3;
-        this.setData("prevTile", { x, y });
-      });
-
-    /*
-    groundLayer.setInteractive().on("pointerdown", function (p) {
-      if (this.scene.mapController.has("activeUnit")) {
-        let { x, y } = this.worldToTileXY(p.worldX, p.worldY);
-        this.scene.mapController.set({
-          target: this.scene.mapController.getTile(x, y)
-        });
-      }
-    });
-    */
+      .on(
+        "pointerdown",
+        function (
+          this: Phaser.Tilemaps.TilemapLayer,
+          pointer: Phaser.Input.Pointer
+        ) {
+          const { x, y } = this.worldToTileXY(pointer.worldX, pointer.worldY);
+          (this.scene as MapScene).controller.onTileSelected(
+            pointer,
+            this.getTileAt(x, y, true)
+          );
+        }
+      );
 
     this.input.on("pointermove", (p: any) => {
       if (!p.isDown) return;
       this.cameras.main.scrollX -= p.x - p.prevPosition.x;
       this.cameras.main.scrollY -= p.y - p.prevPosition.y;
     });
-
-    const tileSize = this.tilemap.tileWidth;
-    this.cameras.main.setBounds(
-      -tileSize,
-      -tileSize,
-      (this.tilemap.height + 2) * tileSize,
-      (this.tilemap.width + 2) * tileSize
-    );
   }
 
   update(dt: number) {
-    //this.mapController.update(dt);
+    //this.controller.update(dt);
   }
 }
