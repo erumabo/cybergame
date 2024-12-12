@@ -1,5 +1,6 @@
+import { Components } from "src/globals";
 import * as Phaser from "phaser";
-import { World } from "src/mecs";
+import World from "src/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
 import UnitView from "src/Vistas/UIComponents/UnitView";
@@ -12,48 +13,55 @@ import IDLE from "./Estados/IDLE";
 export default class MapSceneController implements IMapSceneControllerState {
   scene: Phaser.Scene;
   world: World;
+
   estado: IMapSceneControllerState;
-  unidadActiva: int;
-  states: Map<string, IMapSceneControllerState>;
+  states: IMapSceneControllerState[];
+
+  unidadActiva?: number;
+  objetivo?: number | Phaser.Tilemaps.Tile;
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene;
-    
+
     this.world = new World();
-    this.world.addComponent(UnitStats);
-    this.world.addComponent(UnitSprite);
-    this.world.addComponent(Phaser.GameObjects.DOMElement);
-    
-    this.states = new Map();
-    this.states.set("IDLE", (this.estado = new IDLE(this)));
+    for (let component in Components) this.world.addComponent(component);
+
+    this.states = [];
+    this.states.push((this.estado = new IDLE(this)));
   }
 
-  setState(state: IMapSceneControllerState) {
+  setState(state: new (ctx: MapSceneController) => IMapSceneControllerState) {
+    let nextState = this.states.find(
+      s => Object.getPrototypeOf(s) == state.prototype
+    );
+    if (!nextState) this.states.push((nextState = new state(this)));
     this.estado.exit();
-    this.estado = state;
+    this.estado = nextState;
     this.estado.enter();
   }
 
   addUnitEntity(unit: UnitSprite) {
     const entity = this.world.addEntity();
 
-    this.world.bindEntityComponent(entity, unit, UnitSprite);
+    this.world.bindEntityComponent(entity, unit, "UnitSprite");
+    unit.setData("entity", entity);
 
-    const stats = this.world.addEntityComponent(entity, UnitStats, 80, 80);
+    const stats = new UnitStats(80, 80);
+    this.world.bindEntityComponent(entity, stats, "UnitStats");
     unit.addBar("salud", 0xff0000, stats.salud);
     unit.addBar("energia", 0x00ffff, stats.energia);
-  
+
     const htmlElement = this.scene.add.dom(0, 0, new UnitView());
     unit.add(htmlElement);
-    this.world.bindEntityComponent(entity, htmlElement, Phaser.GameObjects.DOMElement);
+    this.world.bindEntityComponent(entity, htmlElement, "DOMElement");
   }
 
-  onUnitSelected(point: Phaser.Input.Pointer, unit: UnitSprite) {
-    this.estado.onUnitSelected(point, unit);
+  interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
+    this.estado.interaccionObjeto(point, target);
   }
 
-  onTileSelected(point: Phaser.Input.Pointer, tile: Phaser.Tilemaps.Tile) {
-    this.estado.onTileSelected(point, tile);
+  interaccionMapa(point: Phaser.Input.Pointer, tile: Phaser.Tilemaps.Tile) {
+    this.estado.interaccionMapa(point, tile);
   }
 
   enter() {}

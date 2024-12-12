@@ -1,9 +1,10 @@
-import * as Phaser from "phaser";
 import IMapSceneControllerState from "./IMapSceneControllerState";
+import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
+import * as Phaser from "phaser";
 import MapSceneController from "../MapController";
-import TargetTileSelected from "./TargetTileSelected";
+import anime from "animejs/lib/anime.es.js";
 
-export default class UnidadActiva {
+export default class ObjetivoSeleccionado {
   context: MapSceneController;
   constructor(context: MapSceneController) {
     this.context = context;
@@ -14,10 +15,8 @@ export default class UnidadActiva {
   }
 
   interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    this.context.objetivo = target;
-    this.context.setState(TargetTileSelected);
+    // noop
   }
-
   enter() {}
   update(dt: number) {}
   exit() {}

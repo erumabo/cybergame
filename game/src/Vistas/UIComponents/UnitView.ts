@@ -25,19 +25,19 @@ export default class UnitView extends HTMLElement {
     this.render();
   }
   get actions() {
-    return this.#actions?.join();
+    return this.#actions?.join() ?? "";
   }
 
-  attributeChangedCallback(name: 'actions', oldValue: any, newValue: any) {
+  attributeChangedCallback(name: "actions", oldValue: any, newValue: any) {
     console.log(`Attribute ${name} has changed.`);
-    if((this[name] as any) != newValue) this[name] = newValue;
+    if ((this[name] as any) != newValue) this[name] = newValue;
   }
   //#endregion
 
   disconnectedCallback() {}
 
   render() {
-    console.log("render")
+    console.log("render");
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
   }
 }

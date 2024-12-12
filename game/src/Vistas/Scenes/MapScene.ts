@@ -24,12 +24,17 @@ export class MapScene extends Phaser.Scene {
   create() {
     // Crear objectos
     this.tilemap = new TilemapSprite(this, this.mapa);
-    
+
     this.tilemap.layers.forEach((layer, index) =>
       this.tilemap.processLayer(layer, this.tilemap.tilesetImages, index)
     );
-    
-    const charsDepth = this.tilemap.layers.length + 1;
+
+    this.tilemap.addOverlayLayer(
+      this.tilemap.tilesetImages,
+      this.tilemap.layers.length + 1
+    );
+
+    const charsDepth = this.tilemap.layers.length + 2;
     this.units = this.tilemap.createFromObjects(
       "Chars",
       { classType: UnitSprite, ignoreTileset: false },
@@ -53,20 +58,19 @@ export class MapScene extends Phaser.Scene {
   }
 
   setUIEventListeners() {
-
     this.units.forEach(unit =>
       unit
         .setInteractive()
         .on(
           "pointerdown",
           function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
-            (this.scene as MapScene).controller.onUnitSelected(pointer, unit);
+            (this.scene as MapScene).controller.interaccionObjeto(pointer, this.getData("entity"));
           }
         )
     );
 
     this.tilemap.layers[
-      this.tilemap.getLayerIndexByName("SueloDual")
+      this.tilemap.getLayerIndexByName("Overlay")
     ]?.tilemapLayer
       .setInteractive()
       .on(
@@ -76,7 +80,7 @@ export class MapScene extends Phaser.Scene {
           pointer: Phaser.Input.Pointer
         ) {
           const { x, y } = this.worldToTileXY(pointer.worldX, pointer.worldY);
-          (this.scene as MapScene).controller.onTileSelected(
+          (this.scene as MapScene).controller.interaccionMapa(
             pointer,
             this.getTileAt(x, y, true)
           );

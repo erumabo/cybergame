@@ -1,4 +1,4 @@
-import { UnitTypes, TileTypes } from "./globals.js";
+import { UnitTypes } from "./globals.js";
 
 const gameConfig = {
   pack: "assets/pack.json",

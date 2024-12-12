@@ -1,7 +1,11 @@
-export class World {
+import SparseSet from "src/utils/SparseSet";
+
+type Component = (...args) => any | any;
+
+export default class World {
   nextEntity: number;
-  components: Class[];
-  componentData: Map<number, any>[];
+  components: string[];
+  componentData: Map<number, Component>[];
   entityComponents: Map<number, number>;
 
   constructor() {
@@ -16,22 +20,16 @@ export class World {
     return this.nextEntity;
   }
 
-  addComponent(component: Class) {
+  addComponent(component: string) {
     const i = this.componentData.findIndex(c => c == null);
     this.componentData[i] = new Map();
     this.components[i] = component;
   }
 
-  addEntityComponent(
-    entity: number,
-    componentType: new (...params: any[]) => Class,
-    ...params: any[]
-  ) {
-    const component = new componentType(...params);
-    return this.bindEntityComponent(entity, component, componentType);
-  }
-
-  bindEntityComponent(entity: number, component: any, componentType: Class) {
+  // if using a class, could infer type from constructor
+  // but, by separating type from actual object, you can use anything
+  // Instance, POJO, strings, bools, etc...
+  bindEntityComponent(entity: number, component: Component, componentType: string) {
     const componentId = this.components.indexOf(componentType);
     if (componentId < 0) throw new Error("Component not found");
 
@@ -43,7 +41,7 @@ export class World {
     return component;
   }
 
-  query(...components: Class[]) {
+  query(...components: string[]) {
     let query: number = 0;
     for (let component of components) {
       let i = this.components.findIndex(c => c == component);
@@ -61,5 +59,17 @@ export class World {
       }
     });
     return entities;
+  }
+
+  getEntityComponent(entity: number, component: string) {
+    const componentId = this.components.indexOf(component);
+    if (componentId < 0) throw new Error("Component not found");
+    return this.componentData[componentId].get(entity);
+  }
+  
+  entityHasComponent(entity: number, component: string) {
+    const componentId = this.components.indexOf(component);
+    if (componentId < 0) throw new Error("Component not found");
+    return this.componentData[componentId].has(entity);
   }
 }

@@ -1,27 +1,35 @@
 import * as Phaser from "phaser";
+
 import IMapSceneControllerState from "./IMapSceneControllerState";
 import MapSceneController from "../MapController";
-import TargetTileSelected from "./TargetTileSelected";
+import UnidadActiva from "./UnidadActiva";
 
-export default class UnidadActiva {
+import move from "../Sistemas/MoveUnit";
+
+export default class TargetTileSelected {
   context: MapSceneController;
   constructor(context: MapSceneController) {
     this.context = context;
   }
 
   interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
-    this.context.objetivo = target;
+    //this.context.objetivo = target;
   }
 
   interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    this.context.objetivo = target;
-    this.context.setState(TargetTileSelected);
+    // noop
   }
+  
+  enter() {
+    move(this.context);
 
-  enter() {}
+    this.context.objetivo = undefined;
+    this.context.setState(UnidadActiva);
+  }
   update(dt: number) {}
   exit() {}
 
   //#region Systems
+  
   //#endregion
 }

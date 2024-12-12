@@ -10,15 +10,18 @@ export default class IDLE {
     this.context = context;
   }
 
-  onUnitSelected(point: Phaser.Input.Pointer, target: UnitSprite) {
-    this.context.unidadActiva = target;
-    let nextState: IMapSceneControllerState =
-      this.context.states.get("UnidadActiva") ?? new UnidadActiva(this.context);
-    this.context.states.set("UnidadActiva", nextState);
-    this.context.setState(nextState);
+  interaccionObjeto(point: Phaser.Input.Pointer, entity: number) {
+    if (this.context.world.entityHasComponent(entity, "UnitSprite")) {
+      // Unidad
+      this.context.unidadActiva = entity;
+      this.context.setState(UnidadActiva);
+      return;
+    }
   }
 
-  onTileSelected(point: Phaser.Input.Pointer, unit: Phaser.Tilemaps.Tile) {}
+  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
+    //noop
+  }
 
   enter() {}
   update(dt: number) {}

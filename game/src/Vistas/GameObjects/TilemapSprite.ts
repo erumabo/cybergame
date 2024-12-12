@@ -1,29 +1,6 @@
 import * as Phaser from "phaser";
 import UnitSprite from "./UnitSprite";
 
-/*
-  mapRotation(tile) {
-    const rotations = [
-      [0, 0],
-      [1, 0],
-      [1, 1],
-      [3, 0],
-      [1, 3],
-      [3, 3],
-      [6, 0],
-      [7, 0],
-      [1, 2],
-      [6, 1],
-      [3, 1],
-      [7, 1],
-      [3, 2],
-      [7, 3],
-      [7, 2],
-      [15, 0]
-    ];
-    return rotations[tile];
-  }*/
-
 function clamp(min: number, val: number, max: number) {
   return Math.min(max, Math.max(min, val));
 }
@@ -68,32 +45,18 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
     }
 
     if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {
-      const dual: Phaser.Tilemaps.TilemapLayer[] = [0, 1, 2, 3]
-        .map(i =>
-          this.createBlankLayer(
-            layer.name + "Dual" + i,
-            tilesets,
-            layer.x - layer.tileWidth / 2,
-            layer.y - layer.tileHeight / 2,
-            layer.width + 1,
-            layer.height + 1,
-            layer.tileWidth,
-            layer.tileHeight
-          )
-        )
-        .concat([
-          this.createBlankLayer(
-            layer.name + "Dual",
-            tilesets,
-            layer.x,
-            layer.y,
-            layer.width,
-            layer.height,
-            layer.tileWidth,
-            layer.tileHeight
-          )
-        ])
-        .filter(tilemap => tilemap != null);
+      const dual: Phaser.Tilemaps.TilemapLayer[] = [0, 1, 2, 3].map(i =>
+        this.createBlankLayer(
+          layer.name + "Dual" + i,
+          tilesets,
+          layer.x - layer.tileWidth / 2,
+          layer.y - layer.tileHeight / 2,
+          layer.width + 1,
+          layer.height + 1,
+          layer.tileWidth,
+          layer.tileHeight
+        )!.setDepth(index)
+      );
 
       dual[0].forEachTile(tile => {
         const coords = [
@@ -118,18 +81,12 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
             if (tiletypes == null) return;
             return {
               id: type,
-              //"z-index": +(
-              //  tiletypes
-              //    .getTileData(type)
-              //    .properties.find(p => p.name == "z-index")?.value ?? 0
-              //),
               firstgid: this.getTileset(tiletypes.name + "Dual")?.firstgid || 0,
               x: Math.floor(type / tiletypes.columns),
               y: (type % tiletypes.columns) - 1,
               tilesetWidth: tiletypes.columns
             };
           })
-          //.sort((a, b) => a["z-index"] - b["z-index"])
           .forEach((type: any, li: number) => {
             const pattern = tiles.map(t => +(t.index == type.id));
             type.x = type.x * 4 + pattern[0] * 2 + pattern[2];
@@ -141,7 +98,20 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
           });
       });
 
-      return dual[4];
+      return dual[0];
     }
+  }
+
+  addOverlayLayer(tilesets: Phaser.Tilemaps.Tileset[], index: number) {
+    return this.createBlankLayer(
+      "Overlay",
+      tilesets,
+      0,
+      0,
+      this.width,
+      this.height,
+      this.tileWidth,
+      this.tileHeight
+    )!.setDepth(index);
   }
 }
