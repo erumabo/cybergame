@@ -71,7 +71,6 @@ export default class ActionsMenu extends HTMLElement {
   disconnectedCallback() {}
 
   onActionClick(ev: Event, action: string) {
-    console.log(action);
     this.dispatchEvent(new CustomEvent("action", { detail: action }));
   }
 }

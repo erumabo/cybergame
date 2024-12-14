@@ -5,6 +5,7 @@ import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
 import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
 import UnitView from "src/Vistas/UIComponents/UnitView";
+import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
 import IMapSceneControllerState from "./Estados/IMapSceneControllerState";
@@ -12,7 +13,7 @@ import IDLE from "./Estados/IDLE";
 //#endregion Import Estados
 
 export default class MapSceneController implements IMapSceneControllerState {
-  scene: Phaser.Scene;
+  scene: MapScene;
   world: World;
   tilemap!: TilemapSprite;
 
@@ -22,7 +23,7 @@ export default class MapSceneController implements IMapSceneControllerState {
   unidadActiva?: number;
   objetivo?: number | Phaser.Tilemaps.Tile;
 
-  constructor(scene: Phaser.Scene) {
+  constructor(scene: MapScene) {
     this.scene = scene;
 
     this.world = new World();

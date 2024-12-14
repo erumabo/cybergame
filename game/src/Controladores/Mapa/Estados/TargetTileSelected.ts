@@ -38,14 +38,11 @@ export default class TargetTileSelected {
   //#region Livecycle
   enter() {
     let actionsMenu = this.context.scene.actionsMenu;
-    actionsMenu.show();
-    actionsMenu.domNode.setAttribute("disabled", true);
-    
     const tile = this.context.objetivo as Phaser.Tilemaps.Tile;
     let { pixelX: x, pixelY: y, width, height } = tile;
     actionsMenu.setPosition(x + width, y);
     actionsMenu.domNode.actions = "Move";
-    actionsMenu.domNode.setAttribute("disabled", true);
+    actionsMenu.show();
   }
 
   update(dt: number) {}

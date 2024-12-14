@@ -30,7 +30,7 @@ export default class UnitSprite extends Phaser.GameObjects.DOMElement {
 
   setPosition(...pos: number[]) {
     this.container?.setPosition(...pos);
-    super.setPosition(...pos);
+    return super.setPosition(...pos);
   }
 
   show() {
