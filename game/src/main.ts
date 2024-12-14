@@ -1,6 +1,9 @@
 import { Game } from "phaser";
 import { BootScene } from "./Vistas/Scenes/BootScene";
 import { MapScene } from "./Vistas/Scenes/MapScene";
+import Alpine from "alpinejs";
+
+Alpine.start();
 
 const config = {
   type: Phaser.AUTO,

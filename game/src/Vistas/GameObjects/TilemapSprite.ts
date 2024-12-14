@@ -16,7 +16,7 @@ Phaser.Tilemaps.Tileset.prototype.getTileProperties = function (
 
 export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
   tilesetImages: Phaser.Tilemaps.Tileset[];
-
+  
   constructor(scene: Phaser.Scene, key: string) {
     const tilemapData = scene.cache.tilemap.get(key);
     const mapData = Phaser.Tilemaps.Parsers.Parse(
@@ -28,7 +28,7 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
       true //default
     );
     super(scene, mapData);
-
+    
     this.tilesetImages =
       this.tilesets
         ?.map(tileset => this.addTilesetImage(tileset.name))
@@ -41,7 +41,8 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
     index: number
   ) {
     if (layer.visible) {
-      return this.createLayer(layer.name, tilesets)!.setDepth(index);
+      const vlayer = this.createLayer(layer.name, tilesets)!.setDepth(index);
+      return vlayer;
     }
 
     if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {
@@ -97,13 +98,13 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
             dual[li].putTileAt(index, tile.x, tile.y);
           });
       });
-
+      
       return dual[0];
     }
   }
 
   addOverlayLayer(tilesets: Phaser.Tilemaps.Tileset[], index: number) {
-    return this.createBlankLayer(
+    const vlayer = this.createBlankLayer(
       "Overlay",
       tilesets,
       0,
@@ -113,5 +114,6 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
       this.tileWidth,
       this.tileHeight
     )!.setDepth(index);
+    return vlayer;
   }
 }

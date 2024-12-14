@@ -10,16 +10,20 @@ export default class ObjetivoSeleccionado {
     this.context = context;
   }
 
+  //#region UI Events
   interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
     this.context.objetivo = target;
   }
 
-  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    // noop
-  }
+  interaccionMapa = (_: Phaser.Input.Pointer, __: Phaser.Tilemaps.Tile) => _;
+  actionMenuClick = (_: string) => _;
+  //#endregion
+  
+  //#region Livecycle
   enter() {}
   update(dt: number) {}
   exit() {}
+  //#endregion
 
   //#region Systems
   //#endregion

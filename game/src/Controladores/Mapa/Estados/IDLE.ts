@@ -10,6 +10,7 @@ export default class IDLE {
     this.context = context;
   }
 
+  //#region UI Events
   interaccionObjeto(point: Phaser.Input.Pointer, entity: number) {
     if (this.context.world.entityHasComponent(entity, "UnitSprite")) {
       // Unidad
@@ -19,11 +20,14 @@ export default class IDLE {
     }
   }
 
-  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    //noop
-  }
+  interaccionMapa = (_: Phaser.Input.Pointer, __: Phaser.Tilemaps.Tile) => _;
+  actionMenuClick = (_: string) => _;
+  //#endregion
 
+  //#region Livecycle
   enter() {}
   update(dt: number) {}
   exit() {}
+  //#endregion
+  
 }

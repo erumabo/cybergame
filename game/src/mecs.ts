@@ -1,6 +1,6 @@
 import SparseSet from "src/utils/SparseSet";
 
-type Component = (...args) => any | any;
+type Component = any; //(...args) => any | any;
 
 export default class World {
   nextEntity: number;

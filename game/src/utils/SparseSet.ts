@@ -26,10 +26,10 @@ export default class SparseSet {
   }
 
   *[Symbol.iterator]() {
-    for (let i in this.#dense) yield i;
+    for (let i of this.#dense) yield i;
   }
 
   foreach(callback: (x: number) => any) {
-    for (let i in this.#dense) callback(i);
+    for (let i of this.#dense) callback(i);
   }
 }

@@ -9,6 +9,7 @@ export default class UnidadActiva {
     this.context = context;
   }
 
+  //#region UI Events
   interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
     this.context.objetivo = target;
   }
@@ -17,10 +18,14 @@ export default class UnidadActiva {
     this.context.objetivo = target;
     this.context.setState(TargetTileSelected);
   }
-
+  actionMenuClick = (_: string) => _;
+  //#endregion
+  
+  //#region Livecycle
   enter() {}
   update(dt: number) {}
   exit() {}
+  //#endregion
 
   //#region Systems
   //#endregion

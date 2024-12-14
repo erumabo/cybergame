@@ -5,6 +5,7 @@ import MapSceneController from "../MapController";
 import UnidadActiva from "./UnidadActiva";
 
 import move from "../Sistemas/MoveUnit";
+import ActionsList from "src/Vistas/UIComponents/ActionsList";
 
 export default class TargetTileSelected {
   context: MapSceneController;
@@ -12,24 +13,51 @@ export default class TargetTileSelected {
     this.context = context;
   }
 
+  //#region UI Events
   interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
     //this.context.objetivo = target;
   }
 
   interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    // noop
+    this.context.objetivo = target;
+    this.enter();
   }
-  
-  enter() {
-    move(this.context);
 
-    this.context.objetivo = undefined;
+  actionMenuClick(action: string) {
+    switch (action) {
+      case "Move":
+        move(this.context);
+        break;
+      default:
+        break;
+    }
     this.context.setState(UnidadActiva);
   }
+  //#endregion
+
+  //#region Livecycle
+  enter() {
+    let actionsMenu = this.context.scene.actionsMenu;
+    actionsMenu.show();
+    actionsMenu.domNode.setAttribute("disabled", true);
+    
+    const tile = this.context.objetivo as Phaser.Tilemaps.Tile;
+    let { pixelX: x, pixelY: y, width, height } = tile;
+    actionsMenu.setPosition(x + width, y);
+    actionsMenu.domNode.actions = "Move";
+    actionsMenu.domNode.setAttribute("disabled", true);
+  }
+
   update(dt: number) {}
-  exit() {}
+
+  exit() {
+    this.context.objetivo = undefined;
+    this.context.scene.actionsMenu.domNode.actions = "";
+    this.context.scene.actionsMenu.hide();
+  }
+  //#endregion
 
   //#region Systems
-  
+
   //#endregion
 }

@@ -1,8 +1,15 @@
 const template: HTMLTemplateElement = document.createElement("template");
 template.innerHTML = `
-  <div>
-  Hallo!
-  </div>
+  <style>
+    h1 {
+      background: aqua;
+      font-size: 1rem;
+      bottom: 
+    }
+  </style>
+  <h1>
+  Aqua!
+  </h1>
 `;
 
 export default class UnitView extends HTMLElement {
@@ -20,7 +27,10 @@ export default class UnitView extends HTMLElement {
 
   #actions: string[] | undefined;
   set actions(val: string) {
-    this.#actions = val.split(",");
+    this.#actions = val
+      .split(",")
+      .map(a => a.trim())
+      .filter(act => !!act);
     this.setAttribute("actions", val);
     this.render();
   }

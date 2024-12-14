@@ -1,5 +1,4 @@
 import * as Phaser from "phaser";
-import anime from "animejs/lib/anime.es.js";
 import Bar from "./Bar";
 
 export default class UnitSprite extends Phaser.GameObjects.Container {

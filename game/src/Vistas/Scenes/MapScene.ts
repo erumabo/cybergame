@@ -2,6 +2,7 @@
 import * as Phaser from "phaser";
 import TilemapSprite from "../GameObjects/TilemapSprite";
 import UnitSprite from "../GameObjects/UnitSprite";
+import ActionsMenu from "../GameObjects/ActionsMenu";
 import MapSceneController from "../../Controladores/Mapa/MapController";
 
 export class MapScene extends Phaser.Scene {
@@ -9,6 +10,7 @@ export class MapScene extends Phaser.Scene {
   tilemap!: TilemapSprite;
   controller: MapSceneController;
   units!: UnitSprite[];
+  actionsMenu!: ActionsMenu;
 
   constructor() {
     super("MapScene");
@@ -24,6 +26,7 @@ export class MapScene extends Phaser.Scene {
   create() {
     // Crear objectos
     this.tilemap = new TilemapSprite(this, this.mapa);
+    this.controller.tilemap = this.tilemap;
 
     this.tilemap.layers.forEach((layer, index) =>
       this.tilemap.processLayer(layer, this.tilemap.tilesetImages, index)
@@ -53,6 +56,10 @@ export class MapScene extends Phaser.Scene {
       (this.tilemap.height + 2) * tileWidth,
       (this.tilemap.width + 2) * tileHeight
     );
+    
+    this.actionsMenu = new ActionsMenu(this);
+    this.add.existing(this.actionsMenu);
+    this.actionsMenu.setDepth(charsDepth + 3)
 
     this.setUIEventListeners();
   }
@@ -64,9 +71,16 @@ export class MapScene extends Phaser.Scene {
         .on(
           "pointerdown",
           function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
-            (this.scene as MapScene).controller.interaccionObjeto(pointer, this.getData("entity"));
+            (this.scene as MapScene).controller.interaccionObjeto(
+              pointer,
+              this.getData("entity")
+            );
           }
         )
+    );
+    
+    this.actionsMenu.on("action", ({ detail: action }: CustomEvent) =>
+      this.controller.actionMenuClick(action)
     );
 
     this.tilemap.layers[
@@ -74,7 +88,7 @@ export class MapScene extends Phaser.Scene {
     ]?.tilemapLayer
       .setInteractive()
       .on(
-        "pointerdown",
+        "pointerup",
         function (
           this: Phaser.Tilemaps.TilemapLayer,
           pointer: Phaser.Input.Pointer

@@ -3,6 +3,7 @@ import * as Phaser from "phaser";
 import World from "src/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
+import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
 import UnitView from "src/Vistas/UIComponents/UnitView";
 
 //#region Import Estados
@@ -13,6 +14,7 @@ import IDLE from "./Estados/IDLE";
 export default class MapSceneController implements IMapSceneControllerState {
   scene: Phaser.Scene;
   world: World;
+  tilemap!: TilemapSprite;
 
   estado: IMapSceneControllerState;
   states: IMapSceneControllerState[];
@@ -35,9 +37,9 @@ export default class MapSceneController implements IMapSceneControllerState {
       s => Object.getPrototypeOf(s) == state.prototype
     );
     if (!nextState) this.states.push((nextState = new state(this)));
-    this.estado.exit();
+    this.exit();
     this.estado = nextState;
-    this.estado.enter();
+    this.enter();
   }
 
   addUnitEntity(unit: UnitSprite) {
@@ -56,17 +58,27 @@ export default class MapSceneController implements IMapSceneControllerState {
     this.world.bindEntityComponent(entity, htmlElement, "DOMElement");
   }
 
-  interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
-    this.estado.interaccionObjeto(point, target);
+  //#region UI Events
+  interaccionObjeto(point: Phaser.Input.Pointer, entity: number) {
+    this.estado.interaccionObjeto(point, entity);
   }
-
-  interaccionMapa(point: Phaser.Input.Pointer, tile: Phaser.Tilemaps.Tile) {
-    this.estado.interaccionMapa(point, tile);
+  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
+    this.estado.interaccionMapa(point, target);
   }
+  actionMenuClick(action: string) {
+    this.estado.actionMenuClick(action);
+  }
+  //#endregion
 
-  enter() {}
+  //#region Livecycle
+  enter() {
+    this.estado.enter();
+  }
   update(dt: number) {
     this.estado.update(dt);
   }
-  exit() {}
+  exit() {
+    this.estado.exit();
+  }
+  //#endregion
 }

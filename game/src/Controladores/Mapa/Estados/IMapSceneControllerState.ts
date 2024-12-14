@@ -8,6 +8,7 @@ export default interface IMapSceneControllerState {
     point: Phaser.Input.Pointer,
     target: Phaser.Tilemaps.Tile
   ): void;
+  actionMenuClick(action: string): void;
   
   // Ciclo de vida
   enter(): void;
