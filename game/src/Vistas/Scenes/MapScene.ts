@@ -1,9 +1,13 @@
 //import _ from "underscore";
 import * as Phaser from "phaser";
+
+ // @ts-ignore
+import { Compiler } from "inkjs/full";
 import TilemapSprite from "../GameObjects/TilemapSprite";
 import UnitSprite from "../GameObjects/UnitSprite";
 import ActionsMenu from "../GameObjects/ActionsMenu";
 import MapSceneController from "../../Controladores/Mapa/MapController";
+import StoryManager from "../../Plugins/StoryManager";
 
 export class MapScene extends Phaser.Scene {
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
@@ -11,6 +15,7 @@ export class MapScene extends Phaser.Scene {
   controller: MapSceneController;
   units!: UnitSprite[];
   actionsMenu!: ActionsMenu;
+  storyManager!: StoryManager;
 
   constructor() {
     super("MapScene");
@@ -18,10 +23,18 @@ export class MapScene extends Phaser.Scene {
   }
 
   init(data: any) {
+    console.log(data)
     this.mapa = data.mapa;
   }
 
-  preload() {}
+  preload() {
+    if (!this.cache.custom.ink.has(this.mapa)) {
+      const storyInk = this.cache.text.get("story_" + this.mapa);
+      const story = new Compiler(storyInk).Compile();
+      this.cache.custom.ink.add(this.mapa, story);
+    }
+    this.storyManager.setStory(this.cache.custom.ink.get(this.mapa));
+  }
 
   create() {
     // Crear objectos
@@ -56,10 +69,11 @@ export class MapScene extends Phaser.Scene {
       (this.tilemap.height + 2) * tileWidth,
       (this.tilemap.width + 2) * tileHeight
     );
-    
+    this.cameras.main.setZoom(1.2);
+
     this.actionsMenu = new ActionsMenu(this);
     this.add.existing(this.actionsMenu);
-    this.actionsMenu.setDepth(charsDepth + 3)
+    this.actionsMenu.setDepth(100);
 
     this.setUIEventListeners();
   }
@@ -78,7 +92,7 @@ export class MapScene extends Phaser.Scene {
           }
         )
     );
-    
+
     this.actionsMenu.on("action", ({ detail: action }: CustomEvent) =>
       this.controller.actionMenuClick(action)
     );
@@ -88,7 +102,7 @@ export class MapScene extends Phaser.Scene {
     ]?.tilemapLayer
       .setInteractive()
       .on(
-        "pointerup",
+        "pointerdown",
         function (
           this: Phaser.Tilemaps.TilemapLayer,
           pointer: Phaser.Input.Pointer

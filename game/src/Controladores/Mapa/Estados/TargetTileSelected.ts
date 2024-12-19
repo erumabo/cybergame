@@ -5,7 +5,13 @@ import MapSceneController from "../MapController";
 import UnidadActiva from "./UnidadActiva";
 
 import move from "../Sistemas/MoveUnit";
-import ActionsList from "src/Vistas/UIComponents/ActionsList";
+import { ActionsList } from "src/Vistas/UIComponents/mb-elements";
+
+function inspect(ctx: MapSceneController) {
+  ctx.scene.storyManager.setKnot("Investigar");
+  ctx.scene.scene.pause();
+  ctx.scene.scene.run("VN", "");
+}
 
 export default class TargetTileSelected {
   context: MapSceneController;
@@ -27,11 +33,14 @@ export default class TargetTileSelected {
     switch (action) {
       case "Move":
         move(this.context);
+        this.context.setState(UnidadActiva);
+        break;
+      case "Inspect":
+        inspect(this.context);
         break;
       default:
         break;
     }
-    this.context.setState(UnidadActiva);
   }
   //#endregion
 
@@ -41,7 +50,7 @@ export default class TargetTileSelected {
     const tile = this.context.objetivo as Phaser.Tilemaps.Tile;
     let { pixelX: x, pixelY: y, width, height } = tile;
     actionsMenu.setPosition(x + width, y);
-    actionsMenu.domNode.actions = "Move";
+    actionsMenu.domNode["actions"] = "Move,Inspect";
     actionsMenu.show();
   }
 
@@ -49,7 +58,7 @@ export default class TargetTileSelected {
 
   exit() {
     this.context.objetivo = undefined;
-    this.context.scene.actionsMenu.domNode.actions = "";
+    this.context.scene.actionsMenu.domNode["actions"] = "";
     this.context.scene.actionsMenu.hide();
   }
   //#endregion

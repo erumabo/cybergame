@@ -1,0 +1,23 @@
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  li {
+    list-style: none inside;
+  }
+  button {
+    width: 64px;
+    height: 1rem;
+  }
+</style>
+<menu>
+  <template x-for="action in actions">
+    <li>
+      <button
+        @click.stop.prevent="onActionClick($event, action)"
+        x-text="action"></button>
+    </li>
+  </template>
+</menu>

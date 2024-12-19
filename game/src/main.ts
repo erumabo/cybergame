@@ -1,8 +1,12 @@
 import { Game } from "phaser";
+
 import { BootScene } from "./Vistas/Scenes/BootScene";
 import { MapScene } from "./Vistas/Scenes/MapScene";
-import Alpine from "alpinejs";
+import { VNScene } from "./Vistas/Scenes/VNScene";
 
+import StoryManager from "./Plugins/StoryManager";
+
+import Alpine from "alpinejs";
 Alpine.start();
 
 const config = {
@@ -10,7 +14,7 @@ const config = {
   width: 1024,
   height: 768,
   parent: "game-container",
-  backgroundColor: "#000000",
+  backgroundColor: "#E0C9A6",
   scale: {
     mode: Phaser.Scale.RESIZE,
     width: window.innerWidth,
@@ -23,8 +27,14 @@ const config = {
     BootScene,
     //Preloader,
     //MainMenu,
-    MapScene
-  ]
+    MapScene,
+    VNScene
+  ],
+  plugins: {
+    global: [
+      { key: "StoryManager", plugin: StoryManager, start: false, mapping: "storyManager" }
+    ]
+  }
 };
 
 const game = new Game(config);

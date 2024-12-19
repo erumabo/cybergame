@@ -4,7 +4,7 @@ import World from "src/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
 import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
-import UnitView from "src/Vistas/UIComponents/UnitView";
+import { UnitView } from "src/Vistas/UIComponents/mb-elements";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
@@ -54,9 +54,8 @@ export default class MapSceneController implements IMapSceneControllerState {
     unit.addBar("salud", 0xff0000, stats.salud);
     unit.addBar("energia", 0x00ffff, stats.energia);
 
-    const htmlElement = this.scene.add.dom(0, 0, new UnitView());
-    unit.add(htmlElement);
-    this.world.bindEntityComponent(entity, htmlElement, "DOMElement");
+    this.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
+    unit.setDOMAttribute("name", "" + entity);
   }
 
   //#region UI Events

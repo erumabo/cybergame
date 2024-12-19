@@ -21,6 +21,11 @@
         "key": "Bosque",
         "type": "tilemapTiledJSON",
         "url": "Bosque.json"
+      },
+      {
+        "key": "story_Bosque",
+        "type": "text",
+        "url": "story.ink"
       }
     ]
   },

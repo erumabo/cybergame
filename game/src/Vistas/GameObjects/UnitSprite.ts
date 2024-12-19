@@ -1,15 +1,29 @@
 import * as Phaser from "phaser";
 import Bar from "./Bar";
+import ActionsMenu from "./ActionsMenu";
+import { UnitView } from "../UIComponents/mb-elements";
 
 export default class UnitSprite extends Phaser.GameObjects.Container {
   sprite?: Phaser.GameObjects.Sprite;
   bars: Map<string, Bar>;
+  actionsMenu: ActionsMenu;
+  view: Phaser.GameObjects.DOMElement;
+  viewNode: UnitView;
 
   constructor(scene: Phaser.Scene) {
     super(scene);
     this.setDataEnabled();
 
     this.bars = new Map();
+
+    this.actionsMenu = new ActionsMenu(this.scene);
+    this.actionsMenu.hide();
+    this.add(this.actionsMenu);
+
+    this.viewNode = new UnitView();
+    this.view = this.scene.add.dom(0, 0, this.viewNode);
+    this.add(this.view);
+
     Object.defineProperty(this, "displayWidth", {
       set: function (width: number) {
         this.sprite && (this.sprite.displayWidth = width);
@@ -50,7 +64,9 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     const x = this.bars.size + 2;
     const y = this.displayHeight / 2 + (height + 2) * this.bars.size - 2;
 
-    const bar = new Bar(this.scene, x, y, width, height, color).setFillPercent(value);
+    const bar = new Bar(this.scene, x, y, width, height, color).setFillPercent(
+      value
+    );
     this.add(bar);
 
     this.bars.set(stat, bar);
@@ -60,5 +76,9 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     if (!this.bars.has(stat)) throw new Error(`Bar for stat ${stat} not found`);
 
     this.bars.get(stat)!.setFillPercent(value);
+  }
+  
+  setDOMAttribute(attribute: string, value: any) {
+    this.viewNode.setAttribute(attribute, value);
   }
 }

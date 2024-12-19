@@ -1,26 +1,26 @@
 import * as Phaser from "phaser";
-import { ActionsList } from "../UIComponents/mb-elements";
+import { VNTextDisplay } from "../UIComponents/mb-elements";
 
-export default class ActionsMenu extends Phaser.GameObjects.DOMElement {
+export default class VNDisplay extends Phaser.GameObjects.DOMElement {
   container: Phaser.GameObjects.Container;
-  domNode: ActionsList;
+  domNode: VNTextDisplay;
 
-  constructor(scene: Phaser.Scene) {
-    super(scene, 0, 0, new ActionsList(), "width: 64px; height: 40px;");
+  constructor(scene: Phaser.Scene, width: number, height: number) {
+    super(scene, 0, 0, new VNTextDisplay(), `width: ${width}px; height: ${height}px;`);
 
-    this.domNode = this.node as ActionsList;
+    this.domNode = this.node as VNTextDisplay;
     this.addListener("action");
 
     // To stop events from propagating under the menu
     const background = this.scene.add
-      .rectangle(0, 0, 64, 40, 0xe0c9a6, 0.9)
+      .rectangle(0, 0, width, height, 0xe0c9a6, 0.9)
       .setStrokeStyle(1, 0, 1);
     background
       .setInteractive()
-      .on("pointerdown", () => 1)
-      .on("pointerup", () => 1);
+      .on("pointerdown", () => this.emit("pointerdown"))
+      .on("pointerup", () => this.emit("pointerup"));
 
-    this.container = this.scene.add.container(100, 100);
+    this.container = this.scene.add.container(0, 0);
     this.container.add(background);
     this.container.add(this);
 
@@ -37,13 +37,14 @@ export default class ActionsMenu extends Phaser.GameObjects.DOMElement {
 
   show() {
     this.domNode.style.display = "block";
-    this.domNode.style.width = "64px";
+    //this.domNode.style.width = "64px";
     this.container.setToTop();
     this.container.setVisible(true);
   }
+
   hide() {
     this.domNode.style.display = "none";
-    this.domNode.style.width = "0";
+    //this.domNode.style.width = "0";
     this.container.setToBack();
     this.container.setVisible(false);
   }

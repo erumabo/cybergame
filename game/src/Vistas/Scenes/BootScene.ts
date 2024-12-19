@@ -5,7 +5,9 @@ export class BootScene extends Phaser.Scene {
   constructor() {
     super("Boot");
   }
-  init() {}
+  init() {
+    this.cache.addCustom("ink");
+  }
   preload() {
     // this goes in main preload
     // there => preload tilesets, and other general stuff

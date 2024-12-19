@@ -25,7 +25,8 @@ export default class IDLE {
   //#endregion
 
   //#region Livecycle
-  enter() {}
+  enter() {
+  }
   update(dt: number) {}
   exit() {}
   //#endregion
