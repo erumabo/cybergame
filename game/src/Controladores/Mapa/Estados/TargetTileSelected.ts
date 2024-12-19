@@ -10,7 +10,7 @@ import { ActionsList } from "src/Vistas/UIComponents/mb-elements";
 function inspect(ctx: MapSceneController) {
   ctx.scene.storyManager.setKnot("Investigar");
   ctx.scene.scene.pause();
-  ctx.scene.scene.run("VN", "");
+  ctx.scene.scene.run("VN", { knot: "" });
 }
 
 export default class TargetTileSelected {

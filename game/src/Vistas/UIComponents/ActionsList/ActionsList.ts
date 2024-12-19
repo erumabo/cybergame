@@ -39,13 +39,11 @@ export default class ActionsMenu
       .filter((act) => !!act);
   }
   set actions(v: string) {
-    this.setAttribute(
-      "actions",
-      (this.#props["actions"] = ActionsMenu.parseActions(v))
-    );
+    this.#props["actions"] = ActionsMenu.parseActions(v);
+    this.setAttribute("actions", v);
   }
   get actions() {
-    return this.#props["actions"] ?? "";
+    return this.#props["actions"]?.join(",") ?? "";
   }
 
   attributeChangedCallback(name: Prop, oldValue: string, newValue: string) {

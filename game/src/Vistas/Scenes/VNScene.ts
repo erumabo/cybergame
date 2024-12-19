@@ -3,12 +3,14 @@ import ink from "inkjs";
 import { marked } from "marked";
 import mustache from "mustache";
 import VNDisplay from "../GameObjects/VNDisplay";
+import StoryManager from "../../Plugins/StoryManager";
 
 export class VNScene extends Phaser.Scene {
   knot?: string;
   background?: Phaser.GameObjects.Rectangle;
   story?: ink.Story;
   vnDisplay?: VNDisplay;
+  storyManager!: StoryManager;
 
   constructor() {
     super("VN");
@@ -43,22 +45,34 @@ export class VNScene extends Phaser.Scene {
 
   update(dt: number) {}
 
-  playStory(knot) {
-    this.vnDisplay.show();
+  playStory() {
+    this.vnDisplay!.show();
     this.stepStory();
   }
 
   stepStory() {
-    let story: ink.Story = this.storyManager.story;
+    let story = this.storyManager.story;
+    if(!story) {
+      throw new Error("Story fragment not set");
+    }
+    
     if (story.canContinue) {
-      const text = marked.parse(
-        mustache.render(story.Continue(), { player: "Aqua" }, {}, ["<%", "%>"])
-      );
-      this.vnDisplay.setHTML(text);
+      const text = story.Continue();
+      if(!text) {
+        throw new Error("Story didnt return next line");
+      }
+      
+      const formatted = marked.parse(
+        mustache.render(text, { player: "Aqua" }, {}, ["<%", "%>"])
+      ) as string;
+      this.vnDisplay!.setHTML(formatted);
+      
     } else {
-      this.vnDisplay.hide();
+      
+      this.vnDisplay!.hide();
       this.scene.sleep();
       setTimeout(() => this.scene.resume("MapScene"), 100);
+      
     }
   }
 }
