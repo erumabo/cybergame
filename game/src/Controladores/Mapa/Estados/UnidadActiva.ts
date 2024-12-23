@@ -1,32 +1,32 @@
-import * as Phaser from "phaser";
-import IMapSceneControllerState from "./IMapSceneControllerState";
-import MapSceneController from "../MapController";
-import TargetTileSelected from "./TargetTileSelected";
+import { enqueueActions } from "xstate";
+import { MAction } from "../statesTypeDef";
 
-export default class UnidadActiva {
-  context: MapSceneController;
-  constructor(context: MapSceneController) {
-    this.context = context;
+const unidadSeleccionada = {
+  on: {
+    selectTile: {
+      actions: enqueueActions(({ context, event, enqueue }) => {
+        enqueue.assign({
+          target: event.target
+        });
+      }) as MAction,
+      target: "targetSelected"
+    },
+    selectUnit: {
+      actions: enqueueActions(({ context, event, enqueue }) => {
+        if (context.unit == event.target) {
+          enqueue.assign({
+            unit: undefined
+          });
+          enqueue.raise({ type: "gotoIdle" });
+        } else {
+          enqueue.assign({
+            unit: event.target
+          });
+        }
+      }) as MAction
+    },
+    gotoIdle: "idle"
   }
+};
 
-  //#region UI Events
-  interaccionObjeto(point: Phaser.Input.Pointer, target: number) {
-    this.context.objetivo = target;
-  }
-
-  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    this.context.objetivo = target;
-    this.context.setState(TargetTileSelected);
-  }
-  actionMenuClick = (_: string) => _;
-  //#endregion
-  
-  //#region Livecycle
-  enter() {}
-  update(dt: number) {}
-  exit() {}
-  //#endregion
-
-  //#region Systems
-  //#endregion
-}
+export default unidadSeleccionada;

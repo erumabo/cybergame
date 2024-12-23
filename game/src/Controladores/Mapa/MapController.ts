@@ -8,20 +8,16 @@ import { UnitView } from "src/Vistas/UIComponents/mb-elements";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
-import IMapSceneControllerState from "./Estados/IMapSceneControllerState";
-import IDLE from "./Estados/IDLE";
+import { createActor, Actor } from "xstate";
+import stateMachine from "./StateMachine";
 //#endregion Import Estados
 
-export default class MapSceneController implements IMapSceneControllerState {
+export default class MapSceneController {
   scene: MapScene;
   world: World;
   tilemap!: TilemapSprite;
 
-  estado: IMapSceneControllerState;
-  states: IMapSceneControllerState[];
-
-  unidadActiva?: number;
-  objetivo?: number | Phaser.Tilemaps.Tile;
+  stateActor; // Actor<infer>
 
   constructor(scene: MapScene) {
     this.scene = scene;
@@ -29,18 +25,13 @@ export default class MapSceneController implements IMapSceneControllerState {
     this.world = new World();
     for (let component in Components) this.world.addComponent(component);
 
-    this.states = [];
-    this.states.push((this.estado = new IDLE(this)));
-  }
-
-  setState(state: new (ctx: MapSceneController) => IMapSceneControllerState) {
-    let nextState = this.states.find(
-      s => Object.getPrototypeOf(s) == state.prototype
-    );
-    if (!nextState) this.states.push((nextState = new state(this)));
-    this.exit();
-    this.estado = nextState;
-    this.enter();
+    this.stateActor = createActor(stateMachine, {
+      input: {
+        scene: this.scene,
+        world: this.world
+      }
+    });
+    this.stateActor.start();
   }
 
   addUnitEntity(unit: UnitSprite) {
@@ -60,25 +51,13 @@ export default class MapSceneController implements IMapSceneControllerState {
 
   //#region UI Events
   interaccionObjeto(point: Phaser.Input.Pointer, entity: number) {
-    this.estado.interaccionObjeto(point, entity);
+    this.stateActor.send({ type: "selectUnit", target: entity, point });
   }
   interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    this.estado.interaccionMapa(point, target);
+    this.stateActor.send({ type: "selectTile", target, point });
   }
   actionMenuClick(action: string) {
-    this.estado.actionMenuClick(action);
-  }
-  //#endregion
-
-  //#region Livecycle
-  enter() {
-    this.estado.enter();
-  }
-  update(dt: number) {
-    this.estado.update(dt);
-  }
-  exit() {
-    this.estado.exit();
+    this.stateActor.send({ type: "selectAction", action });
   }
   //#endregion
 }
