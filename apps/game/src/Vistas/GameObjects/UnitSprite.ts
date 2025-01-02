@@ -42,7 +42,7 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     });
   }
 
-  setTexture(key: string, frame: number, ...rest: any[]) {
+  setTexture(key: string, frame: number, ..._: any[]) {
     if (this.sprite) {
       this.sprite.setTexture(key, frame);
     } else {

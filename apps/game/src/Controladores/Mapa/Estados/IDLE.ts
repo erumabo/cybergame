@@ -1,10 +1,10 @@
 import { enqueueActions } from "xstate";
-import { MAction } from "../statesTypeDef";
+import type { MAction } from "../statesTypeDef";
 
 const idle = {
   on: {
     selectUnit: {
-      actions: enqueueActions(({ enqueue, context, event }) => {
+      actions: enqueueActions(({ enqueue, event }) => {
         enqueue.assign({
           unit: event.target
         });

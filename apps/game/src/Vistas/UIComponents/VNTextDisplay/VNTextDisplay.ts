@@ -1,4 +1,4 @@
-import Alpine from "alpinejs";
+//import Alpine from "alpinejs";
 import templateHTML from "./VNTextDisplay.html?raw";
 
 const template: HTMLTemplateElement = document.createElement("template");

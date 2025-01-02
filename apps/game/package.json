@@ -1,8 +1,20 @@
 {
-  "name": "cybergame",
-  "private": true,
+  "name": "@mabo/cybergame",
   "version": "0.0.0",
+  "description": "A simple 2d strategy game made by Mabo",
+  "homepage": "https://github.com/erumabo/cybergame/apps/game/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
   "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "apps/game"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
   "scripts": {
     "dev": "vite",
     "dev-lan": "vite --host",
@@ -16,21 +28,19 @@
     "@types/mustache": "^4.2.5",
     "@types/underscore": "^1.13.0",
     "typescript": "^5.6.3",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-checker": "^0.8.0"
   },
   "dependencies": {
     "@capacitor/android": "^6.1.2",
     "@capacitor/core": "^6.1.2",
     "alpinejs": "^3.14.7",
     "animejs": "^3.2.2",
-    "commander": "^12.1.0",
     "inkjs": "^2.3.1",
-    "jimp": "^1.6.0",
     "marked": "^15.0.4",
     "mustache": "^4.2.0",
     "nipplejs": "^0.10.2",
     "phaser": "^3.80.1",
-    "underscore": "^1.13.7",
     "xstate": "^5.19.0",
     "yaml": "^2.6.0"
   }

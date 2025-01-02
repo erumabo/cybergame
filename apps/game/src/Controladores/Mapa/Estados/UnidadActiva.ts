@@ -1,10 +1,10 @@
 import { enqueueActions } from "xstate";
-import { MAction } from "../statesTypeDef";
+import type { MAction } from "../statesTypeDef";
 
 const unidadSeleccionada = {
   on: {
     selectTile: {
-      actions: enqueueActions(({ context, event, enqueue }) => {
+      actions: enqueueActions(({ event, enqueue }) => {
         enqueue.assign({
           target: event.target
         });

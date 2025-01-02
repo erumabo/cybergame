@@ -1,5 +1,5 @@
 import * as Phaser from "phaser";
-import ink from "inkjs";
+import * as ink from "inkjs";
 import { marked } from "marked";
 import mustache from "mustache";
 import VNDisplay from "../GameObjects/VNDisplay";
@@ -43,7 +43,7 @@ export class VNScene extends Phaser.Scene {
     this.playStory();
   }
 
-  update(dt: number) {}
+  override update(_: number) {}
 
   playStory() {
     this.vnDisplay!.show();
@@ -52,27 +52,24 @@ export class VNScene extends Phaser.Scene {
 
   stepStory() {
     let story = this.storyManager.story;
-    if(!story) {
+    if (!story) {
       throw new Error("Story fragment not set");
     }
-    
+
     if (story.canContinue) {
       const text = story.Continue();
-      if(!text) {
+      if (!text) {
         throw new Error("Story didnt return next line");
       }
-      
+
       const formatted = marked.parse(
         mustache.render(text, { player: "Aqua" }, {}, ["<%", "%>"])
       ) as string;
       this.vnDisplay!.setHTML(formatted);
-      
     } else {
-      
       this.vnDisplay!.hide();
       this.scene.sleep();
       setTimeout(() => this.scene.resume("MapScene"), 100);
-      
     }
   }
 }

@@ -1,5 +1,5 @@
-import path from 'path'
-
+import path from "path";
+import checker from "vite-plugin-checker";
 
 // vite.config.js
 export default {
@@ -16,7 +16,12 @@ export default {
   },
   resolve: {
     alias: {
-      src: path.resolve('src/'),
-    },
-  }
+      src: path.resolve("src/")
+    }
+  },
+  plugins: [
+    checker({
+      typescript: true
+    })
+  ]
 };

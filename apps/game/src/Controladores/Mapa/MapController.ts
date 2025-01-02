@@ -4,11 +4,10 @@ import World from "src/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
 import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
-import { UnitView } from "src/Vistas/UIComponents/mb-elements";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
-import { createActor, Actor } from "xstate";
+import { createActor } from "xstate";
 import stateMachine from "./StateMachine";
 //#endregion Import Estados
 

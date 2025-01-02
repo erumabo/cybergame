@@ -1,5 +1,5 @@
 import { setup, enqueueActions } from "xstate";
-import { TContext, TEvents } from "./statesTypeDef";
+import type { TContext, TEvents } from "./statesTypeDef";
 
 import idle from "./Estados/IDLE";
 import unidadSeleccionada from "./Estados/UnidadActiva";

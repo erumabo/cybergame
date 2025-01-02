@@ -46,7 +46,7 @@ export default class ActionsMenu
     return this.#props["actions"]?.join(",") ?? "";
   }
 
-  attributeChangedCallback(name: Prop, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: Prop, _: string, newValue: string) {
     if (this[name] != newValue) this[name] = newValue;
   }
 
@@ -54,7 +54,7 @@ export default class ActionsMenu
 
   disconnectedCallback() {}
 
-  onActionClick(ev: Event, action: string) {
+  onActionClick(_: Event, action: string) {
     this.dispatchEvent(new CustomEvent("action", { detail: action }));
   }
 }

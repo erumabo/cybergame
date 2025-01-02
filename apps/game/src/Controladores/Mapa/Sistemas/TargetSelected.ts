@@ -3,7 +3,7 @@ export default class TargetSelected {
     
   }
   
-  update(data: any) {
+  update() {
     
   }
 }

@@ -1,9 +1,7 @@
 import * as Phaser from "phaser";
-import UnitModel from "./UnitModel";
 
 export default class MapModel {
   tilemap?: Phaser.Tilemaps.Tilemap;
-  activeUnit?: UnitModel;
   updateList:any[];
   
   constructor() {
@@ -21,22 +19,11 @@ export default class MapModel {
     return true;
   }
 
-  clearHint(hint = 0xff) {
+  clearHint() {
   }
 
   update(dt:number) {
     this.updateList.forEach(i => i.update(dt));
   }
 
-  activateUnit(unit:UnitModel) {
-    /*if (!this.has("activeUnit")) {
-      //cleanup unit hints and timers
-      //  and move to next turn
-      this.clearHint();
-      this.unset("target");
-      return;
-    }
-
-    this.get("activeUnit").activate(this);*/
-  }
 }

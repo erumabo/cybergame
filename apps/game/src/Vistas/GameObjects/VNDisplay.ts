@@ -30,7 +30,7 @@ export default class VNDisplay extends Phaser.GameObjects.DOMElement {
     this.hide();
   }
 
-  setPosition(...pos: number[]) {
+  override setPosition(...pos: number[]) {
     this.container?.setPosition(...pos);
     return super.setPosition(...pos);
   }

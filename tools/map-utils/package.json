@@ -1,0 +1,31 @@
+{
+  "name": "@mabo/map-utils",
+  "version": "1.0.0",
+  "description": "Mabo's tools to work with Tiled maps",
+  "homepage": "https://github.com/erumabo/cybergame/tools/map-utils/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "tools/map-utils"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
+  "bin": {
+    "mabo-bake": "./bakeTileset.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@mabo/tiled": "0.0.0",
+    "commander": "^12.1.0",
+    "jimp": "^1.6.0",
+    "underscore": "^1.13.7",
+    "yaml": "^2.6.1"
+  }
+}

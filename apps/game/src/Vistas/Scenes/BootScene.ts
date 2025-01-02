@@ -17,5 +17,5 @@ export class BootScene extends Phaser.Scene {
   create() {
     this.scene.start("MapScene", { mapa: "Bosque" });
   }
-  update(dt: number) {}
+  override update(_: number) {}
 }

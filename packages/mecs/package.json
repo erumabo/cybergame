@@ -1,0 +1,25 @@
+{
+  "name": "@mabo/mecs",
+  "version": "0.0.0",
+  "description": "Mabo's ECS implementation",
+  "homepage": "https://github.com/erumabo/cybergame/packages/mecs/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "packages/mecs"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "peerDependencies": {},
+  "peerDependenciesMeta": {}
+}

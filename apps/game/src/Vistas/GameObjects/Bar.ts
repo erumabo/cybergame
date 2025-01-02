@@ -3,9 +3,7 @@ import * as Phaser from "phaser";
 export default class Bar extends Phaser.GameObjects.Container {
   progress: Phaser.GameObjects.Rectangle;
   border: Phaser.GameObjects.Rectangle;
-  width: number;
-  height: number;
-
+  
   constructor(
     scene: Phaser.Scene,
     x: number,

@@ -12,7 +12,7 @@ template.innerHTML = `<div>
 
 export class MapView extends HTMLElement {
   //static observedAttributes = [];
-  #UIReady: boolean = false;
+  //#UIReady: boolean = false;
 
   constructor() {
     super();
@@ -21,10 +21,10 @@ export class MapView extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
-    this.#UIReady = true;
+    //this.#UIReady = true;
   }
 
-  attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+  attributeChangedCallback(name: string, _: any, __: any) {
     console.log(`Attribute ${name} has changed.`);
   }
 

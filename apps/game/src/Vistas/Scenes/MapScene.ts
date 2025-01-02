@@ -1,7 +1,7 @@
 //import _ from "underscore";
 import * as Phaser from "phaser";
 
- // @ts-ignore
+// @ts-ignore
 import { Compiler } from "inkjs/full";
 import TilemapSprite from "../GameObjects/TilemapSprite";
 import UnitSprite from "../GameObjects/UnitSprite";
@@ -23,7 +23,6 @@ export class MapScene extends Phaser.Scene {
   }
 
   init(data: any) {
-    console.log(data)
     this.mapa = data.mapa;
   }
 
@@ -56,7 +55,7 @@ export class MapScene extends Phaser.Scene {
       { classType: UnitSprite, ignoreTileset: false },
       true
     ) as UnitSprite[];
-    this.units.forEach(unit => {
+    this.units.forEach((unit) => {
       this.controller.addUnitEntity(unit as UnitSprite);
       unit.setDepth(charsDepth);
     });
@@ -79,7 +78,7 @@ export class MapScene extends Phaser.Scene {
   }
 
   setUIEventListeners() {
-    this.units.forEach(unit =>
+    this.units.forEach((unit) =>
       unit
         .setInteractive()
         .on(
@@ -122,7 +121,7 @@ export class MapScene extends Phaser.Scene {
     });
   }
 
-  update(dt: number) {
+  override update(_: number) {
     //this.controller.update(dt);
   }
 }

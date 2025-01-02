@@ -1,0 +1,31 @@
+{
+  "name": "@mabo/tiled",
+  "version": "0.0.0",
+  "description": "Mabo's Tiled tools, types and helpers",
+  "homepage": "https://github.com/erumabo/cybergame/packages/mabo_tiled/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "packages/mabo_tiled"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "yaml": "^2.6.1"
+  },
+  "peerDependenciesMeta": {
+    "yaml": {
+      "optional": true
+    }
+  }
+}

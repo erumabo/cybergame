@@ -1,5 +1,5 @@
 import * as Phaser from "phaser";
-import ink from "inkjs";
+import * as ink from "inkjs";
 
 export default class StoryManager extends Phaser.Plugins.BasePlugin {
   story?: ink.Story;

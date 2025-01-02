@@ -1,6 +1,8 @@
+#!/usr/bin/env node
 import { program } from "commander";
 import { Jimp } from "jimp";
 import { promises as fs } from "fs";
+import { Tiled } from "@mabo/tiled";
 
 function isSizeValid(size, tileSize) {
   if (size % tileSize) return false;
@@ -38,6 +40,9 @@ function sourceCoords(terrain, tilesetWidth, tileSize) {
 }
 
 async function main(argv) {
+  let tiled = new Tiled();
+  console.log(await tiled.toJSON());
+  
   program
     .requiredOption("-i, --input <file>", "File input")
     .requiredOption("-o, --output <file>", "File output")
@@ -65,7 +70,7 @@ async function main(argv) {
   console.log(`Size: ${width}x${height}`);
   console.log(`Size (in tiles): ${htiles}x${vtiles}`);
   console.log(`Number of expected terrains: ${terrains}`);
-  if(terrains > 32) {
+  if (terrains > 32) {
     console.log(`Clip number of terrains to 32`);
     terrains = 32;
   }

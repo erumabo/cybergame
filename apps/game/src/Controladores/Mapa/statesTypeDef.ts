@@ -1,4 +1,4 @@
-import { ActionFunction, NonReducibleUnknown, EventObject } from "xstate";
+import type { ActionFunction, NonReducibleUnknown, EventObject } from "xstate";
 import World from "src/mecs";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 import { Tilemaps } from "phaser";

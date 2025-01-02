@@ -1,0 +1,32 @@
+{
+  "name": "@mabo/level-editor",
+  "version": "0.0.0",
+  "description": "Mabo's Tiled web editor, made with PixiJS",
+  "homepage": "https://github.com/erumabo/cybergame/tools/level-editor/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "tools/level-editor"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "build": "tsc && vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "pixi.js": "^8.6.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "eslint": "^9.16.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.2"
+  }
+}

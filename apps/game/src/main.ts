@@ -32,9 +32,16 @@ const config = {
   ],
   plugins: {
     global: [
-      { key: "StoryManager", plugin: StoryManager, start: false, mapping: "storyManager" }
+      {
+        key: "StoryManager",
+        plugin: StoryManager,
+        start: false,
+        mapping: "storyManager"
+      }
     ]
   }
 };
 
-const game = new Game(config);
+(() => {
+  new Game(config);
+})();
