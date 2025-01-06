@@ -4,18 +4,9 @@ function clamp(min: number, val: number, max: number) {
   return Math.min(max, Math.max(min, val));
 }
 
-// Hack to suppport Tiled v1.2 up
-Phaser.Tilemaps.Tileset.prototype.getTileProperties = function (
-  tileIndex: number
-) {
-  return this.containsTileIndex(tileIndex)
-    ? (this.getTileData(tileIndex) as any).properties
-    : null;
-};
-
 export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
   tilesetImages: Phaser.Tilemaps.Tileset[];
-  
+
   constructor(scene: Phaser.Scene, key: string) {
     const tilemapData = scene.cache.tilemap.get(key);
     const mapData = Phaser.Tilemaps.Parsers.Parse(
@@ -27,27 +18,37 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
       true //default
     );
     super(scene, mapData);
-    
+
     this.tilesetImages =
       this.tilesets
-        ?.map(tileset => this.addTilesetImage(tileset.name))
-        ?.filter(v => v != null) || [];
+        ?.map((tileset) => this.addTilesetImage(tileset.name))
+        ?.filter((v) => v != null) || [];
   }
 
   processLayer(
     layer: Phaser.Tilemaps.LayerData,
     tilesets: Phaser.Tilemaps.Tileset[],
-    index: number
+    _: number
   ) {
     if (layer.visible) {
-      const vlayer = this.createLayer(layer.name, tilesets)!.setDepth(index);
-      return vlayer;
+      const vlayer = this.createLayer(layer.name, tilesets)!;
+      return [vlayer];
     }
 
     if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {
-      const dual: Phaser.Tilemaps.TilemapLayer[] = [0, 1, 2, 3].map(i =>
+      const vlayer = this.createLayer(layer.name, tilesets)!;
+      return [vlayer, ...this.createDualLayers(layer, tilesets)];
+    }
+  }
+
+  createDualLayers(
+    layer: Phaser.Tilemaps.LayerData,
+    tilesets: Phaser.Tilemaps.Tileset[]
+  ) {
+    const corners = [0, 1, 2, 3].map(
+      (i) =>
         this.createBlankLayer(
-          layer.name + "Dual" + i,
+          layer.name + "#" + i,
           tilesets,
           layer.x - layer.tileWidth / 2,
           layer.y - layer.tileHeight / 2,
@@ -55,54 +56,50 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
           layer.height + 1,
           layer.tileWidth,
           layer.tileHeight
-        )!.setDepth(index)
-      );
+        )!
+    );
 
-      dual[0].forEachTile(tile => {
-        const coords = [
-          clamp(0, tile.y - 1, layer.width - 1),
-          clamp(0, tile.y, layer.width - 1),
-          clamp(0, tile.x - 1, layer.height - 1),
-          clamp(0, tile.x, layer.height - 1)
-        ];
-        const tiles = [
-          layer.data[coords[0]][coords[2]],
-          layer.data[coords[1]][coords[2]],
-          layer.data[coords[0]][coords[3]],
-          layer.data[coords[1]][coords[3]]
-        ];
+    corners[0].forEachTile((tile) => {
+      const coords = [
+        clamp(0, tile.y, layer.width - 1),
+        clamp(0, tile.x, layer.height - 1),
+        clamp(0, tile.y - 1, layer.width - 1),
+        clamp(0, tile.x - 1, layer.height - 1)
+      ];
+      const tiles = [
+        layer.data[coords[2]][coords[3]].index,
+        layer.data[coords[0]][coords[3]].index,
+        layer.data[coords[2]][coords[1]].index,
+        layer.data[coords[0]][coords[1]].index
+      ];
 
-        let types = [...new Set(tiles.map(t => t.index))];
-        types
-          .map((type: number) => {
-            let tiletypes = this.tilesets.find(tileset =>
-              tileset.containsTileIndex(type)
-            );
-            if (tiletypes == null) return;
-            return {
-              id: type,
-              firstgid: this.getTileset(tiletypes.name + "Dual")?.firstgid || 0,
-              x: Math.floor(type / tiletypes.columns),
-              y: (type % tiletypes.columns) - 1,
-              tilesetWidth: tiletypes.columns
-            };
-          })
-          .forEach((type: any, li: number) => {
-            const pattern = tiles.map(t => +(t.index == type.id));
-            type.x = type.x * 4 + pattern[0] * 2 + pattern[2];
-            type.y = type.y * 4 + pattern[1] * 2 + pattern[3];
+      let types = [...new Set(tiles)];
+      types.forEach((id: number, li: number) => {
+        let tiletypes = this.tilesets.find((tileset) =>
+          tileset.containsTileIndex(id)
+        );
+        if (tiletypes == null) return;
+        const type = {
+          id,
+          firstgid: this.getTileset(tiletypes.name + "Dual")?.firstgid || 0,
+          x: Math.floor(id / tiletypes.columns) << 2,
+          y: ((id % tiletypes.columns) - 1) << 2,
+          tilesetWidth: tiletypes.columns
+        };
 
-            const index =
-              type.firstgid + type.x * type.tilesetWidth * 4 + type.y;
-            dual[li].putTileAt(index, tile.x, tile.y);
-          });
+        const pattern = tiles.map((t) => +(t == id));
+        type.x = type.x | (pattern[0] << 1) | pattern[2];
+        type.y = type.y | (pattern[1] << 1) | pattern[3];
+
+        const index = type.firstgid + type.x * type.tilesetWidth * 4 + type.y;
+        corners[li].putTileAt(index, tile.x, tile.y);
       });
-      
-      return dual[0];
-    }
+    });
+
+    return corners;
   }
 
-  addOverlayLayer(tilesets: Phaser.Tilemaps.Tileset[], index: number) {
+  createOverlayLayer(tilesets: Phaser.Tilemaps.Tileset[], index: number) {
     const vlayer = this.createBlankLayer(
       "Overlay",
       tilesets,

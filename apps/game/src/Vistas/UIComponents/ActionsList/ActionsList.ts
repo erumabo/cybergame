@@ -57,6 +57,17 @@ export default class ActionsMenu
   onActionClick(_: Event, action: string) {
     this.dispatchEvent(new CustomEvent("action", { detail: action }));
   }
+  
+  show() {
+    this.style.width = "64px";
+    this.style.display = "block";
+    this.style.visibility = "visible";
+  }
+  hide() {
+    this.style.width = "0";
+    this.style.display = "none";
+    this.style.visibility = "hidden";
+  }
 }
 
 customElements.define("mb-action-menu", ActionsMenu);

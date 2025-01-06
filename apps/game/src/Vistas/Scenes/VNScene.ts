@@ -25,9 +25,9 @@ export class VNScene extends Phaser.Scene {
     const height = cheight / 3;
     if (!this.background) {
       this.background = this.add
-        .rectangle(0, 0, width, cheight, 0x000000, 0.5)
+        .rectangle(0, 0, width, cheight, 0x000000, 0.25)
         .setOrigin(0, 0);
-      this.background.setVisible(false);
+      //this.background.setVisible(false);
     }
 
     if (!this.vnDisplay) {

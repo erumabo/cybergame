@@ -8,6 +8,7 @@ import UnitSprite from "../GameObjects/UnitSprite";
 import ActionsMenu from "../GameObjects/ActionsMenu";
 import MapSceneController from "../../Controladores/Mapa/MapController";
 import StoryManager from "../../Plugins/StoryManager";
+import { GridEngine, type CharacterData } from "grid-engine";
 
 export class MapScene extends Phaser.Scene {
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
@@ -16,6 +17,7 @@ export class MapScene extends Phaser.Scene {
   units!: UnitSprite[];
   actionsMenu!: ActionsMenu;
   storyManager!: StoryManager;
+  gridEngine!: GridEngine;
 
   constructor() {
     super("MapScene");
@@ -37,28 +39,50 @@ export class MapScene extends Phaser.Scene {
 
   create() {
     // Crear objectos
+    let layer0: Phaser.GameObjects.GameObject[] = [];
     this.tilemap = new TilemapSprite(this, this.mapa);
     this.controller.tilemap = this.tilemap;
 
     this.tilemap.layers.forEach((layer, index) =>
-      this.tilemap.processLayer(layer, this.tilemap.tilesetImages, index)
+      layer0.push(
+        ...this.tilemap.processLayer(layer, this.tilemap.tilesetImages, index)!
+      )
     );
 
-    this.tilemap.addOverlayLayer(
-      this.tilemap.tilesetImages,
-      this.tilemap.layers.length + 1
+    layer0.push(
+      this.tilemap.createOverlayLayer(
+        this.tilemap.tilesetImages,
+        this.tilemap.layers.length + 1
+      )
     );
 
-    const charsDepth = this.tilemap.layers.length + 2;
+    //const charsDepth = this.tilemap.layers.length + 2;
     this.units = this.tilemap.createFromObjects(
       "Chars",
       { classType: UnitSprite, ignoreTileset: false },
       true
     ) as UnitSprite[];
+
+    const gridEngineConfig = {
+      layerOverlay: false,
+      characters: [] as CharacterData[]
+    };
+
     this.units.forEach((unit) => {
-      this.controller.addUnitEntity(unit as UnitSprite);
-      unit.setDepth(charsDepth);
+      const entity = this.controller.addUnitEntity(unit as UnitSprite);
+      layer0.push(unit);
+      gridEngineConfig.characters.push({
+        id: "" + entity,
+        sprite: unit.sprite,
+        container: unit,
+        startPosition: {
+          x: (unit.x - 16) / this.tilemap.tileWidth,
+          y: (unit.y + 16) / this.tilemap.tileHeight
+        }
+      });
     });
+    this.add.layer().add(layer0);
+    this.gridEngine.create(this.tilemap, gridEngineConfig);
 
     const tileWidth = this.tilemap.tileWidth;
     const tileHeight = this.tilemap.tileHeight;
@@ -72,7 +96,7 @@ export class MapScene extends Phaser.Scene {
 
     this.actionsMenu = new ActionsMenu(this);
     this.add.existing(this.actionsMenu);
-    this.actionsMenu.setDepth(100);
+    this.add.layer().add([this.actionsMenu]);
 
     this.setUIEventListeners();
   }

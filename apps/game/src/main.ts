@@ -1,10 +1,13 @@
 import { Game } from "phaser";
 
+// Scenes
 import { BootScene } from "./Vistas/Scenes/BootScene";
 import { MapScene } from "./Vistas/Scenes/MapScene";
 import { VNScene } from "./Vistas/Scenes/VNScene";
 
+// Plugins
 import StoryManager from "./Plugins/StoryManager";
+import { GridEngine } from "grid-engine";
 
 import Alpine from "alpinejs";
 Alpine.start();
@@ -33,10 +36,17 @@ const config = {
   plugins: {
     global: [
       {
-        key: "StoryManager",
+        key: "storyManager",
         plugin: StoryManager,
         start: false,
         mapping: "storyManager"
+      }
+    ],
+    scene: [
+      {
+        key: "gridEngine",
+        plugin: GridEngine,
+        mapping: "gridEngine"
       }
     ]
   }

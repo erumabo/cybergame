@@ -39,13 +39,15 @@ export default class MapSceneController {
     this.world.bindEntityComponent(entity, unit, "UnitSprite");
     unit.setData("entity", entity);
 
-    const stats = new UnitStats(80, 80);
+    const stats = new UnitStats(80, 20);
     this.world.bindEntityComponent(entity, stats, "UnitStats");
     unit.addBar("salud", 0xff0000, stats.salud);
     unit.addBar("energia", 0x00ffff, stats.energia);
 
     this.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
     unit.setDOMAttribute("name", "" + entity);
+
+    return entity;
   }
 
   //#region UI Events

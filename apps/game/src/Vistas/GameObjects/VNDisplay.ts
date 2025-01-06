@@ -6,7 +6,13 @@ export default class VNDisplay extends Phaser.GameObjects.DOMElement {
   domNode: VNTextDisplay;
 
   constructor(scene: Phaser.Scene, width: number, height: number) {
-    super(scene, 0, 0, new VNTextDisplay(), `width: ${width}px; height: ${height}px;`);
+    super(
+      scene,
+      0,
+      0,
+      new VNTextDisplay(),
+      `width: ${width}px; height: ${height}px;`
+    );
 
     this.domNode = this.node as VNTextDisplay;
     this.addListener("action");
@@ -32,7 +38,7 @@ export default class VNDisplay extends Phaser.GameObjects.DOMElement {
 
   override setPosition(...pos: number[]) {
     this.container?.setPosition(...pos);
-    return super.setPosition(...pos);
+    return this; //super.setPosition(...pos);
   }
 
   show() {

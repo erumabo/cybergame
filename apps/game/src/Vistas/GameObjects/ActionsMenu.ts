@@ -9,18 +9,19 @@ export default class ActionsMenu extends Phaser.GameObjects.DOMElement {
     super(scene, 0, 0, new ActionsList(), "width: 64px; height: 40px;");
 
     this.domNode = this.node as ActionsList;
+    //this.domNode["actions"] = "Action,Action"
     this.addListener("action");
 
     // To stop events from propagating under the menu
     const background = this.scene.add
-      .rectangle(0, 0, 64, 40, 0xe0c9a6, 0.9)
+      .rectangle(0, 0, 64, 80, 0xe0c9a6, 1)
       .setStrokeStyle(1, 0, 1);
     background
       .setInteractive()
       .on("pointerdown", () => 1)
       .on("pointerup", () => 1);
 
-    this.container = this.scene.add.container(100, 100);
+    this.container = this.scene.add.container(0, 0);
     this.container.add(background);
     this.container.add(this);
 
@@ -36,14 +37,12 @@ export default class ActionsMenu extends Phaser.GameObjects.DOMElement {
   }
 
   show() {
-    this.domNode.style.display = "block";
-    this.domNode.style.width = "64px";
+    this.domNode.show();
     this.container.setToTop();
     this.container.setVisible(true);
   }
   hide() {
-    this.domNode.style.display = "none";
-    this.domNode.style.width = "0";
+    this.domNode.hide();
     this.container.setToBack();
     this.container.setVisible(false);
   }

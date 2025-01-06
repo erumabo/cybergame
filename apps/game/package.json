@@ -36,6 +36,7 @@
     "@capacitor/core": "^6.1.2",
     "alpinejs": "^3.14.7",
     "animejs": "^3.2.2",
+    "grid-engine": "^2.46.0",
     "inkjs": "^2.3.1",
     "marked": "^15.0.4",
     "mustache": "^4.2.0",

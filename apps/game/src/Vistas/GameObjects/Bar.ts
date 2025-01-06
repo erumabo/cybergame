@@ -3,7 +3,7 @@ import * as Phaser from "phaser";
 export default class Bar extends Phaser.GameObjects.Container {
   progress: Phaser.GameObjects.Rectangle;
   border: Phaser.GameObjects.Rectangle;
-  
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -17,13 +17,17 @@ export default class Bar extends Phaser.GameObjects.Container {
     this.width = width;
     this.height = height;
 
-    this.border = scene.add.rectangle(0, 0, width, 1).setStrokeStyle(1, 0);
+    this.border = scene.add
+      .rectangle(0, 0, width, 1)
+      .setStrokeStyle(1, 0)
+      .setOrigin(0, 0);
     this.add(this.border);
 
     this.progress = scene.add
       .rectangle(0, 0, width, height)
       .setFillStyle(color, 1)
-      .setStrokeStyle(1, 0);
+      .setStrokeStyle(1, 0)
+      .setOrigin(0, 0);
     this.add(this.progress);
 
     this.setPosition(x, y);

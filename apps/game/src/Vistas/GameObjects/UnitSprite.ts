@@ -6,7 +6,7 @@ import { UnitView } from "../UIComponents/mb-elements";
 export default class UnitSprite extends Phaser.GameObjects.Container {
   sprite?: Phaser.GameObjects.Sprite;
   bars: Map<string, Bar>;
-  actionsMenu: ActionsMenu;
+  actionsMenu?: ActionsMenu;
   view: Phaser.GameObjects.DOMElement;
   viewNode: UnitView;
 
@@ -21,7 +21,7 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     this.add(this.actionsMenu);
 
     this.viewNode = new UnitView();
-    this.view = this.scene.add.dom(0, 0, this.viewNode);
+    this.view = this.scene.add.dom(0, -32, this.viewNode).setOrigin(0, 0);
     this.add(this.view);
 
     Object.defineProperty(this, "displayWidth", {
@@ -48,6 +48,7 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     } else {
       this.add((this.sprite = this.scene.add.sprite(0, 0, key, frame)));
       this.setSize(this.sprite.displayWidth, this.sprite.displayHeight);
+      this.sprite.setOrigin(0, 0);
     }
     return this.sprite;
   }
@@ -58,11 +59,15 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     }
   }
 
+  override setPosition(x: number, y: number) {
+    return super.setPosition(x, y);
+  }
+
   addBar(stat: string, color: number, value: number = 100) {
     const width = this.displayWidth;
     const height = this.displayHeight / 10;
     const x = this.bars.size + 2;
-    const y = this.displayHeight / 2 + (height + 2) * this.bars.size - 2;
+    const y = this.displayHeight + (height + 2) * (this.bars.size - 1);
 
     const bar = new Bar(this.scene, x, y, width, height, color).setFillPercent(
       value
@@ -77,7 +82,7 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
 
     this.bars.get(stat)!.setFillPercent(value);
   }
-  
+
   setDOMAttribute(attribute: string, value: any) {
     this.viewNode.setAttribute(attribute, value);
   }
