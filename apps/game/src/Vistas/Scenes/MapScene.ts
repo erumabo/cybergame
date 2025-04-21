@@ -92,7 +92,7 @@ export class MapScene extends Phaser.Scene {
       (this.tilemap.height + 2) * tileWidth,
       (this.tilemap.width + 2) * tileHeight
     );
-    this.cameras.main.setZoom(1.2);
+    this.cameras.main.setZoom(1.5);
 
     this.actionsMenu = new ActionsMenu(this);
     this.add.existing(this.actionsMenu);
@@ -102,18 +102,20 @@ export class MapScene extends Phaser.Scene {
   }
 
   setUIEventListeners() {
-    this.units.forEach((unit) =>
-      unit
-        .setInteractive()
-        .on(
-          "pointerdown",
-          function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
-            (this.scene as MapScene).controller.interaccionObjeto(
-              pointer,
-              this.getData("entity")
-            );
-          }
-        )
+    this.units.forEach(
+      (unit) =>
+        unit.sprite &&
+        unit.sprite
+          .setInteractive()
+          .on(
+            "pointerup",
+            function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
+              (this.scene as MapScene).controller.interaccionObjeto(
+                pointer,
+                this.parentContainer.getData("entity")
+              );
+            }
+          )
     );
 
     this.actionsMenu.on("action", ({ detail: action }: CustomEvent) =>
@@ -125,11 +127,12 @@ export class MapScene extends Phaser.Scene {
     ]?.tilemapLayer
       .setInteractive()
       .on(
-        "pointerdown",
+        "pointerup",
         function (
           this: Phaser.Tilemaps.TilemapLayer,
           pointer: Phaser.Input.Pointer
         ) {
+          if (pointer.getDistance() > 10) return; // ignore if this is after pan
           const { x, y } = this.worldToTileXY(pointer.worldX, pointer.worldY);
           (this.scene as MapScene).controller.interaccionMapa(
             pointer,

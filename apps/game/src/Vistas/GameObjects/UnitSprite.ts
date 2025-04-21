@@ -23,6 +23,8 @@ export default class UnitSprite extends Phaser.GameObjects.Container {
     this.viewNode = new UnitView();
     this.view = this.scene.add.dom(0, -32, this.viewNode).setOrigin(0, 0);
     this.add(this.view);
+    
+    //this.add(this.scene.add.rectangle(0,0,32,32));
 
     Object.defineProperty(this, "displayWidth", {
       set: function (width: number) {

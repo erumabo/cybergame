@@ -14,4 +14,4 @@ const idle = {
   }
 };
 
-export default idle;
+export { idle };

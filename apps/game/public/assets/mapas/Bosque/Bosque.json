@@ -5,7 +5,7 @@
   "tileheight": 32,
   "nextobjectid": 1,
   "orientation": "orthogonal",
-  "version": 10,
+  "version": 11,
   "tilesets": [
     {
       "name": "Tileset",
@@ -72,64 +72,13 @@
           ]
         },
         {
-          "id": 2,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": "2"
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 2
         },
         {
-          "id": 3,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": "3"
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 3
         },
         {
-          "id": 4,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": "4"
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 4
         },
         {
           "id": 5,
@@ -157,44 +106,10 @@
           ]
         },
         {
-          "id": 6,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": "6"
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 6
         },
         {
-          "id": 7,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 7
         },
         {
           "id": 8,
@@ -222,44 +137,10 @@
           ]
         },
         {
-          "id": 9,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 9
         },
         {
-          "id": 10,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 10
         },
         {
           "id": 11,
@@ -268,11 +149,6 @@
               "name": "alias",
               "type": "string",
               "value": "="
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
             },
             {
               "name": "type",
@@ -295,11 +171,6 @@
               "value": "^"
             },
             {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
               "name": "type",
               "type": "string",
               "value": "Arboles"
@@ -320,11 +191,6 @@
               "value": "-"
             },
             {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
               "name": "type",
               "type": "string",
               "value": "Acera"
@@ -337,24 +203,7 @@
           ]
         },
         {
-          "id": 14,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 14
         },
         {
           "id": 15,
@@ -363,11 +212,6 @@
               "name": "alias",
               "type": "string",
               "value": "*"
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
             },
             {
               "name": "type",
@@ -382,98 +226,20 @@
           ]
         },
         {
-          "id": 16,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 16
         },
         {
-          "id": 17,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 17
         },
         {
-          "id": 18,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 18
         },
         {
-          "id": 19,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 19
         },
         {
           "id": 20,
           "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
             {
               "name": "type",
               "type": "string",
@@ -485,16 +251,6 @@
           "id": 21,
           "properties": [
             {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
               "name": "type",
               "type": "string",
               "value": "Edificio 2"
@@ -502,864 +258,133 @@
           ]
         },
         {
-          "id": 22,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 22
         },
         {
-          "id": 23,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 23
         },
         {
-          "id": 24,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 24
         },
         {
-          "id": 25,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 25
         },
         {
-          "id": 26,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 26
         },
         {
-          "id": 27,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 27
         },
         {
-          "id": 28,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 28
         },
         {
-          "id": 29,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 29
         },
         {
-          "id": 30,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 30
         },
         {
-          "id": 31,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 31
         },
         {
-          "id": 32,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 32
         },
         {
-          "id": 32,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 32
         },
         {
-          "id": 34,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 34
         },
         {
-          "id": 35,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 35
         },
         {
-          "id": 36,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 36
         },
         {
-          "id": 37,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 37
         },
         {
-          "id": 38,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 38
         },
         {
-          "id": 39,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 39
         },
         {
-          "id": 40,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 40
         },
         {
-          "id": 41,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 41
         },
         {
-          "id": 42,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 42
         },
         {
-          "id": 43,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 43
         },
         {
-          "id": 44,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 44
         },
         {
-          "id": 45,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 45
         },
         {
-          "id": 46,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 46
         },
         {
-          "id": 47,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 47
         },
         {
-          "id": 48,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 48
         },
         {
-          "id": 49,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 49
         },
         {
-          "id": 50,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 50
         },
         {
-          "id": 51,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 51
         },
         {
-          "id": 52,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 52
         },
         {
-          "id": 53,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 53
         },
         {
-          "id": 54,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 54
         },
         {
-          "id": 55,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 55
         },
         {
-          "id": 56,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 56
         },
         {
-          "id": 57,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 57
         },
         {
-          "id": 58,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 58
         },
         {
-          "id": 59,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 59
         },
         {
-          "id": 60,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 60
         },
         {
-          "id": 61,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 61
         },
         {
-          "id": 62,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 62
         },
         {
-          "id": 63,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 63
         },
         {
-          "id": 64,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 64
         }
       ]
     },
@@ -1378,24 +403,7 @@
       "image": "../Tilesets/TilesetDual/tileset.png",
       "tiles": [
         {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1414,21 +422,7 @@
       "image": "../Tilesets/Aqua/tileset.png",
       "tiles": [
         {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1447,41 +441,7 @@
       "image": "../Tilesets/Azure/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1500,41 +460,7 @@
       "image": "../Tilesets/Cinnabar/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1553,41 +479,7 @@
       "image": "../Tilesets/Diamond/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1606,41 +498,7 @@
       "image": "../Tilesets/Emerald/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1659,41 +517,7 @@
       "image": "../Tilesets/Opal/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1712,41 +536,7 @@
       "image": "../Tilesets/Rubellite/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1765,41 +555,7 @@
       "image": "../Tilesets/Ruby/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1818,41 +574,7 @@
       "image": "../Tilesets/Spinel/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     },
@@ -1871,41 +593,7 @@
       "image": "../Tilesets/Topaz/tileset.png",
       "tiles": [
         {
-          "id": 1,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "z-index",
-              "type": "string",
-              "value": ""
-            },
-            {
-              "name": "type",
-              "type": "string",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": 0,
-          "properties": [
-            {
-              "name": "alias",
-              "type": "string"
-            },
-            {
-              "name": "z-index",
-              "type": "string"
-            },
-            {
-              "name": "type",
-              "type": "string"
-            }
-          ]
+          "id": 0
         }
       ]
     }
@@ -1961,6 +649,17 @@
           "name": "Aquamarina",
           "x": 32,
           "y": 32,
+          "visible": true,
+          "rotation": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "id": 0,
+          "gid": 1145,
+          "name": "Cinabrio",
+          "x": 64,
+          "y": 64,
           "visible": true,
           "rotation": 0,
           "width": 32,

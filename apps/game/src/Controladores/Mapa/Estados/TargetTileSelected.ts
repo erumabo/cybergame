@@ -10,7 +10,7 @@ const targetSelected = {
     actionsMenu.domNode["actions"] = "Move,Inspect";
     actionsMenu.show();
   },
-  
+
   on: {
     selectTile: {
       target: "targetSelected",
@@ -21,22 +21,22 @@ const targetSelected = {
         });
       }) as MAction
     },
-    
+
     selectAction: {
       actions: enqueueActions(({ event, enqueue }) => {
         enqueue({ type: event.action });
       }) as MAction
     },
-    
+
     gotoUnidadSeleccionada: {
       target: "unidadSeleccionada"
     }
   },
-  
+
   exit: enqueueActions(({ context, enqueue }) => {
     enqueue.assign({ target: undefined });
     context.scene.actionsMenu.domNode["actions"] = "";
     context.scene.actionsMenu.hide();
   }) as MAction
 };
-export default targetSelected;
+export { targetSelected };

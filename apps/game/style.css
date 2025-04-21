@@ -8,13 +8,34 @@
 }
 
 :root {
+  /*Color Scheme*/
+  --white: #ede6cb;
+
+  --blue-10: #699fad;
+  --blue-40: #3a708e;
+  --blue-50: #2b454f;
+  --blue-60: #111215;
+
+  --green-10: #9a9f87;
+  --green-20: #4f5d42;
+  --green-40: #314e3f;
+  --green-50: #1d3230;
+  --green-60: #151d1a;
+
+  --brown-10: #f5d893;
+  --brown-20: #e8b26f;
+  --brown-30: #b6834c;
+  --brown-40: #704d2b;
+  --brown-50: #40231e;
+  --brown-60: #151015;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--white);
+  background-color: var(--brown-60);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

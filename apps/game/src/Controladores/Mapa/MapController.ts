@@ -1,4 +1,4 @@
-import { Components } from "src/globals";
+import { Components, COLORS } from "src/globals";
 import * as Phaser from "phaser";
 import World from "src/mecs";
 import UnitStats from "src/Componentes/Stats";
@@ -9,12 +9,14 @@ import { MapScene } from "src/Vistas/Scenes/MapScene";
 //#region Import Estados
 import { createActor } from "xstate";
 import stateMachine from "./StateMachine";
+import type { TContext } from "./statesTypeDef";
 //#endregion Import Estados
 
 export default class MapSceneController {
   scene: MapScene;
   world: World;
   tilemap!: TilemapSprite;
+  oldContext: TContext;
 
   stateActor; // Actor<infer>
 
@@ -22,6 +24,7 @@ export default class MapSceneController {
     this.scene = scene;
 
     this.world = new World();
+    this.oldContext = { scene: this.scene, world: this.world };
     for (let component in Components) this.world.addComponent(component);
 
     this.stateActor = createActor(stateMachine, {
@@ -31,6 +34,30 @@ export default class MapSceneController {
       }
     });
     this.stateActor.start();
+    this.stateActor.subscribe((state) => this.stateChange(state));
+  }
+
+  stateChange({ context }: { context: TContext }) {
+    if (this.oldContext.target != context.target) {
+      this.oldContext.target &&
+        typeof this.oldContext.target != "number" &&
+        this.setTileTint(this.oldContext.target);
+      context.target &&
+        typeof context.target != "number" &&
+        this.setTileTint(context.target, 0xe0e0e0);
+    }
+    this.oldContext = context;
+  }
+
+  setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
+    for (let layer of this.scene.tilemap.layers) {
+      layer.tilemapLayer.getTileAt(x, y, true).tint = tint;
+      if (layer.name.includes("#")) {
+        layer.tilemapLayer.getTileAt(x + 1, y, true).tint = tint;
+        layer.tilemapLayer.getTileAt(x + 1, y + 1, true).tint = tint;
+        layer.tilemapLayer.getTileAt(x, y + 1, true).tint = tint;
+      }
+    }
   }
 
   addUnitEntity(unit: UnitSprite) {
@@ -41,8 +68,8 @@ export default class MapSceneController {
 
     const stats = new UnitStats(80, 20);
     this.world.bindEntityComponent(entity, stats, "UnitStats");
-    unit.addBar("salud", 0xff0000, stats.salud);
-    unit.addBar("energia", 0x00ffff, stats.energia);
+    unit.addBar("salud", COLORS["--blue-40"], stats.salud);
+    unit.addBar("energia", COLORS["--green-10"], stats.energia);
 
     this.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
     unit.setDOMAttribute("name", "" + entity);

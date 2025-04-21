@@ -1,3 +1,5 @@
+import { COLORS } from "./globals";
+
 import { Game } from "phaser";
 
 // Scenes
@@ -17,7 +19,7 @@ const config = {
   width: 1024,
   height: 768,
   parent: "game-container",
-  backgroundColor: "#E0C9A6",
+  backgroundColor: COLORS["--brown-60"],
   scale: {
     mode: Phaser.Scale.RESIZE,
     width: window.innerWidth,

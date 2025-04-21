@@ -20,13 +20,15 @@ const unidadSeleccionada = {
           enqueue.raise({ type: "gotoIdle" });
         } else {
           enqueue.assign({
-            unit: event.target
+            target: event.target
           });
+          enqueue.raise({ type: "gotoTarget" });
         }
       }) as MAction
     },
-    gotoIdle: "idle"
+    gotoIdle: "idle",
+    gotoTarget: "targetSelected"
   }
 };
 
-export default unidadSeleccionada;
+export { unidadSeleccionada };

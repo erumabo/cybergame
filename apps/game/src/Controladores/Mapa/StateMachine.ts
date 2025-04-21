@@ -1,9 +1,9 @@
 import { setup, enqueueActions } from "xstate";
 import type { TContext, TEvents } from "./statesTypeDef";
 
-import idle from "./Estados/IDLE";
-import unidadSeleccionada from "./Estados/UnidadActiva";
-import targetSelected from "./Estados/TargetTileSelected";
+import { idle } from "./Estados/IDLE";
+import { unidadSeleccionada } from "./Estados/UnidadActiva";
+import { targetSelected } from "./Estados/TargetTileSelected";
 
 import moveAction from "./Sistemas/MoveUnit";
 import inspectAction from "./Sistemas/InspectTile";

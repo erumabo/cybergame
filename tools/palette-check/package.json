@@ -1,0 +1,31 @@
+{
+  "name": "@mabo/palette-check",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://github.com/erumabo/cybergame/tools/map-utils/README.md",
+  "author": "Mabo <mabo.daniel@gmail.com> ()",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erumabo/cybergame.git",
+    "directory": "tools/map-utils"
+  },
+  "bugs": {
+    "url": "https://github.com/erumabo/cybergame/issues"
+  },
+  "bin": {
+    "mabo-palete": "./main.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "apca-w3": "^0.1.9",
+    "color-diff": "^1.4.0",
+    "commander": "^12.1.0",
+    "culori": "^4.0.1",
+    "underscore": "^1.13.7"
+  }
+}
