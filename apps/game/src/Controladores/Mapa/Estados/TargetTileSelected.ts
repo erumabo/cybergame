@@ -1,42 +1,52 @@
-import { enqueueActions } from "xstate";
-import type { MAction, TContext } from "../statesTypeDef";
+import { State } from "@mabo/chart";
 
-const targetSelected = {
-  entry: ({ context }: { context: TContext }) => {
-    let actionsMenu = context.scene.actionsMenu;
-    const tile = context.target as Phaser.Tilemaps.Tile;
+function showMenu({ world }: any) {
+    let actionsMenu = world.scene.actionsMenu;
+    const tile = world.target as Phaser.Tilemaps.Tile;
     let { pixelX: x, pixelY: y, width } = tile;
     actionsMenu.setPosition(x + width, y);
     actionsMenu.domNode["actions"] = "Move,Inspect";
     actionsMenu.show();
-  },
+  }
+
+const targetSelected: State = {
+  entry: showMenu,
+  update: showMenu,
 
   on: {
     selectTile: {
-      target: "targetSelected",
-      reenter: true,
-      actions: enqueueActions(({ event, enqueue }) => {
-        enqueue.assign({
-          target: event.target
-        });
-      }) as MAction
+      action: ({ world, target }: any) => {
+        world.target = target;
+      },
+      target: "targetSelected"
     },
 
     selectAction: {
-      actions: enqueueActions(({ event, enqueue }) => {
-        enqueue({ type: event.action });
-      }) as MAction
+      action: ({world, action}: any) => {
+        world.systems[action+'Action']({world});
+      },
+      target: "unidadSeleccionada"
     },
-
-    gotoUnidadSeleccionada: {
+    
+    unselectUnit: {
+      action: ({ world }: any) => {
+        world.activeUnit = null;
+      },
+      target: "idle"
+    },
+    selectUnit: {
+      action: ({ world, target }: any) => {
+        world.activeUnit = target;
+      },
       target: "unidadSeleccionada"
     }
   },
 
-  exit: enqueueActions(({ context, enqueue }) => {
-    enqueue.assign({ target: undefined });
-    context.scene.actionsMenu.domNode["actions"] = "";
-    context.scene.actionsMenu.hide();
-  }) as MAction
+  exit: ({ world }: any) => {
+    world.target = undefined;
+    world.scene.actionsMenu.domNode["actions"] = "";
+    world.scene.actionsMenu.hide();
+  }
 };
-export { targetSelected };
+
+export default targetSelected;

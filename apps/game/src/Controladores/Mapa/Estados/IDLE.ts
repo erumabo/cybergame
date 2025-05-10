@@ -1,17 +1,12 @@
-import { enqueueActions } from "xstate";
-import type { MAction } from "../statesTypeDef";
-
 const idle = {
   on: {
     selectUnit: {
-      actions: enqueueActions(({ enqueue, event }) => {
-        enqueue.assign({
-          unit: event.target
-        });
-      }) as MAction,
+      action: ({ world, target }: any) => {
+        world.activeUnit = target;
+      },
       target: "unidadSeleccionada"
     }
   }
 };
 
-export { idle };
+export default idle;

@@ -1,9 +1,9 @@
 import * as Phaser from "phaser";
-import type { TContext } from "../statesTypeDef";
 
-export default function moveAction({ context }: { context: TContext }) {
-  const tile = context.target as Phaser.Tilemaps.Tile;
-  context.scene.gridEngine.moveTo("" + context.unit, tile, {
+export default function MoveAction({ world }: any) {
+  //world.actor.send("gotoUnidadSeleccionada")
+  const tile = world.target as Phaser.Tilemaps.Tile;
+  world.scene.gridEngine.moveTo("" + world.activeUnit, tile, {
     algorithm: "A_STAR",
     considerCosts: true
   });

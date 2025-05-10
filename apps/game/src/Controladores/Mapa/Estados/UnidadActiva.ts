@@ -1,34 +1,24 @@
-import { enqueueActions } from "xstate";
-import type { MAction } from "../statesTypeDef";
-
 const unidadSeleccionada = {
   on: {
     selectTile: {
-      actions: enqueueActions(({ event, enqueue }) => {
-        enqueue.assign({
-          target: event.target
-        });
-      }) as MAction,
+      action: ({ world, target }: any) => {
+        world.target = target;
+      },
       target: "targetSelected"
     },
-    selectUnit: {
-      actions: enqueueActions(({ context, event, enqueue }) => {
-        if (context.unit == event.target) {
-          enqueue.assign({
-            unit: undefined
-          });
-          enqueue.raise({ type: "gotoIdle" });
-        } else {
-          enqueue.assign({
-            target: event.target
-          });
-          enqueue.raise({ type: "gotoTarget" });
-        }
-      }) as MAction
+    unselectUnit: {
+      action: ({ world }: any) => {
+        world.activeUnit = null;
+      },
+      target: "idle"
     },
-    gotoIdle: "idle",
-    gotoTarget: "targetSelected"
+    selectUnit: {
+      action: ({ world, target }: any) => {
+        world.activeUnit = target;
+      },
+      target: "unidadSeleccionada"
+    }
   }
 };
 
-export { unidadSeleccionada };
+export default unidadSeleccionada;

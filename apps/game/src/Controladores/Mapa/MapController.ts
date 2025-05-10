@@ -1,52 +1,40 @@
 import { Components, COLORS } from "src/globals";
 import * as Phaser from "phaser";
-import World from "src/mecs";
+import { World } from "@mabo/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
 import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
-import { createActor } from "xstate";
-import stateMachine from "./StateMachine";
-import type { TContext } from "./statesTypeDef";
+import { StateMachine } from "@mabo/chart";
+import idle from "./Estados/IDLE";
+import targetSelected from "./Estados/TargetTileSelected";
+import unidadSeleccionada from "./Estados/UnidadActiva";
+
+import MoveAction from "./Sistemas/MoveUnit";
+import InspectAction from "./Sistemas/InspectTile";
 //#endregion Import Estados
 
 export default class MapSceneController {
   scene: MapScene;
   world: World;
   tilemap!: TilemapSprite;
-  oldContext: TContext;
-
-  stateActor; // Actor<infer>
+  actor: StateMachine;
+  activeUnit?: number;
+  target?: any;
+  systems = { MoveAction, InspectAction };
 
   constructor(scene: MapScene) {
     this.scene = scene;
 
     this.world = new World();
-    this.oldContext = { scene: this.scene, world: this.world };
     for (let component in Components) this.world.addComponent(component);
 
-    this.stateActor = createActor(stateMachine, {
-      input: {
-        scene: this.scene,
-        world: this.world
-      }
-    });
-    this.stateActor.start();
-    this.stateActor.subscribe((state) => this.stateChange(state));
-  }
-
-  stateChange({ context }: { context: TContext }) {
-    if (this.oldContext.target != context.target) {
-      this.oldContext.target &&
-        typeof this.oldContext.target != "number" &&
-        this.setTileTint(this.oldContext.target);
-      context.target &&
-        typeof context.target != "number" &&
-        this.setTileTint(context.target, 0xe0e0e0);
-    }
-    this.oldContext = context;
+    this.actor = new StateMachine({
+      states: { idle, targetSelected, unidadSeleccionada },
+      initial: "idle"
+    }).start();
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
@@ -78,14 +66,17 @@ export default class MapSceneController {
   }
 
   //#region UI Events
-  interaccionObjeto(point: Phaser.Input.Pointer, entity: number) {
-    this.stateActor.send({ type: "selectUnit", target: entity, point });
+  interaccionObjeto(_: Phaser.Input.Pointer, entity: number) {
+    this.actor.send(this.activeUnit == entity ? "unselectUnit" : "selectUnit", {
+      world: this,
+      target: entity
+    });
   }
-  interaccionMapa(point: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
-    this.stateActor.send({ type: "selectTile", target, point });
+  interaccionMapa(_: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
+    this.actor.send("selectTile", { world: this, target });
   }
   actionMenuClick(action: string) {
-    this.stateActor.send({ type: "selectAction", action });
+    this.actor.send("selectAction", { world: this, action });
   }
   //#endregion
 }

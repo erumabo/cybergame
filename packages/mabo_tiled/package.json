@@ -27,5 +27,8 @@
     "yaml": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0"
   }
 }

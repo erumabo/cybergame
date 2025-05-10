@@ -34,6 +34,8 @@
   "dependencies": {
     "@capacitor/android": "^6.1.2",
     "@capacitor/core": "^6.1.2",
+    "@mabo/chart": "^0.0.0",
+    "@mabo/mecs": "0.0.0",
     "alpinejs": "^3.14.7",
     "animejs": "^3.2.2",
     "grid-engine": "^2.46.0",
@@ -42,7 +44,6 @@
     "mustache": "^4.2.0",
     "nipplejs": "^0.10.2",
     "phaser": "^3.80.1",
-    "xstate": "^5.19.0",
     "yaml": "^2.6.0"
   }
 }

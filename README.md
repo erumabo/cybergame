@@ -1,46 +1,33 @@
 # About
 
-A repo to develop a 2d top-down view rpg strategy game
+A monorepo to develop a 2d top-down view rpg strategy game and some related libs.
 
-## Libs
+## Apps/Game
 
-- [Phaser 3](https://phaser.io/): Game engine
-- [Picnic CSS](https://picnicss.com): CSS and UI look and feel
-- [Backbone](https://backbonejs.org): Models and Collections events and reactive data
-- HTML Web Components for UI
-- [AnimeJS](https://animejs.com/documentation/): Animation and Tweening Timelines
-- [Inkle's Ink](http://www.inklestudios.com/ink) and [InkJS](https://github.com/y-lohse/inkjs): Dialogs and story state management
+A topdown 2d strategy game, with rpg elements.
 
-https://github.com/necolas/normalize.css/
+## Apps/Level Editor
 
-### replace backbone
-https://github.com/pmndrs/valtio, https://github.com/pmndrs/valtio/blob/main/docs/guides/async.mdx
-https://github.com/ai/nanoevents
+Simple Tiles tilemap editor for use in the game.
+*Abandoned in favor of cli tools*
 
-### helper and ui
-https://github.com/dataarts/dat.gui/blob/master/API.md#Controller+listen
-https://github.com/ai/keyux
+## Tools/Map Utils
 
+A set of snipets and small tools to manipulate Tiled tilemaps in json/yaml format.
+Can also extract and embeb layers from csv files.
 
-## Assets
+## Tools/Pallete Check
 
-Currently using ["Pixel Art Top Down Basic" by _Cainos_](https://cainos.itch.io/pixel-art-top-down-basic) tileset.
-Will change eventually.
+Simple script to check contrast levels in a pallet, also generates a swatch with color combinations for testing.
 
-Tilesets are created using this [tileset template](https://opengameart.org/content/seamless-tileset-template) by [caeles](https://opengameart.org/users/caeles)
+## Packages/Mabo Tiled
 
-## Tools Used
+Helper lib to manipulate Tiled tilemaps in json/yaml format.
 
-The entire game* is made from an Android phone thanks to this wonderfull tools:
+## Packages/Mabo ECS
 
-- Pixel Studio by _Hippo Games_, available for
-  [Steam](https://store.steampowered.com/app/1204050/Pixel_Studio__pixel_art_editor/)
-  and [Android](https://play.google.com/store/apps/details?id=com.PixelStudio)
-- [Termux](https://termux.com/) the best terminal emulator for android
-- [NotTiled](https://github.com/wandsmire/NotTiled) nice .tmx editor and Tiled alternative for Android,
-  and other platforms
-- [ACode](https://acode.app/) as HTML JS CSS editor
-- [Vite](https://vitejs.dev) for development server and static site build
+Mabo's simple implementation of ECS (minus "S", you bring that)
 
+## Packages/Mabo Chart
 
-\* The final APK is generated with Github Actions, as I couldn't setup the build tools on my Termux instace
+Mabo's simple Statechart library, sans parallel states, but with lifecycle hooks and actions.

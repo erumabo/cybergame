@@ -1,8 +1,8 @@
 {
-  "name": "@mabo/mecs",
+  "name": "@mabo/chart",
   "version": "0.0.0",
-  "description": "Mabo's ECS implementation",
-  "homepage": "https://github.com/erumabo/cybergame/packages/mecs/README.md",
+  "description": "Mabo's Simple State Charts",
+  "homepage": "https://github.com/erumabo/cybergame/packages/mabochart/README.md",
   "author": "Mabo <mabo.daniel@gmail.com> ()",
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erumabo/cybergame.git",
-    "directory": "packages/mecs"
+    "directory": "packages/mabochart"
   },
   "bugs": {
     "url": "https://github.com/erumabo/cybergame/issues"
@@ -20,8 +20,8 @@
     "test": "cucumber-js"
   },
   "types": "./index.d.ts",
-  "peerDependenciesMeta": {},
   "devDependencies": {
     "@cucumber/cucumber": "^11.2.0"
-  }
+  },
+  "peerDependenciesMeta": {}
 }

@@ -1,9 +1,7 @@
-import { TContext } from "../statesTypeDef";
-
-export default function inspectAction({ context }: { context: TContext }) {
-  context.scene.storyManager.setKnot("Investigar");
-  context.scene.actionsMenu.hide();
-  context.scene.events.once("resume", () => context.scene.actionsMenu.show());
-  context.scene.scene.pause();
-  context.scene.scene.run("VN", { knot: "" });
+export default function InspectAction({ world }: { world: any }) {
+  world.scene.storyManager.setKnot("Investigar");
+  world.scene.actionsMenu.hide();
+  //world.scene.events.once("resume", () => world.scene.actionsMenu.show());
+  world.scene.scene.pause();
+  world.scene.scene.run("VN", { knot: "" });
 }
