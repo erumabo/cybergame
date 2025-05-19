@@ -15,5 +15,8 @@
     "apps/*",
     "packages/*",
     "tools/*"
-  ]
+  ],
+  "devDependencies": {
+    "jsdoc-to-markdown": "^9.1.1"
+  }
 }
