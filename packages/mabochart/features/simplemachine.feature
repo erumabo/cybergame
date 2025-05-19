@@ -8,9 +8,9 @@ Requisito: Maquinas de estado anidadas
   Escenario: Estado incial
     Entonces el estado actual es "qA"
   
-  Escenario: Transicion no existe
+  Escenario: Transicion no existe se ignora
     Cuando recibe evento "tA"
-    Entonces tira error "Transition not implemented: tA at qA"
+    Entonces el estado actual es "qA"
     
   Escenario: Estado inexistente
     Cuando recibe evento "t0"

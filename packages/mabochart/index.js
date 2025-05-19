@@ -1,7 +1,19 @@
+/**
+ * A simple implementation of statecharts
+ * @module @mabo/chart
+ */
+
+
+/** Class that represents a state chart machine */
 export class StateMachine {
   #baseState;
   #stateStack;
 
+  /**
+   * @param {Object} baseState - The base state object, must define initial stata and other sub states
+   * @param {string} baseState.initial - The intial state of the machine
+   * @param {Object} baseState.states - The configuration of all child states, can be recursive
+   */
   constructor(baseState) {
     this.#baseState = baseState;
     this.#baseState.on = {
@@ -11,20 +23,25 @@ export class StateMachine {
     this.#stateStack = [];
   }
 
+  /**
+   * Starts the machine in the initial state
+   */
   start(data) {
     this.#transition(this.#baseState.initial, data);
     return this;
   }
 
-  error(event, state) {
-    throw new Error(`Transition not implemented: ${event} at ${state}`);
-    return this;
-  }
-
+  /**
+   * Send an event to be processed by the machine
+   * @param {string} event - The event
+   * @param {*} data - Arbitrary data to be provided to event handlers
+   */
   send(event, data) {
     let state;
     for (let i = this.#stateStack.length - 1; i >= 0; i--) {
       state = this.#stateStack[i];
+      // For loop instead of direct prop access
+      //   to implement regext matching in future
       for (const transition in state.on) {
         if (transition == event) {
           const handler = state.on[transition];
@@ -35,7 +52,6 @@ export class StateMachine {
         }
       }
     }
-    return this.error(event, this.currentState);
   }
 
   #transition(nextState, data) {
