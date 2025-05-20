@@ -1,5 +1,5 @@
 import { Components, COLORS } from "src/globals";
-import * as Phaser from "phaser";
+import type { Input, Tilemaps } from "phaser";
 import { World } from "@mabo/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
@@ -21,7 +21,7 @@ export default class MapSceneController {
   world: World;
   tilemap!: TilemapSprite;
   actor: StateMachine;
-  activeUnit?: number;
+  activeUnit: number = 0;
   target?: any;
   systems = { MoveAction, InspectAction };
 
@@ -35,6 +35,10 @@ export default class MapSceneController {
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
     }).start();
+  }
+  
+  get state() {
+    return this.actor.currentState;
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
@@ -66,13 +70,13 @@ export default class MapSceneController {
   }
 
   //#region UI Events
-  interaccionObjeto(_: Phaser.Input.Pointer, entity: number) {
+  interaccionObjeto(_: Input.Pointer, entity: number) {
     this.actor.send(this.activeUnit == entity ? "unselectUnit" : "selectUnit", {
       world: this,
       target: entity
     });
   }
-  interaccionMapa(_: Phaser.Input.Pointer, target: Phaser.Tilemaps.Tile) {
+  interaccionMapa(_: Input.Pointer, target: Tilemaps.Tile) {
     this.actor.send("selectTile", { world: this, target });
   }
   actionMenuClick(action: string) {

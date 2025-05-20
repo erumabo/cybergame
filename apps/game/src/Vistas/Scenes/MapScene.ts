@@ -1,23 +1,27 @@
 //import _ from "underscore";
-import * as Phaser from "phaser";
+import { Scene } from "phaser";
+import type { GameObjects, Input } from "phaser";
+import { ARROWS } from "src/globals";
 
-// @ts-ignore
 import { Compiler } from "inkjs/full";
 import TilemapSprite from "../GameObjects/TilemapSprite";
 import UnitSprite from "../GameObjects/UnitSprite";
 import ActionsMenu from "../GameObjects/ActionsMenu";
 import MapSceneController from "../../Controladores/Mapa/MapController";
 import StoryManager from "../../Plugins/StoryManager";
+import DatGui from "../../Plugins/DatGui";
 import { GridEngine, type CharacterData } from "grid-engine";
 
-export class MapScene extends Phaser.Scene {
+export class MapScene extends Scene {
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
   controller: MapSceneController;
   units!: UnitSprite[];
   actionsMenu!: ActionsMenu;
   storyManager!: StoryManager;
+  datGui!: DatGui;
   gridEngine!: GridEngine;
+  guiControllers: any[] = [];
 
   constructor() {
     super("MapScene");
@@ -35,11 +39,15 @@ export class MapScene extends Phaser.Scene {
       this.cache.custom.ink.add(this.mapa, story);
     }
     this.storyManager.setStory(this.cache.custom.ink.get(this.mapa));
+
+    const gui = this.datGui.gui.addFolder("Scene");
+    this.guiControllers.push(gui.add(this.controller, "state"));
+    this.guiControllers.push(gui.add(this.controller, "activeUnit"));
   }
 
   create() {
     // Crear objectos
-    let layer0: Phaser.GameObjects.GameObject[] = [];
+    let layer0: GameObjects.GameObject[] = [];
     this.tilemap = new TilemapSprite(this, this.mapa);
     this.controller.tilemap = this.tilemap;
 
@@ -107,48 +115,128 @@ export class MapScene extends Phaser.Scene {
         unit.sprite &&
         unit.sprite
           .setInteractive()
-          .on(
-            "pointerup",
-            function (this: UnitSprite, pointer: Phaser.Input.Pointer) {
-              (this.scene as MapScene).controller.interaccionObjeto(
-                pointer,
-                this.parentContainer.getData("entity")
-              );
-            }
-          )
+          .on("pointerup", function (this: UnitSprite, pointer: Input.Pointer) {
+            (this.scene as MapScene).controller.interaccionObjeto(
+              pointer,
+              this.parentContainer.getData("entity")
+            );
+          })
     );
 
     this.actionsMenu.on("action", ({ detail: action }: CustomEvent) =>
       this.controller.actionMenuClick(action)
     );
 
-    this.tilemap.layers[
-      this.tilemap.getLayerIndexByName("Overlay")
-    ]?.tilemapLayer
-      .setInteractive()
-      .on(
-        "pointerup",
-        function (
-          this: Phaser.Tilemaps.TilemapLayer,
-          pointer: Phaser.Input.Pointer
-        ) {
-          if (pointer.getDistance() > 10) return; // ignore if this is after pan
-          const { x, y } = this.worldToTileXY(pointer.worldX, pointer.worldY);
-          (this.scene as MapScene).controller.interaccionMapa(
-            pointer,
-            this.getTileAt(x, y, true)
-          );
-        }
-      );
+    this.input.on(
+      "pointerup",
+      (
+        //this: Tilemaps.TilemapLayer,
+        pointer: Input.Pointer
+      ) => {
+        const tilelayer = this.tilemap.layers[0].tilemapLayer;
+        if (pointer.getDistance() > 10) return; // ignore if this is after pan
+        const { x, y } = tilelayer.worldToTileXY(
+          pointer.worldX,
+          pointer.worldY
+        );
+        const tile = tilelayer.getTileAt(x, y, true);
+        if (!tile) return; // ignore out of bounds touches
+        this.controller.interaccionMapa(pointer, tile);
+      }
+    );
 
     this.input.on("pointermove", (p: any) => {
       if (!p.isDown) return;
+
       this.cameras.main.scrollX -= p.x - p.prevPosition.x;
       this.cameras.main.scrollY -= p.y - p.prevPosition.y;
     });
   }
 
   override update(_: number) {
+    this.guiControllers.forEach((c) => c.updateDisplay());
     //this.controller.update(dt);
+  }
+
+  #direction(a: { x: number; y: number }, b: { x: number; y: number }) {
+    let dir = 0b0000;
+    switch (a.y - b.y) {
+      case -1:
+        dir |= 0b1000;
+        break;
+      case 1:
+        dir |= 0b0010;
+        break;
+    }
+    switch (b.x - a.x) {
+      case -1:
+        dir |= 0b0100;
+        break;
+      case 1:
+        dir |= 0b0001;
+        break;
+    }
+    return dir;
+  }
+
+  renderPath(path: { x: number; y: number }[], clear: boolean = false) {
+    const layer =
+      this.tilemap.layers[this.tilemap.getLayerIndexByName("Overlay")]
+        ?.tilemapLayer;
+    if (!layer) return;
+
+    if (clear) layer.forEachTile((t) => (t.index = -1));
+
+    let prev, pos, next;
+    for (let i = 0; i < path.length; ++i) {
+      pos = path[i];
+      next = i < path.length - 1 ? path[i + 1] : null;
+
+      let dir = 0;
+      if (prev) dir |= this.#direction(prev, pos);
+      if (next) dir |= this.#direction(next, pos);
+      prev = pos;
+      
+      switch (dir) {
+        case 0b0000:
+          continue;
+        case 0b1000:
+          dir = i == 0 ? ARROWS.UP : ARROWS.END_UP;
+          break;
+        case 0b0100:
+          dir = i == 0 ? ARROWS.RIGHT : ARROWS.END_RIGHT;
+          break;
+        case 0b0010:
+          dir = i == 0 ? ARROWS.DOWN : ARROWS.END_DOWN;
+          break;
+        case 0b0001:
+          dir = i == 0 ? ARROWS.LEFT : ARROWS.END_LEFT;
+          break;
+        case 0b1010:
+          dir = ARROWS.UD;
+          break;
+        case 0b0101:
+          dir = ARROWS.LR;
+          break;
+        case 0b1100:
+          dir = ARROWS.UR;
+          break;
+        case 0b1001:
+          dir = ARROWS.UL;
+          break;
+        case 0b0110:
+          dir = ARROWS.DR;
+          break;
+        case 0b0011:
+          dir = ARROWS.DL;
+          break;
+        default:
+          continue;
+      }
+      
+      layer.getTileAt(pos.x, pos.y, true).index = dir;
+
+      //this.controller.setTileTint(pos, 0xdddddd);
+    }
   }
 }

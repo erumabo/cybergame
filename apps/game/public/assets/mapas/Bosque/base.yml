@@ -4,6 +4,7 @@ tilewidth: 32
 tileheight: 32
 nextobjectid: 1
 orientation: orthogonal
+version: 11
 tilesets:
   - name: Tileset #1-99
   - name: TilesetDual #100-1124
@@ -17,6 +18,7 @@ tilesets:
   - name: Ruby      # 1195
   - name: Spinel    # 1205
   - name: Topaz     # 1215
+  - name: TilesetUI # 1225-2249
 layers:
   - name: Suelo
     type: tilelayer
@@ -47,13 +49,24 @@ layers:
     y: 0
     id: 2
     objects: 
-      - id: 1
+      - id: 0
         gid: 1125
         type: player
         name: Aquamarina
-        x: 33
-        y: 33
+        x: 32
+        y: 32
+        visible: true
+        rotation: 0
         width: 32
         height: 32
+      - id: 0
+        gid: 1145
+        type: player
+        name: Cinabrio
+        x: 64
+        y: 64
+        visible: true
         rotation: 0
+        width: 32
+        height: 32
     

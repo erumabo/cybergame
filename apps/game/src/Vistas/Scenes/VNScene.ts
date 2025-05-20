@@ -1,14 +1,15 @@
-import * as Phaser from "phaser";
-import * as ink from "inkjs";
+import { Scene } from "phaser";
+import type { GameObjects } from "phaser";
+import type { Story } from "inkjs";
 import { marked } from "marked";
 import mustache from "mustache";
 import VNDisplay from "../GameObjects/VNDisplay";
 import StoryManager from "../../Plugins/StoryManager";
 
-export class VNScene extends Phaser.Scene {
+export class VNScene extends Scene {
   knot?: string;
-  background?: Phaser.GameObjects.Rectangle;
-  story?: ink.Story;
+  background?: GameObjects.Rectangle;
+  story?: Story;
   vnDisplay?: VNDisplay;
   storyManager!: StoryManager;
 

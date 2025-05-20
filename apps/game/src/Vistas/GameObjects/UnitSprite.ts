@@ -1,16 +1,18 @@
-import * as Phaser from "phaser";
+import type { Scene } from "phaser";
+import { GameObjects } from "phaser";
+
 import Bar from "./Bar";
 import ActionsMenu from "./ActionsMenu";
 import { UnitView } from "../UIComponents/mb-elements";
 
-export default class UnitSprite extends Phaser.GameObjects.Container {
-  sprite?: Phaser.GameObjects.Sprite;
+export default class UnitSprite extends GameObjects.Container {
+  sprite?: GameObjects.Sprite;
   bars: Map<string, Bar>;
   actionsMenu?: ActionsMenu;
-  view: Phaser.GameObjects.DOMElement;
+  view: GameObjects.DOMElement;
   viewNode: UnitView;
 
-  constructor(scene: Phaser.Scene) {
+  constructor(scene: Scene) {
     super(scene);
     this.setDataEnabled();
 

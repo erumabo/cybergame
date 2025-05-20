@@ -11,6 +11,11 @@
         "key": "TilesetDual",
         "type": "image",
         "url": "Tilesets/TilesetDual/tileset.png"
+      },
+      {
+        "key": "TilesetUI",
+        "type": "image",
+        "url": "Tilesets/TilesetUI/tileset-ui.png"
       }
     ]
   },

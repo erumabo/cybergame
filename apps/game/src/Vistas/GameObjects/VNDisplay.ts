@@ -1,11 +1,12 @@
-import * as Phaser from "phaser";
+import type { Scene } from "phaser";
+import { GameObjects } from "phaser";
 import { VNTextDisplay } from "../UIComponents/mb-elements";
 
-export default class VNDisplay extends Phaser.GameObjects.DOMElement {
-  container: Phaser.GameObjects.Container;
+export default class VNDisplay extends GameObjects.DOMElement {
+  container: GameObjects.Container;
   domNode: VNTextDisplay;
 
-  constructor(scene: Phaser.Scene, width: number, height: number) {
+  constructor(scene: Scene, width: number, height: number) {
     super(
       scene,
       0,

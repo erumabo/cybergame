@@ -1,0 +1,11 @@
+name: TilesetUI
+firstgid: 1225
+tilewidth: 32
+tileheight: 32
+spacing: 0
+margin: 0
+columns: 32
+tilecount: 1024
+imagewidth: 1024
+imageheight: 1024
+properties: []

@@ -1,7 +1,7 @@
-import * as Phaser from "phaser";
+import type { Tilemaps } from "phaser";
 
 export default class MapModel {
-  tilemap?: Phaser.Tilemaps.Tilemap;
+  tilemap?: Tilemaps.Tilemap;
   updateList:any[];
   
   constructor() {

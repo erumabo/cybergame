@@ -1,14 +1,14 @@
-import * as Phaser from "phaser";
-import * as ink from "inkjs";
+import { Plugins } from "phaser";
+import type { Story } from "inkjs";
 
-export default class StoryManager extends Phaser.Plugins.BasePlugin {
-  story?: ink.Story;
+export default class StoryManager extends Plugins.BasePlugin {
+  story?: Story;
 
-  constructor(pluginManager:any) {
+  constructor(pluginManager: any) {
     super(pluginManager);
   }
 
-  setStory(story: ink.Story) {
+  setStory(story: Story) {
     this.story = story;
   }
 

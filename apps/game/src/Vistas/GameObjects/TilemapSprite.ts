@@ -1,15 +1,16 @@
-import * as Phaser from "phaser";
+import type { Scene } from "phaser";
+import { Tilemaps } from "phaser";
 
 function clamp(min: number, val: number, max: number) {
   return Math.min(max, Math.max(min, val));
 }
 
-export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
-  tilesetImages: Phaser.Tilemaps.Tileset[];
+export default class TilemapSprite extends Tilemaps.Tilemap {
+  tilesetImages: Tilemaps.Tileset[];
 
-  constructor(scene: Phaser.Scene, key: string) {
+  constructor(scene: Scene, key: string) {
     const tilemapData = scene.cache.tilemap.get(key);
-    const mapData = Phaser.Tilemaps.Parsers.Parse(
+    const mapData = Tilemaps.Parsers.Parse(
       key,
       tilemapData.format,
       tilemapData.data,
@@ -26,8 +27,8 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
   }
 
   processLayer(
-    layer: Phaser.Tilemaps.LayerData,
-    tilesets: Phaser.Tilemaps.Tileset[],
+    layer: Tilemaps.LayerData,
+    tilesets: Tilemaps.Tileset[],
     _: number
   ) {
     if (layer.visible) {
@@ -42,8 +43,8 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
   }
 
   createDualLayers(
-    layer: Phaser.Tilemaps.LayerData,
-    tilesets: Phaser.Tilemaps.Tileset[]
+    layer: Tilemaps.LayerData,
+    tilesets: Tilemaps.Tileset[]
   ) {
     const corners = [0, 1, 2, 3].map(
       (i) =>
@@ -99,7 +100,7 @@ export default class TilemapSprite extends Phaser.Tilemaps.Tilemap {
     return corners;
   }
 
-  createOverlayLayer(tilesets: Phaser.Tilemaps.Tileset[], index: number) {
+  createOverlayLayer(tilesets: Tilemaps.Tileset[], index: number) {
     const vlayer = this.createBlankLayer(
       "Overlay",
       tilesets,

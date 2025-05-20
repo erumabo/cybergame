@@ -1,11 +1,12 @@
-import * as Phaser from "phaser";
+import type { Scene } from "phaser";
+import { GameObjects } from "phaser";
 
-export default class Bar extends Phaser.GameObjects.Container {
-  progress: Phaser.GameObjects.Rectangle;
-  border: Phaser.GameObjects.Rectangle;
+export default class Bar extends GameObjects.Container {
+  progress: GameObjects.Rectangle;
+  border: GameObjects.Rectangle;
 
   constructor(
-    scene: Phaser.Scene,
+    scene: Scene,
     x: number,
     y: number,
     width: number,

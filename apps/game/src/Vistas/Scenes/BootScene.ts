@@ -1,7 +1,7 @@
-import * as Phaser from "phaser";
+import { Scene } from "phaser";
 import { gameConfig } from "../../levelConfig.js";
 
-export class BootScene extends Phaser.Scene {
+export class BootScene extends Scene {
   constructor() {
     super("Boot");
   }

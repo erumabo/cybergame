@@ -1,11 +1,12 @@
-import * as Phaser from "phaser";
+import type { Scene } from "phaser";
+import { GameObjects } from "phaser";
 import { ActionsList } from "../UIComponents/mb-elements";
 
-export default class ActionsMenu extends Phaser.GameObjects.DOMElement {
-  container: Phaser.GameObjects.Container;
+export default class ActionsMenu extends GameObjects.DOMElement {
+  container: GameObjects.Container;
   domNode: ActionsList;
 
-  constructor(scene: Phaser.Scene) {
+  constructor(scene: Scene) {
     super(scene, 0, 0, new ActionsList(), "width: 64px; height: 40px;");
 
     this.domNode = this.node as ActionsList;

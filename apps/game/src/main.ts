@@ -9,6 +9,7 @@ import { VNScene } from "./Vistas/Scenes/VNScene";
 
 // Plugins
 import StoryManager from "./Plugins/StoryManager";
+import DatGui from "./Plugins/DatGui";
 import { GridEngine } from "grid-engine";
 
 import Alpine from "alpinejs";
@@ -42,6 +43,12 @@ const config = {
         plugin: StoryManager,
         start: false,
         mapping: "storyManager"
+      },
+      {
+        key: "datGui",
+        plugin: DatGui,
+        start: false,
+        mapping: "datGui"
       }
     ],
     scene: [
