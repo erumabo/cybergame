@@ -1,6 +1,6 @@
 import type { Scene } from "phaser";
 import { GameObjects } from "phaser";
-import { VNTextDisplay } from "../UIComponents/mb-elements";
+import VNTextDisplay from "../HTMLComponents/VNTextDisplay/VNTextDisplay";
 
 export default class VNDisplay extends GameObjects.DOMElement {
   container: GameObjects.Container;

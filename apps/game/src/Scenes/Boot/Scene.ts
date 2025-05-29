@@ -9,9 +9,6 @@ export class BootScene extends Scene {
     this.cache.addCustom("ink");
   }
   preload() {
-    // this goes in main preload
-    // there => preload tilesets, and other general stuff
-    // here => load this.mapa ("Bosque")
     this.load.pack("juego", gameConfig.pack);
   }
   create() {

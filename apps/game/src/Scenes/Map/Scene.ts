@@ -1,26 +1,26 @@
-//import _ from "underscore";
-import { Scene } from "phaser";
 import type { GameObjects, Input } from "phaser";
+import type StoryManager from "../../Plugins/StoryManager";
+import type DatGui from "../../Plugins/DatGui";
+import type { GridEngine, CharacterData } from "grid-engine";
 import * as CONSTANTS from "src/globals";
 
+import { Scene } from "phaser";
 import { Compiler } from "inkjs/full";
-import TilemapSprite from "../GameObjects/TilemapSprite";
-import UnitSprite from "../GameObjects/UnitSprite";
-import ActionsMenu from "../GameObjects/ActionsMenu";
-import MapSceneController from "../../Controladores/Mapa/MapController";
-import StoryManager from "../../Plugins/StoryManager";
-import DatGui from "../../Plugins/DatGui";
-import { GridEngine, type CharacterData } from "grid-engine";
+import TilemapSprite from "./GameObjects/TilemapSprite";
+import UnitSprite from "./GameObjects/UnitSprite";
+import ActionsMenu from "./GameObjects/ActionsMenu";
+import MapSceneController from "./Controller";
 
 export class MapScene extends Scene {
+  declare storyManager: StoryManager;
+  declare datGui: DatGui;
+  declare gridEngine: GridEngine;
+  
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
   controller: MapSceneController;
   units!: UnitSprite[];
   actionsMenu!: ActionsMenu;
-  declare storyManager: StoryManager;
-  declare datGui: DatGui;
-  declare gridEngine: GridEngine;
   guiControllers: any[] = [];
 
   constructor() {

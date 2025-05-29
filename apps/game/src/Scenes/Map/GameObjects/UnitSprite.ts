@@ -3,7 +3,7 @@ import { GameObjects } from "phaser";
 
 import Bar from "./Bar";
 import ActionsMenu from "./ActionsMenu";
-import { UnitView } from "../UIComponents/mb-elements";
+import UnitView from "../HTMLComponents/UnitView/UnitView";
 
 export default class UnitSprite extends GameObjects.Container {
   sprite?: GameObjects.Sprite;

@@ -1,6 +1,6 @@
 import type { Scene } from "phaser";
 import { GameObjects } from "phaser";
-import { ActionsList } from "../UIComponents/mb-elements";
+import ActionsList from "../HTMLComponents/ActionsList/ActionsList";
 
 export default class ActionsMenu extends GameObjects.DOMElement {
   container: GameObjects.Container;

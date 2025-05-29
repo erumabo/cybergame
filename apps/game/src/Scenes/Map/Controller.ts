@@ -1,9 +1,9 @@
 import { Components, COLORS } from "src/globals";
 import type { Input, Tilemaps } from "phaser";
 import { World } from "@mabo/mecs";
-import UnitStats from "src/Componentes/Stats";
-import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
-import { MapScene } from "src/Vistas/Scenes/MapScene";
+import UnitStats from "./Models/Stats";
+import UnitSprite from "./GameObjects/UnitSprite";
+import { MapScene } from "./Scene";
 
 //#region Import Estados
 import { StateMachine } from "@mabo/chart";

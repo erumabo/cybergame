@@ -3,7 +3,7 @@ import type { GameObjects } from "phaser";
 import type { Story } from "inkjs";
 import { marked } from "marked";
 import mustache from "mustache";
-import VNDisplay from "../GameObjects/VNDisplay";
+import VNDisplay from "./GameObjects/VNDisplay";
 import StoryManager from "../../Plugins/StoryManager";
 
 export class VNScene extends Scene {

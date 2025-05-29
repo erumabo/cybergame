@@ -3,14 +3,14 @@ import { COLORS } from "./globals";
 import { Game } from "phaser";
 
 // Scenes
-import { BootScene } from "./Vistas/Scenes/BootScene";
-import { MapScene } from "./Vistas/Scenes/MapScene";
-import { VNScene } from "./Vistas/Scenes/VNScene";
+import { BootScene } from "./Scenes/Boot/Scene";
+import { MapScene } from "./Scenes/Map/Scene";
+import { VNScene } from "./Scenes/VN/Scene";
 
 // Plugins
 import StoryManager from "./Plugins/StoryManager";
-import DatGui from "./Plugins/DatGui";
 import { GridEngine } from "grid-engine";
+import DatGui from "./Plugins/DatGui";
 
 import Alpine from "alpinejs";
 Alpine.start();
