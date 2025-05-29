@@ -3,7 +3,6 @@ import type { Input, Tilemaps } from "phaser";
 import { World } from "@mabo/mecs";
 import UnitStats from "src/Componentes/Stats";
 import UnitSprite from "src/Vistas/GameObjects/UnitSprite";
-import TilemapSprite from "src/Vistas/GameObjects/TilemapSprite";
 import { MapScene } from "src/Vistas/Scenes/MapScene";
 
 //#region Import Estados
@@ -17,15 +16,14 @@ import InspectAction from "./Sistemas/InspectTile";
 //#endregion Import Estados
 
 export default class MapSceneController {
-  scene: MapScene;
   world: World;
-  tilemap!: TilemapSprite;
   actor: StateMachine;
-  activeUnit: number = 0;
+  activeUnit: string = "";
   target?: any;
   systems = { MoveAction, InspectAction };
+  stateHandler?: any;
 
-  constructor(scene: MapScene) {
+  constructor(public scene: MapScene) {
     this.scene = scene;
 
     this.world = new World();
@@ -34,9 +32,9 @@ export default class MapSceneController {
     this.actor = new StateMachine({
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
-    }).start();
+    }).start({ world: this });
   }
-  
+
   get state() {
     return this.actor.currentState;
   }
@@ -70,15 +68,19 @@ export default class MapSceneController {
   }
 
   //#region UI Events
-  interaccionObjeto(_: Input.Pointer, entity: number) {
-    this.actor.send(this.activeUnit == entity ? "unselectUnit" : "selectUnit", {
-      world: this,
-      target: entity
-    });
+  onPointerDown(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
+    this.stateHandler.onPointerDown &&
+      this.stateHandler.onPointerDown({ world: this, tile, pointer });
   }
-  interaccionMapa(_: Input.Pointer, target: Tilemaps.Tile) {
-    this.actor.send("selectTile", { world: this, target });
+  onDrag(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
+    this.stateHandler.onDrag &&
+      this.stateHandler.onDrag({ world: this, tile, pointer });
   }
+  onPointerUp(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
+    this.stateHandler.onPointerUp &&
+      this.stateHandler.onPointerUp({ world: this, tile, pointer });
+  }
+
   actionMenuClick(action: string) {
     this.actor.send("selectAction", { world: this, action });
   }

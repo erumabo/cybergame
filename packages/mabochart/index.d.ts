@@ -27,7 +27,7 @@ export type State = BaseState | (BaseState & ParentState);
 export class StateMachine {
   constructor(baseState: ParentState);
   currentState: string;
-  start(): StateMachine;
+  start(data?: any): StateMachine;
   error(): StateMachine;
   send(event: string, data?: any): StateMachine;
 }

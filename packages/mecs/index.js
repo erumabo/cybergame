@@ -1,20 +1,18 @@
 export class World {
-  nextEntity = 0;
-  entities = [];
-  componentEntities = new Map();
-  componentME = new Map();
-  components = [];
+  #nextEntity = 0; // entity identity
+  entities = []; // sparse array of map component <> backref to dense array
+  componentEntities = new Map(); // map component <> dense array
+  componentME = new Map(); // map component <> max index in dense array
   
   constructor() {}
 
   addEntity() {
-    this.nextEntity++;
-    this.entities[this.nextEntity] = new Map();
-    return this.nextEntity;
+    this.#nextEntity++;
+    this.entities[this.#nextEntity] = new Map();
+    return this.#nextEntity;
   }
 
   addComponent(component) {
-    this.components.push(component);
     this.componentEntities.set(component, []);
     this.componentME.set(component, 0);
   }

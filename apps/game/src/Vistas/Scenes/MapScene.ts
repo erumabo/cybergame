@@ -1,7 +1,7 @@
 //import _ from "underscore";
 import { Scene } from "phaser";
 import type { GameObjects, Input } from "phaser";
-import { ARROWS } from "src/globals";
+import * as CONSTANTS from "src/globals";
 
 import { Compiler } from "inkjs/full";
 import TilemapSprite from "../GameObjects/TilemapSprite";
@@ -18,9 +18,9 @@ export class MapScene extends Scene {
   controller: MapSceneController;
   units!: UnitSprite[];
   actionsMenu!: ActionsMenu;
-  storyManager!: StoryManager;
-  datGui!: DatGui;
-  gridEngine!: GridEngine;
+  declare storyManager: StoryManager;
+  declare datGui: DatGui;
+  declare gridEngine: GridEngine;
   guiControllers: any[] = [];
 
   constructor() {
@@ -43,13 +43,13 @@ export class MapScene extends Scene {
     const gui = this.datGui.gui.addFolder("Scene");
     this.guiControllers.push(gui.add(this.controller, "state"));
     this.guiControllers.push(gui.add(this.controller, "activeUnit"));
+    this.guiControllers.push(gui.add(this.game.loop, "actualFps"));
   }
 
   create() {
     // Crear objectos
     let layer0: GameObjects.GameObject[] = [];
     this.tilemap = new TilemapSprite(this, this.mapa);
-    this.controller.tilemap = this.tilemap;
 
     this.tilemap.layers.forEach((layer, index) =>
       layer0.push(
@@ -64,7 +64,6 @@ export class MapScene extends Scene {
       )
     );
 
-    //const charsDepth = this.tilemap.layers.length + 2;
     this.units = this.tilemap.createFromObjects(
       "Chars",
       { classType: UnitSprite, ignoreTileset: false },
@@ -109,73 +108,39 @@ export class MapScene extends Scene {
     this.setUIEventListeners();
   }
 
-  setUIEventListeners() {
-    this.units.forEach(
-      (unit) =>
-        unit.sprite &&
-        unit.sprite
-          .setInteractive()
-          .on("pointerup", function (this: UnitSprite, pointer: Input.Pointer) {
-            (this.scene as MapScene).controller.interaccionObjeto(
-              pointer,
-              this.parentContainer.getData("entity")
-            );
-          })
-    );
+  #selectTile(pointer: Input.Pointer) {
+    const tilelayer = this.tilemap.layers[0].tilemapLayer;
+    const { x, y } = tilelayer.worldToTileXY(pointer.worldX, pointer.worldY);
+    const tile = tilelayer.getTileAt(x, y, true);
+    if (!tile || this.controller.target == tile) return; // ignore out of bounds touches
+    return tile;
+  }
 
+  setUIEventListeners() {
     this.actionsMenu.on("action", ({ detail: action }: CustomEvent) =>
       this.controller.actionMenuClick(action)
     );
 
-    this.input.on(
-      "pointerup",
-      (
-        //this: Tilemaps.TilemapLayer,
-        pointer: Input.Pointer
-      ) => {
-        const tilelayer = this.tilemap.layers[0].tilemapLayer;
-        if (pointer.getDistance() > 10) return; // ignore if this is after pan
-        const { x, y } = tilelayer.worldToTileXY(
-          pointer.worldX,
-          pointer.worldY
-        );
-        const tile = tilelayer.getTileAt(x, y, true);
-        if (!tile) return; // ignore out of bounds touches
-        this.controller.interaccionMapa(pointer, tile);
-      }
-    );
-
-    this.input.on("pointermove", (p: any) => {
+    this.input.on("pointerdown", (p: Input.Pointer) => {
+      this.controller.onPointerDown(p, this.#selectTile(p));
+    });
+    this.input.on("pointerup", (p: Input.Pointer) => {
+      this.controller.onPointerUp(p, this.#selectTile(p));
+    });
+    this.input.on("pointermove", (p: Input.Pointer) => {
       if (!p.isDown) return;
-
-      this.cameras.main.scrollX -= p.x - p.prevPosition.x;
-      this.cameras.main.scrollY -= p.y - p.prevPosition.y;
+      this.controller.onDrag(p, this.#selectTile(p));
     });
   }
 
   override update(_: number) {
     this.guiControllers.forEach((c) => c.updateDisplay());
-    //this.controller.update(dt);
   }
 
   #direction(a: { x: number; y: number }, b: { x: number; y: number }) {
-    let dir = 0b0000;
-    switch (a.y - b.y) {
-      case -1:
-        dir |= 0b1000;
-        break;
-      case 1:
-        dir |= 0b0010;
-        break;
-    }
-    switch (b.x - a.x) {
-      case -1:
-        dir |= 0b0100;
-        break;
-      case 1:
-        dir |= 0b0001;
-        break;
-    }
+    let dir =
+      (b.y - a.y == 0 ? 0 : 2 << (b.y - a.y + 1)) |
+      (a.x - b.x == 0 ? 0 : 1 << (a.x - b.x + 1));
     return dir;
   }
 
@@ -187,56 +152,19 @@ export class MapScene extends Scene {
 
     if (clear) layer.forEachTile((t) => (t.index = -1));
 
-    let prev, pos, next;
+    let prev, pos, next, dir;
     for (let i = 0; i < path.length; ++i) {
       pos = path[i];
       next = i < path.length - 1 ? path[i + 1] : null;
 
-      let dir = 0;
+      dir = 0;
       if (prev) dir |= this.#direction(prev, pos);
       if (next) dir |= this.#direction(next, pos);
       prev = pos;
-      
-      switch (dir) {
-        case 0b0000:
-          continue;
-        case 0b1000:
-          dir = i == 0 ? ARROWS.UP : ARROWS.END_UP;
-          break;
-        case 0b0100:
-          dir = i == 0 ? ARROWS.RIGHT : ARROWS.END_RIGHT;
-          break;
-        case 0b0010:
-          dir = i == 0 ? ARROWS.DOWN : ARROWS.END_DOWN;
-          break;
-        case 0b0001:
-          dir = i == 0 ? ARROWS.LEFT : ARROWS.END_LEFT;
-          break;
-        case 0b1010:
-          dir = ARROWS.UD;
-          break;
-        case 0b0101:
-          dir = ARROWS.LR;
-          break;
-        case 0b1100:
-          dir = ARROWS.UR;
-          break;
-        case 0b1001:
-          dir = ARROWS.UL;
-          break;
-        case 0b0110:
-          dir = ARROWS.DR;
-          break;
-        case 0b0011:
-          dir = ARROWS.DL;
-          break;
-        default:
-          continue;
-      }
-      
-      layer.getTileAt(pos.x, pos.y, true).index = dir;
 
-      //this.controller.setTileTint(pos, 0xdddddd);
+      dir = i == 0 ? CONSTANTS.dir_arrow_start[dir] : CONSTANTS.dir_arrow[dir];
+      if (dir === undefined) continue;
+      layer.getTileAt(pos.x, pos.y, true).index = dir;
     }
   }
 }

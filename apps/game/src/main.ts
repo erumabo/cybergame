@@ -61,6 +61,6 @@ const config = {
   }
 };
 
-(() => {
+window.onload = () => {
   new Game(config);
-})();
+};

@@ -80,3 +80,30 @@ export const enum ARROWS {
   END_DOWN = ARROWS_BASE + 3,
   END_RIGHT = ARROWS_BASE + 35
 }
+
+export const dir_arrow_start = [
+  undefined,
+  ARROWS.LEFT,
+  ARROWS.DOWN,
+  undefined,
+  ARROWS.RIGHT,
+  undefined,
+  undefined,
+  undefined,
+  ARROWS.UP
+];
+export const dir_arrow = [
+  undefined,
+  ARROWS.END_LEFT,
+  ARROWS.END_DOWN,
+  ARROWS.DL,
+  ARROWS.END_RIGHT,
+  ARROWS.LR,
+  ARROWS.DR,
+  undefined,
+  ARROWS.END_UP,
+  ARROWS.UL,
+  ARROWS.UD,
+  undefined,
+  ARROWS.UR
+];
