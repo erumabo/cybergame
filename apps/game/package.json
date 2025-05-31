@@ -19,7 +19,8 @@
     "dev": "vite",
     "dev-lan": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pack-tilemap": "packtm `npm prefix`/apps/game/public/assets/mapas Bosque"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.1.2",

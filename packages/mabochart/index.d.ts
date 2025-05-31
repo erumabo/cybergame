@@ -29,5 +29,5 @@ export class StateMachine {
   currentState: string;
   start(data?: any): StateMachine;
   error(): StateMachine;
-  send(event: string, data?: any): StateMachine;
+  send(event: string, data?: any): Promise<StateMachine>;
 }

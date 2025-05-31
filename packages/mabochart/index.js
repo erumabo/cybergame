@@ -3,7 +3,6 @@
  * @module @mabo/chart
  */
 
-
 /** Class that represents a state chart machine */
 export class StateMachine {
   #baseState;
@@ -37,21 +36,24 @@ export class StateMachine {
    * @param {*} data - Arbitrary data to be provided to event handlers
    */
   send(event, data) {
-    let state;
-    for (let i = this.#stateStack.length - 1; i >= 0; i--) {
-      state = this.#stateStack[i];
-      // For loop instead of direct prop access
-      //   to implement regext matching in future
-      for (const transition in state.on) {
-        if (transition == event) {
-          const handler = state.on[transition];
-          if (typeof handler === "string")
-            return this.#transition(handler, data);
-          if (handler.action) handler.action(data);
-          return this.#transition(handler.target, data);
+    return new Promise((resolve) => {
+      let state;
+      for (let i = this.#stateStack.length - 1; i >= 0; i--) {
+        state = this.#stateStack[i];
+        // For loop instead of direct prop access
+        //   to implement regext matching in future
+        for (const transition in state.on) {
+          if (transition == event) {
+            const handler = state.on[transition];
+            if (typeof handler === "string")
+              resolve(this.#transition(handler, data));
+            if (handler.action) handler.action(data);
+            resolve(this.#transition(handler.target, data));
+          }
         }
       }
-    }
+      resolve(this);
+    });
   }
 
   #transition(nextState, data) {

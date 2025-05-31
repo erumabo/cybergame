@@ -1,11 +1,11 @@
 import { Components, COLORS } from "src/globals";
-import type { Input, Tilemaps } from "phaser";
 import { World } from "@mabo/mecs";
 import UnitStats from "./Models/Stats";
 import UnitSprite from "./GameObjects/UnitSprite";
 import { MapScene } from "./Scene";
 
 //#region Import Estados
+import type { StateHandler, Event, StateContext } from "./Estados/State";
 import { StateMachine } from "@mabo/chart";
 import idle from "./Estados/IDLE";
 import targetSelected from "./Estados/TargetTileSelected";
@@ -15,28 +15,28 @@ import MoveAction from "./Sistemas/MoveUnit";
 import InspectAction from "./Sistemas/InspectTile";
 //#endregion Import Estados
 
-export default class MapSceneController {
-  world: World;
+export default class MapSceneController implements StateHandler {
   actor: StateMachine;
-  activeUnit: string = "";
-  target?: any;
-  systems = { MoveAction, InspectAction };
-  stateHandler?: any;
+  context: StateContext;
+  systems: { [system: string]: Function } = { MoveAction, InspectAction };
+  state?: StateHandler;
 
   constructor(public scene: MapScene) {
     this.scene = scene;
 
-    this.world = new World();
-    for (let component in Components) this.world.addComponent(component);
+    this.context = {
+      activeUnit: "",
+      controller: this,
+      target: { x: -1, y: -1 } as any,
+      world: new World()
+    };
+    for (let component in Components)
+      this.context.world.addComponent(component);
 
     this.actor = new StateMachine({
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
-    }).start({ world: this });
-  }
-
-  get state() {
-    return this.actor.currentState;
+    }).start(this.context);
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
@@ -51,38 +51,36 @@ export default class MapSceneController {
   }
 
   addUnitEntity(unit: UnitSprite) {
-    const entity = this.world.addEntity();
+    const entity = this.context.world.addEntity();
 
-    this.world.bindEntityComponent(entity, unit, "UnitSprite");
+    this.context.world.bindEntityComponent(entity, unit, "UnitSprite");
     unit.setData("entity", entity);
 
     const stats = new UnitStats(80, 20);
-    this.world.bindEntityComponent(entity, stats, "UnitStats");
+    this.context.world.bindEntityComponent(entity, stats, "UnitStats");
     unit.addBar("salud", COLORS["--blue-40"], stats.salud);
     unit.addBar("energia", COLORS["--green-10"], stats.energia);
 
-    this.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
+    this.context.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
     unit.setDOMAttribute("name", "" + entity);
 
     return entity;
   }
 
   //#region UI Events
-  onPointerDown(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
-    this.stateHandler.onPointerDown &&
-      this.stateHandler.onPointerDown({ world: this, tile, pointer });
+  onPointerDown(event: Event, context: StateContext) {
+    this.state?.onPointerDown && this.state.onPointerDown(event, context);
   }
-  onDrag(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
-    this.stateHandler.onDrag &&
-      this.stateHandler.onDrag({ world: this, tile, pointer });
+  onPointerMove(event: Event, context: StateContext) {
+    this.state?.onPointerMove && this.state.onPointerMove(event, context);
   }
-  onPointerUp(pointer: Input.Pointer, tile?: Tilemaps.Tile) {
-    this.stateHandler.onPointerUp &&
-      this.stateHandler.onPointerUp({ world: this, tile, pointer });
+  onPointerUp(event: Event, context: StateContext) {
+    this.state?.onPointerUp && this.state.onPointerUp(event, context);
   }
 
   actionMenuClick(action: string) {
-    this.actor.send("selectAction", { world: this, action });
+    this.context.action = action;
+    this.actor.send("selectAction", this.context);
   }
   //#endregion
 }

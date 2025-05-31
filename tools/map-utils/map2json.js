@@ -6,9 +6,9 @@ import fs from "node:fs";
 const parseCSV = (csv) =>
   csv
     .split("\n")
-    .map(row => row.trim())
-    .filter(row => !!row)
-    .map((row) => row.split(",").map((cell) => cell.trim()))
+    .map((row) => row.trim())
+    .filter((row) => !!row)
+    .map((row) => row.split(",").map((cell) => cell.trim()));
 const openJSON = (file) => JSON.parse(fs.readFileSync(file, "utf-8"));
 const openCSV = (file) => parseCSV(fs.readFileSync(file, "utf-8"));
 const openYAML = (file) => YAML.parse(fs.readFileSync(file, "utf-8"));
@@ -18,7 +18,7 @@ function parsePropValue([title, value]) {
   if (!type) return value;
   switch (type) {
     case "boolean":
-      return value === "true";
+      return value === "true" || value === "1";
     case "int":
       return parseInt(value);
     default:
@@ -26,9 +26,9 @@ function parsePropValue([title, value]) {
   }
 }
 
-function parseTileset(tileset) {
+function parseTileset(path, tileset) {
   const [[, ...tileHeaders], ...tiles] = openCSV(
-    `./Tilesets/${tileset.name}/tiles.csv`
+    `${path}/Tilesets/${tileset.name}/tiles.csv`
   );
   return {
     ...tileset,
@@ -45,25 +45,27 @@ function parseTileset(tileset) {
             prop[0].split(":").length > 1 ? prop[0].split(":")[1] : "string",
           value: parsePropValue(prop)
         }));
-      return {
-        id: +id,
-        properties: properties.length > 0 ? properties : undefined
-      };
-    })
+      return properties.length > 0
+        ? {
+            id: +id,
+            properties: properties
+          }
+        : undefined;
+    }).filter(tile => !!tile)
   };
 }
 
-function assembleTilemap(mapa) {
+function assembleTilemap(path, mapa) {
   //const TileDefinitions = parseTileset(openYAML("./Tilesets/TileTypes/config.yml"));
 
-  let tilemap = openYAML(`./${mapa}/base.yml`);
+  let tilemap = openYAML(`${path}/${mapa}/base.yml`);
   tilemap.tilesets = tilemap.tilesets.map((tileset) =>
-    parseTileset(openYAML(`./Tilesets/${tileset.name}/config.yml`))
+    parseTileset(path, openYAML(`${path}/Tilesets/${tileset.name}/config.yml`))
   );
 
   for (let layer of tilemap.layers) {
     if (layer.type == "tilelayer") {
-      let data = openCSV(`./${mapa}/${layer.name}.csv`);
+      let data = openCSV(`${path}/${mapa}/${layer.name}.csv`);
       layer.data = data.flat().map((cell) => {
         for (let tileset of tilemap.tilesets) {
           let tile = tileset.tiles.find((td) =>
@@ -80,10 +82,11 @@ function assembleTilemap(mapa) {
 }
 
 function main() {
-  const [, , key] = process.argv;
-  const tilemap = assembleTilemap(key);
+  const [, , path, key] = process.argv;
+  
+  const tilemap = assembleTilemap(path, key);
   fs.writeFileSync(
-    `./${key}/${key}.json`,
+    `${path}/${key}/${key}.json`,
     JSON.stringify(tilemap, null, 1) + "\n"
   );
 }

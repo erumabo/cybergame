@@ -24,9 +24,7 @@ export class MapView extends HTMLElement {
     //this.#UIReady = true;
   }
 
-  attributeChangedCallback(name: string, _: any, __: any) {
-    console.log(`Attribute ${name} has changed.`);
-  }
+  attributeChangedCallback(_: string, __: any, ___: any) {}
 
   disconnectedCallback() {}
 }

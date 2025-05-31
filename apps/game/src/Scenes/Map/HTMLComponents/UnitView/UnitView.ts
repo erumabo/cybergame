@@ -52,9 +52,7 @@ export default class UnitView
 
   disconnectedCallback() {}
 
-  onAction(ev: CustomEvent) {
-    console.log(ev, ev.detail);
-  }
+  onAction(_: CustomEvent) {}
 }
 
 customElements.define("mb-unit-view", UnitView);

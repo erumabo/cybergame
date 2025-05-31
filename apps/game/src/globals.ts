@@ -14,42 +14,6 @@ export const COLORS: Record<string, number> = {};
 }
 
 /***
- * Tiles Stuff
- */
-
-export const Hints = {
-  Move: 0b10,
-  Attack: 0b01
-};
-
-/***
- * Units Stuff
- */
-export const UnitTypes = {
-  Heavy: 0,
-  Light: 1,
-  Archer: 2,
-  Knight: 3
-};
-
-export const UnitConfig: Record<string, number>[] = Object.keys(UnitTypes).map(
-  (_) => ({
-    hp: 10,
-    atk: 1,
-    def: 1,
-    power: 5
-  })
-);
-
-UnitConfig[UnitTypes.Heavy] = {
-  ...UnitConfig[UnitTypes.Heavy]
-};
-
-/***
- * Tile and Unit Relation
- */
-
-/***
  * Systems and Components
  *
  */
@@ -61,49 +25,3 @@ export const Components = {
   Moviendo: "Moviendo",
   Atacando: "Atacando"
 };
-
-const ARROWS_BASE = 1225;
-export const enum ARROWS {
-  UP = ARROWS_BASE + 65,
-  DOWN = ARROWS_BASE + 1,
-  LEFT = ARROWS_BASE + 34,
-  RIGHT = ARROWS_BASE + 32,
-  LR = ARROWS_BASE + 67,
-  UD = ARROWS_BASE + 68,
-  UL = ARROWS_BASE + 66,
-  UR = ARROWS_BASE + 64,
-  DL = ARROWS_BASE + 2,
-  DR = ARROWS_BASE + 0,
-  ALL = ARROWS_BASE + 33,
-  END_UP = ARROWS_BASE + 36,
-  END_LEFT = ARROWS_BASE + 4,
-  END_DOWN = ARROWS_BASE + 3,
-  END_RIGHT = ARROWS_BASE + 35
-}
-
-export const dir_arrow_start = [
-  undefined,
-  ARROWS.LEFT,
-  ARROWS.DOWN,
-  undefined,
-  ARROWS.RIGHT,
-  undefined,
-  undefined,
-  undefined,
-  ARROWS.UP
-];
-export const dir_arrow = [
-  undefined,
-  ARROWS.END_LEFT,
-  ARROWS.END_DOWN,
-  ARROWS.DL,
-  ARROWS.END_RIGHT,
-  ARROWS.LR,
-  ARROWS.DR,
-  undefined,
-  ARROWS.END_UP,
-  ARROWS.UL,
-  ARROWS.UD,
-  undefined,
-  ARROWS.UR
-];

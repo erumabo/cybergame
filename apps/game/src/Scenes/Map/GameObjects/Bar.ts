@@ -14,7 +14,7 @@ export default class Bar extends GameObjects.Container {
     color: number
   ) {
     super(scene);
-
+    
     this.width = width;
     this.height = height;
 

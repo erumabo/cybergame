@@ -1,11 +1,15 @@
 import { Plugins } from "phaser";
-import * as dat from 'dat.gui';
+import { GUI } from 'dat.gui';
 
 export default class DatGui extends Plugins.BasePlugin {
-  gui: dat.GUI;
+  gui: GUI;
 
   constructor(pluginManager: any) {
     super(pluginManager);
-    this.gui = new dat.GUI();
+    this.gui = new GUI();
+  }
+  
+  override destroy() {
+    super.destroy();
   }
 }

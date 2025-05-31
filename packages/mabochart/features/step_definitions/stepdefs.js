@@ -17,9 +17,9 @@ When("la maquina inicia", function () {
   this.machine.start(this.context);
 });
 
-When("recibe evento {string}", function (evento) {
+When("recibe evento {string}", async function (evento) {
   try {
-    this.machine.send(evento, this.context);
+    await this.machine.send(evento, this.context);
   } catch (e) {
     this.error = e;
   }

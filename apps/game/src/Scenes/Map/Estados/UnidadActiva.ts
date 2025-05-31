@@ -1,57 +1,48 @@
-const stateHandler = {
-  onPointerDown: ({ world, tile }: any) => {
-    if (!tile) return;
+import type { StateHandler, StateContext } from "./State";
+import MoveUnit from "../Sistemas/MoveUnit";
 
-    let target = world.scene.gridEngine.getCharactersAt(tile);
-    let event;
-    if (target.length == 0) {
-      event = "selectTile";
-      target = tile;
+const stateHandler: StateHandler = {
+  onPointerUp: (_, __) => {},
+  onPointerDown: (event, context) => {
+    if (!event.target) return;
+    const gridEngine = context.controller.scene.gridEngine;
+
+    let targets = gridEngine.getCharactersAt(event.target);
+    let eventName;
+    if (targets.length == 0) {
+      eventName = "selectTile";
+      context.target = event.target;
     } else {
-      target = target[0];
-      world.scene.gridEngine.stopMovement(target);
-      world.scene.gridEngine.moveTo(target, tile, {
-        algorithm: "A_STAR",
-        considerCosts: true,
-        noPathFoundStrategy: "STOP",
-        pathBlockedStrategy: "WAIT",
-        pathBlockedWaitTimeoutMs: 2000
-      });
-      if (world.activeUnit == target) return;
-      event = "selectUnit";
+      eventName = "selectUnit";
+      let unit = targets[0];
+      MoveUnit({ ...context, activeUnit: unit, target: event.target });
+      if (context.activeUnit == unit) return;
+      context.activeUnit = unit;
     }
-    world.actor.send(event, { world, target });
+    context.controller.actor.send(eventName, context);
   },
-  onDrag: ({ world, tile }: any) => {
-    if (!tile) return;
-
-    let event = "selectTile";
-    let target = tile;
-    world.actor.send(event, { world, target });
+  onPointerMove: (event, context) => {
+    if (!event.target) return;
+    context.target = event.target;
+    context.controller.actor.send("selectTile", context);
   }
 };
 
 const unidadSeleccionada = {
-  entry: ({ world }: any) => {
-    world.stateHandler = stateHandler;
+  entry: (context: StateContext) => {
+    context.controller.state = stateHandler;
   },
   on: {
     selectTile: {
-      action: ({ world, target }: any) => {
-        world.target = target;
-      },
       target: "targetSelected"
     },
     unselectUnit: {
-      action: ({ world }: any) => {
-        world.activeUnit = null;
+      action: (context: StateContext) => {
+        context.activeUnit = undefined;
       },
       target: "idle"
     },
     selectUnit: {
-      action: ({ world, target }: any) => {
-        world.activeUnit = target;
-      },
       target: "unidadSeleccionada"
     }
   }
