@@ -109,9 +109,8 @@ export class MapScene extends Scene {
   }
 
   override update(_: number) {
-    if(this.controller.context.target && this.controller.context.activeUnit)
-    {
-    this.guiControllers.forEach((c) => c.updateDisplay());
+    if (this.controller.context.target && this.controller.context.activeUnit) {
+      this.guiControllers.forEach((c) => c.updateDisplay());
     }
   }
   //#endregion Base Methods
@@ -171,6 +170,7 @@ export class MapScene extends Scene {
       dir = 0;
       if (prev) dir |= this.#direction(prev, pos);
       if (next) dir |= this.#direction(next, pos);
+      dir |= next ? 0 : 0b10000;
       prev = pos;
 
       if (!tileMappings[dir]) {
@@ -182,11 +182,11 @@ export class MapScene extends Scene {
           const props: any = tileset.getTileProperties(ti);
           if (!props) continue;
           if (
-            props["up"] == (dir & 0b1000) >> 3 &&
-            props["right"] == (dir & 0b0100) >> 2 &&
-            props["down"] == (dir & 0b0010) >> 1 &&
-            props["left"] == (dir & 0b0001) &&
-            props["cap"] == !next
+            props["cap"] == (dir & 0b10000) >> 4 &&
+            props["up"] == (dir & 0b01000) >> 3 &&
+            props["right"] == (dir & 0b00100) >> 2 &&
+            props["down"] == (dir & 0b00010) >> 1 &&
+            props["left"] == (dir & 0b00001)
           ) {
             tileMappings[dir] = ti;
             break;

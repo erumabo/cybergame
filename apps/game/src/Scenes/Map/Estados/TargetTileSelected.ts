@@ -1,40 +1,6 @@
 import type { State } from "@mabo/chart";
-import type { StateHandler, StateContext } from "./State";
+import type { Event, StateContext } from "./State";
 import MoveUnit from "../Sistemas/MoveUnit";
-
-const stateHandler: StateHandler = {
-  onPointerUp: (event, context) => {
-    if (!event.target) return;
-    context.target = event.target;
-    context.controller.actor.send("selectTile", context);
-  },
-  onPointerMove: (event, context) => {
-    if (!event.target) return;
-    context.target = event.target;
-    context.controller.actor.send("selectTile", context).then(() => console.log("Yramsitoom"))
-    console.log("Return");
-  },
-  onPointerDown: (event, context) => {
-    if (!event.target) return;
-
-    const gridEngine = context.controller.scene.gridEngine;
-
-    let targets = gridEngine.getCharactersAt(event.target);
-    let eventName;
-    if (targets.length == 0) {
-      eventName = "selectTile";
-      context.target = event.target;
-    } else {
-      eventName = "selectUnit";
-      let unit = targets[0];
-      MoveUnit({ ...context, activeUnit: unit, target: event.target });
-      if (context.activeUnit == unit) return;
-      context.activeUnit = unit;
-    }
-
-    context.controller.actor.send(eventName, context);
-  }
-};
 
 function showMenu({ controller, target: tile, activeUnit }: StateContext) {
   if (!tile || !activeUnit) throw new Error("Try to show menu without context");
@@ -69,40 +35,50 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
 }
 
 const targetSelected: State = {
-  entry: (context: StateContext) => {
-    context.controller.state = stateHandler;
+  entry: (_: Event, context: StateContext) => {
     showMenu(context);
   },
-  update: (context: StateContext) => {
+  update: (_: Event, context: StateContext) => {
     showMenu(context);
-    console.log("Updated");
   },
 
   on: {
-    selectTile: {
+    "on.PointerUp.*": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
       target: "targetSelected"
     },
-
+    "on.PointerMove.Map": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    },
+    "on.PointerDown.Map": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    },
+    "on.PointerDown.Ally": {
+      action: (event: Event, context: StateContext) => {
+        MoveUnit({ ...context, activeUnit: event.unit, target: event.target });
+        if (context.activeUnit == event.unit) return;
+        context.activeUnit = event.unit;
+      },
+      target: "unidadSeleccionada"
+    },
     selectAction: {
-      action: (context: StateContext) => {
+      action: (_: Event, context: StateContext) => {
         if (!context.action) throw new Error("Action undefined");
         context.controller.systems[context.action + "Action"](context);
       },
       target: "idle"
-    },
-
-    unselectUnit: {
-      action: (context: StateContext) => {
-        context.activeUnit = undefined;
-      },
-      target: "idle"
-    },
-    selectUnit: {
-      target: "unidadSeleccionada"
     }
   },
 
-  exit: (context: StateContext) => {
+  exit: (_: Event, context: StateContext) => {
     context.target = { x: -1, y: -1 } as any;
     context.controller.scene.actionsMenu.domNode["actions"] = "";
     context.controller.scene.actionsMenu.hide();

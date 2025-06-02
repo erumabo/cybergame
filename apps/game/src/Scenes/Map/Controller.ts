@@ -5,7 +5,7 @@ import UnitSprite from "./GameObjects/UnitSprite";
 import { MapScene } from "./Scene";
 
 //#region Import Estados
-import type { StateHandler, Event, StateContext } from "./Estados/State";
+import type { Event, StateContext } from "./Estados/State";
 import { StateMachine } from "@mabo/chart";
 import idle from "./Estados/IDLE";
 import targetSelected from "./Estados/TargetTileSelected";
@@ -15,11 +15,10 @@ import MoveAction from "./Sistemas/MoveUnit";
 import InspectAction from "./Sistemas/InspectTile";
 //#endregion Import Estados
 
-export default class MapSceneController implements StateHandler {
+export default class MapSceneController {
   actor: StateMachine;
   context: StateContext;
   systems: { [system: string]: Function } = { MoveAction, InspectAction };
-  state?: StateHandler;
 
   constructor(public scene: MapScene) {
     this.scene = scene;
@@ -36,7 +35,7 @@ export default class MapSceneController implements StateHandler {
     this.actor = new StateMachine({
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
-    }).start(this.context);
+    }).start({}, this.context);
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
@@ -69,18 +68,33 @@ export default class MapSceneController implements StateHandler {
 
   //#region UI Events
   onPointerDown(event: Event, context: StateContext) {
-    this.state?.onPointerDown && this.state.onPointerDown(event, context);
+    this.#onEvent("on.PointerDown.", event, context);
+    //this.state?.onPointerDown && this.state.onPointerDown(event, context);
   }
   onPointerMove(event: Event, context: StateContext) {
-    this.state?.onPointerMove && this.state.onPointerMove(event, context);
+    this.#onEvent("on.PointerMove.", event, context);
+    //this.state?.onPointerMove && this.state.onPointerMove(event, context);
   }
   onPointerUp(event: Event, context: StateContext) {
-    this.state?.onPointerUp && this.state.onPointerUp(event, context);
+    this.#onEvent("on.PointerUp.", event, context);
+    //this.state?.onPointerUp && this.state.onPointerUp(event, context);
   }
 
   actionMenuClick(action: string) {
     this.context.action = action;
-    this.actor.send("selectAction", this.context);
+    this.actor.send("selectAction", {}, this.context);
+  }
+
+  #onEvent(eventName: string, event: Event, context: StateContext) {
+    if (!event.target) return;
+
+    const targets = this.scene.gridEngine.getCharactersAt(event.target);
+    if (targets.length == 0) eventName += "Map";
+    else {
+      eventName += "Ally";
+      event.unit = targets[0];
+    }
+    this.actor.send(eventName, event, context);
   }
   //#endregion
 }

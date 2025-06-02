@@ -13,10 +13,5 @@ export interface StateContext {
 export interface Event {
   pointer: Input.Pointer;
   target?: Tilemaps.Tile;
-}
-
-export interface StateHandler {
-  onPointerDown(event: Event, context: StateContext);
-  onPointerUp(event: Event, context: StateContext);
-  onPointerMove(event: Event, context: StateContext);
+  unit?: string;
 }

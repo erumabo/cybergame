@@ -1,45 +1,27 @@
-import type { StateHandler, StateContext } from "./State";
-import { PathBlockedStrategy, NoPathFoundStrategy } from "grid-engine";
-
-const stateHandler: StateHandler = {
-  onPointerUp: (_, __) => {},
-  onPointerDown: (event, context) => {
-    if (!event.target) return;
-
-    const gridEngine = context.controller.scene.gridEngine;
-
-    let targets = gridEngine.getCharactersAt(event.target);
-    if (targets.length == 0) return;
-
-    context.activeUnit = targets[0];
-    gridEngine.stopMovement(context.activeUnit);
-    gridEngine.moveTo(context.activeUnit, event.target, {
-      algorithm: "A_STAR",
-      considerCosts: true,
-      noPathFoundStrategy: NoPathFoundStrategy.STOP,
-      pathBlockedStrategy: PathBlockedStrategy.WAIT,
-      pathBlockedWaitTimeoutMs: 2000
-    });
-
-    context.controller.actor.send("selectUnit", context);
-  },
-  onPointerMove: ({ pointer }, { controller }) => {
-    if (!pointer.isDown) return;
-    const camera = controller.scene.cameras.main;
-    camera.scrollX -= pointer.x - pointer.prevPosition.x;
-    camera.scrollY -= pointer.y - pointer.prevPosition.y;
-  }
-};
+import type { Event, StateContext } from "./State";
+import MoveUnit from "../Sistemas/MoveUnit";
 
 const idle = {
-  entry: (context: StateContext) => {
-    context.controller.state = stateHandler;
+  entry: (_: Event, context: StateContext) => {
     context.activeUnit = "";
-    context.target = {x:-1, y:-1} as any;
+    context.target = { x: -1, y: -1 } as any;
   },
   on: {
-    selectUnit: {
+    "on.PointerDown.Ally": {
+      action: (event: Event, context: StateContext) => {
+        MoveUnit({ ...context, activeUnit: event.unit, target: event.target });
+        if (context.activeUnit == event.unit) return;
+        context.activeUnit = event.unit;
+      },
       target: "unidadSeleccionada"
+    },
+    "on.PointerMove.*": {
+      action: (event: Event, context: StateContext) => {
+        if (!event.pointer.isDown) return;
+        const camera = context.controller.scene.cameras.main;
+        camera.scrollX -= event.pointer.x - event.pointer.prevPosition.x;
+        camera.scrollY -= event.pointer.y - event.pointer.prevPosition.y;
+      }
     }
   }
 };
