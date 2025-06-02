@@ -104,4 +104,26 @@ const estado_externo = {
   }
 };
 
-export { maquina_con_errores, estado_externo };
+const glob_patterns = {
+  initial: "qA",
+  states: {
+    qA: {
+      on: {
+        "t.*": "qC",
+        "t.*.D": "qD",
+        tB: "qB"
+      }
+    },
+    qB: {
+      on: {}
+    },
+    qC: {
+      on: {}
+    },
+    qD: {
+      on: {}
+    }
+  }
+};
+
+export { maquina_con_errores, estado_externo, glob_patterns };

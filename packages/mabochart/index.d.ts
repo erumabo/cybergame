@@ -1,8 +1,13 @@
-type Action = (data: any) => void;
-type Transition = string | {
-  action?: Action;
-  target: string;
-};
+type Action = (...data: any[]) => void;
+type Transition =
+  | string
+  | {
+      action?: Action;
+      target: string;
+    }
+  | {
+      action: Action;
+    };
 
 interface BaseState {
   entry?: Action;
@@ -27,7 +32,7 @@ export type State = BaseState | (BaseState & ParentState);
 export class StateMachine {
   constructor(baseState: ParentState);
   currentState: string;
-  start(data?: any): StateMachine;
+  start(...data: any[]): StateMachine;
   error(): StateMachine;
-  send(event: string, data?: any): Promise<StateMachine>;
+  send(event: string, ...data: any[]): Promise<StateMachine>;
 }

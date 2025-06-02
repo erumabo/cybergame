@@ -25,8 +25,8 @@ export class StateMachine {
   /**
    * Starts the machine in the initial state
    */
-  start(data) {
-    this.#transition(this.#baseState.initial, data);
+  start(...data) {
+    this.#transition(this.#baseState.initial, ...data);
     return this;
   }
 
@@ -35,29 +35,38 @@ export class StateMachine {
    * @param {string} event - The event
    * @param {*} data - Arbitrary data to be provided to event handlers
    */
-  send(event, data) {
-    return new Promise((resolve) => {
-      let state;
-      for (let i = this.#stateStack.length - 1; i >= 0; i--) {
-        state = this.#stateStack[i];
-        // For loop instead of direct prop access
-        //   to implement regext matching in future
-        for (const transition in state.on) {
-          if (transition == event) {
-            const handler = state.on[transition];
-            if (typeof handler === "string")
-              resolve(this.#transition(handler, data));
-            if (handler.action) handler.action(data);
-            resolve(this.#transition(handler.target, data));
+  send(event, ...data) {
+    return new Promise((resolve) =>
+      resolve(
+        (() => {
+          let state, handler;
+          for (let i = this.#stateStack.length - 1; i >= 0; i--) {
+            state = this.#stateStack[i];
+            // For loop instead of direct prop access
+            //   to implement regext matching in future
+            for (const transition in state.on) {
+              if (this.#glob(transition, event)) {
+                handler = state.on[transition];
+                break;
+              }
+            }
           }
-        }
-      }
-      resolve(this);
-    });
+
+          if (!handler) return this;
+
+          if (typeof handler === "string")
+            return this.#transition(handler, ...data);
+
+          if (handler.action) handler.action(...data);
+          if (!handler.target) return this;
+          return this.#transition(handler.target, ...data);
+        })()
+      )
+    );
   }
 
-  #transition(nextState, data) {
-    const statepath = nextState.split(".");
+  #transition(nextState, ...data) {
+    const statepath = nextState?.split(".") ?? [];
     const newStack = [];
 
     let state = this.#baseState;
@@ -86,23 +95,29 @@ export class StateMachine {
       );
     }
 
-    this.#morphStack(newStack, data);
+    this.#morphStack(newStack, ...data);
 
     return this;
   }
 
-  #morphStack(newStack, data) {
+  #morphStack(newStack, ...data) {
     let i = 0,
       j = this.#stateStack.length - 1,
       m = Math.min(newStack.length, this.#stateStack.length);
     for (; i < m && newStack[i] == this.#stateStack[i]; ++i)
-      Object.hasOwn(newStack[i], "update") && newStack[i].update(data);
+      Object.hasOwn(newStack[i], "update") && newStack[i].update(...data);
     for (; j >= i; j--)
       Object.hasOwn(this.#stateStack[j], "exit") &&
-        this.#stateStack[j].exit(data);
+        this.#stateStack[j].exit(...data);
     for (; i < newStack.length; i++)
-      Object.hasOwn(newStack[i], "entry") && newStack[i].entry(data);
+      Object.hasOwn(newStack[i], "entry") && newStack[i].entry(...data);
 
     this.#stateStack = [...newStack];
+  }
+
+  #glob(transition, event) {
+    return new RegExp(
+      "^" + transition.replaceAll(".", "\\.").replaceAll("*", "[^\\.]*") + "$"
+    ).test(event);
   }
 }
