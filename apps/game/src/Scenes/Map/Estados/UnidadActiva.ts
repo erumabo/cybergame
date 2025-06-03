@@ -1,5 +1,5 @@
 import type { Event, StateContext } from "./State";
-import MoveUnit from "../Sistemas/MoveUnit";
+import { MoveUnit } from "../Sistemas/MoveUnit";
 
 const unidadSeleccionada = {
   entry: (_: Event, __: StateContext) => {},

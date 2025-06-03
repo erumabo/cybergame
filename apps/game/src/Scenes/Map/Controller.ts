@@ -6,6 +6,7 @@ import { MapScene } from "./Scene";
 
 //#region Import Estados
 import type { Event, StateContext } from "./Estados/State";
+import type { System } from "./Sistemas/System";
 import { StateMachine } from "@mabo/chart";
 import idle from "./Estados/IDLE";
 import targetSelected from "./Estados/TargetTileSelected";
@@ -18,7 +19,7 @@ import InspectAction from "./Sistemas/InspectTile";
 export default class MapSceneController {
   actor: StateMachine;
   context: StateContext;
-  systems: { [system: string]: Function } = { MoveAction, InspectAction };
+  systems: System[] = [];
 
   constructor(public scene: MapScene) {
     this.scene = scene;
@@ -36,6 +37,9 @@ export default class MapSceneController {
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
     }).start({}, this.context);
+    
+    InspectAction.register(this.context);
+    MoveAction.register(this.context);
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {

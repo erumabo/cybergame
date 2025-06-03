@@ -1,14 +1,23 @@
 import type { State } from "@mabo/chart";
 import type { Event, StateContext } from "./State";
-import MoveUnit from "../Sistemas/MoveUnit";
+import { MoveUnit, FindPath } from "../Sistemas/MoveUnit";
 
 function showMenu({ controller, target: tile, activeUnit }: StateContext) {
   if (!tile || !activeUnit) throw new Error("Try to show menu without context");
 
+  const actions: any[] = [];
+  controller.systems.forEach((system) => {
+    if (system.test(arguments[0]))
+      actions.push({
+        option: system.displayName,
+        value: system.name
+      });
+  });
+
   let actionsMenu = controller.scene.actionsMenu;
   let { pixelX: x, pixelY: y, width } = tile;
   actionsMenu.setPosition(x + width, y);
-  actionsMenu.domNode["actions"] = "Move,Inspect";
+  actionsMenu.domNode["actions"] = actions;
   actionsMenu.show();
 
   const gridEngine = controller.scene.gridEngine;
@@ -24,13 +33,9 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
     }
   };
 
-  const path = gridEngine
-    .findShortestPath(unit, target, {
-      shortestPathAlgorithm: "A_STAR",
-      considerCosts: true,
-      collisionGroups: gridEngine.getCollisionGroups(activeUnit)
-    })
-    .path.map((p: any) => p.position);
+  const path = FindPath(unit, target, gridEngine).path.map(
+    (p: any) => p.position
+  );
   controller.scene.renderPath(path, true);
 }
 
@@ -72,7 +77,11 @@ const targetSelected: State = {
     selectAction: {
       action: (_: Event, context: StateContext) => {
         if (!context.action) throw new Error("Action undefined");
-        context.controller.systems[context.action + "Action"](context);
+        const system = context.controller.systems.find(
+          (sys) => sys.name == context.action
+        );
+        if (!system) throw new Error("No system found");
+        system.execute(context);
       },
       target: "idle"
     }
@@ -80,7 +89,7 @@ const targetSelected: State = {
 
   exit: (_: Event, context: StateContext) => {
     context.target = { x: -1, y: -1 } as any;
-    context.controller.scene.actionsMenu.domNode["actions"] = "";
+    context.controller.scene.actionsMenu.domNode["actions"] = [];
     context.controller.scene.actionsMenu.hide();
     context.controller.scene.renderPath([], true);
   }

@@ -4,13 +4,13 @@ import templateHTML from "./ActionsList.html?raw";
 const template: HTMLTemplateElement = document.createElement("template");
 template.innerHTML = templateHTML;
 
-const observedAttributes = ["actions"] as const;
-type Prop = (typeof observedAttributes)[number];
+const observedAttributes = [] as const;
+type Option = { option: string; value: string };
 
-export default class ActionsMenu
-  extends HTMLElement
-  implements Record<Prop, string>
-{
+export default class ActionsMenu extends HTMLElement {
+  declare shadowRoot: ShadowRoot;
+  //declare prop: string; //observed attrs
+
   #props: any = {};
 
   constructor() {
@@ -21,34 +21,58 @@ export default class ActionsMenu
   }
 
   connectedCallback() {
-    this.#props["actions"] = ActionsMenu.parseActions(
-      this.getAttribute("actions") ?? ""
-    );
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+    this.#props["actions"] = [];
+    this.#props["bufferactions"] = [];
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
     Alpine.addScopeToNode(this.shadowRoot as any, this.#props);
     Alpine.initTree(this.shadowRoot as any);
+
+    /**new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        this.dispatchEvent(
+          new CustomEvent("resize", { detail: entry.contentRect })
+        );
+      }
+    }).observe(this.shadowRoot.querySelector("menu")!);**/
   }
 
   //#region Attributes
   static observedAttributes = observedAttributes;
 
-  static parseActions(actions: string) {
-    return actions
-      .split(",")
-      .map((a) => a.trim())
-      .filter((act) => !!act);
-  }
-  set actions(v: string) {
-    this.#props["actions"] = ActionsMenu.parseActions(v);
-    this.setAttribute("actions", v);
-  }
-  get actions() {
-    return this.#props["actions"]?.join(",") ?? "";
+  set actions(v: Option[]) {
+    v = v.sort((a, b) => {
+      if (this.#props["actions"].some((act: Option) => act.value == a.value))
+        return -1;
+      if (this.#props["actions"].some((act: Option) => act.value == b.value))
+        return 1;
+      return a.option.localeCompare(b.option);
+    });
+
+    const added = v.filter(
+      (p) => !this.#props["actions"].some((act: Option) => act.value == p.value)
+    );
+
+    this.#props["actions"].push(...added);
+    //animate entry
+    setTimeout(() => {
+      this.#props["bufferactions"] = v.reduce((r, p) => {
+        r[p.value] = true;
+        return r;
+      }, {} as any);
+    }, 50);
+    //animate exit
+    setTimeout(() => {
+      this.#props["actions"] = v;
+    }, 100);
   }
 
-  attributeChangedCallback(name: Prop, _: string, newValue: string) {
-    if (this[name] != newValue) this[name] = newValue;
+  get actions() {
+    return this.#props["actions"] ?? [];
   }
+
+  //attributeChangedCallback(name: string, _: any, newValue: any) {
+  //  if (this[name] != newValue) this[name] = newValue;
+  //}
 
   //#endregion
 
@@ -57,7 +81,7 @@ export default class ActionsMenu
   onActionClick(_: Event, action: string) {
     this.dispatchEvent(new CustomEvent("action", { detail: action }));
   }
-  
+
   show() {
     this.style.width = "64px";
     this.style.display = "block";

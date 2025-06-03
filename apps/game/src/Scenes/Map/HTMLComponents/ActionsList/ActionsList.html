@@ -5,22 +5,31 @@
     box-sizing: border-box;
   }
   :host {
-    overflow: clip;
   }
   li {
     list-style: none inside;
   }
   button {
-    width: 64px;
-    height: 1rem;
+    width: min-content;
+    padding: 2px;
+    margin: 2px;
+    height: min-content;
+    border-radius: 10%;
+    box-shadow: 1px 1px 3px 1px black;
+  }
+  menu {
+    height: min-content;
   }
 </style>
 <menu>
-  <template x-for="action in actions">
+  <template x-for="action in actions" :key="action.value">
     <li>
       <button
-        @click.stop.prevent="onActionClick($event, action)"
-        x-text="action"></button>
+        @click.stop.prevent="onActionClick($event, action.value)"
+        x-text="action.option"
+        x-show="bufferactions[action.value]"
+        x-transition.scale.50.duration.50ms
+        ></button>
     </li>
   </template>
 </menu>
