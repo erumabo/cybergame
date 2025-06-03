@@ -1,1110 +1,1042 @@
 {
- "width": 10,
- "height": 10,
- "tilewidth": 32,
- "tileheight": 32,
- "nextobjectid": 1,
- "orientation": "orthogonal",
- "version": 11,
- "tilesets": [
-  {
-   "name": "Tileset",
-   "firstgid": 1,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 8,
-   "tilecount": 64,
-   "imagewidth": 256,
-   "imageheight": 256,
-   "properties": [],
-   "image": "../Tilesets/Tileset/tileset.png",
-   "tiles": [
+  "width": 10,
+  "height": 10,
+  "tilewidth": 32,
+  "tileheight": 32,
+  "nextobjectid": 1,
+  "orientation": "orthogonal",
+  "version": 11,
+  "tilesets": [
     {
-     "id": 0,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "₩"
-      },
-      {
-       "name": "z-index",
-       "type": "string",
-       "value": "0"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Agua Profunda"
-      },
-      {
-       "name": "ge_collide",
-       "type": "boolean",
-       "value": true
-      }
-     ]
+      "name": "Tileset",
+      "firstgid": 1,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 8,
+      "tilecount": 64,
+      "imagewidth": 256,
+      "imageheight": 256,
+      "properties": [],
+      "image": "../Tilesets/Tileset/tileset.png",
+      "tiles": [
+        {
+          "id": 0,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "₩"
+            },
+            {
+              "name": "z-index",
+              "type": "string",
+              "value": "0"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Agua Profunda"
+            },
+            {
+              "name": "ge_collide",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "~"
+            },
+            {
+              "name": "z-index",
+              "type": "string",
+              "value": "3"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Agua"
+            },
+            {
+              "name": "ge_collide",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "v"
+            },
+            {
+              "name": "z-index",
+              "type": "string",
+              "value": "2"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Pasto"
+            },
+            {
+              "name": "ge_cost",
+              "type": "int",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "_"
+            },
+            {
+              "name": "z-index",
+              "type": "string",
+              "value": "10"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Camino"
+            },
+            {
+              "name": "ge_cost",
+              "type": "int",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "="
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Tierra"
+            },
+            {
+              "name": "ge_cost",
+              "type": "int",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "^"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Arboles"
+            },
+            {
+              "name": "ge_collide",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "-"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Acera"
+            },
+            {
+              "name": "ge_cost",
+              "type": "int",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "*"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Arena"
+            },
+            {
+              "name": "ge_cost",
+              "type": "int",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "properties": [
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Edificio 1"
+            },
+            {
+              "name": "ge_collide",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "properties": [
+            {
+              "name": "type",
+              "type": "string",
+              "value": "Edificio 2"
+            },
+            {
+              "name": "ge_collide",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
-     "id": 1,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "~"
-      },
-      {
-       "name": "z-index",
-       "type": "string",
-       "value": "3"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Agua"
-      },
-      {
-       "name": "ge_collide",
-       "type": "boolean",
-       "value": true
-      }
-     ]
+      "name": "TilesetDual",
+      "firstgid": 100,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 2,
+      "margin": 1,
+      "columns": 32,
+      "tilecount": 1024,
+      "imagewidth": 1088,
+      "imageheight": 1088,
+      "properties": [],
+      "image": "../Tilesets/TilesetDual/tileset.png",
+      "tiles": []
     },
     {
-     "id": 5,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "v"
-      },
-      {
-       "name": "z-index",
-       "type": "string",
-       "value": "2"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Pasto"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 2
-      }
-     ]
+      "name": "Aqua",
+      "firstgid": 1125,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Aqua/tileset.png",
+      "tiles": []
     },
     {
-     "id": 8,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "_"
-      },
-      {
-       "name": "z-index",
-       "type": "string",
-       "value": "10"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Camino"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 1
-      }
-     ]
+      "name": "Azure",
+      "firstgid": 1135,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Azure/tileset.png",
+      "tiles": []
     },
     {
-     "id": 11,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "="
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Tierra"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 2
-      }
-     ]
+      "name": "Cinnabar",
+      "firstgid": 1145,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Cinnabar/tileset.png",
+      "tiles": []
     },
     {
-     "id": 12,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "^"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Arboles"
-      },
-      {
-       "name": "ge_collide",
-       "type": "boolean",
-       "value": true
-      }
-     ]
+      "name": "Diamond",
+      "firstgid": 1155,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Diamond/tileset.png",
+      "tiles": []
     },
     {
-     "id": 13,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "-"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Acera"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 1
-      }
-     ]
+      "name": "Emerald",
+      "firstgid": 1165,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Emerald/tileset.png",
+      "tiles": []
     },
     {
-     "id": 15,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "*"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Arena"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 3
-      }
-     ]
+      "name": "Opal",
+      "firstgid": 1175,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Opal/tileset.png",
+      "tiles": []
     },
     {
-     "id": 20,
-     "properties": [
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Edificio 1"
-      },
-      {
-       "name": "ge_collide",
-       "type": "boolean",
-       "value": true
-      }
-     ]
+      "name": "Rubellite",
+      "firstgid": 1185,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Rubellite/tileset.png",
+      "tiles": []
     },
     {
-     "id": 21,
-     "properties": [
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Edificio 2"
-      },
-      {
-       "name": "ge_collide",
-       "type": "boolean",
-       "value": true
-      }
-     ]
+      "name": "Ruby",
+      "firstgid": 1195,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Ruby/tileset.png",
+      "tiles": []
+    },
+    {
+      "name": "Spinel",
+      "firstgid": 1205,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Spinel/tileset.png",
+      "tiles": []
+    },
+    {
+      "name": "Topaz",
+      "firstgid": 1214,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 1,
+      "tilecount": 1,
+      "imagewidth": 32,
+      "imageheight": 32,
+      "properties": [],
+      "image": "../Tilesets/Topaz/tileset.png",
+      "tiles": []
+    },
+    {
+      "name": "TilesetUI",
+      "firstgid": 1225,
+      "tilewidth": 32,
+      "tileheight": 32,
+      "spacing": 0,
+      "margin": 0,
+      "columns": 32,
+      "tilecount": 1024,
+      "imagewidth": 1024,
+      "imageheight": 1024,
+      "properties": [],
+      "image": "../Tilesets/TilesetUI/tileset.png",
+      "tiles": [
+        {
+          "id": 0,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "down right"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "down"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "down left"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "end down"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "end left"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "right"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "middle"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "left"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "end right"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "end up"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 64,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "up right"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 65,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "up"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 66,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "up left"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 67,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "horizontal"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 68,
+          "properties": [
+            {
+              "name": "alias",
+              "type": "string",
+              "value": "vertical"
+            },
+            {
+              "name": "up",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "left",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "down",
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "name": "right",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "cap",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        }
+      ]
     }
-   ]
-  },
-  {
-   "name": "TilesetDual",
-   "firstgid": 100,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 2,
-   "margin": 1,
-   "columns": 32,
-   "tilecount": 1024,
-   "imagewidth": 1088,
-   "imageheight": 1088,
-   "properties": [],
-   "image": "../Tilesets/TilesetDual/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Aqua",
-   "firstgid": 1125,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Aqua/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Azure",
-   "firstgid": 1135,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Azure/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Cinnabar",
-   "firstgid": 1145,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Cinnabar/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Diamond",
-   "firstgid": 1155,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Diamond/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Emerald",
-   "firstgid": 1165,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Emerald/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Opal",
-   "firstgid": 1175,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Opal/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Rubellite",
-   "firstgid": 1185,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Rubellite/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Ruby",
-   "firstgid": 1195,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Ruby/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Spinel",
-   "firstgid": 1205,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Spinel/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "Topaz",
-   "firstgid": 1214,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
-   "imageheight": 32,
-   "properties": [],
-   "image": "../Tilesets/Topaz/tileset.png",
-   "tiles": []
-  },
-  {
-   "name": "TilesetUI",
-   "firstgid": 1225,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 32,
-   "tilecount": 1024,
-   "imagewidth": 1024,
-   "imageheight": 1024,
-   "properties": [],
-   "image": "../Tilesets/TilesetUI/tileset.png",
-   "tiles": [
+  ],
+  "layers": [
     {
-     "id": 0,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "down right"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
+      "name": "Suelo",
+      "type": "tilelayer",
+      "width": 10,
+      "height": 10,
+      "visible": false,
+      "opacity": 1,
+      "offsetx": 0,
+      "offsety": 0,
+      "x": 0,
+      "y": 0,
+      "id": 1,
+      "encoding": "csv",
+      "properties": [
+        {
+          "name": "type",
+          "value": "ground",
+          "type": "string"
+        },
+        {
+          "name": "dualgrid",
+          "value": true,
+          "type": "boolean"
+        }
+      ],
+      "data": [
+        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 6, 6, 6, 6,
+        6, 9, 9, 9, 9, 9, 6, 6, 6, 6, 9, 9, 9, 6, 6, 6, 6, 6, 6, 9, 9, 9, 6, 6,
+        6, 1, 9, 9, 9, 9, 9, 9, 6, 1, 1, 1, 9, 9, 9, 9, 9, 9, 6, 1, 1, 1, 6, 6,
+        6, 9, 9, 9, 6, 1, 1, 1, 6, 6, 6, 6, 9, 9, 6, 6, 1, 1, 6, 6, 6, 6, 9, 9,
+        6, 6, 6, 6
+      ]
     },
     {
-     "id": 1,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "down"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 2,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "down left"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 3,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "end down"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": true
-      }
-     ]
-    },
-    {
-     "id": 4,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "end left"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": true
-      }
-     ]
-    },
-    {
-     "id": 32,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "right"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 33,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "middle"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 34,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "left"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 35,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "end right"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": true
-      }
-     ]
-    },
-    {
-     "id": 36,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "end up"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": true
-      }
-     ]
-    },
-    {
-     "id": 64,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "up right"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 65,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "up"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 66,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "up left"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 67,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "horizontal"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
-    },
-    {
-     "id": 68,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "vertical"
-      },
-      {
-       "name": "up",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "left",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "down",
-       "type": "boolean",
-       "value": true
-      },
-      {
-       "name": "right",
-       "type": "boolean",
-       "value": false
-      },
-      {
-       "name": "cap",
-       "type": "boolean",
-       "value": false
-      }
-     ]
+      "name": "Chars",
+      "type": "objectgroup",
+      "visible": true,
+      "opacity": 1,
+      "offsetx": 0,
+      "offsety": 0,
+      "x": 0,
+      "y": 0,
+      "id": 2,
+      "objects": [
+        {
+          "id": 0,
+          "gid": 1125,
+          "type": "player",
+          "name": "Aquamarina",
+          "x": 32,
+          "y": 32,
+          "visible": true,
+          "rotation": 0,
+          "width": 32,
+          "height": 32,
+          "properties": [
+            { "name": "hp", "value": 80 },
+            { "name": "faction", "value": "ally" },
+            { "name": "mp", "value": 80 }
+          ]
+        },
+        {
+          "id": 0,
+          "gid": 1145,
+          "type": "player",
+          "name": "Cinabrio",
+          "x": 64,
+          "y": 64,
+          "visible": true,
+          "rotation": 0,
+          "width": 32,
+          "height": 32,
+          "properties": [
+            { "name": "hp", "value": 80 },
+            { "name": "faction", "value": "ally" },
+            { "name": "mp", "value": 80 }
+          ]
+        },
+        {
+          "id": 0,
+          "gid": 1155,
+          "type": "enemy",
+          "name": "Diamante",
+          "x": 128,
+          "y": 128,
+          "visible": true,
+          "rotation": 0,
+          "width": 32,
+          "height": 32,
+          "properties": [
+            { "name": "hp", "value": 80 },
+            { "name": "faction", "value": "enemy" },
+            { "name": "mp", "value": 80 }
+          ]
+        }
+      ]
     }
-   ]
-  }
- ],
- "layers": [
-  {
-   "name": "Suelo",
-   "type": "tilelayer",
-   "width": 10,
-   "height": 10,
-   "visible": false,
-   "opacity": 1,
-   "offsetx": 0,
-   "offsety": 0,
-   "x": 0,
-   "y": 0,
-   "id": 1,
-   "encoding": "csv",
-   "properties": [
-    {
-     "name": "type",
-     "value": "ground",
-     "type": "string"
-    },
-    {
-     "name": "dualgrid",
-     "value": true,
-     "type": "boolean"
-    }
-   ],
-   "data": [
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    9,
-    9,
-    6,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    9,
-    9,
-    9,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    9,
-    6,
-    6,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    9,
-    6,
-    6,
-    6,
-    1,
-    9,
-    9,
-    9,
-    9,
-    9,
-    9,
-    6,
-    1,
-    1,
-    1,
-    9,
-    9,
-    9,
-    9,
-    9,
-    9,
-    6,
-    1,
-    1,
-    1,
-    6,
-    6,
-    6,
-    9,
-    9,
-    9,
-    6,
-    1,
-    1,
-    1,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    6,
-    6,
-    1,
-    1,
-    6,
-    6,
-    6,
-    6,
-    9,
-    9,
-    6,
-    6,
-    6,
-    6
-   ]
-  },
-  {
-   "name": "Chars",
-   "type": "objectgroup",
-   "visible": true,
-   "opacity": 1,
-   "offsetx": 0,
-   "offsety": 0,
-   "x": 0,
-   "y": 0,
-   "id": 2,
-   "objects": [
-    {
-     "id": 0,
-     "gid": 1125,
-     "type": "player",
-     "name": "Aquamarina",
-     "x": 32,
-     "y": 32,
-     "visible": true,
-     "rotation": 0,
-     "width": 32,
-     "height": 32
-    },
-    {
-     "id": 0,
-     "gid": 1145,
-     "type": "player",
-     "name": "Cinabrio",
-     "x": 64,
-     "y": 64,
-     "visible": true,
-     "rotation": 0,
-     "width": 32,
-     "height": 32
-    }
-   ]
-  }
- ]
+  ]
 }

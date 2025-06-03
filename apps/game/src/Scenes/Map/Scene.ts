@@ -14,13 +14,12 @@ export class MapScene extends Scene {
   declare datGui: DatGui;
   declare gridEngine: GridEngine;
 
-  actionsMenu!: ActionsMenu;
+  declare actionsMenu: ActionsMenu;
   controller: MapSceneController;
   guiControllers: any[] = [];
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
-  units!: UnitSprite[];
-
+  
   //#region Lifecycle
   constructor() {
     super("MapScene");
@@ -64,22 +63,21 @@ export class MapScene extends Scene {
       )
     );
 
-    this.units = this.tilemap.createFromObjects(
-      "Chars",
-      { classType: UnitSprite, ignoreTileset: false },
-      true
-    ) as UnitSprite[];
-
     const gridEngineConfig = {
       layerOverlay: false,
       characters: [] as CharacterData[]
     };
 
-    this.units.forEach((unit) => {
-      const entity = this.controller.addUnitEntity(unit as UnitSprite);
+    (
+      this.tilemap.createFromObjects(
+        "Chars",
+        { classType: UnitSprite, ignoreTileset: false },
+        true
+      ) as UnitSprite[]
+    ).forEach((unit) => {
       layer0.push(unit);
       gridEngineConfig.characters.push({
-        id: "" + entity,
+        id: unit.name,
         sprite: unit.sprite,
         container: unit,
         startPosition: {

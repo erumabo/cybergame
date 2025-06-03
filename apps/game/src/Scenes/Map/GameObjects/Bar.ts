@@ -4,6 +4,7 @@ import { GameObjects } from "phaser";
 export default class Bar extends GameObjects.Container {
   progress: GameObjects.Rectangle;
   border: GameObjects.Rectangle;
+  fillperc: number = 0;
 
   constructor(
     scene: Scene,
@@ -14,6 +15,8 @@ export default class Bar extends GameObjects.Container {
     color: number
   ) {
     super(scene);
+    
+    console.log(width, height)
     
     this.width = width;
     this.height = height;
@@ -35,7 +38,8 @@ export default class Bar extends GameObjects.Container {
   }
 
   setFillPercent(value: number = 0) {
-    this.progress.setDisplaySize(this.width * (value / 100.0), this.height);
+    this.fillperc = value;
+    this.progress.setDisplaySize(this.width * (this.fillperc / 100.0), this.height);
     return this;
   }
 
@@ -47,6 +51,20 @@ export default class Bar extends GameObjects.Container {
   setStrokeStyle(lineWidth: number = 1, color: number = 0, alpha: number = 1) {
     this.border.setStrokeStyle(lineWidth, color, alpha);
     this.progress.setStrokeStyle(lineWidth, color, alpha);
+    return this;
+  }
+  
+  setWidth(width: number) {
+    this.width = width;
+    this.border.setSize(this.width, this.height);
+    this.progress.setSize(this.width * (this.fillperc / 100.0), this.height);
+    return this;
+  }
+  
+  setHeight(height: number) {
+    this.height = height;
+    this.border.setSize(this.width, this.height);
+    this.progress.setSize(this.width * (this.fillperc / 100.0), this.height);
     return this;
   }
 }

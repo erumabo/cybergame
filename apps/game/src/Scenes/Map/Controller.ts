@@ -1,7 +1,7 @@
-import { Components, COLORS } from "src/globals";
+import { Components } from "src/globals";
 import { World } from "@mabo/mecs";
-import UnitStats from "./Models/Stats";
-import UnitSprite from "./GameObjects/UnitSprite";
+//import UnitStats from "./Models/Stats";
+//import UnitSprite from "./GameObjects/UnitSprite";
 import { MapScene } from "./Scene";
 
 //#region Import Estados
@@ -49,35 +49,15 @@ export default class MapSceneController {
     }
   }
 
-  addUnitEntity(unit: UnitSprite) {
-    const entity = this.context.world.addEntity();
-
-    this.context.world.bindEntityComponent(entity, unit, "UnitSprite");
-    unit.setData("entity", entity);
-
-    const stats = new UnitStats(80, 20);
-    this.context.world.bindEntityComponent(entity, stats, "UnitStats");
-    unit.addBar("salud", COLORS["--blue-40"], stats.salud);
-    unit.addBar("energia", COLORS["--green-10"], stats.energia);
-
-    this.context.world.bindEntityComponent(entity, unit.viewNode, "DOMElement");
-    unit.setDOMAttribute("name", "" + entity);
-
-    return entity;
-  }
-
   //#region UI Events
   onPointerDown(event: Event, context: StateContext) {
     this.#onEvent("on.PointerDown.", event, context);
-    //this.state?.onPointerDown && this.state.onPointerDown(event, context);
   }
   onPointerMove(event: Event, context: StateContext) {
     this.#onEvent("on.PointerMove.", event, context);
-    //this.state?.onPointerMove && this.state.onPointerMove(event, context);
   }
   onPointerUp(event: Event, context: StateContext) {
     this.#onEvent("on.PointerUp.", event, context);
-    //this.state?.onPointerUp && this.state.onPointerUp(event, context);
   }
 
   actionMenuClick(action: string) {
@@ -91,8 +71,15 @@ export default class MapSceneController {
     const targets = this.scene.gridEngine.getCharactersAt(event.target);
     if (targets.length == 0) eventName += "Map";
     else {
-      eventName += "Ally";
       event.unit = targets[0];
+      if (event.unit === context.activeUnit) eventName += "Self";
+      else {
+        let faction = this.scene.gridEngine
+          .getContainer(event.unit)!
+          .getData("faction");
+        if (faction == "ally") eventName += "Ally";
+        else eventName += "Enemy";
+      }
     }
     this.actor.send(eventName, event, context);
   }
