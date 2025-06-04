@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@mabo/tiled": "0.0.0",
+    "chalk": "^5.4.1",
     "commander": "^12.1.0",
     "jimp": "^1.6.0",
     "underscore": "^1.13.7",
