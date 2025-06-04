@@ -6,19 +6,32 @@ nextobjectid: 1
 orientation: orthogonal
 version: 11
 tilesets:
-  - name: Tileset #1-99
-  - name: TilesetDual #100-1124
-  - name: Aqua      # 1125
-  - name: Azure     # 1135
-  - name: Cinnabar  # 1145
-  - name: Diamond   # 1155
-  - name: Emerald   # 1165
-  - name: Opal      # 1175
-  - name: Rubellite # 1185
-  - name: Ruby      # 1195
-  - name: Spinel    # 1205
-  - name: Topaz     # 1215
-  - name: TilesetUI # 1225-2249
+  - name: Tileset
+    firstgid: 1  #1-99
+  - name: TilesetUI
+    firstgid: 100 #100-1124
+  - name: Aqua
+    firstgid: 1125
+  - name: Azure
+    firstgid: 1135
+  - name: Cinnabar
+    firstgid: 1145
+  - name: Diamond
+    firstgid: 1155
+  - name: Emerald
+    firstgid: 1165
+  - name: Opal
+    firstgid: 1175
+  - name: Rubellite
+    firstgid: 1185
+  - name: Ruby
+    firstgid: 1195
+  - name: Spinel
+    firstgid: 1205
+  - name: Topaz
+    firstgid: 1215
+  - name: TilesetDual
+    firstgid: 1225 # 1225-...
 layers:
   - name: Suelo
     type: tilelayer
@@ -51,7 +64,7 @@ layers:
     objects: 
       - id: 0
         gid: 1125
-        type: player
+        type: character
         name: Aquamarina
         x: 32
         y: 32
@@ -59,9 +72,19 @@ layers:
         rotation: 0
         width: 32
         height: 32
+        properties:
+          - name: hp
+            value: 80
+            type: int
+          - name: faction
+            value: ally
+            type: string
+          - name: mp
+            value: 80
+            type: int
       - id: 0
         gid: 1145
-        type: player
+        type: character
         name: Cinabrio
         x: 64
         y: 64
@@ -69,4 +92,33 @@ layers:
         rotation: 0
         width: 32
         height: 32
-    
+        properties:
+          - name: hp
+            value: 80
+            type: int
+          - name: faction
+            value: ally
+            type: string
+          - name: mp
+            value: 80
+            type: int
+      - id: 0
+        gid: 1155
+        type: character
+        name: Diamante
+        x: 128
+        y: 128
+        visible: true
+        rotation: 0
+        width: 32
+        height: 32
+        properties:
+          - name: hp
+            value: 80
+            type: int
+          - name: faction
+            value: enemy
+            type: string
+          - name: mp
+            value: 80
+            type: int
