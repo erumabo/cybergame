@@ -7,6 +7,7 @@ export default {
   build: {
     target: "modules",
     outDir: "dist",
+    chunkSizeWarningLimit: "1000kB",
     rollupOptions: {
       output: {
         preserveModules: true

@@ -1,5 +1,5 @@
-@import '/stylesheets/lucide.css';
 @import '/stylesheets/common.css';
+@import 'lucide-static/font/lucide.css';
 
 body {
   min-width: 100%;

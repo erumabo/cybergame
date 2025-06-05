@@ -1,8 +1,14 @@
 import Alpine from "alpinejs";
 import templateHTML from "./ActionsList.html?raw";
+import lucideCSS from "lucide-static/font/lucide.css?raw";
+import commonCSS from "/stylesheets/common.css?raw";
 
 const template: HTMLTemplateElement = document.createElement("template");
-template.innerHTML = templateHTML;
+template.innerHTML = `<style>
+${commonCSS}
+${lucideCSS}
+</style>
+${templateHTML}`;
 
 const observedAttributes = [] as const;
 type Option = { option: string; value: string, icon?:string };
