@@ -4,7 +4,7 @@ import templateHTML from "./UnitView.html?raw";
 const template: HTMLTemplateElement = document.createElement("template");
 template.innerHTML = templateHTML;
 
-const observedAttributes = ["actions", "name"] as const;
+const observedAttributes = ["name"] as const;
 type Prop = (typeof observedAttributes)[number];
 
 export default class UnitView
@@ -16,11 +16,9 @@ export default class UnitView
     super();
     this.attachShadow({ mode: "open" });
     this.#props = Alpine.reactive(this.#props);
-    this.#props["onAction"] = this.onAction.bind(this);
   }
 
   connectedCallback() {
-    this.#props["actions"] = this.getAttribute("actions") ?? "";
     this.#props["name"] = this.getAttribute("name") ?? "";
     this.shadowRoot!.appendChild(template.content.cloneNode(true));
 
@@ -38,21 +36,12 @@ export default class UnitView
     return this.#props["name"] ?? "";
   }
 
-  set actions(v: string) {
-    this.setAttribute("actions", (this.#props["actions"] = v));
-  }
-  get actions() {
-    return this.#props["actions"] ?? "";
-  }
-
   attributeChangedCallback(name: Prop, _: string, newValue: string) {
     if (this[name] != newValue) this[name] = newValue;
   }
   //#endregion
 
   disconnectedCallback() {}
-
-  onAction(_: CustomEvent) {}
 }
 
 customElements.define("mb-unit-view", UnitView);

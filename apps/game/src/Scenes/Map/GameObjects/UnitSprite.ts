@@ -3,23 +3,17 @@ import { GameObjects } from "phaser";
 
 import { COLORS } from "src/globals";
 import Bar from "./Bar";
-import ActionsMenu from "./ActionsMenu";
 import UnitView from "../HTMLComponents/UnitView/UnitView";
 
 export default class UnitSprite extends GameObjects.Container {
   sprite?: GameObjects.Sprite;
   bars: Map<string, Bar>;
-  actionsMenu?: ActionsMenu;
   view: GameObjects.DOMElement;
   viewNode: UnitView;
 
   constructor(scene: Scene) {
     super(scene);
     this.setDataEnabled();
-
-    this.actionsMenu = new ActionsMenu(this.scene);
-    this.actionsMenu.hide();
-    this.add(this.actionsMenu);
 
     this.viewNode = new UnitView();
     this.view = this.scene.add.dom(0, -32, this.viewNode).setOrigin(0, 0);

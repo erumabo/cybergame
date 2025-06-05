@@ -16,8 +16,6 @@ export default class Bar extends GameObjects.Container {
   ) {
     super(scene);
     
-    console.log(width, height)
-    
     this.width = width;
     this.height = height;
 

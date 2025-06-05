@@ -38,6 +38,7 @@ export function MoveUnit({
 const MoveAction: System = {
   name: "move",
   displayName: "Moverse",
+  icon: "footprints",
   register({ controller }: StateContext) {
     controller.systems.push(MoveAction);
   },

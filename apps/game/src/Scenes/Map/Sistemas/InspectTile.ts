@@ -4,6 +4,7 @@ import type { System } from "./System";
 const InspectAction: System = {
   name: "inspect",
   displayName: "Observar",
+  icon: "search",
   register({controller}: StateContext) {
     controller.systems.push(InspectAction);
   },

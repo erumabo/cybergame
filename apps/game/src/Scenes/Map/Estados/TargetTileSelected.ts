@@ -10,7 +10,8 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
     if (system.test(arguments[0]))
       actions.push({
         option: system.displayName,
-        value: system.name
+        value: system.name,
+        icon: system.icon
       });
   });
 

@@ -5,7 +5,7 @@ const template: HTMLTemplateElement = document.createElement("template");
 template.innerHTML = templateHTML;
 
 const observedAttributes = [] as const;
-type Option = { option: string; value: string };
+type Option = { option: string; value: string, icon?:string };
 
 export default class ActionsMenu extends HTMLElement {
   declare shadowRoot: ShadowRoot;

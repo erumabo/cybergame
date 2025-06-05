@@ -44,6 +44,7 @@
     "dat.gui": "^0.7.9",
     "grid-engine": "^2.46.0",
     "inkjs": "^2.3.1",
+    "lucide-static": "^0.513.0",
     "marked": "^15.0.4",
     "mustache": "^4.2.0",
     "nipplejs": "^0.10.2",
