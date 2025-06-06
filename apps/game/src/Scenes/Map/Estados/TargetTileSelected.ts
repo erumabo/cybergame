@@ -55,7 +55,7 @@ const targetSelected: State = {
       },
       target: "targetSelected"
     },
-    "on.PointerMove.Map": {
+    "on.PointerDrag.Map": {
       action: (event: Event, context: StateContext) => {
         context.target = event.target;
       },

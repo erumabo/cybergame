@@ -18,7 +18,7 @@ const unidadSeleccionada = {
       },
       target: "unidadSeleccionada"
     },
-    "on.PointerMove.Map": {
+    "on.PointerDrag.Map": {
       action: (event: Event, context: StateContext) => {
         context.target = event.target;
       },

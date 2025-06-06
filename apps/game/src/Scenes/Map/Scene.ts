@@ -138,15 +138,13 @@ export class MapScene extends Scene {
           this.controller.context
         )
       )
-      .on("pointermove", (pointer: Input.Pointer) =>
-        this.controller.onPointerMove(
-          {
-            pointer,
-            target: this.#selectTile(pointer)
-          },
-          this.controller.context
-        )
-      );
+      .on("pointermove", (pointer: Input.Pointer) => {
+        const event = { pointer, target: this.#selectTile(pointer) };
+        if(pointer.isDown)
+          this.controller.onPointerDrag(event, this.controller.context)
+        else
+          this.controller.onPointerHover(event, this.controller.context)
+      });
   }
 
   renderPath(path: { x: number; y: number }[], clear: boolean = false) {

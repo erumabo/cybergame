@@ -15,7 +15,7 @@ const idle = {
       },
       target: "unidadSeleccionada"
     },
-    "on.PointerMove.*": {
+    "on.PointerDrag.*": {
       action: (event: Event, context: StateContext) => {
         if (!event.pointer.isDown) return;
         const camera = context.controller.scene.cameras.main;

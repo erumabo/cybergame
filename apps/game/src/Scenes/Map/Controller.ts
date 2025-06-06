@@ -54,11 +54,14 @@ export default class MapSceneController {
   }
 
   //#region UI Events
+  onPointerHover(event: Event, context: StateContext) {
+    this.#onEvent("on.PointerHover.", event, context);
+  }
   onPointerDown(event: Event, context: StateContext) {
     this.#onEvent("on.PointerDown.", event, context);
   }
-  onPointerMove(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerMove.", event, context);
+  onPointerDrag(event: Event, context: StateContext) {
+    this.#onEvent("on.PointerDrag.", event, context);
   }
   onPointerUp(event: Event, context: StateContext) {
     this.#onEvent("on.PointerUp.", event, context);
