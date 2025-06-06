@@ -34,7 +34,7 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
     }
   };
 
-  const path = FindPath(unit, target, gridEngine).path.map(
+  const path = FindPath(activeUnit, unit, target, gridEngine).path.map(
     (p: any) => p.position
   );
   controller.scene.renderPath(path, true);

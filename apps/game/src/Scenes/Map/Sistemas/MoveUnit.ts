@@ -8,6 +8,7 @@ import {
 } from "grid-engine";
 
 export function FindPath(
+  char: string,
   unit: LayerPosition,
   target: LayerPosition,
   gridEngine: GridEngine
@@ -15,7 +16,7 @@ export function FindPath(
   return gridEngine.findShortestPath(unit, target, {
     shortestPathAlgorithm: "A_STAR",
     considerCosts: true,
-    //collisionGroups: gridEngine.getCollisionGroups(context.activeUnit)
+    collisionGroups: gridEngine.getCollisionGroups(char)
   });
 }
 
@@ -57,7 +58,7 @@ const MoveAction: System = {
         y: context.target.y
       }
     };
-    const path = FindPath(unit, target, gridEngine);
+    const path = FindPath(context.activeUnit, unit, target, gridEngine);
     if (!path || path.path.length == 0) return false;
     return true;
   },
