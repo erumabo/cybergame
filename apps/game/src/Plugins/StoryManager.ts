@@ -1,6 +1,7 @@
 import { Plugins } from "phaser";
 import type { Story } from "inkjs";
 import { Compiler } from "inkjs/full";
+import { Path } from "inkjs/engine/Path"
 import { marked } from "marked";
 import mustache from "mustache";
 
@@ -27,6 +28,11 @@ export default class StoryManager extends Plugins.BasePlugin {
     const text = this.story.Continue();
     if (!text) throw new Error("Story should continue, but no text was found");
     return marked.parse(mustache.render(text, this.#context), { async: false });
+  }
+
+  hasContentAtPath(pathString: string) {
+    let path = new Path(pathString);
+    return !!this.story?.ContentAtPath(path).obj;
   }
 
   setContext(context: any) {
