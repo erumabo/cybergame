@@ -49,13 +49,19 @@ const targetSelected: State = {
   },
 
   on: {
-    "on.PointerUp.*": {
+    "on.PointerDrag.Map": {
       action: (event: Event, context: StateContext) => {
         context.target = event.target;
       },
       target: "targetSelected"
     },
-    "on.PointerDrag.Map": {
+    "on.PointerDrag.Ally": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    },
+    "on.PointerDrag.Enemy": {
       action: (event: Event, context: StateContext) => {
         context.target = event.target;
       },
@@ -74,6 +80,12 @@ const targetSelected: State = {
         context.activeUnit = event.unit;
       },
       target: "unidadSeleccionada"
+    },
+    "on.PointerDown.Enemy": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
     },
     selectAction: {
       action: (_: Event, context: StateContext) => {

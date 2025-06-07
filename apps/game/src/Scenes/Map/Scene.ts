@@ -19,7 +19,7 @@ export class MapScene extends Scene {
   guiControllers: any[] = [];
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
-  
+
   //#region Lifecycle
   constructor() {
     super("MapScene");
@@ -140,10 +140,9 @@ export class MapScene extends Scene {
       )
       .on("pointermove", (pointer: Input.Pointer) => {
         const event = { pointer, target: this.#selectTile(pointer) };
-        if(pointer.isDown)
-          this.controller.onPointerDrag(event, this.controller.context)
-        else
-          this.controller.onPointerHover(event, this.controller.context)
+        if (pointer.isDown)
+          this.controller.onPointerDrag(event, this.controller.context);
+        else this.controller.onPointerHover(event, this.controller.context);
       });
   }
 

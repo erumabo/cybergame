@@ -11,7 +11,7 @@ ${lucideCSS}
 ${templateHTML}`;
 
 const observedAttributes = [] as const;
-type Option = { option: string; value: string, icon?:string };
+type Option = { option: string; value: string; icon?: string };
 
 export default class ActionsMenu extends HTMLElement {
   declare shadowRoot: ShadowRoot;
@@ -46,30 +46,29 @@ export default class ActionsMenu extends HTMLElement {
   static observedAttributes = observedAttributes;
 
   set actions(v: Option[]) {
-    v = v.sort((a, b) => {
-      if (this.#props["actions"].some((act: Option) => act.value == a.value))
-        return -1;
-      if (this.#props["actions"].some((act: Option) => act.value == b.value))
-        return 1;
-      return a.option.localeCompare(b.option);
-    });
-
-    const added = v.filter(
-      (p) => !this.#props["actions"].some((act: Option) => act.value == p.value)
+    const current: Option[] = this.#props["actions"];
+    const added = v
+      .filter((p) => !current.some((act: Option) => act.value == p.value))
+      .sort((a, b) => a.option.localeCompare(b.option));
+    const keep = current.filter((p: Option) =>
+      v.some((act: Option) => act.value == p.value)
     );
 
+    //animate exit
     this.#props["actions"].push(...added);
+    this.#props["bufferactions"] = keep.reduce(
+      (r, p) => ((r[p.value] = 1), r),
+      {} as any
+    );
+
     //animate entry
     setTimeout(() => {
-      this.#props["bufferactions"] = v.reduce((r, p) => {
-        r[p.value] = true;
-        return r;
-      }, {} as any);
-    }, 50);
-    //animate exit
-    setTimeout(() => {
-      this.#props["actions"] = v;
-    }, 100);
+      this.#props["bufferactions"] = v.reduce(
+        (r, p) => ((r[p.value] = 1), r),
+        {} as any
+      );
+      this.#props["actions"] = keep.concat(added);
+    }, 120);
   }
 
   get actions() {

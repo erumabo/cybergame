@@ -18,12 +18,30 @@ const unidadSeleccionada = {
       },
       target: "unidadSeleccionada"
     },
+    "on.PointerDown.Enemy": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    },
     "on.PointerDrag.Map": {
       action: (event: Event, context: StateContext) => {
         context.target = event.target;
       },
       target: "targetSelected"
     },
+    "on.PointerDrag.Ally": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    },
+    "on.PointerDrag.Enemy": {
+      action: (event: Event, context: StateContext) => {
+        context.target = event.target;
+      },
+      target: "targetSelected"
+    }
   }
 };
 

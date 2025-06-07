@@ -11,21 +11,51 @@
     padding: 4px;
     margin: 2px;
     height: min-content;
-    border-radius: 10%;
+    border-radius: 1rem;
     box-shadow: 2px 2px 4px 1px var(--blue-60);
   }
   menu {
     height: min-content;
   }
+  
+  .transition {
+    transition-property: transform, margin, opacity;
+    transition-duration: 0.1s;
+    transform-origin: 0;
+  }
+  
+  .entry-1 {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  
+  .entry-2 {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  
+  .leave-1 {
+    transform: scale(0.9);
+    margin-bottom: 0;
+    opacity: 1;
+  }
+  
+  .leave-2 {
+    margin-bottom: -50%;
+    transform: scale(0.3);
+    opacity: 0.5;
+  }
 </style>
 <menu>
   <template x-for="action in actions" :key="action.value">
-    <li>
-      <button
-        @click.stop.prevent="onActionClick($event, action.value)"
-        x-show="bufferactions[action.value]"
-        x-transition.scale.50.duration.50ms
-        >
+    <li x-show="bufferactions[action.value]"
+        x-transition:enter="transition"
+        x-transition:enter-start="entry-1"
+        x-transition:enter-end="entry-2"
+        x-transition:leave="transition"
+        x-transition:leave-start="leave-1"
+        x-transition:leave-end="leave-2">
+      <button @click.stop.prevent="onActionClick($event, action.value)" >
         <span :class="'icon-' + action.icon"></span>
         <span x-text="action.option"></span>
       </button>
