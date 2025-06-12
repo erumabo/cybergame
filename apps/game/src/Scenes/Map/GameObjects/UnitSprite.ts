@@ -1,5 +1,5 @@
 import type { Scene } from "phaser";
-import { GameObjects } from "phaser";
+import { GameObjects, FX } from "phaser";
 
 import { COLORS } from "src/globals";
 import Bar from "./Bar";
@@ -7,6 +7,7 @@ import UnitView from "../HTMLComponents/UnitView/UnitView";
 
 export default class UnitSprite extends GameObjects.Container {
   sprite?: GameObjects.Sprite;
+  spriteEffect?: FX.ColorMatrix;
   bars: Map<string, Bar>;
   view: GameObjects.DOMElement;
   viewNode: UnitView;
@@ -22,42 +23,36 @@ export default class UnitSprite extends GameObjects.Container {
     this.bars = new Map();
 
     this.on("setdata", (_: UnitSprite, key: string, value: number) => {
-      let color: string = "";
       switch (key) {
+        case "current_hp":
+          return this.#addBar(key, COLORS["--blue-40"], 0, value, value);
         case "hp":
-          color = "--blue-40";
-          break;
+          return this.setData("current_hp", value * 10);
         case "mp":
-          color = "--green-10";
-          break;
+          return this.#addBar(key, COLORS["--green-10"], 0, value, value);
         default:
           return;
       }
-      this.#addBar(key, COLORS[color], value);
     });
 
     this.on("changedata", (_: UnitSprite, key: string, value: number) => {
-      try {
-        this.#updateBar(key, value);
-      } catch(_) {}
+      this.#updateBar(key, value);
     });
 
-    Object.defineProperty(this, "displayWidth", {
-      set: function (width: number) {
-        this.sprite && (this.sprite.displayWidth = width);
-        this.bars.forEach((bar: Bar) => bar.setWidth(width));
-      },
-      get: function () {
-        return this.sprite?.displayWidth ?? 0;
-      }
-    });
-    Object.defineProperty(this, "displayHeight", {
-      set: function (height: number) {
-        this.sprite && (this.sprite.displayHeight = height);
-        this.bars.forEach((bar: Bar) => bar.setWidth(height / 10));
-      },
-      get: function () {
-        return this.sprite?.displayHeight ?? 0;
+    return new Proxy(this, {
+      set(target: UnitSprite, property: string, value: any) {
+        if (property == "displayWidth") {
+          target.sprite && (target.sprite.displayWidth = value);
+          target.bars.forEach((bar: Bar) => bar.setWidth(value));
+          target.displayWidth = value;
+          return value;
+        } else if (property == "displayHeight") {
+          target.sprite && (target.sprite.displayHeight = value);
+          target.bars.forEach((bar: Bar) => bar.setWidth(value / 10));
+          target.displayHeight = value;
+          return value;
+        }
+        return Reflect.set(target, property, value);
       }
     });
   }
@@ -69,7 +64,9 @@ export default class UnitSprite extends GameObjects.Container {
       this.add((this.sprite = this.scene.add.sprite(0, 0, key, frame)));
       this.setSize(this.sprite.displayWidth, this.sprite.displayHeight);
       this.sprite.setOrigin(0, 0);
+      this.spriteEffect = this.sprite.postFX.addColorMatrix();
     }
+
     return this.sprite;
   }
 
@@ -87,29 +84,47 @@ export default class UnitSprite extends GameObjects.Container {
     this.viewNode.setAttribute(attribute, value);
   }
 
-  setStat(stat: string, value: number) {
-    this.data.set(stat, value);
+  get atk() {
+    return this.getData("atk");
   }
 
-  getStat(stat: string) {
-    return this.data.get(stat);
+  get def() {
+    return this.getData("def");
   }
 
-  #addBar(stat: string, color: number, value: number = 100) {
+  get hp() {
+    return this.getData("current_hp");
+  }
+
+  damage(val: number) {
+    this.setData("current_hp", Math.max(0, this.hp - val));
+    
+    if(this.hp == 0) {
+      this.spriteEffect!.saturate(-1,false);
+    }
+  }
+
+  #addBar(
+    stat: string,
+    color: number,
+    min: number = 0,
+    value: number = 100,
+    max: number = value
+  ) {
     const width = this.displayWidth;
     const height = this.displayHeight / 10;
     const x = this.bars.size + 2;
     const y = this.displayHeight + (height + 2) * (this.bars.size - 1);
 
-    const bar = new Bar(this.scene, x, y, width, height, color);
-    bar.setFillPercent(value);
+    const bar = new Bar(this.scene, x, y, width, height, color, min, max);
+    bar.setValue(value);
     this.add(bar);
 
     this.bars.set(stat, bar);
   }
 
   #updateBar(stat: string, value: number) {
-    if (!this.bars.has(stat)) throw new Error(`Bar for stat ${stat} not found`);
-    this.bars.get(stat)!.setFillPercent(value);
+    if (!this.bars.has(stat)) return;
+    this.bars.get(stat)!.setValue(value);
   }
 }

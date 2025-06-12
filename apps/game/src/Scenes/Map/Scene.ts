@@ -107,9 +107,7 @@ export class MapScene extends Scene {
   }
 
   override update(_: number) {
-    if (this.controller.context.target && this.controller.context.activeUnit) {
-      this.guiControllers.forEach((c) => c.updateDisplay());
-    }
+    this.guiControllers.forEach((c) => c.updateDisplay());
   }
   //#endregion Base Methods
 

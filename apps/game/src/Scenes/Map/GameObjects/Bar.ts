@@ -4,7 +4,11 @@ import { GameObjects } from "phaser";
 export default class Bar extends GameObjects.Container {
   progress: GameObjects.Rectangle;
   border: GameObjects.Rectangle;
-  fillperc: number = 0;
+  fillratio: number = 0;
+  min: number = 0;
+  max: number = 100;
+  minperc: number = 0;
+  range: number = 100;
 
   constructor(
     scene: Scene,
@@ -12,12 +16,18 @@ export default class Bar extends GameObjects.Container {
     y: number,
     width: number,
     height: number,
-    color: number
+    color: number,
+    min: number = 0,
+    max: number = 100
   ) {
     super(scene);
-    
+
     this.width = width;
     this.height = height;
+    this.min = min;
+    this.max = max;
+    this.range = this.max - this.min;
+    this.minperc = this.min / this.range;
 
     this.border = scene.add
       .rectangle(0, 0, width, 1)
@@ -35,9 +45,9 @@ export default class Bar extends GameObjects.Container {
     this.setPosition(x, y);
   }
 
-  setFillPercent(value: number = 0) {
-    this.fillperc = value;
-    this.progress.setDisplaySize(this.width * (this.fillperc / 100.0), this.height);
+  setValue(value: number = 0) {
+    this.fillratio = Math.max(0, value / this.range - this.minperc);
+    this.progress.setDisplaySize(this.width * this.fillratio, this.height);
     return this;
   }
 
@@ -51,18 +61,18 @@ export default class Bar extends GameObjects.Container {
     this.progress.setStrokeStyle(lineWidth, color, alpha);
     return this;
   }
-  
+
   setWidth(width: number) {
     this.width = width;
     this.border.setSize(this.width, this.height);
-    this.progress.setSize(this.width * (this.fillperc / 100.0), this.height);
+    this.progress.setSize(this.width * this.fillratio, this.height);
     return this;
   }
-  
+
   setHeight(height: number) {
     this.height = height;
     this.border.setSize(this.width, this.height);
-    this.progress.setSize(this.width * (this.fillperc / 100.0), this.height);
+    this.progress.setSize(this.width * this.fillratio, this.height);
     return this;
   }
 }

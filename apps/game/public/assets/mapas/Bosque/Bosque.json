@@ -982,23 +982,33 @@
      "properties": [
       {
        "name": "hp",
-       "value": 80,
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "mp",
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "atk",
+       "value": 2,
+       "type": "int"
+      },
+      {
+       "name": "def",
+       "value": 1,
        "type": "int"
       },
       {
        "name": "faction",
        "value": "ally",
        "type": "string"
-      },
-      {
-       "name": "mp",
-       "value": 80,
-       "type": "int"
       }
      ]
     },
     {
-     "id": 0,
+     "id": 1,
      "gid": 1145,
      "type": "character",
      "name": "Cinabrio",
@@ -1011,28 +1021,38 @@
      "properties": [
       {
        "name": "hp",
-       "value": 80,
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "mp",
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "atk",
+       "value": 2,
+       "type": "int"
+      },
+      {
+       "name": "def",
+       "value": 1,
        "type": "int"
       },
       {
        "name": "faction",
        "value": "ally",
        "type": "string"
-      },
-      {
-       "name": "mp",
-       "value": 80,
-       "type": "int"
       }
      ]
     },
     {
-     "id": 0,
+     "id": 2,
      "gid": 1155,
      "type": "character",
      "name": "Diamante",
-     "x": 128,
-     "y": 128,
+     "x": 96,
+     "y": 96,
      "visible": true,
      "rotation": 0,
      "width": 32,
@@ -1040,18 +1060,28 @@
      "properties": [
       {
        "name": "hp",
-       "value": 80,
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "mp",
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "atk",
+       "value": 1,
+       "type": "int"
+      },
+      {
+       "name": "def",
+       "value": 0,
        "type": "int"
       },
       {
        "name": "faction",
        "value": "enemy",
        "type": "string"
-      },
-      {
-       "name": "mp",
-       "value": 80,
-       "type": "int"
       }
      ]
     }

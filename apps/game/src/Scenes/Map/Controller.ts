@@ -1,7 +1,5 @@
 import { Components } from "src/globals";
 import { World } from "@mabo/mecs";
-//import UnitStats from "./Models/Stats";
-//import UnitSprite from "./GameObjects/UnitSprite";
 import { MapScene } from "./Scene";
 
 //#region Import Estados
@@ -14,6 +12,7 @@ import unidadSeleccionada from "./Estados/UnidadActiva";
 
 import MoveAction from "./Sistemas/MoveUnit";
 import InspectAction from "./Sistemas/InspectTile";
+import AttackMelee from "./Sistemas/AttackMelee";
 //#endregion Import Estados
 
 export default class MapSceneController {
@@ -40,6 +39,7 @@ export default class MapSceneController {
     
     InspectAction.register(this.context);
     MoveAction.register(this.context);
+    AttackMelee.register(this.context);
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {

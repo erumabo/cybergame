@@ -41,40 +41,40 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
 }
 
 const targetSelected: State = {
-  entry: (_: Event, context: StateContext) => {
+  entry(_: Event, context: StateContext) {
     showMenu(context);
   },
-  update: (_: Event, context: StateContext) => {
+  update(_: Event, context: StateContext) {
     showMenu(context);
   },
 
   on: {
     "on.PointerDrag.Map": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
     "on.PointerDrag.Ally": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
     "on.PointerDrag.Enemy": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
     "on.PointerDown.Map": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
     "on.PointerDown.Ally": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         MoveUnit({ ...context, activeUnit: event.unit, target: event.target });
         if (context.activeUnit == event.unit) return;
         context.activeUnit = event.unit;
@@ -82,13 +82,19 @@ const targetSelected: State = {
       target: "unidadSeleccionada"
     },
     "on.PointerDown.Enemy": {
-      action: (event: Event, context: StateContext) => {
+      action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
+    "on.PointerUp.Self": {
+      action(_: Event, context: StateContext) {
+        context.target = undefined;
+      },
+      target: "idle"
+    },
     selectAction: {
-      action: (_: Event, context: StateContext) => {
+      action(_: Event, context: StateContext) {
         if (!context.action) throw new Error("Action undefined");
         const system = context.controller.systems.find(
           (sys) => sys.name == context.action
@@ -100,7 +106,7 @@ const targetSelected: State = {
     }
   },
 
-  exit: (_: Event, context: StateContext) => {
+  exit(_: Event, context: StateContext) {
     context.target = { x: -1, y: -1 } as any;
     context.controller.scene.actionsMenu.domNode["actions"] = [];
     context.controller.scene.actionsMenu.hide();

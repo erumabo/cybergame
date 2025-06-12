@@ -7,7 +7,7 @@ orientation: orthogonal
 version: 11
 tilesets:
   - name: Tileset
-    firstgid: 1  #1-99
+    firstgid: 1 #1-99
   - name: TilesetUI
     firstgid: 100 #100-1124
   - name: Aqua
@@ -61,7 +61,7 @@ layers:
     x: 0
     y: 0
     id: 2
-    objects: 
+    objects:
       - id: 0
         gid: 1125
         type: character
@@ -74,14 +74,20 @@ layers:
         height: 32
         properties:
           - name: hp
-            value: 80
+            value: 10
+            type: int
+          - name: mp
+            value: 10
+            type: int
+          - name: atk
+            value: 1
+            type: int
+          - name: def
+            value: 1
             type: int
           - name: faction
             value: ally
             type: string
-          - name: mp
-            value: 80
-            type: int
       - id: 0
         gid: 1145
         type: character
@@ -94,31 +100,43 @@ layers:
         height: 32
         properties:
           - name: hp
-            value: 80
+            value: 10
+            type: int
+          - name: mp
+            value: 10
+            type: int
+          - name: atk
+            value: 1
+            type: int
+          - name: def
+            value: 1
             type: int
           - name: faction
             value: ally
             type: string
-          - name: mp
-            value: 80
-            type: int
       - id: 0
         gid: 1155
         type: character
         name: Diamante
-        x: 128
-        y: 128
+        x: 96
+        y: 96
         visible: true
         rotation: 0
         width: 32
         height: 32
         properties:
           - name: hp
-            value: 80
+            value: 10
+            type: int
+          - name: mp
+            value: 10
+            type: int
+          - name: atk
+            value: 1
+            type: int
+          - name: def
+            value: 1
             type: int
           - name: faction
             value: enemy
             type: string
-          - name: mp
-            value: 80
-            type: int
