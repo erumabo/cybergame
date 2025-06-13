@@ -1,273 +1,236 @@
 {
-  "edges": [
-    {
-      "fromNode": "75913fa5ff770b08",
-      "fromSide": "right",
-      "id": "e965aec3eccbedd3",
-      "styleAttributes": {
-        "arrow": null,
-        "pathfindingMethod": "square"
-      },
-      "toNode": "0e47f44c39325299",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "aab706dbd21fc8dc",
-      "fromSide": "bottom",
-      "id": "60b151fba4d9db4c",
-      "styleAttributes": {
-      },
-      "toNode": "e39cb52ff527ddc4",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "6ae16c588d758a83",
-      "fromSide": "left",
-      "id": "a4cbe99d8ebffaff",
-      "styleAttributes": {
-      },
-      "toNode": "7dbe9302cddd1b5e",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "7dbe9302cddd1b5e",
-      "fromSide": "bottom",
-      "id": "2507e7cd040af543",
-      "styleAttributes": {
-      },
-      "toNode": "aab706dbd21fc8dc",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "0e47f44c39325299",
-      "fromSide": "left",
-      "id": "04c12c77e49b35e4",
-      "styleAttributes": {
-        "path": null,
-        "pathfindingMethod": "square"
-      },
-      "toNode": "75913fa5ff770b08",
-      "toSide": "bottom"
-    },
-    {
-      "fromNode": "b8f9908534d43dbf",
-      "fromSide": "left",
-      "id": "d401d61670747111",
-      "label": "onPointerDown.Ally",
-      "toNode": "6b2c1886f34d8b6c",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "b8f9908534d43dbf",
-      "fromSide": "right",
-      "id": "78f28786b8aa93af",
-      "label": "onPointerDown.Map\nonPointerMove.Map\nonPointerUp.Map",
-      "styleAttributes": {
-        "arrow": null,
-        "pathfindingMethod": "direct"
-      },
-      "toNode": "6940006635d812f9",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "6b2c1886f34d8b6c",
-      "fromSide": "bottom",
-      "id": "95caa64c0d36f03b",
-      "label": "onPointerDown.Map\nonPointerMove.Map\nonPointerDown.Entity\nonPointerMove.Entity",
-      "styleAttributes": {
-      },
-      "toNode": "7b9f9908207cbd78",
-      "toSide": "top"
-    },
-    {
-      "fromNode": "6940006635d812f9",
-      "fromSide": "left",
-      "id": "8e37ced01f04818d",
-      "styleAttributes": {
-        "pathfindingMethod": "direct"
-      },
-      "toNode": "b8f9908534d43dbf",
-      "toSide": "bottom"
-    },
-    {
-      "fromNode": "7b9f9908207cbd78",
-      "fromSide": "bottom",
-      "id": "483e68048ef7c26a",
-      "label": "onAction",
-      "styleAttributes": {
-      },
-      "toNode": "7d23ce546270bd88",
-      "toSide": "left"
-    },
-    {
-      "fromNode": "7b9f9908207cbd78",
-      "fromSide": "left",
-      "id": "50b1895bca07fd42",
-      "label": "onPointerDown.Ally\n",
-      "styleAttributes": {
-      },
-      "toNode": "6b2c1886f34d8b6c",
-      "toSide": "left"
-    },
-    {
-      "fromNode": "7d23ce546270bd88",
-      "fromSide": "right",
-      "id": "de4c4ee97f26ecaa",
-      "styleAttributes": {
-        "pathfindingMethod": null
-      },
-      "toNode": "b8f9908534d43dbf",
-      "toSide": "bottom"
-    }
-  ],
-  "nodes": [
-    {
-      "color": "5",
-      "height": 1160,
-      "id": "0e47f44c39325299",
-      "label": "Modo História",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "group",
-      "width": 1120,
-      "x": 800,
-      "y": 360
-    },
-    {
-      "color": "3",
-      "height": 1120,
-      "id": "75913fa5ff770b08",
-      "label": "Modo Combate",
-      "styleAttributes": {
-        "border": null
-      },
-      "type": "group",
-      "width": 1160,
-      "x": -400,
-      "y": -800
-    },
-    {
-      "height": 60,
-      "id": "7dbe9302cddd1b5e",
-      "styleAttributes": {
-      },
-      "text": "",
-      "type": "text",
-      "width": 260,
-      "x": 823,
-      "y": 477
-    },
-    {
-      "height": 60,
-      "id": "6ae16c588d758a83",
-      "styleAttributes": {
-      },
-      "text": "",
-      "type": "text",
-      "width": 260,
-      "x": 1107,
-      "y": 388
-    },
-    {
-      "height": 60,
-      "id": "ca966675b18d642d",
-      "styleAttributes": {
-        "border": "invisible",
-        "textAlign": "right"
-      },
-      "text": "p c.e: Player controled Entity",
-      "type": "text",
-      "width": 300,
-      "x": 440,
-      "y": 240
-    },
-    {
-      "height": 120,
-      "id": "7b9f9908207cbd78",
-      "styleAttributes": {
-        "shape": "pill",
-        "textAlign": "center"
-      },
-      "text": "Selecciona Objectivo\nonDrag: self\nonPointerUp: self",
-      "type": "text",
-      "width": 260,
-      "x": -100,
-      "y": -240
-    },
-    {
-      "height": 60,
-      "id": "7d23ce546270bd88",
-      "styleAttributes": {
-        "shape": "parallelogram",
-        "textAlign": "center"
-      },
-      "text": "Exec Action",
-      "type": "text",
-      "width": 160,
-      "x": 100,
-      "y": -40
-    },
-    {
-      "height": 60,
-      "id": "6b2c1886f34d8b6c",
-      "styleAttributes": {
-        "shape": "pill",
-        "textAlign": "center"
-      },
-      "text": "Unidad seleccionada\non..*.Ally => Self",
-      "type": "text",
-      "width": 240,
-      "x": -100,
-      "y": -460
-    },
-    {
-      "height": 60,
-      "id": "b8f9908534d43dbf",
-      "styleAttributes": {
-        "shape": "pill",
-        "textAlign": "center"
-      },
-      "text": "Idle",
-      "type": "text",
-      "width": 159,
-      "x": 277,
-      "y": -742
-    },
-    {
-      "height": 60,
-      "id": "6940006635d812f9",
-      "styleAttributes": {
-        "shape": "parallelogram",
-        "textAlign": "center"
-      },
-      "text": "Pan",
-      "type": "text",
-      "width": 76,
-      "x": 520,
-      "y": -560
-    },
-    {
-      "height": 60,
-      "id": "e39cb52ff527ddc4",
-      "styleAttributes": {
-      },
-      "text": "",
-      "type": "text",
-      "width": 260,
-      "x": 823,
-      "y": 717
-    },
-    {
-      "height": 60,
-      "id": "aab706dbd21fc8dc",
-      "styleAttributes": {
-      },
-      "text": "",
-      "type": "text",
-      "width": 260,
-      "x": 889,
-      "y": 597
-    }
-  ]
+	"edges":[
+		{
+			"fromNode":"75913fa5ff770b08",
+			"fromSide":"right",
+			"id":"e965aec3eccbedd3",
+			"styleAttributes":{
+				"arrow":null,
+				"pathfindingMethod":"square"
+			},
+			"toNode":"0e47f44c39325299",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"aab706dbd21fc8dc",
+			"fromSide":"bottom",
+			"id":"60b151fba4d9db4c",
+			"styleAttributes":{},
+			"toNode":"e39cb52ff527ddc4",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"6ae16c588d758a83",
+			"fromSide":"left",
+			"id":"a4cbe99d8ebffaff",
+			"styleAttributes":{},
+			"toNode":"7dbe9302cddd1b5e",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"7dbe9302cddd1b5e",
+			"fromSide":"bottom",
+			"id":"2507e7cd040af543",
+			"styleAttributes":{},
+			"toNode":"aab706dbd21fc8dc",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"0e47f44c39325299",
+			"fromSide":"left",
+			"id":"04c12c77e49b35e4",
+			"styleAttributes":{
+				"path":null,
+				"pathfindingMethod":"square"
+			},
+			"toNode":"75913fa5ff770b08",
+			"toSide":"bottom"
+		},
+		{"fromNode":"b8f9908534d43dbf","fromSide":"left","id":"d401d61670747111","label":"onPointerDown.Ally","toNode":"6b2c1886f34d8b6c","toSide":"top"},
+		{
+			"fromNode":"b8f9908534d43dbf",
+			"fromSide":"right",
+			"id":"78f28786b8aa93af",
+			"label":"onPointerDown.Map\nonPointerMove.Map\nonPointerUp.Map",
+			"styleAttributes":{
+				"arrow":null,
+				"pathfindingMethod":"direct"
+			},
+			"toNode":"6940006635d812f9",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"6b2c1886f34d8b6c",
+			"fromSide":"bottom",
+			"id":"95caa64c0d36f03b",
+			"label":"onPointerDown.Map\nonPointerMove.Map\nonPointerDown.Entity\nonPointerMove.Entity",
+			"styleAttributes":{},
+			"toNode":"7b9f9908207cbd78",
+			"toSide":"top"
+		},
+		{
+			"fromNode":"6940006635d812f9",
+			"fromSide":"left",
+			"id":"8e37ced01f04818d",
+			"styleAttributes":{"pathfindingMethod":"direct"},
+			"toNode":"b8f9908534d43dbf",
+			"toSide":"bottom"
+		},
+		{
+			"fromNode":"7b9f9908207cbd78",
+			"fromSide":"bottom",
+			"id":"483e68048ef7c26a",
+			"label":"onAction",
+			"styleAttributes":{},
+			"toNode":"7d23ce546270bd88",
+			"toSide":"left"
+		},
+		{
+			"fromNode":"7b9f9908207cbd78",
+			"fromSide":"left",
+			"id":"50b1895bca07fd42",
+			"label":"onPointerDown.Ally\n",
+			"styleAttributes":{},
+			"toNode":"6b2c1886f34d8b6c",
+			"toSide":"left"
+		},
+		{
+			"fromNode":"7d23ce546270bd88",
+			"fromSide":"right",
+			"id":"de4c4ee97f26ecaa",
+			"styleAttributes":{
+				"pathfindingMethod":null
+			},
+			"toNode":"b8f9908534d43dbf",
+			"toSide":"bottom"
+		}
+	],
+	"nodes":[
+		{
+			"color":"5",
+			"height":1160,
+			"id":"0e47f44c39325299",
+			"label":"Modo História",
+			"styleAttributes":{
+				"border":null
+			},
+			"type":"group",
+			"width":1120,
+			"x":800,
+			"y":360
+		},
+		{
+			"color":"3",
+			"height":1120,
+			"id":"75913fa5ff770b08",
+			"label":"Modo Combate",
+			"styleAttributes":{
+				"border":null
+			},
+			"type":"group",
+			"width":1160,
+			"x":-400,
+			"y":-800
+		},
+		{
+			"height":60,
+			"id":"7dbe9302cddd1b5e",
+			"styleAttributes":{},
+			"text":"",
+			"type":"text",
+			"width":260,
+			"x":823,
+			"y":477
+		},
+		{
+			"height":60,
+			"id":"6ae16c588d758a83",
+			"styleAttributes":{},
+			"text":"",
+			"type":"text",
+			"width":260,
+			"x":1107,
+			"y":388
+		},
+		{
+			"height":60,
+			"id":"ca966675b18d642d",
+			"styleAttributes":{"border":"invisible","textAlign":"right"},
+			"text":"p c.e: Player controled Entity",
+			"type":"text",
+			"width":300,
+			"x":440,
+			"y":240
+		},
+		{
+			"height":120,
+			"id":"7b9f9908207cbd78",
+			"styleAttributes":{"shape":"pill","textAlign":"center"},
+			"text":"Selecciona Objectivo\nonDrag: self\nonPointerUp: self",
+			"type":"text",
+			"width":260,
+			"x":-100,
+			"y":-240
+		},
+		{
+			"height":60,
+			"id":"7d23ce546270bd88",
+			"styleAttributes":{"shape":"parallelogram","textAlign":"center"},
+			"text":"Exec Action",
+			"type":"text",
+			"width":160,
+			"x":100,
+			"y":-40
+		},
+		{
+			"height":60,
+			"id":"6b2c1886f34d8b6c",
+			"styleAttributes":{"shape":"pill","textAlign":"center"},
+			"text":"Unidad seleccionada\non..*.Ally => Self",
+			"type":"text",
+			"width":240,
+			"x":-100,
+			"y":-460
+		},
+		{
+			"height":60,
+			"id":"b8f9908534d43dbf",
+			"styleAttributes":{"shape":"pill","textAlign":"center"},
+			"text":"Idle",
+			"type":"text",
+			"width":159,
+			"x":277,
+			"y":-742
+		},
+		{
+			"height":60,
+			"id":"6940006635d812f9",
+			"styleAttributes":{"shape":"parallelogram","textAlign":"center"},
+			"text":"Pan",
+			"type":"text",
+			"width":76,
+			"x":520,
+			"y":-560
+		},
+		{
+			"height":60,
+			"id":"e39cb52ff527ddc4",
+			"styleAttributes":{},
+			"text":"",
+			"type":"text",
+			"width":260,
+			"x":823,
+			"y":717
+		},
+		{
+			"height":60,
+			"id":"aab706dbd21fc8dc",
+			"styleAttributes":{},
+			"text":"",
+			"type":"text",
+			"width":260,
+			"x":889,
+			"y":597
+		}
+	]
 }
