@@ -1,0 +1,342 @@
+{
+  "edges": [
+    {
+      "fromNode": "9255293e85b47754",
+      "fromSide": "right",
+      "id": "68027e763939d3ff",
+      "label": "Delega",
+      "toNode": "2a6ce4fa77c276f9",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "8a91d4c562cbc158",
+      "fromSide": "bottom",
+      "id": "c4a3746370cc8351",
+      "toNode": "0ff9f332754a6fb2",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "2a6ce4fa77c276f9",
+      "fromSide": "top",
+      "id": "1039f64b90a98efd",
+      "label": "Delega",
+      "toNode": "76d6f6a2139db9d8",
+      "toSide": "bottom"
+    },
+    {
+      "fromNode": "3a74f9a706fa353e",
+      "fromSide": "right",
+      "id": "733835caaa344f69",
+      "label": "Dispara",
+      "toNode": "919d26d2563f23c4",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "90c8f1791fe1aa09",
+      "fromSide": "right",
+      "id": "74bf4bb5b362427f",
+      "toNode": "9255293e85b47754",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "90c8f1791fe1aa09",
+      "fromSide": "right",
+      "id": "e4357ab78b592b24",
+      "toNode": "0296d842e568ddb4",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "90c8f1791fe1aa09",
+      "fromSide": "right",
+      "id": "ed5fdd98669dbf46",
+      "toNode": "1b96cf4d010eb2d2",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "9255293e85b47754",
+      "fromSide": "right",
+      "id": "f681e0cdf90bebde",
+      "toNode": "eff99fc586cfaf9f",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "42680ad8f1943949",
+      "fromSide": "bottom",
+      "id": "952473b1590c7f48",
+      "label": "Compuesto",
+      "toNode": "eff99fc586cfaf9f",
+      "toSide": "top"
+    },
+    {
+      "fromNode": "919d26d2563f23c4",
+      "fromSide": "bottom",
+      "id": "73cd392ecc20e109",
+      "label": "Actualiza",
+      "styleAttributes": {
+      },
+      "toNode": "42680ad8f1943949",
+      "toSide": "right"
+    },
+    {
+      "fromNode": "2a6ce4fa77c276f9",
+      "fromSide": "right",
+      "id": "ab04ee3bd625c619",
+      "styleAttributes": {
+        "arrow": "halved-triangle",
+        "pathfindingMethod": "direct"
+      },
+      "toNode": "42680ad8f1943949",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "8a91d4c562cbc158",
+      "fromSide": "bottom",
+      "id": "b0791db1a82a5838",
+      "label": "Contiene",
+      "styleAttributes": {
+      },
+      "toNode": "7e9e5978bd4facc8",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "42680ad8f1943949",
+      "fromSide": "bottom",
+      "id": "afe4bd2b5eef911d",
+      "styleAttributes": {
+      },
+      "toNode": "8a91d4c562cbc158",
+      "toSide": "top"
+    },
+    {
+      "fromNode": "76d6f6a2139db9d8",
+      "fromSide": "top",
+      "id": "9c31496333d86362",
+      "label": "Evento",
+      "styleAttributes": {
+        "pathfindingMethod": "direct"
+      },
+      "toNode": "3a74f9a706fa353e",
+      "toSide": "bottom"
+    },
+    {
+      "fromNode": "76d6f6a2139db9d8",
+      "fromSide": "right",
+      "id": "42b22e15093c5fc7",
+      "label": "Observa",
+      "styleAttributes": {
+      },
+      "toNode": "42680ad8f1943949",
+      "toSide": "top"
+    },
+    {
+      "fromNode": "9255293e85b47754",
+      "fromSide": "right",
+      "id": "76e7b5165a6db6b3",
+      "styleAttributes": {
+      },
+      "toNode": "961eee35972718ef",
+      "toSide": "left"
+    },
+    {
+      "fromNode": "961eee35972718ef",
+      "fromSide": "top",
+      "id": "5fabcc261bcc6346",
+      "styleAttributes": {
+      },
+      "toNode": "eff99fc586cfaf9f",
+      "toSide": "bottom"
+    },
+    {
+      "fromNode": "961eee35972718ef",
+      "fromSide": "right",
+      "id": "0c8dd82688018fec",
+      "styleAttributes": {
+      },
+      "toNode": "7e9e5978bd4facc8",
+      "toSide": "bottom"
+    },
+    {
+      "fromNode": "9255293e85b47754",
+      "fromSide": "right",
+      "id": "05a314b9c9b21856",
+      "styleAttributes": {
+      },
+      "toNode": "b4a8475630d29cb9",
+      "toSide": "left"
+    }
+  ],
+  "nodes": [
+    {
+      "color": "4",
+      "height": 55,
+      "id": "9255293e85b47754",
+      "styleAttributes": {
+        "textAlign": null
+      },
+      "text": "Escena Mapa",
+      "type": "text",
+      "width": 134,
+      "x": 20,
+      "y": -51
+    },
+    {
+      "color": "6",
+      "height": 60,
+      "id": "90c8f1791fe1aa09",
+      "styleAttributes": {
+      },
+      "text": "Game",
+      "type": "text",
+      "width": 115,
+      "x": -240,
+      "y": 90
+    },
+    {
+      "height": 50,
+      "id": "2a6ce4fa77c276f9",
+      "styleAttributes": {
+      },
+      "text": "Controlador",
+      "type": "text",
+      "width": 160,
+      "x": 240,
+      "y": -200
+    },
+    {
+      "height": 60,
+      "id": "42680ad8f1943949",
+      "styleAttributes": {
+      },
+      "text": "Contexto",
+      "type": "text",
+      "width": 140,
+      "x": 460,
+      "y": -200
+    },
+    {
+      "color": "4",
+      "height": 56,
+      "id": "eff99fc586cfaf9f",
+      "styleAttributes": {
+      },
+      "text": "Tilemap",
+      "type": "text",
+      "width": 141,
+      "x": 260,
+      "y": -60
+    },
+    {
+      "height": 60,
+      "id": "76d6f6a2139db9d8",
+      "styleAttributes": {
+      },
+      "text": "Estado",
+      "type": "text",
+      "width": 250,
+      "x": 200,
+      "y": -340
+    },
+    {
+      "height": 60,
+      "id": "919d26d2563f23c4",
+      "styleAttributes": {
+      },
+      "text": "Sistemas",
+      "type": "text",
+      "width": 250,
+      "x": 620,
+      "y": -380
+    },
+    {
+      "height": 60,
+      "id": "3a74f9a706fa353e",
+      "styleAttributes": {
+      },
+      "text": "FST",
+      "type": "text",
+      "width": 260,
+      "x": 200,
+      "y": -500
+    },
+    {
+      "height": 59,
+      "id": "8a91d4c562cbc158",
+      "styleAttributes": {
+      },
+      "text": "Mundo",
+      "type": "text",
+      "width": 131,
+      "x": 440,
+      "y": -60
+    },
+    {
+      "height": 51,
+      "id": "0ff9f332754a6fb2",
+      "styleAttributes": {
+      },
+      "text": "Entidades",
+      "type": "text",
+      "width": 157,
+      "x": 680,
+      "y": -40
+    },
+    {
+      "height": 50,
+      "id": "7e9e5978bd4facc8",
+      "styleAttributes": {
+      },
+      "text": "Unidades",
+      "type": "text",
+      "width": 140,
+      "x": 680,
+      "y": 20
+    },
+    {
+      "color": "5",
+      "height": 60,
+      "id": "1b96cf4d010eb2d2",
+      "styleAttributes": {
+      },
+      "text": "Escena Preload",
+      "type": "text",
+      "width": 250,
+      "x": 0,
+      "y": 460
+    },
+    {
+      "color": "5",
+      "height": 60,
+      "id": "0296d842e568ddb4",
+      "styleAttributes": {
+      },
+      "text": "Escena Boot",
+      "type": "text",
+      "width": 250,
+      "x": 0,
+      "y": 400
+    },
+    {
+      "color": "4",
+      "height": 60,
+      "id": "961eee35972718ef",
+      "styleAttributes": {
+      },
+      "text": "GridEngine Plugin",
+      "type": "text",
+      "width": 200,
+      "x": 260,
+      "y": 100
+    },
+    {
+      "height": 60,
+      "id": "b4a8475630d29cb9",
+      "styleAttributes": {
+      },
+      "text": "Inkle Plugin",
+      "type": "text",
+      "width": 160,
+      "x": 260,
+      "y": 200
+    }
+  ]
+}
