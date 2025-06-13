@@ -41,6 +41,7 @@ function showMenu({ controller, target: tile, activeUnit }: StateContext) {
 }
 
 const targetSelected: State = {
+  initial: "target_trap",
   entry(_: Event, context: StateContext) {
     showMenu(context);
   },
@@ -49,45 +50,19 @@ const targetSelected: State = {
   },
 
   on: {
-    "on.PointerDrag.Map": {
+    "PointerDrag.*": {
       action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
-    "on.PointerDrag.Ally": {
+    "PointerDown.*": {
       action(event: Event, context: StateContext) {
         context.target = event.target;
       },
       target: "targetSelected"
     },
-    "on.PointerDrag.Enemy": {
-      action(event: Event, context: StateContext) {
-        context.target = event.target;
-      },
-      target: "targetSelected"
-    },
-    "on.PointerDown.Map": {
-      action(event: Event, context: StateContext) {
-        context.target = event.target;
-      },
-      target: "targetSelected"
-    },
-    "on.PointerDown.Ally": {
-      action(event: Event, context: StateContext) {
-        MoveUnit({ ...context, activeUnit: event.unit, target: event.target });
-        if (context.activeUnit == event.unit) return;
-        context.activeUnit = event.unit;
-      },
-      target: "unidadSeleccionada"
-    },
-    "on.PointerDown.Enemy": {
-      action(event: Event, context: StateContext) {
-        context.target = event.target;
-      },
-      target: "targetSelected"
-    },
-    "on.PointerUp.Self": {
+    "PointerUp.Self": {
       action(_: Event, context: StateContext) {
         context.target = undefined;
       },
@@ -111,6 +86,25 @@ const targetSelected: State = {
     context.controller.scene.actionsMenu.domNode["actions"] = [];
     context.controller.scene.actionsMenu.hide();
     context.controller.scene.renderPath([], true);
+  },
+
+  states: {
+    target_trap: {
+      on: {
+        "PointerDown.Ally": {
+          action(event: Event, context: StateContext) {
+            MoveUnit({
+              ...context,
+              activeUnit: event.unit,
+              target: event.target
+            });
+            if (context.activeUnit == event.unit) return;
+            context.activeUnit = event.unit;
+          },
+          target: "unidadSeleccionada"
+        }
+      }
+    }
   }
 };
 

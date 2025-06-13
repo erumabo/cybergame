@@ -36,33 +36,31 @@ export class StateMachine {
    * @param {*} data - Arbitrary data to be provided to event handlers
    */
   send(event, ...data) {
-    return new Promise((resolve) =>
-      resolve(
-        (() => {
-          let state, handler;
-          for (let i = this.#stateStack.length - 1; i >= 0; i--) {
-            state = this.#stateStack[i];
-            // For loop instead of direct prop access
-            //   to implement regext matching in future
-            for (const transition in state.on) {
-              if (this.#glob(transition, event)) {
-                handler = state.on[transition];
-                break;
-              }
-            }
-          }
+    return new Promise((resolve) => {
+      let handler = this.#getStateHandler(event);
+      if (!handler) return resolve(this);
 
-          if (!handler) return this;
+      let target = handler;
+      if (typeof handler != "string") {
+        if (handler.action) handler.action(...data);
+        target = handler.target;
+      }
 
-          if (typeof handler === "string")
-            return this.#transition(handler, ...data);
+      if (!target) resolve(this);
+      else resolve(this.#transition(target, ...data));
+    });
+  }
 
-          if (handler.action) handler.action(...data);
-          if (!handler.target) return this;
-          return this.#transition(handler.target, ...data);
-        })()
-      )
-    );
+  #getStateHandler(event) {
+    let state;
+    for (let i = this.#stateStack.length - 1; i >= 0; i--) {
+      state = this.#stateStack[i];
+      for (const transition in state.on) {
+        if (this.#glob(transition, event)) {
+          return state.on[transition];
+        }
+      }
+    }
   }
 
   #transition(nextState, ...data) {

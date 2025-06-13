@@ -7,7 +7,7 @@ const idle = {
     context.target = { x: -1, y: -1 } as any;
   },
   on: {
-    "on.PointerDown.Ally": {
+    "PointerDown.Ally": {
       action(event: Event, context: StateContext) {
         MoveUnit({ ...context, activeUnit: event.unit, target: event.target });
         if (context.activeUnit == event.unit) return;
@@ -15,7 +15,7 @@ const idle = {
       },
       target: "unidadSeleccionada"
     },
-    "on.PointerDrag.*": {
+    "PointerDrag.*": {
       action(event: Event, context: StateContext) {
         if (!event.pointer.isDown) return;
         const camera = context.controller.scene.cameras.main;

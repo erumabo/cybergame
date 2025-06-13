@@ -36,7 +36,7 @@ export default class MapSceneController {
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
     }).start({}, this.context);
-    
+
     InspectAction.register(this.context);
     MoveAction.register(this.context);
     AttackMelee.register(this.context);
@@ -55,16 +55,18 @@ export default class MapSceneController {
 
   //#region UI Events
   onPointerHover(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerHover.", event, context);
+    if (event.target == context.target) return;
+    this.#onEvent("PointerHover.", event, context);
   }
   onPointerDown(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerDown.", event, context);
+    this.#onEvent("PointerDown.", event, context);
   }
   onPointerDrag(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerDrag.", event, context);
+    if (event.target == context.target) return;
+    this.#onEvent("PointerDrag.", event, context);
   }
   onPointerUp(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerUp.", event, context);
+    this.#onEvent("PointerUp.", event, context);
   }
 
   actionMenuClick(action: string) {
@@ -72,7 +74,7 @@ export default class MapSceneController {
     this.actor.send("selectAction", {}, this.context);
   }
 
-  #onEvent(eventName: string, event: Event, context: StateContext) {
+  async #onEvent(eventName: string, event: Event, context: StateContext) {
     if (!event.target) return;
 
     const targets = this.scene.gridEngine.getCharactersAt(event.target);
@@ -88,7 +90,7 @@ export default class MapSceneController {
         else eventName += "Enemy";
       }
     }
-    this.actor.send(eventName, event, context);
+    await this.actor.send(eventName, event, context);
   }
   //#endregion
 }

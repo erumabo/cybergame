@@ -118,7 +118,7 @@ export class MapScene extends Scene {
     );
 
     this.input
-      .on("pointerdown", (pointer: Input.Pointer) =>
+      .on("pointerdown", (pointer: Input.Pointer) => 
         this.controller.onPointerDown(
           {
             pointer,
@@ -206,7 +206,7 @@ export class MapScene extends Scene {
     const tilelayer = this.tilemap.layers[0].tilemapLayer;
     const { x, y } = tilelayer.worldToTileXY(pointer.worldX, pointer.worldY);
     const tile = tilelayer.getTileAt(x, y, true);
-    if (!tile || this.controller.context.target == tile) return; // ignore out of bounds touches
+    if (!tile) return; // ignore out of bounds touches
     return tile;
   }
   //#endregion Private
