@@ -1,6 +1,7 @@
-import type { StateContext } from "../Estados/State";
+import type { EventPayload } from "../Estados/State";
 import type { System } from "./System";
 import type UnitSprite from "../GameObjects/UnitSprite";
+import type MapSceneController from "../Controller";
 
 import { Math as PMath } from "phaser";
 
@@ -8,12 +9,12 @@ const AttackMelee: System = {
   name: "atk_melee",
   displayName: "Ataque",
   icon: "swords",
-  register(context: StateContext) {
-    context.controller.systems.push(AttackMelee);
+  register(controller: MapSceneController) {
+    controller.systems.push(AttackMelee);
   },
-  test(context: StateContext) {
+  test({ context, scene }: EventPayload) {
     if (!context.activeUnit || !context.target) return false;
-    const gridEngine = context.controller.scene.gridEngine;
+    const gridEngine = scene.gridEngine;
     const unit = gridEngine.getPosition(context.activeUnit);
     if (!unit) return false;
     if (
@@ -30,9 +31,9 @@ const AttackMelee: System = {
     let enemySprite = gridEngine.getContainer(enemy[0])! as UnitSprite;
     return enemySprite.hp > 0 && enemySprite.getData("faction") == "enemy";
   },
-  execute(context: StateContext) {
+  execute({ context, scene }: EventPayload) {
     if (!context.activeUnit || !context.target) return false;
-    const gridEngine = context.controller.scene.gridEngine;
+    const gridEngine = scene.gridEngine;
     const enemyname = gridEngine.getCharactersAt(context.target)[0]!;
 
     const unit = gridEngine.getContainer(context.activeUnit)! as UnitSprite;
@@ -43,7 +44,7 @@ const AttackMelee: System = {
 
     enemy.damage(ataque - defensa);
 
-    context.controller.scene.cameras.main.shake(200,0.01);
+    scene.cameras.main.shake(200, 0.01);
   }
 };
 
