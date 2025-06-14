@@ -118,7 +118,7 @@ export class MapScene extends Scene {
     );
 
     this.input
-      .on("pointerdown", (pointer: Input.Pointer) => 
+      .on("pointerdown", (pointer: Input.Pointer) =>
         this.controller.onPointerDown(
           {
             pointer,
@@ -142,6 +142,18 @@ export class MapScene extends Scene {
           this.controller.onPointerDrag(event, this.controller.context);
         else this.controller.onPointerHover(event, this.controller.context);
       });
+
+    this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {
+      let sprite: UnitSprite;
+      if (oldUnit) {
+        sprite = this.gridEngine.getContainer(oldUnit) as UnitSprite;
+        sprite.removeEffect("glow");
+      }
+      if (newUnit) {
+        sprite = this.gridEngine.getContainer(newUnit) as UnitSprite;
+        sprite.setEffect("glow");
+      }
+    });
   }
 
   renderPath(path: { x: number; y: number }[], clear: boolean = false) {

@@ -1,4 +1,4 @@
-import type { StateContext } from "../Estados/State";
+import type { EventPayload } from "../Estados/State";
 import type { System } from "./System";
 import {
   PathBlockedStrategy,
@@ -20,14 +20,12 @@ export function FindPath(
   });
 }
 
-export function MoveUnit({
-  controller,
-  target: tile,
-  activeUnit: unit
-}: StateContext) {
+export function MoveUnit({ scene, context }: EventPayload) {
+  const tile = context.target,
+    unit = context.activeUnit;
   if (!tile || !unit) return;
-  controller.scene.gridEngine.stopMovement(unit);
-  controller.scene.gridEngine.moveTo(unit, tile, {
+  scene.gridEngine.stopMovement(unit);
+  scene.gridEngine.moveTo(unit, tile, {
     algorithm: "A_STAR",
     considerCosts: true,
     noPathFoundStrategy: NoPathFoundStrategy.STOP,
@@ -40,13 +38,13 @@ const MoveAction: System = {
   name: "move",
   displayName: "Moverse",
   icon: "footprints",
-  register({ controller }: StateContext) {
+  register(controller) {
     controller.systems.push(MoveAction);
   },
-  test(context: StateContext) {
-    if(!context.activeUnit || !context.target) return false;
-    
-    const gridEngine = context.controller.scene.gridEngine;
+  test({ context, scene }: EventPayload) {
+    if (!context.activeUnit || !context.target) return false;
+
+    const gridEngine = scene.gridEngine;
     const unit = {
       position: gridEngine.getPosition(context.activeUnit),
       charLayer: gridEngine.getCharLayer(context.activeUnit)
@@ -62,8 +60,8 @@ const MoveAction: System = {
     if (!path || path.path.length == 0) return false;
     return true;
   },
-  execute(context: StateContext) {
-    MoveUnit(context);
+  execute(payload: EventPayload) {
+    MoveUnit(payload);
   }
 };
 export default MoveAction;
