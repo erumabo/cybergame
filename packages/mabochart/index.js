@@ -52,15 +52,11 @@ export class StateMachine {
   }
 
   #getStateHandler(event) {
-    let state;
-    for (let i = this.#stateStack.length - 1; i >= 0; i--) {
+    let i = this.#stateStack.length - 1,
       state = this.#stateStack[i];
-      for (const transition in state.on) {
-        if (this.#glob(transition, event)) {
-          return state.on[transition];
-        }
-      }
-    }
+    for (; i >= 0; state = this.#stateStack[--i])
+      for (const transition in state.on)
+        if (this.#glob(transition, event)) return state.on[transition];
   }
 
   #transition(nextState, ...data) {

@@ -111,7 +111,8 @@ const glob_patterns = {
       on: {
         "t.*": "qC",
         "t.*.D": "qD",
-        tB: "qB"
+        tB: "qB",
+        tE: "qE"
       }
     },
     qB: {
@@ -122,6 +123,19 @@ const glob_patterns = {
     },
     qD: {
       on: {}
+    },
+    qE: {
+      initial: "trap",
+      on: {
+        "t.*": "qC"
+      },
+      states: {
+        trap: {
+          on: {
+            "t.A": "qA"
+          }
+        }
+      }
     }
   }
 };
