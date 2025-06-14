@@ -142,6 +142,18 @@ export class MapScene extends Scene {
           this.controller.onPointerDrag(event, this.controller.context);
         else this.controller.onPointerHover(event, this.controller.context);
       });
+
+    this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {
+      let sprite: UnitSprite;
+      if (oldUnit) {
+        sprite = this.gridEngine.getContainer(oldUnit) as UnitSprite;
+        sprite.removeEffect("glow");
+      }
+      if (newUnit) {
+        sprite = this.gridEngine.getContainer(newUnit) as UnitSprite;
+        sprite.setEffect("glow");
+      }
+    });
   }
 
   renderPath(path: { x: number; y: number }[], clear: boolean = false) {
@@ -206,7 +218,7 @@ export class MapScene extends Scene {
     const tilelayer = this.tilemap.layers[0].tilemapLayer;
     const { x, y } = tilelayer.worldToTileXY(pointer.worldX, pointer.worldY);
     const tile = tilelayer.getTileAt(x, y, true);
-    if (!tile || this.controller.context.target == tile) return; // ignore out of bounds touches
+    if (!tile) return; // ignore out of bounds touches
     return tile;
   }
   //#endregion Private

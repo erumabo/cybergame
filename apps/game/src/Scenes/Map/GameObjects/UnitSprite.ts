@@ -6,8 +6,9 @@ import Bar from "./Bar";
 import UnitView from "../HTMLComponents/UnitView/UnitView";
 
 export default class UnitSprite extends GameObjects.Container {
-  sprite?: GameObjects.Sprite;
-  spriteEffect?: FX.ColorMatrix;
+  declare sprite: GameObjects.Sprite;
+  fx: Map<string, FX.Controller>;
+  declare colorfx: FX.ColorMatrix;
   bars: Map<string, Bar>;
   view: GameObjects.DOMElement;
   viewNode: UnitView;
@@ -21,6 +22,7 @@ export default class UnitSprite extends GameObjects.Container {
     this.add(this.view);
 
     this.bars = new Map();
+    this.fx = new Map();
 
     this.on("setdata", (_: UnitSprite, key: string, value: number) => {
       switch (key) {
@@ -64,7 +66,7 @@ export default class UnitSprite extends GameObjects.Container {
       this.add((this.sprite = this.scene.add.sprite(0, 0, key, frame)));
       this.setSize(this.sprite.displayWidth, this.sprite.displayHeight);
       this.sprite.setOrigin(0, 0);
-      this.spriteEffect = this.sprite.postFX.addColorMatrix();
+      this.colorfx = this.sprite.postFX.addColorMatrix();
     }
 
     return this.sprite;
@@ -98,10 +100,29 @@ export default class UnitSprite extends GameObjects.Container {
 
   damage(val: number) {
     this.setData("current_hp", Math.max(0, this.hp - val));
-    
-    if(this.hp == 0) {
-      this.spriteEffect!.saturate(-1,false);
+
+    if (this.hp == 0) {
+      this.colorfx.saturate(-1, false);
     }
+  }
+
+  setEffect(effect: string) {
+    if (this.fx.has(effect)) return;
+    let effectC;
+    switch (effect) {
+      case "glow":
+        effectC = this.sprite.postFX.addGlow(COLORS["--white"]);
+        break;
+      default:
+        return;
+    }
+    this.fx.set(effect, effectC);
+  }
+
+  removeEffect(effect: string) {
+    if (!this.fx.has(effect)) return;
+    this.sprite.postFX.remove(this.fx.get(effect)!);
+    this.fx.delete(effect)
   }
 
   #addBar(

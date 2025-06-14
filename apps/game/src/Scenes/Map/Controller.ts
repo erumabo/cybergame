@@ -3,9 +3,10 @@ import { World } from "@mabo/mecs";
 import { MapScene } from "./Scene";
 
 //#region Import Estados
-import type { Event, StateContext } from "./Estados/State";
+import type { UIEvent, StateContext } from "./Estados/State";
 import type { System } from "./Sistemas/System";
 import { StateMachine } from "@mabo/chart";
+import type { Tilemaps } from "phaser";
 import idle from "./Estados/IDLE";
 import targetSelected from "./Estados/TargetTileSelected";
 import unidadSeleccionada from "./Estados/UnidadActiva";
@@ -25,7 +26,6 @@ export default class MapSceneController {
 
     this.context = {
       activeUnit: "",
-      controller: this,
       target: { x: -1, y: -1 } as any,
       world: new World()
     };
@@ -35,11 +35,15 @@ export default class MapSceneController {
     this.actor = new StateMachine({
       states: { idle, targetSelected, unidadSeleccionada },
       initial: "idle"
-    }).start({}, this.context);
-    
-    InspectAction.register(this.context);
-    MoveAction.register(this.context);
-    AttackMelee.register(this.context);
+    }).start({
+      context: this.context,
+      controller: this,
+      scene: this.scene
+    });
+
+    InspectAction.register(this);
+    MoveAction.register(this);
+    AttackMelee.register(this);
   }
 
   setTileTint({ x, y }: { x: number; y: number }, tint: number = 0xffffff) {
@@ -54,25 +58,47 @@ export default class MapSceneController {
   }
 
   //#region UI Events
-  onPointerHover(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerHover.", event, context);
+  onPointerHover(event: UIEvent, context: StateContext) {
+    if (event.target == context.target) return;
+    this.#onEvent("PointerHover.", event, context);
   }
-  onPointerDown(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerDown.", event, context);
+  onPointerDown(event: UIEvent, context: StateContext) {
+    this.#onEvent("PointerDown.", event, context);
   }
-  onPointerDrag(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerDrag.", event, context);
+  onPointerDrag(event: UIEvent, context: StateContext) {
+    if (event.target == context.target) return;
+    this.#onEvent("PointerDrag.", event, context);
   }
-  onPointerUp(event: Event, context: StateContext) {
-    this.#onEvent("on.PointerUp.", event, context);
+  onPointerUp(event: UIEvent, context: StateContext) {
+    this.#onEvent("PointerUp.", event, context);
   }
 
   actionMenuClick(action: string) {
     this.context.action = action;
-    this.actor.send("selectAction", {}, this.context);
+    this.actor.send("selectAction", {
+      context: this.context,
+      controller: this,
+      scene: this.scene
+    });
   }
 
-  #onEvent(eventName: string, event: Event, context: StateContext) {
+  selectUnit(unit?: string) {
+    this.scene.events?.emit("unitChange", {
+      old: this.context.activeUnit,
+      new: unit
+    });
+    this.context.activeUnit = unit ?? "";
+  }
+
+  setTarget(target?: Tilemaps.Tile) {
+    this.scene.events?.emit("targetChange", {
+      old: this.context.target,
+      new: target
+    });
+    this.context.target = target ?? ({ x: -1, y: -1 } as any);
+  }
+
+  async #onEvent(eventName: string, event: UIEvent, context: StateContext) {
     if (!event.target) return;
 
     const targets = this.scene.gridEngine.getCharactersAt(event.target);
@@ -88,7 +114,13 @@ export default class MapSceneController {
         else eventName += "Enemy";
       }
     }
-    this.actor.send(eventName, event, context);
+
+    await this.actor.send(eventName, {
+      event,
+      context,
+      controller: this,
+      scene: this.scene
+    });
   }
   //#endregion
 }
