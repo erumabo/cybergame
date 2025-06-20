@@ -16,9 +16,12 @@
     "url": "https://github.com/erumabo/cybergame/issues"
   },
   "bin": {
-    "mabo-bake": "./bakeTileset.js",
-    "packtm": "./map2json.js"
+    "tilemap-utils": "./main.js"
   },
+  "files": [
+    "main.js",
+    "src"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,6 +30,7 @@
     "chalk": "^5.4.1",
     "commander": "^12.1.0",
     "jimp": "^1.6.0",
+    "kdljs": "^0.3.0",
     "underscore": "^1.13.7",
     "yaml": "^2.6.1"
   }

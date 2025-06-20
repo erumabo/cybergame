@@ -1,0 +1,155 @@
+tileset name=TilesetUI \
+  tilewidth=32 tileheight=32 spacing=0 margin=0 \
+  columns=32 tilecount=1024 {
+    image source="./tileset.png" width=1024 height=1024
+    tile id=0 {
+      properties {
+        property name=name value="down right"
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=1 {
+      properties {
+        property name=name value=down
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=2 {
+      properties {
+        property name=name value="down left"
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=3 {
+      properties {
+        property name=name value="end down"
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#true
+      }
+    }
+    tile id=4 {
+      properties {
+        property name=name value="end left"
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#true
+      }
+    }
+    tile id=32 {
+      properties {
+        property name=name value=right
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=33 {
+      properties {
+        property name=name value=middle
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=34 {
+      properties {
+        property name=name value=left
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=35 {
+      properties {
+        property name=name value="end right"
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#true
+      }
+    }
+    tile id=36 {
+      properties {
+        property name=name value="end up"
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#true
+      }
+    }
+    tile id=64 {
+      properties {
+        property name=name value="up right"
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=65 {
+      properties {
+        property name=name value=up
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=66 {
+      properties {
+        property name=name value="up left"
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=67 {
+      properties {
+        property name=name value=horizontal
+        property name=up type=boolean value=#false
+        property name=left type=boolean value=#true
+        property name=down type=boolean value=#false
+        property name=right type=boolean value=#true
+        property name=cap type=boolean value=#false
+      }
+    }
+    tile id=68 {
+      properties {
+        property name=name value=vertical
+        property name=up type=boolean value=#true
+        property name=left type=boolean value=#false
+        property name=down type=boolean value=#true
+        property name=right type=boolean value=#false
+        property name=cap type=boolean value=#false
+      }
+    }
+}
