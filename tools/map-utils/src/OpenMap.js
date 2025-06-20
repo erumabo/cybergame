@@ -59,7 +59,7 @@ function getTileset(fullpath, filename) {
       break;
   }
   filepath = path.dirname(filepath);
-  tileset.image = path.relative("", path.join(filepath, tileset.image));
+  tileset.image = path.relative(fullpath, path.join(filepath, tileset.image));
   return tileset;
 }
 
@@ -71,7 +71,10 @@ function processTileLayer(fullpath, layer, tilemap) {
       "Layers",
       `base_${layer.name}.csv`
     );
-    if (!fs.existsSync(layerdatapath)) throw new Error("No layer data found for " +layer.name + ".csv");
+    if (!fs.existsSync(layerdatapath))
+      throw new Error(
+        `No layer data found for ${layer.name}, either inside or as ${layer.name}.csv`
+      );
 
     let csvLayer = CSVParser.ParseLayer(readFile(layerdatapath));
     layer.width = csvLayer.width;
@@ -141,6 +144,7 @@ function processObjectGroup(fullpath, layer, tilemap) {
           if (tset) tileobject.gid += tset.firstgid - 1;
         } else {
           // not embebed tileset, will not embed object
+          // return original with template ref
           return object;
         }
       }
@@ -182,9 +186,9 @@ function assembleTilemap(name, fullpath, mapa) {
 }
 
 export default function ParseTilemap(name, input) {
-  if(!input) return new Tiled.TiledMap();
+  if (!input) return new Tiled.TiledMap();
   const fullpath = path.join(process.cwd(), input);
-  
+
   const wdir = path.dirname(fullpath);
   const mapkey = path.basename(fullpath);
 
