@@ -1,0 +1,77 @@
+tileset name=Tileset \
+  tilewidth=32 tileheight=32 spacing=0 margin=0 \
+  columns=8 tilecount=64 {
+    image source="./tileset.png" width=256 height=256
+    tile id=0 {
+      properties {
+        property type=int name=z-index value=0 
+        property type=string name=name value=₩ 
+        property type=string name=type value="Agua Profunda" 
+        property type=boolean name=ge_collide value=#true
+      }
+    }
+    tile id=1 {
+      properties {
+        property type=int name=z-index value=3
+        property type=string name=name value=~
+        property type=string name=type value=Agua
+        property type=boolean name=ge_collide value=#true
+      }
+    }
+    tile id=5 {
+      properties {
+        property type=int name=z-index value=2
+        property type=int name=ge_cost value=2
+        property type=string name=name value=v
+        property type=string name=type value=Pasto
+      }
+    }
+    tile id=8 {
+      properties {
+        property type=int name=z-index value=10
+        property type=int name=ge_cost value=1
+        property type=string name=name value=_
+        property type=string name=type value=Camino
+      }
+    }
+    tile id=11 {
+      properties {
+        property type=int name=ge_cost value=2
+        property type=string name=name value="="
+        property type=string name=type value=Tierra
+      }
+    }
+    tile id=12 {
+      properties {
+        property type=string name=name value=^
+        property type=string name=type value=Arboles
+        property type=boolean name=ge_collide value=#true
+      }
+    }
+    tile id=13 {
+      properties {
+        property type=int name=ge_cost value=1
+        property type=string name=name value=-
+        property type=string name=type value=Acera
+      }
+    }
+    tile id=15 {
+      properties {
+        property type=int name=ge_cost value=3
+        property type=string name=name value=*
+        property type=string name=type value=Arena
+      }
+    }
+    tile id=20 { 
+      properties {
+        property type=string name=type value="Edificio 1"
+        property type=boolean name=ge_collide value=#true
+      }
+    }
+    tile id=21 { 
+      properties {
+        property type=string name=type value="Edificio 2"
+        property type=boolean name=ge_collide value=#true
+      }
+    }
+}

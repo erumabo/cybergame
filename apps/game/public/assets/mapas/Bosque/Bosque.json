@@ -1,38 +1,231 @@
 {
- "width": 10,
+ "compressionlevel": -1,
  "height": 10,
- "tilewidth": 32,
- "tileheight": 32,
- "nextobjectid": 1,
- "orientation": "orthogonal",
- "version": 11,
- "tilesets": [
+ "infinite": false,
+ "layers": [
   {
-   "name": "Tileset",
-   "firstgid": 1,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 8,
-   "tilecount": 64,
-   "imagewidth": 256,
-   "imageheight": 256,
-   "properties": [],
-   "image": "../Tilesets/Tileset/tileset.png",
-   "tiles": [
+   "id": 1,
+   "locked": false,
+   "name": "Suelo",
+   "offsetx": 0,
+   "offsety": 0,
+   "opacity": 0,
+   "parallaxx": 1,
+   "parallaxy": 1,
+   "properties": [
     {
-     "id": 0,
+     "name": "type",
+     "type": "string",
+     "value": "ground"
+    },
+    {
+     "name": "dualgrid",
+     "type": "boolean",
+     "value": true
+    }
+   ],
+   "startx": 0,
+   "starty": 0,
+   "visible": false,
+   "x": 0,
+   "y": 0,
+   "compression": "",
+   "data": [6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,9,9,9,9,6,6,6,6,6,9,9,9,9,9,6,6,6,6,9,9,9,6,6,6,6,6,6,9,9,9,6,6,6,1,9,9,9,9,9,9,6,1,1,1,9,9,9,9,9,9,6,1,1,1,6,6,6,9,9,9,6,1,1,1,6,6,6,6,9,9,6,6,1,1,6,6,6,6,9,9,6,6,6,6],
+   "encoding": "csv",
+   "height": 10,
+   "type": "tilelayer",
+   "width": 10
+  },
+  {
+   "id": 2,
+   "locked": false,
+   "name": "Chars",
+   "offsetx": 0,
+   "offsety": 0,
+   "opacity": 1,
+   "parallaxx": 1,
+   "parallaxy": 1,
+   "properties": [],
+   "startx": 0,
+   "starty": 0,
+   "visible": true,
+   "x": 0,
+   "y": 0,
+   "draworder": "topdown",
+   "objects": [
+    {
+     "ellipse": false,
+     "gid": 1125,
+     "height": 32,
+     "id": 1,
+     "name": "Aquamarina",
+     "point": false,
      "properties": [
       {
-       "name": "alias",
-       "type": "string",
-       "value": "₩"
+       "name": "hp",
+       "type": "int",
+       "value": 10
       },
       {
-       "name": "z-index",
+       "name": "mp",
+       "type": "int",
+       "value": 10
+      },
+      {
+       "name": "atk",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "def",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "faction",
        "type": "string",
-       "value": "0"
+       "value": "ally"
+      }
+     ],
+     "rotation": 0,
+     "type": "character",
+     "visible": true,
+     "width": 32,
+     "x": 32,
+     "y": 32
+    },
+    {
+     "ellipse": false,
+     "gid": 1145,
+     "height": 32,
+     "id": 2,
+     "name": "Cinabrio",
+     "point": false,
+     "properties": [
+      {
+       "name": "hp",
+       "type": "int",
+       "value": 10
+      },
+      {
+       "name": "mp",
+       "type": "int",
+       "value": 10
+      },
+      {
+       "name": "atk",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "def",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "faction",
+       "type": "string",
+       "value": "ally"
+      }
+     ],
+     "rotation": 0,
+     "type": "character",
+     "visible": true,
+     "width": 32,
+     "x": 64,
+     "y": 64
+    },
+    {
+     "ellipse": false,
+     "gid": 1155,
+     "height": 32,
+     "id": 3,
+     "name": "Diamante",
+     "point": false,
+     "properties": [
+      {
+       "name": "hp",
+       "type": "int",
+       "value": 10
+      },
+      {
+       "name": "mp",
+       "type": "int",
+       "value": 10
+      },
+      {
+       "name": "atk",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "def",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "faction",
+       "type": "string",
+       "value": "enemy"
+      }
+     ],
+     "rotation": 0,
+     "type": "character",
+     "visible": true,
+     "width": 32,
+     "x": 96,
+     "y": 96
+    }
+   ],
+   "type": "objectgroup"
+  }
+ ],
+ "nextlayerid": 3,
+ "nextobjectid": 4,
+ "orientation": "orthogonal",
+ "parallaxoriginx": 0,
+ "parallaxoriginy": 0,
+ "properties": [],
+ "renderorder": "right-down",
+ "tiledversion": "1.11.1",
+ "tileheight": 32,
+ "tilesets": [
+  {
+   "columns": 8,
+   "fillmode": "stretch",
+   "firstgid": 1,
+   "image": "../Tilesets/Tileset/tileset.png",
+   "imageheight": 256,
+   "imagewidth": 256,
+   "margin": 0,
+   "name": "Tileset",
+   "objectalignment": "unspecified",
+   "properties": [],
+   "spacing": 0,
+   "tilecount": 64,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [
+    {
+     "animation": [],
+     "id": 0,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
+     "properties": [
+      {
+       "name": "z-index",
+       "type": "int",
+       "value": 0
+      },
+      {
+       "name": "name",
+       "type": "string",
+       "value": "₩"
       },
       {
        "name": "type",
@@ -47,17 +240,24 @@
      ]
     },
     {
+     "animation": [],
      "id": 1,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
-       "type": "string",
-       "value": "~"
+       "name": "z-index",
+       "type": "int",
+       "value": 3
       },
       {
-       "name": "z-index",
+       "name": "name",
        "type": "string",
-       "value": "3"
+       "value": "~"
       },
       {
        "name": "type",
@@ -72,60 +272,86 @@
      ]
     },
     {
+     "animation": [],
      "id": 5,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
-       "type": "string",
-       "value": "v"
-      },
-      {
        "name": "z-index",
-       "type": "string",
-       "value": "2"
-      },
-      {
-       "name": "type",
-       "type": "string",
-       "value": "Pasto"
+       "type": "int",
+       "value": 2
       },
       {
        "name": "ge_cost",
        "type": "int",
        "value": 2
-      }
-     ]
-    },
-    {
-     "id": 8,
-     "properties": [
-      {
-       "name": "alias",
-       "type": "string",
-       "value": "_"
       },
       {
-       "name": "z-index",
+       "name": "name",
        "type": "string",
-       "value": "10"
+       "value": "v"
       },
       {
        "name": "type",
        "type": "string",
-       "value": "Camino"
+       "value": "Pasto"
+      }
+     ]
+    },
+    {
+     "animation": [],
+     "id": 8,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
+     "properties": [
+      {
+       "name": "z-index",
+       "type": "int",
+       "value": 10
       },
       {
        "name": "ge_cost",
        "type": "int",
        "value": 1
+      },
+      {
+       "name": "name",
+       "type": "string",
+       "value": "_"
+      },
+      {
+       "name": "type",
+       "type": "string",
+       "value": "Camino"
       }
      ]
     },
     {
+     "animation": [],
      "id": 11,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "ge_cost",
+       "type": "int",
+       "value": 2
+      },
+      {
+       "name": "name",
        "type": "string",
        "value": "="
       },
@@ -133,19 +359,21 @@
        "name": "type",
        "type": "string",
        "value": "Tierra"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 2
       }
      ]
     },
     {
+     "animation": [],
      "id": 12,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "^"
       },
@@ -162,10 +390,22 @@
      ]
     },
     {
+     "animation": [],
      "id": 13,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "ge_cost",
+       "type": "int",
+       "value": 1
+      },
+      {
+       "name": "name",
        "type": "string",
        "value": "-"
       },
@@ -173,19 +413,26 @@
        "name": "type",
        "type": "string",
        "value": "Acera"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 1
       }
      ]
     },
     {
+     "animation": [],
      "id": 15,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "ge_cost",
+       "type": "int",
+       "value": 3
+      },
+      {
+       "name": "name",
        "type": "string",
        "value": "*"
       },
@@ -193,16 +440,18 @@
        "name": "type",
        "type": "string",
        "value": "Arena"
-      },
-      {
-       "name": "ge_cost",
-       "type": "int",
-       "value": 3
       }
      ]
     },
     {
+     "animation": [],
      "id": 20,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
        "name": "type",
@@ -217,7 +466,14 @@
      ]
     },
     {
+     "animation": [],
      "id": 21,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
        "name": "type",
@@ -231,27 +487,40 @@
       }
      ]
     }
-   ]
+   ],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "TilesetUI",
-   "firstgid": 100,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
    "columns": 32,
-   "tilecount": 1024,
-   "imagewidth": 1024,
-   "imageheight": 1024,
-   "properties": [],
+   "fillmode": "stretch",
+   "firstgid": 100,
    "image": "../Tilesets/TilesetUI/tileset.png",
+   "imageheight": 1024,
+   "imagewidth": 1024,
+   "margin": 0,
+   "name": "TilesetUI",
+   "objectalignment": "unspecified",
+   "properties": [],
+   "spacing": 0,
+   "tilecount": 1024,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
    "tiles": [
     {
+     "animation": [],
      "id": 0,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "down right"
       },
@@ -283,10 +552,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 1,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "down"
       },
@@ -318,10 +594,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 2,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "down left"
       },
@@ -353,10 +636,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 3,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "end down"
       },
@@ -388,10 +678,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 4,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "end left"
       },
@@ -423,10 +720,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 32,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "right"
       },
@@ -458,10 +762,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 33,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "middle"
       },
@@ -493,10 +804,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 34,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "left"
       },
@@ -528,10 +846,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 35,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "end right"
       },
@@ -563,10 +888,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 36,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "end up"
       },
@@ -598,10 +930,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 64,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "up right"
       },
@@ -633,10 +972,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 65,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "up"
       },
@@ -668,10 +1014,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 66,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "up left"
       },
@@ -703,10 +1056,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 67,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "horizontal"
       },
@@ -738,10 +1098,17 @@
      ]
     },
     {
+     "animation": [],
      "id": 68,
+     "imageheight": 0,
+     "imagewidth": 0,
+     "x": 0,
+     "y": 0,
+     "width": 0,
+     "height": 0,
      "properties": [
       {
-       "name": "alias",
+       "name": "name",
        "type": "string",
        "value": "vertical"
       },
@@ -772,320 +1139,245 @@
       }
      ]
     }
-   ]
+   ],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Aqua",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1125,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Aqua/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Aqua",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Aqua/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Azure",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1135,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Azure/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Azure",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Azure/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Cinnabar",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1145,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Cinnabar/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Cinnabar",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Cinnabar/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Diamond",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1155,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Diamond/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Diamond",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Diamond/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Emerald",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1165,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Emerald/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Emerald",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Emerald/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Opal",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1175,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Opal/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Opal",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Opal/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Rubellite",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1185,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Rubellite/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Rubellite",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Rubellite/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Ruby",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1195,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Ruby/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Ruby",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Ruby/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Spinel",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1205,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Spinel/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Spinel",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Spinel/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "Topaz",
+   "columns": 1,
+   "fillmode": "stretch",
    "firstgid": 1215,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 0,
-   "margin": 0,
-   "columns": 1,
-   "tilecount": 1,
-   "imagewidth": 32,
+   "image": "../Tilesets/Topaz/tileset.png",
    "imageheight": 32,
+   "imagewidth": 32,
+   "margin": 0,
+   "name": "Topaz",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/Topaz/tileset.png"
+   "spacing": 0,
+   "tilecount": 1,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   },
   {
-   "name": "TilesetDual",
-   "firstgid": 1225,
-   "tilewidth": 32,
-   "tileheight": 32,
-   "spacing": 2,
-   "margin": 1,
    "columns": 32,
-   "tilecount": 1024,
-   "imagewidth": 1088,
+   "fillmode": "stretch",
+   "firstgid": 1225,
+   "image": "../Tilesets/TilesetDual/tileset.png",
    "imageheight": 1088,
+   "imagewidth": 1088,
+   "margin": 1,
+   "name": "TilesetDual",
+   "objectalignment": "unspecified",
    "properties": [],
-   "image": "../Tilesets/TilesetDual/tileset.png"
+   "spacing": 2,
+   "tilecount": 1024,
+   "tiledversion": "1.11.1",
+   "tileheight": 32,
+   "tilerendersize": "tile",
+   "tiles": [],
+   "tilewidth": 32,
+   "type": "tileset",
+   "version": "1.11.1"
   }
  ],
- "layers": [
-  {
-   "name": "Suelo",
-   "type": "tilelayer",
-   "width": 10,
-   "height": 10,
-   "visible": false,
-   "opacity": 1,
-   "offsetx": 0,
-   "offsety": 0,
-   "x": 0,
-   "y": 0,
-   "id": 1,
-   "encoding": "csv",
-   "properties": [
-    {
-     "name": "type",
-     "value": "ground",
-     "type": "string"
-    },
-    {
-     "name": "dualgrid",
-     "value": true,
-     "type": "boolean"
-    }
-   ],
-   "data": [6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,9,9,9,9,6,6,6,6,6,9,9,9,9,9,6,6,6,6,9,9,9,6,6,6,6,6,6,9,9,9,6,6,6,1,9,9,9,9,9,9,6,1,1,1,9,9,9,9,9,9,6,1,1,1,6,6,6,9,9,9,6,1,1,1,6,6,6,6,9,9,6,6,1,1,6,6,6,6,9,9,6,6,6,6]
-  },
-  {
-   "name": "Chars",
-   "type": "objectgroup",
-   "visible": true,
-   "opacity": 1,
-   "offsetx": 0,
-   "offsety": 0,
-   "x": 0,
-   "y": 0,
-   "id": 2,
-   "objects": [
-    {
-     "id": 0,
-     "gid": 1125,
-     "type": "character",
-     "name": "Aquamarina",
-     "x": 32,
-     "y": 32,
-     "visible": true,
-     "rotation": 0,
-     "width": 32,
-     "height": 32,
-     "properties": [
-      {
-       "name": "hp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "mp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "atk",
-       "value": 2,
-       "type": "int"
-      },
-      {
-       "name": "def",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "faction",
-       "value": "ally",
-       "type": "string"
-      }
-     ]
-    },
-    {
-     "id": 1,
-     "gid": 1145,
-     "type": "character",
-     "name": "Cinabrio",
-     "x": 64,
-     "y": 64,
-     "visible": true,
-     "rotation": 0,
-     "width": 32,
-     "height": 32,
-     "properties": [
-      {
-       "name": "hp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "mp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "atk",
-       "value": 2,
-       "type": "int"
-      },
-      {
-       "name": "def",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "faction",
-       "value": "ally",
-       "type": "string"
-      }
-     ]
-    },
-    {
-     "id": 2,
-     "gid": 1155,
-     "type": "character",
-     "name": "Diamante",
-     "x": 96,
-     "y": 96,
-     "visible": true,
-     "rotation": 0,
-     "width": 32,
-     "height": 32,
-     "properties": [
-      {
-       "name": "hp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "mp",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "atk",
-       "value": 1,
-       "type": "int"
-      },
-      {
-       "name": "def",
-       "value": 0,
-       "type": "int"
-      },
-      {
-       "name": "faction",
-       "value": "enemy",
-       "type": "string"
-      }
-     ]
-    }
-   ]
-  }
- ]
+ "tilewidth": 32,
+ "type": "map",
+ "version": 11,
+ "width": 10
 }

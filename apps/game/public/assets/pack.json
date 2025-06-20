@@ -1,21 +1,21 @@
 {
   "tilesets": {
-    "path": "assets/mapas",
+    "path": "assets/mapas/Tilesets",
     "files": [
       {
         "key": "Tileset",
         "type": "image",
-        "url": "Tilesets/Tileset/tileset.png"
+        "url": "Tileset/tileset.png"
       },
       {
         "key": "TilesetDual",
         "type": "image",
-        "url": "Tilesets/TilesetDual/tileset.png"
+        "url": "TilesetDual/tileset.png"
       },
       {
         "key": "TilesetUI",
         "type": "image",
-        "url": "Tilesets/TilesetUI/tileset-ui.png"
+        "url": "TilesetUI/tileset-ui.png"
       }
     ]
   },

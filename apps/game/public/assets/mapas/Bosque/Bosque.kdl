@@ -1,0 +1,44 @@
+map width=10 height=10 tilewidth=32 tileheight=32 \
+  orientation="orthogonal" version=11 \
+  nextobjectid=4 nextlayerid=3 {
+  
+    tileset source="../Tilesets/Tileset/config.kdl"     firstgid=1;    //1-99
+    tileset source="../Tilesets/TilesetUI/config.kdl"   firstgid=100;  //100-1124
+    tileset source="../Tilesets/Aqua/config.yml"        firstgid=1125;
+    tileset source="../Tilesets/Azure/config.yml"       firstgid=1135;
+    tileset source="../Tilesets/Cinnabar/config.yml"    firstgid=1145;
+    tileset source="../Tilesets/Diamond/config.yml"     firstgid=1155;
+    tileset source="../Tilesets/Emerald/config.yml"     firstgid=1165;
+    tileset source="../Tilesets/Opal/config.yml"        firstgid=1175;
+    tileset source="../Tilesets/Rubellite/config.yml"   firstgid=1185;
+    tileset source="../Tilesets/Ruby/config.yml"        firstgid=1195;
+    tileset source="../Tilesets/Spinel/config.yml"      firstgid=1205;
+    tileset source="../Tilesets/Topaz/config.yml"       firstgid=1215;
+    tileset source="../Tilesets/TilesetDual/config.yml" firstgid=1225; //1225-...
+  
+    layer id=1 name="Suelo" width=10 height=10 visible=#false opacity=0 {
+      data encoding="csv";
+      properties {
+        property name="type" value="ground" type="string";
+        property name="dualgrid" value=#true type="boolean";
+      }
+    }
+    
+    objectgroup id=2 name="Chars" {
+      properties;
+      objects {
+        object id=1 template="../ObjectTemplates/Character-Aqua.kdl" x=32 y=32;
+        object id=2 template="../ObjectTemplates/Character-Cinabrio.yml" x=64 y=64;
+        object id=3 gid=1155 type="character" name="Diamante" \
+          x=96 y=96 width=32 height=32 {
+          properties {
+            property name="hp" value=10 type="int";
+            property name="mp" value=10 type="int";
+            property name="atk" value=1 type="int";
+            property name="def" value=1 type="int";
+            property name="faction" value="enemy" type="string";
+          }
+        }
+      }
+    }
+}

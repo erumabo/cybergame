@@ -5,6 +5,7 @@ spacing: 2
 margin: 1
 columns: 32
 tilecount: 1024
+image: ./tileset.png
 imagewidth: 1088
 imageheight: 1088
 properties: []

@@ -1,0 +1,14 @@
+template {
+ tileset name="Aqua" // Usr existing tileset by name
+ object gid=1 type="character" name="Aquamarina" \
+  width=32 height=32 \
+  visible=#true {
+    properties {
+      property name="hp" value=10 type="int"
+      property name="mp" value=10 type="int"
+      property name="atk" value=1 type="int"
+      property name="def" value=1 type="int"
+      property name="faction" value="ally" type="string"
+    }
+  }
+}
