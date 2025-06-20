@@ -1,3 +1,5 @@
+Before Jira
+
 Agregar un sistema de ataque basico.
 # Flow
 

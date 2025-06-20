@@ -4,6 +4,8 @@ tags:
   - mvp
   - tech-debt
 ---
+JIRA:PJ-1
+
 Si, en el handler de un evento, el contexto cambia (set Active Unit, unset target, etc), no hay forma de detectar eso para realizar una acción, solo podemos repetir el mismo código en cada estado.
 
 # Idea

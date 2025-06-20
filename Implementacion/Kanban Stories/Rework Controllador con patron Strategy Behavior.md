@@ -1,3 +1,5 @@
+Before Jira
+
 # Estado actual
 El controlador maneja todo input, consulta el estado y contexto (objecto estado, self), y escoge que transición usar en la maquina.
 La maquina de estados solo es un flag, y ejecuta acciones inmediatas en respuesta.
