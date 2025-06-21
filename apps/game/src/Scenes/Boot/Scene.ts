@@ -5,9 +5,7 @@ export class BootScene extends Scene {
   constructor() {
     super("Boot");
   }
-  init() {
-    this.cache.addCustom("ink");
-  }
+  init() {}
   preload() {
     // if this takes too much time, it should go in preload scene
     // & here we only load the loading screen

@@ -1,17 +1,39 @@
-import { Plugins } from "phaser";
+import { Plugins, Loader } from "phaser";
+import type { Types } from "phaser";
 import type { Story } from "inkjs";
 import { Compiler } from "inkjs/full";
-import { Path } from "inkjs/engine/Path"
+import { Path } from "inkjs/engine/Path";
 import { marked } from "marked";
 import mustache from "mustache";
 
-export default class StoryManager extends Plugins.BasePlugin {
+class InkStoryFile extends Loader.FileTypes.TextFile {
+  constructor(
+    loader: Loader.LoaderPlugin,
+    key: string | Types.Loader.FileTypes.TextFileConfig,
+    url?: string,
+    xhrSettings?: Types.Loader.XHRSettingsObject
+  ) {
+    super(loader, key, url, xhrSettings);
+    this.cache = loader.cacheManager.custom.ink;
+    if (!this.cache) loader.cacheManager.addCustom("ink");
+    this.cache = loader.cacheManager.custom.ink;
+  }
+
+  override onProcess() {
+    this.data = new Compiler(this.xhrLoader!.responseText).Compile();
+    this.onProcessComplete();
+  }
+}
+
+export default class InkStoryManager extends Plugins.BasePlugin {
   story?: Story;
 
   #context?: any;
 
   constructor(pluginManager: any) {
     super(pluginManager);
+
+    pluginManager.registerFileType("ink", this.inkStoryFileCallback);
   }
 
   override init() {
@@ -47,10 +69,26 @@ export default class StoryManager extends Plugins.BasePlugin {
   setStory(storyName: string): Story {
     const inkCache = this.game.cache.custom.ink;
     if (inkCache.has(storyName)) return (this.story = inkCache.get(storyName));
+    // TODO: Set a fallback story file
+    throw new Error("No story file found");
+  }
 
-    const storyInk = this.game.cache.text.get("story_" + storyName);
-    this.story = new Compiler(storyInk).Compile();
-    inkCache.add(storyName, this.story);
-    return this.story;
+  inkStoryFileCallback(
+    this: Loader.LoaderPlugin,
+    key:
+      | string
+      | Types.Loader.FileTypes.TextFileConfig
+      | Array<Types.Loader.FileTypes.TextFileConfig>,
+    url?: string,
+    xhrSettings?: Types.Loader.XHRSettingsObject
+  ): Loader.LoaderPlugin {
+    if (Array.isArray(key)) {
+      key.forEach((config) => this.addFile(new InkStoryFile(this, config)));
+    } else {
+      //  If it's an array it has to be an array of Objects, so we get everything out of the 'key' object
+      this.addFile(new InkStoryFile(this, key, url, xhrSettings));
+    }
+
+    return this;
   }
 }

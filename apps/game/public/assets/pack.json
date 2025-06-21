@@ -28,8 +28,8 @@
         "url": "Bosque.json"
       },
       {
-        "key": "story_Bosque",
-        "type": "text",
+        "key": "Bosque",
+        "type": "ink",
         "url": "story.ink"
       }
     ]
