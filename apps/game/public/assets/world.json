@@ -1,0 +1,111 @@
+{
+  "items": [],
+  "characters": [
+    {
+      "name": "Larimar",
+      "frame": 0,
+      "width": 32,
+      "height": 32,
+      "spritesheet": "Aqua",
+      "properties": [
+        {
+          "name": "hp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "mp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "atk",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "def",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "faction",
+          "type": "string",
+          "value": "ally"
+        }
+      ],
+      "inventory": []
+    },
+    {
+      "name": "Rubi",
+      "frame": 0,
+      "spritesheet": "Ruby",
+      "width": 32,
+      "height": 32,
+      "properties": [
+        {
+          "name": "hp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "mp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "atk",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "def",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "faction",
+          "type": "string",
+          "value": "ally"
+        }
+      ],
+      "inventory": []
+    },
+    {
+      "name": "Diamante",
+      "frame": 0,
+      "spritesheet": "Diamond",
+      "width": 32,
+      "height": 32,
+      "properties": [
+        {
+          "name": "hp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "mp",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "name": "atk",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "def",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "faction",
+          "type": "string",
+          "value": "enemy"
+        }
+      ],
+      "inventory": []
+    }
+  ],
+  "party": ["Rubi", "Larimar"]
+}

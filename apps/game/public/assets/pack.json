@@ -1,5 +1,8 @@
 {
-  "tilesets": {
+  "World": {
+    "files": [{ "key": "WorldConfig", "type": "json", "url": "assets/world.json" }]
+  },
+  "Tilesets": {
     "path": "assets/mapas/Tilesets",
     "files": [
       {
@@ -19,7 +22,7 @@
       }
     ]
   },
-  "bosque": {
+  "Bosque": {
     "path": "assets/mapas/Bosque",
     "files": [
       {
@@ -34,7 +37,7 @@
       }
     ]
   },
-  "Chars": {
+  "CharSpritesheets": {
     "path": "assets/mapas/Tilesets",
     "defaultType": "spritesheet",
     "files": [
