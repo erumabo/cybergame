@@ -10,7 +10,7 @@ import { VNScene } from "./Scenes/VN/Scene";
 // Plugins
 import StoryManager from "./Plugins/StoryManager";
 import { GridEngine } from "grid-engine";
-import DatGui from "./Plugins/DatGui";
+//import DatGui from "./Plugins/DatGui";
 
 import Alpine from "alpinejs";
 Alpine.start();
@@ -44,12 +44,12 @@ const config = {
         start: false,
         mapping: "storyManager"
       },
-      {
+      /*{
         key: "datGui",
         plugin: DatGui,
         start: false,
         mapping: "datGui"
-      }
+      }*/
     ],
     scene: [
       {

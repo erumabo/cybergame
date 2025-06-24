@@ -1,0 +1,17 @@
+{
+  "Bosque": {
+    "path": "assets/mapas/Bosque",
+    "files": [
+      {
+        "key": "Bosque",
+        "type": "tilemapTiledJSON",
+        "url": "Bosque.json"
+      },
+      {
+        "key": "Bosque",
+        "type": "ink",
+        "url": "story.ink"
+      }
+    ]
+  }
+}
