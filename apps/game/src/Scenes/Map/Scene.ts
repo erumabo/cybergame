@@ -9,6 +9,12 @@ import UnitSprite from "./GameObjects/UnitSprite";
 import ActionsMenu from "./GameObjects/ActionsMenu";
 import MapSceneController from "./Controller";
 
+interface Propery {
+  name: string;
+  type?: string;
+  value: any;
+}
+
 export class MapScene extends Scene {
   declare storyManager: StoryManager;
   declare datGui: DatGui;
@@ -18,6 +24,7 @@ export class MapScene extends Scene {
   controller: MapSceneController;
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
+  tileMappings: number[] = []; // memo for ui tiles, used for path arrows
 
   //#region Lifecycle
   constructor() {
@@ -63,7 +70,7 @@ export class MapScene extends Scene {
       characters: []
     });
     layer0 = layer0
-      .concat(this.#spawnParty(worldConfig["party"], worldConfig.characters))
+      .concat(this.#spawnParty(worldConfig.party, worldConfig.characters))
       .concat(this.#spawnEnemies(worldConfig.characters));
 
     this.add.layer().add(layer0);
@@ -148,7 +155,7 @@ export class MapScene extends Scene {
     if (clear) layer.forEachTile((t) => (t.index = -1));
 
     let prev, pos, next, dir;
-    const tileMappings: number[] = [];
+
     for (let i = 0; i < path.length; ++i) {
       pos = path[i];
       next = i < path.length - 1 ? path[i + 1] : null;
@@ -156,10 +163,10 @@ export class MapScene extends Scene {
       dir = 0;
       if (prev) dir |= this.#direction(prev, pos);
       if (next) dir |= this.#direction(next, pos);
-      dir |= next ? 0 : 0b10000;
+      else dir |= 0b10000;
       prev = pos;
-
-      if (!tileMappings[dir]) {
+      
+      if (!this.tileMappings[dir]) {
         for (
           let ti = tileset.firstgid;
           ti < tileset.firstgid + tileset.total;
@@ -174,13 +181,13 @@ export class MapScene extends Scene {
             props["down"] == (dir & 0b00010) >> 1 &&
             props["left"] == (dir & 0b00001)
           ) {
-            tileMappings[dir] = ti;
+            this.tileMappings[dir] = ti;
             break;
           }
         }
       }
 
-      dir = tileMappings[dir];
+      dir = this.tileMappings[dir];
       if (dir === undefined) continue;
       layer.getTileAt(pos.x, pos.y, true).index = dir;
     }
@@ -190,8 +197,8 @@ export class MapScene extends Scene {
   //#region Private
   #direction(a: { x: number; y: number }, b: { x: number; y: number }) {
     let dir =
-      (b.y - a.y == 0 ? 0 : 2 << (b.y - a.y + 1)) |
-      (a.x - b.x == 0 ? 0 : 1 << (a.x - b.x + 1));
+      (b.y - a.y === 0 ? 0 : 2 << (b.y - a.y + 1)) |
+      (a.x - b.x === 0 ? 0 : 1 << (a.x - b.x + 1));
     return dir;
   }
 
@@ -204,7 +211,7 @@ export class MapScene extends Scene {
   }
 
   // Same as phaser ObjectHelper version, same behaviour
-  #setTiledProperties(target: any, properties: { name: string; value: any }[]) {
+  #setTiledProperties(target: any, properties: Propery[]) {
     properties.forEach((prop) => {
       if (target[prop.name] !== undefined) target[prop.name] = prop.value;
       else target.setData(prop.name, prop.value);
@@ -235,9 +242,7 @@ export class MapScene extends Scene {
     return unit;
   }
 
-  #spawnEnemies(
-    charConfigs: { properties: { name: string; value: string }[] }[]
-  ) {
+  #spawnEnemies(charConfigs: { properties: Propery[] }[]) {
     let spawned: UnitSprite[] = [];
     let spawnSpaces =
       this.tilemap
@@ -252,7 +257,7 @@ export class MapScene extends Scene {
 
       // First enemy that matches the model
       let enemy = enemies.find((enemy) =>
-        model.every((prop: { name: string; value: string }) =>
+        model.every((prop: Propery) =>
           enemy.properties.some(
             (p) => p.name === prop.name && p.value === prop.value
           )
