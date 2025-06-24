@@ -1,5 +1,8 @@
 {
   "appId": "dev.mabo.cybergame",
   "appName": "cybergame",
-  "webDir": "dist"
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http"
+  }
 }

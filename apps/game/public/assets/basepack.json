@@ -1,40 +1,28 @@
 {
-  "tilesets": {
+  "World": {
+    "files": [
+      { "key": "WorldConfig", "type": "json", "url": "assets/world.json" }
+    ]
+  },
+  "Tilesets": {
     "path": "assets/mapas/Tilesets",
+    "defaultType": "image",
     "files": [
       {
         "key": "Tileset",
-        "type": "image",
         "url": "Tileset/tileset.png"
       },
       {
         "key": "TilesetDual",
-        "type": "image",
         "url": "TilesetDual/tileset.png"
       },
       {
         "key": "TilesetUI",
-        "type": "image",
         "url": "TilesetUI/tileset-ui.png"
       }
     ]
   },
-  "bosque": {
-    "path": "assets/mapas/Bosque",
-    "files": [
-      {
-        "key": "Bosque",
-        "type": "tilemapTiledJSON",
-        "url": "Bosque.json"
-      },
-      {
-        "key": "story_Bosque",
-        "type": "text",
-        "url": "story.ink"
-      }
-    ]
-  },
-  "Chars": {
+  "CharSpritesheets": {
     "path": "assets/mapas/Tilesets",
     "defaultType": "spritesheet",
     "files": [

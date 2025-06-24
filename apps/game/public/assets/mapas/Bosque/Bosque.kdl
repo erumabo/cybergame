@@ -27,18 +27,9 @@ map width=10 height=10 tilewidth=32 tileheight=32 \
     objectgroup id=2 name="Chars" {
       properties;
       objects {
-        object id=1 template="../ObjectTemplates/Character-Aqua.kdl" x=32 y=32;
-        object id=2 template="../ObjectTemplates/Character-Cinabrio.yml" x=64 y=64;
-        object id=3 gid=1155 type="character" name="Diamante" \
-          x=96 y=96 width=32 height=32 {
-          properties {
-            property name="hp" value=10 type="int";
-            property name="mp" value=10 type="int";
-            property name="atk" value=1 type="int";
-            property name="def" value=1 type="int";
-            property name="faction" value="enemy" type="string";
-          }
-        }
+        object id=1 type="character" x=64 y=64 { point; }
+        object id=2 type="character" x=64 y=32 { point; }
+        object id=3 type="enemy" x=96 y=96 { point; }
       }
     }
 }

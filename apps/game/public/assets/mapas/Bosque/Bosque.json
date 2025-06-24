@@ -54,125 +54,26 @@
    "draworder": "topdown",
    "objects": [
     {
-     "ellipse": false,
-     "gid": 1125,
-     "height": 32,
      "id": 1,
-     "name": "Aquamarina",
-     "point": false,
-     "properties": [
-      {
-       "name": "hp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "mp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "atk",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "def",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "faction",
-       "type": "string",
-       "value": "ally"
-      }
-     ],
-     "rotation": 0,
+     "point": true,
      "type": "character",
      "visible": true,
-     "width": 32,
-     "x": 32,
-     "y": 32
-    },
-    {
-     "ellipse": false,
-     "gid": 1145,
-     "height": 32,
-     "id": 2,
-     "name": "Cinabrio",
-     "point": false,
-     "properties": [
-      {
-       "name": "hp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "mp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "atk",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "def",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "faction",
-       "type": "string",
-       "value": "ally"
-      }
-     ],
-     "rotation": 0,
-     "type": "character",
-     "visible": true,
-     "width": 32,
      "x": 64,
      "y": 64
     },
     {
-     "ellipse": false,
-     "gid": 1155,
-     "height": 32,
-     "id": 3,
-     "name": "Diamante",
-     "point": false,
-     "properties": [
-      {
-       "name": "hp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "mp",
-       "type": "int",
-       "value": 10
-      },
-      {
-       "name": "atk",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "def",
-       "type": "int",
-       "value": 1
-      },
-      {
-       "name": "faction",
-       "type": "string",
-       "value": "enemy"
-      }
-     ],
-     "rotation": 0,
+     "id": 2,
+     "point": true,
      "type": "character",
      "visible": true,
-     "width": 32,
+     "x": 64,
+     "y": 32
+    },
+    {
+     "id": 3,
+     "point": true,
+     "type": "enemy",
+     "visible": true,
      "x": 96,
      "y": 96
     }

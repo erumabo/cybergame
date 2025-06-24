@@ -23,7 +23,7 @@
     "pack-tilemap": "packtm `npm prefix`/apps/game/public/assets/mapas Bosque"
   },
   "devDependencies": {
-    "@capacitor/cli": "^6.1.2",
+    "@capacitor/cli": "^7.0.0",
     "@mabo/map-utils": "^1.0.0",
     "@types/alpinejs": "^3.13.11",
     "@types/animejs": "^3.1.12",
@@ -31,12 +31,12 @@
     "@types/mustache": "^4.2.5",
     "@types/underscore": "^1.13.0",
     "typescript": "^5.6.3",
-    "vite": "^5.4.19",
+    "vite": "^6.3.5",
     "vite-plugin-checker": "^0.8.0"
   },
   "dependencies": {
-    "@capacitor/android": "^6.1.2",
-    "@capacitor/core": "^6.1.2",
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
     "@mabo/chart": "^0.0.0",
     "@mabo/mecs": "0.0.0",
     "alpinejs": "^3.14.7",
