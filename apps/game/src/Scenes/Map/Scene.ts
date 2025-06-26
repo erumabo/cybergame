@@ -148,49 +148,39 @@ export class MapScene extends Scene {
     const layer =
       this.tilemap.layers[this.tilemap.getLayerIndexByName("Overlay")]
         ?.tilemapLayer;
+    if (layer && clear) layer.forEachTile((t) => (t.index = -1));
+    if (path.length < 2) return;
 
     const tileset = this.tilemap.getTileset("TilesetUI");
-    if (!layer || !tileset) return;
+    if (!tileset) return;
 
-    if (clear) layer.forEachTile((t) => (t.index = -1));
-
-    let prev, pos, next, dir;
-
-    for (let i = 0; i < path.length; ++i) {
-      pos = path[i];
-      next = i < path.length - 1 ? path[i + 1] : null;
-
-      dir = 0;
-      if (prev) dir |= this.#direction(prev, pos);
-      if (next) dir |= this.#direction(next, pos);
-      else dir |= 0b10000;
+    let pos = path[0],
+      next = path[1],
       prev = pos;
-      
-      if (!this.tileMappings[dir]) {
-        for (
-          let ti = tileset.firstgid;
-          ti < tileset.firstgid + tileset.total;
-          ti++
-        ) {
-          const props: any = tileset.getTileProperties(ti);
-          if (!props) continue;
-          if (
-            props["cap"] == (dir & 0b10000) >> 4 &&
-            props["up"] == (dir & 0b01000) >> 3 &&
-            props["right"] == (dir & 0b00100) >> 2 &&
-            props["down"] == (dir & 0b00010) >> 1 &&
-            props["left"] == (dir & 0b00001)
-          ) {
-            this.tileMappings[dir] = ti;
-            break;
-          }
-        }
-      }
 
-      dir = this.tileMappings[dir];
-      if (dir === undefined) continue;
-      layer.getTileAt(pos.x, pos.y, true).index = dir;
+    // First tile
+    layer.getTileAt(pos.x, pos.y, true).index = this.#getArrowTile(
+      this.#direction(next, pos),
+      tileset
+    );
+
+    // Tiles [1, last)
+    let i = 1;
+    for (; i < path.length - 1; ) {
+      pos = next;
+      next = path[++i];
+      layer.getTileAt(pos.x, pos.y, true).index = this.#getArrowTile(
+        this.#direction(next, pos) | this.#direction(prev, pos),
+        tileset
+      );
+      prev = pos;
     }
+
+    // Last tile
+    layer.getTileAt(next.x, next.y, true).index = this.#getArrowTile(
+      0b10000 | this.#direction(pos, next),
+      tileset
+    );
   }
   //#endregion Public
 
@@ -200,6 +190,29 @@ export class MapScene extends Scene {
       (b.y - a.y === 0 ? 0 : 2 << (b.y - a.y + 1)) |
       (a.x - b.x === 0 ? 0 : 1 << (a.x - b.x + 1));
     return dir;
+  }
+
+  #getArrowTile(dir: number, tileset: Tilemaps.Tileset): number {
+    if (!this.tileMappings[dir]) {
+      this.tileMappings[dir] = -1;
+      for (
+        let ti = tileset.firstgid;
+        ti < tileset.firstgid + tileset.total;
+        ti++
+      ) {
+        const props: any = tileset.getTileProperties(ti);
+        if (!props) continue;
+        if (
+          !!(dir & 0b10000) === props["cap"] &&
+          !!(dir & 0b01000) === props["up"] &&
+          !!(dir & 0b00100) === props["right"] &&
+          !!(dir & 0b00010) === props["down"] &&
+          !!(dir & 0b00001) === props["left"]
+        )
+          return (this.tileMappings[dir] = ti);
+      }
+    }
+    return this.tileMappings[dir];
   }
 
   #selectTile(pointer: Input.Pointer) {
