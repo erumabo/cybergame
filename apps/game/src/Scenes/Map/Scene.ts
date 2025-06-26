@@ -1,13 +1,14 @@
-import type { GameObjects, Input } from "phaser";
+import type { GameObjects, Input, Tilemaps } from "phaser";
 import type StoryManager from "../../Plugins/StoryManager";
 import type DatGui from "../../Plugins/DatGui";
 import type { GridEngine } from "grid-engine";
 
-import { Scene } from "phaser";
+import { Scene, Math as PMath } from "phaser";
 import TilemapSprite from "./GameObjects/TilemapSprite";
 import UnitSprite from "./GameObjects/UnitSprite";
 import ActionsMenu from "./GameObjects/ActionsMenu";
 import MapSceneController from "./Controller";
+import type GesturesPlugin from "phaser3-rex-plugins/plugins/gestures-plugin.js";
 
 interface Propery {
   name: string;
@@ -19,6 +20,7 @@ export class MapScene extends Scene {
   declare storyManager: StoryManager;
   declare datGui: DatGui;
   declare gridEngine: GridEngine;
+  declare rexGestures: GesturesPlugin;
 
   declare actionsMenu: ActionsMenu;
   controller: MapSceneController;
@@ -130,6 +132,13 @@ export class MapScene extends Scene {
           this.controller.onPointerDrag(event, this.controller.context);
         else this.controller.onPointerHover(event, this.controller.context);
       });
+
+    const pinch = this.rexGestures.add.pinch(this, {});
+    pinch.on("pinch", (ev: any) => {
+      this.cameras.main.setZoom(
+        PMath.Clamp(this.cameras.main.zoom + (ev.scaleFactor - 1), 0.1, 10)
+      );
+    });
 
     this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {
       let sprite: UnitSprite;

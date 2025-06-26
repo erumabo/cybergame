@@ -49,6 +49,7 @@
     "mustache": "^4.2.0",
     "nipplejs": "^0.10.2",
     "phaser": "^3.80.1",
+    "phaser3-rex-plugins": "^1.80.16",
     "yaml": "^2.6.0"
   }
 }

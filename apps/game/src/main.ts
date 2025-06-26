@@ -10,6 +10,7 @@ import { VNScene } from "./Scenes/VN/Scene";
 // Plugins
 import StoryManager from "./Plugins/StoryManager";
 import { GridEngine } from "grid-engine";
+import GesturesPlugin from "phaser3-rex-plugins/plugins/gestures-plugin.js";
 //import DatGui from "./Plugins/DatGui";
 
 import Alpine from "alpinejs";
@@ -55,6 +56,11 @@ const config = {
         key: "gridEngine",
         plugin: GridEngine,
         mapping: "gridEngine"
+      },
+      {
+        key: "rexGestures",
+        plugin: GesturesPlugin,
+        mapping: "rexGestures"
       }
     ]
   }
