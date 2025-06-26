@@ -13,18 +13,17 @@ import { GridEngine } from "grid-engine";
 //import DatGui from "./Plugins/DatGui";
 
 import Alpine from "alpinejs";
-Alpine.start();
 
 const config = {
   type: Phaser.AUTO,
-  width: 1024,
-  height: 768,
+  width: window.innerWidth,
+  height: window.innerHeight,
   parent: "game-container",
-  backgroundColor: COLORS["--brown-60"],
+  backgroundColor: COLORS["--white"],
   scale: {
     mode: Phaser.Scale.RESIZE,
-    width: window.innerWidth,
-    height: (2 * window.innerHeight) / 3
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    autoRound: true
   },
   dom: {
     createContainer: true
@@ -43,7 +42,7 @@ const config = {
         plugin: StoryManager,
         start: false,
         mapping: "storyManager"
-      },
+      }
       /*{
         key: "datGui",
         plugin: DatGui,
@@ -61,6 +60,20 @@ const config = {
   }
 };
 
+let game: Game;
 window.onload = () => {
-  new Game(config);
+  Alpine.start();
+  game = new Game(config);
 };
+
+function onChangeScreen() {
+  if (game) game.scale.resize(window.innerWidth, window.innerHeight);
+}
+
+// Very important orientation changes, otherwise the game size grows unbound
+const _orientation =
+  screen.orientation ||
+  (screen as any).mozOrientation ||
+  (screen as any).msOrientation;
+_orientation.addEventListener("change", () => onChangeScreen());
+window.addEventListener("resize", () => onChangeScreen());
