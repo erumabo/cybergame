@@ -1,4 +1,4 @@
-map width=10 height=10 tilewidth=32 tileheight=32 \
+map width=20 height=20 tilewidth=32 tileheight=32 \
   orientation="orthogonal" version=11 \
   nextobjectid=4 nextlayerid=3 {
   
@@ -16,7 +16,7 @@ map width=10 height=10 tilewidth=32 tileheight=32 \
     tileset source="../Tilesets/Topaz/config.yml"       firstgid=1215;
     tileset source="../Tilesets/TilesetDual/config.yml" firstgid=1225; //1225-...
   
-    layer id=1 name="Suelo" width=10 height=10 visible=#false opacity=0 {
+    layer id=1 name="Suelo" width=20 height=20 visible=#false opacity=0 {
       data encoding="csv";
       properties {
         property name="type" value="ground" type="string";
