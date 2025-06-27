@@ -27,7 +27,7 @@ export class MapScene extends Scene {
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
   tileMappings: number[] = []; // memo for ui tiles, used for path arrows
-
+  
   //#region Lifecycle
   constructor() {
     super("MapScene");
@@ -72,8 +72,8 @@ export class MapScene extends Scene {
       characters: []
     });
     layer0 = layer0
-      .concat(this.#spawnParty(worldConfig.party, worldConfig.characters))
-      .concat(this.#spawnEnemies(worldConfig.characters));
+      .concat(this.#spawnEnemies(worldConfig.characters))
+      .concat(this.#spawnParty(worldConfig.party, worldConfig.characters));
 
     this.add.layer().add(layer0);
 
@@ -94,6 +94,10 @@ export class MapScene extends Scene {
       (this.tilemap.width + 2) * tileHeight
     );
     this.cameras.main.setZoom(1.5);
+
+    const mainChar = layer0[layer0.length - 1] as UnitSprite;
+    this.cameras.main.centerOn(mainChar.x, mainChar.y);
+
     this.setUIEventListeners();
     console.timeEnd("Map create time");
   }
@@ -107,37 +111,50 @@ export class MapScene extends Scene {
       this.controller.actionMenuClick(action)
     );
 
-    this.input
-      .on("pointerdown", (pointer: Input.Pointer) =>
-        this.controller.onPointerDown(
-          {
-            pointer,
-            target: this.#selectTile(pointer)
-          },
-          this.controller.context
-        )
-      )
-      .on("pointerup", (pointer: Input.Pointer) =>
-        this.controller.onPointerUp(
-          {
-            pointer,
-            target: this.#selectTile(pointer)
-          },
-          this.controller.context
-        )
-      )
-      .on("pointermove", (pointer: Input.Pointer) => {
-        const event = { pointer, target: this.#selectTile(pointer) };
-        if (pointer.isDown)
-          this.controller.onPointerDrag(event, this.controller.context);
-        else this.controller.onPointerHover(event, this.controller.context);
-      });
+    // To wait for second finger to land, so we dont missfire a "One finger press" event first
+    // Time can be tuned
+    const press = this.rexGestures.add.press({ time: 50 } as any);
+    press.on("pressstart", () => {
+      let pointers =
+        (this.input.pointer1?.active ? 1 : 0) +
+        (this.input.pointer2?.active ? 1 : 0);
+      const pointer = this.input.pointer1;
+      const event = { pointer, target: this.#selectTile(pointer) };
+      if (pointers === 1) {
+        this.controller.onPointerDown(event, this.controller.context);
+      } /**else {
+        // two finger touch event
+        // Unused for now
+      }**/
+    });
+    press.on("pressend", () => {
+      let pointers =
+        (this.input.pointer1?.active ? 1 : 0) +
+        (this.input.pointer2?.active ? 1 : 0);
+      const pointer = this.input.pointer1;
+      const event = { pointer, target: this.#selectTile(pointer) };
+      if (pointers === 0) {
+        this.controller.onPointerUp(event, this.controller.context);
+      } /**else {
+        // two finger touch event ended, but one finger remains
+        // Unused for now
+      }**/
+    });
 
-    const pinch = this.rexGestures.add.pinch(this, {});
+    const pinch = this.rexGestures.add.pinch({} as any);
     pinch.on("pinch", (ev: any) => {
+      // Camera zoom speed, something to tune
       this.cameras.main.setZoom(
         PMath.Clamp(this.cameras.main.zoom + (ev.scaleFactor - 1), 0.1, 10)
       );
+    });
+    pinch.on("drag1", (ev: any) => {
+      // Ignore very small events, like a finger tremor
+      // Threshold can be tuned
+      if (Math.abs(ev.drag1Vector.x + ev.drag1Vector.y) < 0.5) return;
+      const pointer = ev.pointers[0];
+      const event = { pointer, target: this.#selectTile(pointer) };
+      this.controller.onPointerDrag(event, this.controller.context);
     });
 
     this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {

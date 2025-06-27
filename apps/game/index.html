@@ -11,7 +11,7 @@
     <div id="game">
       <div id="game-container"></div>
     </div>
-    
+
     <template id="map-view-template">
       <style>
         ul,
@@ -21,7 +21,7 @@
         }
       </style>
       <div>
-        <img id="unitImage"/>
+        <img id="unitImage" />
         <span id="unitId"></span><br />
         <span id="unitClass"></span><br />
         <ul id="unitActions"></ul>
@@ -29,9 +29,10 @@
       </div>
     </template>
 
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
+    <script src="node_modules/eruda/eruda.js"></script>
+    <script>
+      eruda.init();
+    </script>
     <script type="module" src="/src/main.ts" defer></script>
-  
   </body>
 </html>
