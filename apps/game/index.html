@@ -4,20 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vite App</title>
   </head>
   <body>
     <div id="game">
       <div id="game-container"></div>
-      <div id="game-controlls"></div>
     </div>
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>
-      eruda.init();
-    </script>
 
     <template id="map-view-template">
       <style>
@@ -28,7 +21,7 @@
         }
       </style>
       <div>
-        <img id="unitImage"/>
+        <img id="unitImage" />
         <span id="unitId"></span><br />
         <span id="unitClass"></span><br />
         <ul id="unitActions"></ul>
@@ -36,6 +29,10 @@
       </div>
     </template>
 
+    <script src="node_modules/eruda/eruda.js"></script>
+    <script>
+      eruda.init();
+    </script>
     <script type="module" src="/src/main.ts" defer></script>
   </body>
 </html>

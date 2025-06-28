@@ -1,13 +1,14 @@
-import type { GameObjects, Input } from "phaser";
+import type { GameObjects, Input, Tilemaps } from "phaser";
 import type StoryManager from "../../Plugins/StoryManager";
 import type DatGui from "../../Plugins/DatGui";
 import type { GridEngine } from "grid-engine";
 
-import { Scene } from "phaser";
+import { Scene, Math as PMath } from "phaser";
 import TilemapSprite from "./GameObjects/TilemapSprite";
 import UnitSprite from "./GameObjects/UnitSprite";
 import ActionsMenu from "./GameObjects/ActionsMenu";
 import MapSceneController from "./Controller";
+import type GesturesPlugin from "phaser3-rex-plugins/plugins/gestures-plugin.js";
 
 interface Propery {
   name: string;
@@ -19,13 +20,14 @@ export class MapScene extends Scene {
   declare storyManager: StoryManager;
   declare datGui: DatGui;
   declare gridEngine: GridEngine;
+  declare rexGestures: GesturesPlugin;
 
   declare actionsMenu: ActionsMenu;
   controller: MapSceneController;
   mapa!: string; // !: Type => trust me bro, this wont be null when i use it
   tilemap!: TilemapSprite;
   tileMappings: number[] = []; // memo for ui tiles, used for path arrows
-
+  
   //#region Lifecycle
   constructor() {
     super("MapScene");
@@ -70,8 +72,8 @@ export class MapScene extends Scene {
       characters: []
     });
     layer0 = layer0
-      .concat(this.#spawnParty(worldConfig.party, worldConfig.characters))
-      .concat(this.#spawnEnemies(worldConfig.characters));
+      .concat(this.#spawnEnemies(worldConfig.characters))
+      .concat(this.#spawnParty(worldConfig.party, worldConfig.characters));
 
     this.add.layer().add(layer0);
 
@@ -92,6 +94,10 @@ export class MapScene extends Scene {
       (this.tilemap.width + 2) * tileHeight
     );
     this.cameras.main.setZoom(1.5);
+
+    const mainChar = layer0[layer0.length - 1] as UnitSprite;
+    this.cameras.main.centerOn(mainChar.x, mainChar.y);
+
     this.setUIEventListeners();
     console.timeEnd("Map create time");
   }
@@ -105,31 +111,58 @@ export class MapScene extends Scene {
       this.controller.actionMenuClick(action)
     );
 
-    this.input
-      .on("pointerdown", (pointer: Input.Pointer) =>
-        this.controller.onPointerDown(
-          {
-            pointer,
-            target: this.#selectTile(pointer)
-          },
-          this.controller.context
-        )
-      )
-      .on("pointerup", (pointer: Input.Pointer) =>
-        this.controller.onPointerUp(
-          {
-            pointer,
-            target: this.#selectTile(pointer)
-          },
-          this.controller.context
-        )
-      )
-      .on("pointermove", (pointer: Input.Pointer) => {
-        const event = { pointer, target: this.#selectTile(pointer) };
-        if (pointer.isDown)
-          this.controller.onPointerDrag(event, this.controller.context);
-        else this.controller.onPointerHover(event, this.controller.context);
-      });
+    // To wait for second finger to land, so we dont missfire a "One finger press" event first
+    // Time can be tuned
+    const press = this.rexGestures.add.press({ time: 50 } as any);
+    press.on("pressstart", () => {
+      let pointers =
+        (this.input.pointer1?.active || this.input.mousePointer?.active ? 1 : 0) +
+        (this.input.pointer2?.active ? 1 : 0);
+      const pointer = this.input.activePointer;
+      const event = { pointer, target: this.#selectTile(pointer) };
+      if (pointers === 1) {
+        this.controller.onPointerDown(event, this.controller.context);
+      } /**else {
+        // two finger touch event
+        // Unused for now
+      }**/
+    });
+    press.on("pressend", () => {
+      let pointers =
+        (this.input.pointer1?.active || this.input.mousePointer?.active ? 1 : 0) +
+        (this.input.pointer2?.active ? 1 : 0);
+      const pointer = this.input.activePointer;
+      const event = { pointer, target: this.#selectTile(pointer) };
+      if (pointers === 0) {
+        this.controller.onPointerUp(event, this.controller.context);
+      } /**else {
+        // two finger touch event ended, but one finger remains
+        // Unused for now
+      }**/
+    });
+
+    const pinch = this.rexGestures.add.pinch({} as any);
+    pinch.on("drag1", (ev: any) => {
+      // Ignore very small events, like a finger tremor
+      // Threshold can be tuned
+      if (Math.abs(ev.drag1Vector.x + ev.drag1Vector.y) < 0.5) return;
+      const pointer = ev.pointers[0];
+      const event = { pointer, target: this.#selectTile(pointer) };
+      this.controller.onPointerDrag(event, this.controller.context);
+    });
+    pinch.on("pinch", (pinch: any) => {
+      // Camera zoom speed, something to tune
+      this.cameras.main.setZoom(
+        PMath.Clamp(this.cameras.main.zoom + (pinch.scaleFactor), 0.1, 10)
+      );
+    });
+
+    this.input.on("wheel", (_: any, __: any, ___:number, deltaY: number) => {
+      // Camera zoom speed, something to tune
+      this.cameras.main.setZoom(
+        PMath.Clamp(this.cameras.main.zoom - (deltaY/100.0), 0.1, 10)
+      );
+    });
 
     this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {
       let sprite: UnitSprite;
@@ -148,49 +181,39 @@ export class MapScene extends Scene {
     const layer =
       this.tilemap.layers[this.tilemap.getLayerIndexByName("Overlay")]
         ?.tilemapLayer;
+    if (layer && clear) layer.forEachTile((t) => (t.index = -1));
+    if (path.length < 2) return;
 
     const tileset = this.tilemap.getTileset("TilesetUI");
-    if (!layer || !tileset) return;
+    if (!tileset) return;
 
-    if (clear) layer.forEachTile((t) => (t.index = -1));
-
-    let prev, pos, next, dir;
-
-    for (let i = 0; i < path.length; ++i) {
-      pos = path[i];
-      next = i < path.length - 1 ? path[i + 1] : null;
-
-      dir = 0;
-      if (prev) dir |= this.#direction(prev, pos);
-      if (next) dir |= this.#direction(next, pos);
-      else dir |= 0b10000;
+    let pos = path[0],
+      next = path[1],
       prev = pos;
-      
-      if (!this.tileMappings[dir]) {
-        for (
-          let ti = tileset.firstgid;
-          ti < tileset.firstgid + tileset.total;
-          ti++
-        ) {
-          const props: any = tileset.getTileProperties(ti);
-          if (!props) continue;
-          if (
-            props["cap"] == (dir & 0b10000) >> 4 &&
-            props["up"] == (dir & 0b01000) >> 3 &&
-            props["right"] == (dir & 0b00100) >> 2 &&
-            props["down"] == (dir & 0b00010) >> 1 &&
-            props["left"] == (dir & 0b00001)
-          ) {
-            this.tileMappings[dir] = ti;
-            break;
-          }
-        }
-      }
 
-      dir = this.tileMappings[dir];
-      if (dir === undefined) continue;
-      layer.getTileAt(pos.x, pos.y, true).index = dir;
+    // First tile
+    layer.getTileAt(pos.x, pos.y, true).index = this.#getArrowTile(
+      this.#direction(next, pos),
+      tileset
+    );
+
+    // Tiles [1, last)
+    let i = 1;
+    for (; i < path.length - 1; ) {
+      pos = next;
+      next = path[++i];
+      layer.getTileAt(pos.x, pos.y, true).index = this.#getArrowTile(
+        this.#direction(next, pos) | this.#direction(prev, pos),
+        tileset
+      );
+      prev = pos;
     }
+
+    // Last tile
+    layer.getTileAt(next.x, next.y, true).index = this.#getArrowTile(
+      0b10000 | this.#direction(pos, next),
+      tileset
+    );
   }
   //#endregion Public
 
@@ -200,6 +223,29 @@ export class MapScene extends Scene {
       (b.y - a.y === 0 ? 0 : 2 << (b.y - a.y + 1)) |
       (a.x - b.x === 0 ? 0 : 1 << (a.x - b.x + 1));
     return dir;
+  }
+
+  #getArrowTile(dir: number, tileset: Tilemaps.Tileset): number {
+    if (!this.tileMappings[dir]) {
+      this.tileMappings[dir] = -1;
+      for (
+        let ti = tileset.firstgid;
+        ti < tileset.firstgid + tileset.total;
+        ti++
+      ) {
+        const props: any = tileset.getTileProperties(ti);
+        if (!props) continue;
+        if (
+          !!(dir & 0b10000) === props["cap"] &&
+          !!(dir & 0b01000) === props["up"] &&
+          !!(dir & 0b00100) === props["right"] &&
+          !!(dir & 0b00010) === props["down"] &&
+          !!(dir & 0b00001) === props["left"]
+        )
+          return (this.tileMappings[dir] = ti);
+      }
+    }
+    return this.tileMappings[dir];
   }
 
   #selectTile(pointer: Input.Pointer) {
