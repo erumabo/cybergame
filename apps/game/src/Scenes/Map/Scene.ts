@@ -116,9 +116,9 @@ export class MapScene extends Scene {
     const press = this.rexGestures.add.press({ time: 50 } as any);
     press.on("pressstart", () => {
       let pointers =
-        (this.input.pointer1?.active ? 1 : 0) +
+        (this.input.pointer1?.active || this.input.mousePointer?.active ? 1 : 0) +
         (this.input.pointer2?.active ? 1 : 0);
-      const pointer = this.input.pointer1;
+      const pointer = this.input.activePointer;
       const event = { pointer, target: this.#selectTile(pointer) };
       if (pointers === 1) {
         this.controller.onPointerDown(event, this.controller.context);
@@ -129,9 +129,9 @@ export class MapScene extends Scene {
     });
     press.on("pressend", () => {
       let pointers =
-        (this.input.pointer1?.active ? 1 : 0) +
+        (this.input.pointer1?.active || this.input.mousePointer?.active ? 1 : 0) +
         (this.input.pointer2?.active ? 1 : 0);
-      const pointer = this.input.pointer1;
+      const pointer = this.input.activePointer;
       const event = { pointer, target: this.#selectTile(pointer) };
       if (pointers === 0) {
         this.controller.onPointerUp(event, this.controller.context);
@@ -142,12 +142,6 @@ export class MapScene extends Scene {
     });
 
     const pinch = this.rexGestures.add.pinch({} as any);
-    pinch.on("pinch", (ev: any) => {
-      // Camera zoom speed, something to tune
-      this.cameras.main.setZoom(
-        PMath.Clamp(this.cameras.main.zoom + (ev.scaleFactor - 1), 0.1, 10)
-      );
-    });
     pinch.on("drag1", (ev: any) => {
       // Ignore very small events, like a finger tremor
       // Threshold can be tuned
@@ -155,6 +149,19 @@ export class MapScene extends Scene {
       const pointer = ev.pointers[0];
       const event = { pointer, target: this.#selectTile(pointer) };
       this.controller.onPointerDrag(event, this.controller.context);
+    });
+    pinch.on("pinch", (pinch: any) => {
+      // Camera zoom speed, something to tune
+      this.cameras.main.setZoom(
+        PMath.Clamp(this.cameras.main.zoom + (pinch.scaleFactor), 0.1, 10)
+      );
+    });
+
+    this.input.on("wheel", (_: any, __: any, ___:number, deltaY: number) => {
+      // Camera zoom speed, something to tune
+      this.cameras.main.setZoom(
+        PMath.Clamp(this.cameras.main.zoom - (deltaY/100.0), 0.1, 10)
+      );
     });
 
     this.events.on("unitChange", ({ old: oldUnit, new: newUnit }: any) => {
