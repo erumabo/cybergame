@@ -18,10 +18,6 @@ interface BaseState {
   exit?: Action;
 }
 
-type States = {
-  [state: string]: State;
-};
-
 interface ParentState {
   states: { [state: string]: State };
   initial: string;
@@ -29,10 +25,15 @@ interface ParentState {
 
 export type State = BaseState | (BaseState & ParentState);
 
+export class Actor {
+  public stack: State[];
+  public state: string;
+  constructor(stateMachine: StateMachine);
+  public send(event: string, ...data: any[]): Promise<StateMachine>;
+}
+
 export class StateMachine {
   constructor(baseState: ParentState);
-  currentState: string;
-  start(...data: any[]): StateMachine;
-  error(): StateMachine;
-  send(event: string, ...data: any[]): Promise<StateMachine>;
+  public start(...data: any[]): Actor;
+  public _send(actor: Actor, event: string, ...data: any[]): Promise<Actor>;
 }

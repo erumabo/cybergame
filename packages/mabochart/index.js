@@ -3,10 +3,32 @@
  * @module @mabo/chart
  */
 
-/** Class that represents a state chart machine */
+/**
+ * Actor that responds to events based on a state machine model
+ * Allows reusing the same machine def with multiple actors/entities
+ */
+export class Actor {
+  constructor(stateMachine) {
+    this.stateMachine = stateMachine;
+    this.stack = [];
+    this.state = "";
+  }
+
+  /**
+   * Send an event to be processed by the machine
+   * @param {string} event - The event
+   * @param {*} data - Arbitrary data to be provided to event handlers
+   */
+  send(ev, ...data) {
+    this.stateMachine._send(this, ev, ...data);
+  }
+}
+
+/**
+ * Class that represents a state chart machine
+ */
 export class StateMachine {
   #baseState;
-  #stateStack;
 
   /**
    * @param {Object} baseState - The base state object, must define initial stata and other sub states
@@ -18,27 +40,21 @@ export class StateMachine {
     this.#baseState.on = {
       "*": this.error
     };
-    this.currentState = null;
-    this.#stateStack = [];
   }
 
   /**
-   * Starts the machine in the initial state
+   * Starts a new actor for this machine in the initial state
    */
   start(...data) {
-    this.#transition(this.#baseState.initial, ...data);
-    return this;
+    const actor = new Actor(this);
+    this.#transition(actor, this.#baseState.initial, ...data);
+    return actor;
   }
 
-  /**
-   * Send an event to be processed by the machine
-   * @param {string} event - The event
-   * @param {*} data - Arbitrary data to be provided to event handlers
-   */
-  send(event, ...data) {
+  _send(actor, event, ...data) {
     return new Promise((resolve) => {
-      let handler = this.#getStateHandler(event);
-      if (!handler) return resolve(this);
+      let handler = this.#getStateHandler(actor, event);
+      if (!handler) return resolve(actor);
 
       let target = handler;
       if (typeof handler != "string") {
@@ -46,20 +62,20 @@ export class StateMachine {
         target = handler.target;
       }
 
-      if (!target) resolve(this);
-      else resolve(this.#transition(target, ...data));
+      if (!target) resolve(actor);
+      else resolve(this.#transition(actor, target, ...data));
     });
   }
 
-  #getStateHandler(event) {
-    let i = this.#stateStack.length - 1,
-      state = this.#stateStack[i];
-    for (; i >= 0; state = this.#stateStack[--i])
+  #getStateHandler(actor, event) {
+    let i = actor.stack.length - 1,
+      state = actor.stack[i];
+    for (; i >= 0; state = actor.stack[--i])
       for (const transition in state.on)
         if (this.#glob(transition, event)) return state.on[transition];
   }
 
-  #transition(nextState, ...data) {
+  #transition(actor, nextState, ...data) {
     const statepath = nextState?.split(".") ?? [];
     const newStack = [];
 
@@ -70,43 +86,42 @@ export class StateMachine {
       else throw new Error(`Invalid state ${stateName} at ${nextState}`);
     }
 
-    this.currentState = nextState;
+    actor.state = nextState;
 
     while (Object.hasOwn(state, "initial")) {
       if (Object.hasOwn(state.states, state.initial)) {
-        this.currentState = this.currentState + "." + state.initial;
+        actor.state = actor.state + "." + state.initial;
         newStack.push((state = state.states[state.initial]));
       } else {
         throw new Error(
-          `Invalid state ${state.initial} at ${this.currentState}.${state.initial}`
+          `Invalid state ${state.initial} at ${actor.state}.${state.initial}`
         );
       }
     }
 
     if (Object.hasOwn(state, "states")) {
       throw new Error(
-        `Composite state ${this.currentState} has no initial state defined`
+        `Composite state ${actor.state} has no initial state defined`
       );
     }
 
-    this.#morphStack(newStack, ...data);
+    this.#morphStack(actor, newStack, ...data);
 
-    return this;
+    return actor;
   }
 
-  #morphStack(newStack, ...data) {
+  #morphStack(actor, newStack, ...data) {
     let i = 0,
-      j = this.#stateStack.length - 1,
-      m = Math.min(newStack.length, this.#stateStack.length);
-    for (; i < m && newStack[i] == this.#stateStack[i]; ++i)
+      j = actor.stack.length - 1,
+      m = Math.min(newStack.length, actor.stack.length);
+    for (; i < m && newStack[i] == actor.stack[i]; ++i)
       Object.hasOwn(newStack[i], "update") && newStack[i].update(...data);
     for (; j >= i; j--)
-      Object.hasOwn(this.#stateStack[j], "exit") &&
-        this.#stateStack[j].exit(...data);
+      Object.hasOwn(actor.stack[j], "exit") && actor.stack[j].exit(...data);
     for (; i < newStack.length; i++)
       Object.hasOwn(newStack[i], "entry") && newStack[i].entry(...data);
 
-    this.#stateStack = [...newStack];
+    actor.stack = [...newStack];
   }
 
   #glob(transition, event) {
