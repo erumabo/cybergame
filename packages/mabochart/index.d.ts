@@ -25,11 +25,18 @@ interface ParentState {
 
 export type State = BaseState | (BaseState & ParentState);
 
+export class TransitionEvent {
+  next?: TransitionEvent;
+  event: string;
+  data: any[];
+  constructor(type: string, data: any[]);
+}
+
 export class Actor {
   public stack: State[];
   public state: string;
   constructor(stateMachine: StateMachine);
-  public send(event: string, ...data: any[]): Promise<StateMachine>;
+  public send(event: string, ...data: any[]): Actor;
 }
 
 export class StateMachine {

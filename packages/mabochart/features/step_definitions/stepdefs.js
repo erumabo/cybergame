@@ -14,12 +14,12 @@ Given("un contexto {string}", function (context) {
 });
 
 When("la maquina inicia", function () {
-  this.machine.start(this.context);
+  this.actor = this.machine.start(this.context);
 });
 
 When("recibe evento {string}", async function (evento) {
   try {
-    await this.machine.send(evento, this.context);
+    await this.actor.send(evento, this.context);
   } catch (e) {
     this.error = e;
   }
@@ -27,7 +27,7 @@ When("recibe evento {string}", async function (evento) {
 
 Then("el estado actual es {string}", function (string) {
   assert.ifError(this.error);
-  assert.strictEqual(this.machine.currentState, string);
+  assert.strictEqual(this.actor.state, string);
 });
 
 Then("tira error {string}", function (error) {

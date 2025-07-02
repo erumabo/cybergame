@@ -3,15 +3,28 @@
  * @module @mabo/chart
  */
 
+class TransitionEvent {
+  constructor(event, data) {
+    this.event = event;
+    this.data = data;
+    this.next = null;
+  }
+}
+
 /**
  * Actor that responds to events based on a state machine model
  * Allows reusing the same machine def with multiple actors/entities
  */
-export class Actor {
+class Actor {
+  #currentEvent;
+  #lastEvent;
+  _processing;
+
   constructor(stateMachine) {
     this.stateMachine = stateMachine;
     this.stack = [];
     this.state = "";
+    this._processing = false;
   }
 
   /**
@@ -20,7 +33,23 @@ export class Actor {
    * @param {*} data - Arbitrary data to be provided to event handlers
    */
   send(ev, ...data) {
-    this.stateMachine._send(this, ev, ...data);
+    if (this._processing) {
+      this.#lastEvent.next = new TransitionEvent(ev, data);
+      this.#lastEvent = this.#lastEvent.next;
+      return;
+    }
+
+    this._processing = true;
+    this.#currentEvent = new TransitionEvent(ev, data);
+    this.#lastEvent = this.#currentEvent;
+    let event = this.#currentEvent;
+    while (event) {
+      this.stateMachine._send(this, event.event, ...event.data);
+      this.#currentEvent = this.#currentEvent.next;
+      event = this.#currentEvent;
+    }
+    this.#lastEvent = null;
+    this._processing = false;
   }
 }
 
@@ -52,19 +81,17 @@ export class StateMachine {
   }
 
   _send(actor, event, ...data) {
-    return new Promise((resolve) => {
-      let handler = this.#getStateHandler(actor, event);
-      if (!handler) return resolve(actor);
+    let handler = this.#getStateHandler(actor, event);
+    if (!handler) return actor;
 
-      let target = handler;
-      if (typeof handler != "string") {
-        if (handler.action) handler.action(...data);
-        target = handler.target;
-      }
+    let target = handler;
+    if (typeof handler != "string") {
+      if (handler.action) handler.action(...data);
+      target = handler.target;
+    }
 
-      if (!target) resolve(actor);
-      else resolve(this.#transition(actor, target, ...data));
-    });
+    if (target) this.#transition(actor, target, ...data);
+    return actor;
   }
 
   #getStateHandler(actor, event) {

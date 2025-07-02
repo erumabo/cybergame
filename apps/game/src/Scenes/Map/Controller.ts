@@ -5,6 +5,7 @@ import { MapScene } from "./Scene";
 //#region Import Estados
 import type { UIEvent, StateContext } from "./Estados/State";
 import type { System } from "./Sistemas/System";
+import type { Actor } from "@mabo/chart";
 import { StateMachine } from "@mabo/chart";
 import type { Tilemaps } from "phaser";
 import idle from "./Estados/IDLE";
@@ -17,7 +18,7 @@ import AttackMelee from "./Sistemas/AttackMelee";
 //#endregion Import Estados
 
 export default class MapSceneController {
-  actor: StateMachine;
+  actor: Actor;
   context: StateContext;
   systems: System[] = [];
 
