@@ -60,14 +60,14 @@ export default class MapSceneController {
 
   //#region UI Events
   onPointerHover(event: UIEvent, context: StateContext) {
-    if (event.target == context.target) return;
+    if (event.target === context.target) return;
     this.#onEvent("PointerHover.", event, context);
   }
   onPointerDown(event: UIEvent, context: StateContext) {
     this.#onEvent("PointerDown.", event, context);
   }
   onPointerDrag(event: UIEvent, context: StateContext) {
-    if (event.target == context.target) return;
+    if (event.target === context.target) return;
     this.#onEvent("PointerDrag.", event, context);
   }
   onPointerUp(event: UIEvent, context: StateContext) {
@@ -103,7 +103,7 @@ export default class MapSceneController {
     if (!event.target) return;
 
     const targets = this.scene.gridEngine.getCharactersAt(event.target);
-    if (targets.length == 0) eventName += "Map";
+    if (targets.length === 0) eventName += "Map";
     else {
       event.unit = targets[0];
       if (event.unit === context.activeUnit) eventName += "Self";
@@ -111,7 +111,7 @@ export default class MapSceneController {
         let faction = this.scene.gridEngine
           .getContainer(event.unit)!
           .getData("faction");
-        if (faction == "ally") eventName += "Ally";
+        if (faction === "ally") eventName += "Ally";
         else eventName += "Enemy";
       }
     }

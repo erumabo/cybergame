@@ -74,7 +74,7 @@ const targetSelected: State = {
       action({ context, controller }: EventPayload) {
         if (!context.action) throw new Error("Action undefined");
         const system = controller.systems.find(
-          (sys) => sys.name == context.action
+          (sys) => sys.name === context.action
         );
         if (!system) throw new Error("No system found");
         system.execute(arguments[0]);
@@ -104,7 +104,7 @@ const targetSelected: State = {
                 target: event.target
               }
             });
-            if (context.activeUnit == event.unit) return;
+            if (context.activeUnit === event.unit) return;
             controller.selectUnit(event.unit);
           },
           target: "unidadSeleccionada"

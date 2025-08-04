@@ -11,14 +11,12 @@ export default class UnitSprite extends GameObjects.Container {
   declare colorfx: FX.ColorMatrix;
   bars: Map<string, Bar>;
   view: GameObjects.DOMElement;
-  viewNode: UnitView;
 
   constructor(scene: Scene) {
     super(scene);
     this.setDataEnabled();
 
-    this.viewNode = new UnitView();
-    this.view = this.scene.add.dom(0, -32, this.viewNode).setOrigin(0, 0);
+    this.view = this.scene.add.dom(0, -32, new UnitView()).setOrigin(0, 0);
     this.add(this.view);
 
     this.bars = new Map();
@@ -43,12 +41,12 @@ export default class UnitSprite extends GameObjects.Container {
 
     return new Proxy(this, {
       set(target: UnitSprite, property: string, value: any) {
-        if (property == "displayWidth") {
+        if (property === "displayWidth") {
           target.sprite && (target.sprite.displayWidth = value);
           target.bars.forEach((bar: Bar) => bar.setWidth(value));
           target.displayWidth = value;
           return value;
-        } else if (property == "displayHeight") {
+        } else if (property === "displayHeight") {
           target.sprite && (target.sprite.displayHeight = value);
           target.bars.forEach((bar: Bar) => bar.setWidth(value / 10));
           target.displayHeight = value;
@@ -83,7 +81,7 @@ export default class UnitSprite extends GameObjects.Container {
   }
 
   setDOMAttribute(attribute: string, value: any) {
-    this.viewNode.setAttribute(attribute, value);
+    this.view.node.setAttribute(attribute, value);
   }
 
   get atk() {
@@ -101,7 +99,7 @@ export default class UnitSprite extends GameObjects.Container {
   damage(val: number) {
     this.setData("current_hp", Math.max(0, this.hp - val));
 
-    if (this.hp == 0) {
+    if (this.hp === 0) {
       this.colorfx.saturate(-1, false);
     }
   }
@@ -122,7 +120,7 @@ export default class UnitSprite extends GameObjects.Container {
   removeEffect(effect: string) {
     if (!this.fx.has(effect)) return;
     this.sprite.postFX.remove(this.fx.get(effect)!);
-    this.fx.delete(effect)
+    this.fx.delete(effect);
   }
 
   #addBar(

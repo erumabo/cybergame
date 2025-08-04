@@ -48,10 +48,10 @@ export default class ActionsMenu extends HTMLElement {
   set actions(v: Option[]) {
     const current: Option[] = this.#props["actions"];
     const added = v
-      .filter((p) => !current.some((act: Option) => act.value == p.value))
+      .filter((p) => !current.some((act: Option) => act.value === p.value))
       .sort((a, b) => a.option.localeCompare(b.option));
     const keep = current.filter((p: Option) =>
-      v.some((act: Option) => act.value == p.value)
+      v.some((act: Option) => act.value === p.value)
     );
 
     //animate exit

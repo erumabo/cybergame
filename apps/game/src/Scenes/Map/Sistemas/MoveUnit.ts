@@ -57,7 +57,7 @@ const MoveAction: System = {
       }
     };
     const path = FindPath(context.activeUnit, unit, target, gridEngine);
-    if (!path || path.path.length == 0) return false;
+    if (!path || path.path.length === 0) return false;
     return true;
   },
   execute(payload: EventPayload) {

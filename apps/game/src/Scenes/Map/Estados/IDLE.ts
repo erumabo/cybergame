@@ -13,7 +13,7 @@ const idle = {
           ...arguments[0],
           context: { ...context, activeUnit: event.unit, target: event.target }
         });
-        if (context.activeUnit == event.unit) return;
+        if (context.activeUnit === event.unit) return;
         controller.selectUnit(event.unit);
       },
       target: "unidadSeleccionada"

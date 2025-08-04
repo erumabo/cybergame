@@ -36,7 +36,7 @@ export default class TilemapSprite extends Tilemaps.Tilemap {
       return [vlayer];
     }
 
-    if (layer.properties.some((prop: any) => prop.name == "dualgrid")) {
+    if (layer.properties.some((prop: any) => prop.name === "dualgrid")) {
       const vlayer = this.createLayer(layer.name, tilesets)!;
       return [vlayer, ...this.createDualLayers(layer, tilesets)];
     }
@@ -79,7 +79,7 @@ export default class TilemapSprite extends Tilemaps.Tilemap {
         let tiletypes = this.tilesets.find((tileset) =>
           tileset.containsTileIndex(id)
         );
-        if (tiletypes == null) return;
+        if (!tiletypes) return;
         const type = {
           id,
           firstgid: this.getTileset(tiletypes.name + "Dual")?.firstgid || 0,
@@ -88,7 +88,7 @@ export default class TilemapSprite extends Tilemaps.Tilemap {
           tilesetWidth: tiletypes.columns
         };
 
-        const pattern = tiles.map((t) => +(t == id));
+        const pattern = tiles.map((t) => +(t === id));
         type.x = type.x | (pattern[0] << 1) | pattern[2];
         type.y = type.y | (pattern[1] << 1) | pattern[3];
 

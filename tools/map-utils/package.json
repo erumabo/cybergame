@@ -6,7 +6,9 @@
   "author": "Mabo <mabo.daniel@gmail.com> ()",
   "license": "MIT",
   "type": "module",
-  "private": true,
+  "publishConfig": {
+    "registry": "http://192.168.18.60:4873"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/erumabo/cybergame.git",

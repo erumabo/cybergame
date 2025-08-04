@@ -6,6 +6,7 @@ import type { GridEngine } from "grid-engine";
 import { Scene, Math as PMath } from "phaser";
 import TilemapSprite from "./GameObjects/TilemapSprite";
 import UnitSprite from "./GameObjects/UnitSprite";
+import EnemyUnit from "./GameObjects/EnemyUnit";
 import ActionsMenu from "./GameObjects/ActionsMenu";
 import MapSceneController from "./Controller";
 import type GesturesPlugin from "phaser3-rex-plugins/plugins/gestures-plugin.js";
@@ -267,8 +268,12 @@ export class MapScene extends Scene {
     });
   }
 
-  #spawnCharacter(char: any, position: { x?: number; y?: number }) {
-    let unit = new UnitSprite(this);
+  #spawnCharacter<Type extends UnitSprite>(
+    char: any,
+    position: { x?: number; y?: number },
+    type: new (...args: any[]) => Type
+  ): Type {
+    let unit = new type(this);
 
     unit.setName(char.name);
     unit.setPosition(position.x ?? 0, position.y ?? 0);
@@ -292,13 +297,13 @@ export class MapScene extends Scene {
   }
 
   #spawnEnemies(charConfigs: { properties: Propery[] }[]) {
-    let spawned: UnitSprite[] = [];
+    let spawned: EnemyUnit[] = [];
     let spawnSpaces =
       this.tilemap
         .filterObjects("Chars", (obj: any) => obj.point && obj.type === "enemy")
         ?.sort((a, b) => b.id - a.id) ?? [];
     let enemies = charConfigs.filter((char) =>
-      char.properties.some((p) => p.name == "faction" && p.value == "enemy")
+      char.properties.some((p) => p.name === "faction" && p.value === "enemy")
     );
 
     for (let i = 0; i < spawnSpaces.length; ++i) {
@@ -316,7 +321,7 @@ export class MapScene extends Scene {
       if (!enemy) {
         console.warn(`Could not find enemy config for ${model}`);
       } else {
-        spawned.push(this.#spawnCharacter(enemy, spawnSpaces[i]));
+        spawned.push(this.#spawnCharacter(enemy, spawnSpaces[i], EnemyUnit));
       }
     }
 
@@ -340,7 +345,7 @@ export class MapScene extends Scene {
       if (!char) {
         console.warn(`Unkwon character config ${characters[i]}`);
       } else {
-        spawned.push(this.#spawnCharacter(char, spawnSpaces[i]));
+        spawned.push(this.#spawnCharacter(char, spawnSpaces[i], UnitSprite));
       }
     }
 

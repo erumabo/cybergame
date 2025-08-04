@@ -27,9 +27,9 @@ const AttackMelee: System = {
     )
       return false;
     const enemy = gridEngine.getCharactersAt(context.target);
-    if (enemy.length == 0) return false;
+    if (enemy.length === 0) return false;
     let enemySprite = gridEngine.getContainer(enemy[0])! as UnitSprite;
-    return enemySprite.hp > 0 && enemySprite.getData("faction") == "enemy";
+    return enemySprite.hp > 0 && enemySprite.getData("faction") === "enemy";
   },
   execute({ context, scene }: EventPayload) {
     if (!context.activeUnit || !context.target) return false;
