@@ -31,7 +31,7 @@
     "commander": "^12.1.0",
     "jimp": "^1.6.0",
     "kdljs": "^0.3.0",
-    "underscore": "^1.13.7",
+    "underscore": "^1.13.8",
     "yaml": "^2.6.1"
   }
 }
