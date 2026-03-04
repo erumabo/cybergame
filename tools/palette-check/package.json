@@ -26,6 +26,6 @@
     "color-diff": "^1.4.0",
     "commander": "^12.1.0",
     "culori": "^4.0.1",
-    "underscore": "^1.13.7"
+    "underscore": "^1.13.8"
   }
 }
